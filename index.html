@@ -834,7 +834,7 @@ myFAQ.toggle(2); //toggle the 3rd element
 				onComplete: function(){
 					this.indexesLoaded[index] = true;
 					this.definitions[index].slide('toggle');
-				}
+				}.bind(this)
 			}).send();
 		}
 	}
