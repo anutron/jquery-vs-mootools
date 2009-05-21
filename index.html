@@ -438,7 +438,7 @@ ninja.logInventory();
 			
 <pre class="js">Element.implement{{
     hover : function(enter,leave){
-       this.addEvents({ mouseenter : enter, mouseleave : leave });
+       return this.addEvents({ mouseenter : enter, mouseleave : leave });
     }
 });
 
