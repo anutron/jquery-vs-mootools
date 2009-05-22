@@ -220,7 +220,7 @@
 			
 		
 			<p>
-				  If you go to the jQuery site, here's what it says at the top of the page about what jQuery is all about:        
+				  If you go to the jQuery site, here's what it says at the top of the page:
 			</p>
 			<blockquote>jQuery is a fast and concise JavaScript Library that simplifies HTML document traversing, event handling, animating, and Ajax interactions for rapid web development. jQuery is designed to change the way that you write JavaScript.</blockquote>
 			<p>
@@ -326,20 +326,20 @@ ninja.logInventory();
 //this ninja can kill with its exploding palm technique</pre>
 
 			<p>
-				In the example above, we bind ninja (which is "this" in side the <em>logInventory</em> method) to the method we pass to the array so that we can refer to the log property of ninja. If we didn't do this, "this" would be <em>window</em>.
+				In the example above, we bind ninja (which is "this" inside the <em>logInventory</em> method) to the method we pass to the array so that we can refer to the log property of ninja. If we didn't do this, "this" would be <em>window</em>.
 			</p>
 			<p>
-				These are just some examples of the power and expressiveness that JavaScript has to offer - inheritance, self reference and binding, efficient prototype properties. The bad news is that vanilla JavaScript doesn't make these powerful things very useful or accessible, and this is where MooTools <i>starts</i>. It makes these types of patterns easy and rather pleasant to use. You end up writing more abstract code, and in the long run, this is a good thing - a powerful thing. Learning how these patterns are valuable and how to use them properly takes effort, but the up side is that the code you author is both highly reusable and much easier to maintain. I'll talk about these two things a bit more in a minute.  
+				These are just some examples of the power and expressiveness that JavaScript has to offer - inheritance, self reference and binding, and efficient prototype properties. The bad news is that vanilla JavaScript doesn't make these powerful things very useful or accessible, and this is where MooTools <i>starts</i>. It makes these types of patterns easy and rather pleasant to use. You end up writing more abstract code, and in the long run, this is a good thing - a powerful thing. Learning how these patterns are valuable and how to use them properly takes effort, but the up side is that the code you author is both highly reusable and much easier to maintain. I'll talk about these two things a bit more in a minute.  
 			</p>
 			
 			<a name="jsfun"></a>
 			<h2>MooTools Makes JavaScript Itself More Fun</h2>
 		
 			<p>
-				Because MooTools focuses on making the JavaScript API itself more stable and coherent, it is focused less on giving you an interface that "changes the way you write JavaScript" and more on making JavaScript as a whole less frustrating. MooTools tries to be an extension to the JavaScript language. MooTools tries to make JavaScript the way it is meant to be. A significant portion of the core library is spent on augmenting Function, String, Array, Number, Element and other prototypes. The other big thing it offers is a function called <em><a href="http://mootools.net/docs/core/Class/Class">Class</a></em>.  
+				Because MooTools focuses on making the JavaScript API itself more stable and coherent, it is focused less on giving you an interface that "changes the way you write JavaScript" and more on making JavaScript as a whole less frustrating; MooTools is an extension to the JavaScript language. MooTools tries to make JavaScript the way it is meant to be. A significant portion of the core library is spent on augmenting Function, String, Array, Number, Element and other prototypes. The other big thing it offers is a function called <em><a href="http://mootools.net/docs/core/Class/Class">Class</a></em>.  
 			</p>
 			<p>
-				Now, <em>Class</em> looks to many people like it's trying to recreate a more classical inheritance model that one might find in Java or PHP, but that's <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Class-Based_vs._Prototype-Based_Languages">not the case</a>. What <em>Class</em> does is make the prototypal inheritance model of JavaScript easier for you and me to access and take advantage of. I'll note that these concepts are not unique to MooTools (other frameworks offer similar functionality), but both of these concepts are not present in jQuery. jQuery does not offer an inheritance system nor does it offer any enhancements to native objects (Function, String, etc). This is not a deficiency of jQuery as the authors of jQuery could easily offer these things. Rather, they have designed a toolkit with a different goal in mind. Where MooTools aims to make JavaScript more fun, jQuery aims to make the DOM more fun and its designers have chosen to limit their scope to that task.  
+				Now, <em>Class</em> looks to many people like it's trying to recreate a more classical inheritance model that one might find in Java or C, but that's <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Class-Based_vs._Prototype-Based_Languages">not the case</a>. What <em>Class</em> does is make the prototypal inheritance model of JavaScript easier for you and me to access and take advantage of. I'll note that these concepts are not unique to MooTools (other frameworks offer similar functionality), but both of these concepts are not present in jQuery. jQuery does not offer an inheritance system nor does it offer any enhancements to native objects (Function, String, etc). This is not a deficiency of jQuery as the authors of jQuery could easily offer these things. Rather, they have designed a toolkit with a different goal in mind. Where MooTools aims to make JavaScript more fun, jQuery aims to make the DOM more fun and its designers have chosen to limit their scope to that task.  
 			</p>
 			
 			<a name="domfun"></a>
@@ -362,7 +362,7 @@ ninja.logInventory();
 });</pre>
 
 			<p>
-				If you read <a href="http://www.amazon.com/gp/product/1430209836?ie=UTF8&tag=clientside-20&link_code=as3&camp=211189&creative=373489&creativeASIN=1430209836">the MooTools book</a> or the <a href="http://www.mootorial.com/wiki">MooTools tutorial</a> (both of which I authored) they start in a much different place. While you can skip ahead and quickly learn about effects and the DOM, if you want to learn MooTools, you have to start with things like <em>Class</em>, and I'll admit: if you're new to programming, or you just want to get something working on your site without having to learn everything about JavaScript, chances are jQuery is going to look a lot more friendly to you.     
+				If you read <a href="http://www.amazon.com/gp/product/1430209836?ie=UTF8&tag=clientside-20&link_code=as3&camp=211189&creative=373489&creativeASIN=1430209836">the MooTools book</a> or the <a href="http://www.mootorial.com/wiki">MooTools tutorial</a> (both of which I authored) they start in a much different place. While you can skip ahead and quickly learn about effects and the DOM, if you want to learn MooTools, you have to start with things like <em>Class</em>, and, I'll admit: if you're new to programming, or you just want to get something working on your site without having to learn everything about JavaScript, chances are jQuery is going to look a lot more friendly to you.     
 			</p>
 			
 			<p>
@@ -436,7 +436,7 @@ ninja.logInventory();
 			
 			<p>But what if you like the jQuery syntax? One way to illustrate the power of MooTools is to show you how easy it is to change it to suit your tastes. If we wanted to implement the <em>hover</em> method from jQuery in MooTools, we could easily do so:</p>
 			
-<pre class="js">Element.implement{{
+<pre class="js">Element.implement({
     hover : function(enter,leave){
        return this.addEvents({ mouseenter : enter, mouseleave : leave });
     }
@@ -611,7 +611,7 @@ $(document).ready(function() {
 			<h3>MooTools and Inheritance</h3>
 		
 			<p>
-				Despite its name, the MooTools <em>Class</em> function is not really a class nor does it create them. It has design patterns that might remind you of classes in a more traditional programming language, but really <em>Class</em> is all about objects and prototypal inheritance.
+				Despite its name, the MooTools <em>Class</em> function is not really a class nor does it create them. It has design patterns that might remind you of classes in a more traditional programming language, but really <em>Class</em> is all about objects and prototypal inheritance. (Unfortunately, using words like "class" are the most convenient way to describe these things, so for the purposes of this article, when I refer to "classes" I'm referring to functions that return objects - which I'll "instances" - that inherit from a prototype.)
 			</p>
 			<p>
 				To make a class, you pass an object to the <em>Class</em> constructor like this:
@@ -626,7 +626,7 @@ $(document).ready(function() {
     energy: 1,
     eat: function() {
         this.energy = this.energy + 1; //same as this.energy++
-	}
+    }
 });</pre>
 		
 			<p>
@@ -634,7 +634,7 @@ $(document).ready(function() {
 			</p>
 <pre class="js">var bob = new Human("bob", 20); //bob's name is "bob" and he's 20 years old.</pre>
 			<p>
-				Now we have an instance of <em>Human</em>. <em>bob</em> has the properties of the object we defined when we created our <em>Human</em> class. But the important thing is that <em>bob</em> has these properties through inheritance. When we reference <i>bob.eat</i>, <i>bob</i> doesn't really have this property. JavaScript looks at <i>bob</i> and he doesn't have an <i>eat</i> method, so it looks up the inheritance chain and finds it on the object we passed when we created the Human class. This is true for <i>energy</i>, too. At first glance this looks potentially bad; we don't want all the humans we create to gain energy every time that <i>bob</i> eats. The important thing to recognize is that the first time we assign a value to <i>bob</i>'s energy, we assign him his own value and we no longer look at the prototype for it. So the first time <i>bob</i> eats, he gets his own definition for <em>energy</em> (set to 2).
+				Now we have an instance of <em>Human</em>. <em>bob</em> has the properties of the object we defined when we created our <em>Human</em> class. But the important thing is that <em>bob</em> has these properties through inheritance. When we reference <i>bob.eat</i>, <i>bob</i> doesn't really have this property. JavaScript looks at <i>bob</i> and he doesn't have an <i>eat</i> method, so it looks up the inheritance chain and finds it on the object we passed when we created the <em>Human</em> class. This is true for <i>energy</i>, too. At first glance this looks potentially bad; we don't want all the humans we create to gain energy every time that <i>bob</i> eats. The important thing to recognize is that the first time we assign a value to <i>bob</i>'s energy, we assign him his own value and we no longer look at the prototype for it. So the first time <i>bob</i> eats, he gets his own definition for <em>energy</em> (set to 2).
 			</p>
 			<pre class="js">bob.eat(); //bob.energy == 2</pre>
 			<p>
@@ -664,9 +664,9 @@ $(document).ready(function() {
 <pre class="js">jQuery.fn.ajaxFaq = function(options) {
     var settings = jQuery.extend({ 
 		//some ajax specific options like the url to request terms from
-        url: ...definitions: 'dd'
-    },
-    options); 
+        url: '/getfaq.php'
+        definitions: 'dd'
+    }, options); 
 	//"this" is the current context; in this case, the elements we want to turn into faq layouts
     $(this).find(settings.definitions).click(function() {
         $(this).load(.....); //the logic to load the content from the term
@@ -746,7 +746,7 @@ blackNinja.attack(bob);
 });</pre>
 
 			<p>
-				Now we have a <em>Samurai</em> class and a <em>Ninja</em> class. But look at how little code both <em>Ninja</em> and <em>Samurai</em> took to define? Both of them are similar in that they are humans with warrior qualities, but they are different in that samurais are always, always good, while ninjas have shifting allegiances. By spending the time to write a <em>Human</em> class and a <em>Warrior</em> class, we're able to have three different classes with no repetition of code while maintaining a very granular level of control over when methods are called and how they relate to each other. Each instance we create has its own state and the code itself is very legible.
+				Now we have a <em>Samurai</em> class and a <em>Ninja</em> class. But look at how little code both <em>Ninja</em> and <em>Samurai</em> took to define. Both of them are similar in that they are humans with warrior qualities, but they are different in that samurais are always, always good, while ninjas have shifting allegiances. By spending the time to write a <em>Human</em> class and a <em>Warrior</em> class, we're able to have three different classes with no repetition of code while maintaining a very granular level of control over when methods are called and how they relate to each other. Each instance we create has its own state and the code itself is very legible.
 			</p>
 			
 			<p>
