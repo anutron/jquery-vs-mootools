@@ -814,7 +814,7 @@ myFAQ.toggle(2); //toggle the 3rd element
 				
 			</p>
 
-<pre class="js">FAQ.Ajax({
+<pre class="js">FAQ.Ajax = new Class({
 	//this class inherits the properties of FAQ
 	Extends: FAQ,
 	//it also gets a new option in addition to the other defaults
@@ -882,7 +882,11 @@ myFAQ.toggle(2); //toggle the 3rd element
 			<hr/>
 			<p class="about" style="color: #700"><strong>A note on comments here</strong>: These comments are moderated. No comments will show up until they are approved. Comments that are not productive (i.e. inflammatory, rude, etc) will not be approved. Similarly, "fan" comments won't be approved either - i.e. no "FrameworkX Rulez! It's better than FrameworkY for realz!" are not constructive comments.
 			</p>
-			<div id="disqus_thread"></div><script type="text/javascript" src="http://disqus.com/forums/jqueryvsmootools/embed.js"></script>
+			<div id="disqus_thread"></div>
+			<script>
+				var disqus_url = "http://jqueryvsmootools.com/";
+			</script>
+			<script type="text/javascript" src="http://disqus.com/forums/jqueryvsmootools/embed.js"></script>
 		</div>
 		<script type="text/javascript">
 		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");

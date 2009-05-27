@@ -942,7 +942,7 @@ myFAQ.toggle(2); //toggle the 3rd element
 <p>Podemos acessar métodos e propriedades dessa instância. Mas e sobre nossa funcionalidade AJAX? O problema com nossa extensão AJAX na versão da jQuery é que não podíamos 
 atrasar a animação até o término do carregamento do conteúdo. Não temos este problema com nossa versão na MooTools.</p>
 
-<pre class="js">var FAQ.Ajax({
+<pre class="js">FAQ.Ajax = new Class({
 	//this class inherits the properties of FAQ
 	Extends: FAQ,
 	//it also gets a new option in addition to the other defaults
@@ -1032,7 +1032,11 @@ escreva sua própria análise delas e talvez suas conclusões destaquem alguma c
 			<hr/>
 			<p class="about" style="color: #700"><strong>Uma nota sobre os comentários</strong>: Esses comentários são moderados. Nenhum comentário irá aparecer até que sejam aprovados. Comentários que não forem produtivos (por exemplo: difamadores, rudes, etc) não serão aprovados. Analogamente, comentários tipo "fã" não serão aprovados (por exemplo: A Framework X domina! É melhor que a Framework Y para trabalhos de verdade! - não são considerados construtivos).
 			</p>
-			<div id="disqus_thread"></div><script type="text/javascript" src="http://disqus.com/forums/jqueryvsmootools/embed.js"></script>
+			<div id="disqus_thread"></div>
+			<script>
+				var disqus_url = "http://jqueryvsmootools.com/";
+			</script>
+			<script type="text/javascript" src="http://disqus.com/forums/jqueryvsmootools/embed.js"></script>
 		</div>
 		<script type="text/javascript">
 		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
