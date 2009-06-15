@@ -518,7 +518,7 @@ function(){
 			  Es muy tentador cuando estas trabajando en un proyecto web para escribir código de esta manera. Solo agregas un poco de lógica en la página que selecciona los elementos del DOM y "los prepara" ocultando algunos, alterando otros, y agregando listeners para click o mouseover. Desarrollar código en esta manera es muy eficiente, y muy rápido. El problema con escribir toda tu lógica en las sentencias de domready es que terminarás con un montón de código que hace la misma cosa en diferentes lugares. Si tomamos el patron de FAQ anterior nosotros podemos aplicar esa lógica fácilmente en cualquier otra página con cualquier lista de términos y definiciones. Vamos a repetir la misma lógica cada vez que encontremos este patrón?
 			</p>
 			<p>
-				   A simple way to make it reusable is to wrap the logic in a function and pass in arguments. Here's what that might look like in jQuery: 
+			  Una manera simple de hacerlo reusable es contener la lógica en una función y pasarla en argumentos. Aquí esta como debería verse en jQuery:
 			</p>
 
 <pre class="js">function faq(container, terms, definitions) {
@@ -531,18 +531,18 @@ $(document).ready(function() {
 });</pre>
 
 			<p>
-				This is much better for two really big and important reasons:  
+        Esto es mucho mejor por dos razones realmente grandes e importantes:
 			</p>
 			<ol>
 				<li>
-					 If tomorrow we need to change how these lists work (maybe we want to add click tracking logic so we can measure it in our web logs or maybe we want to fetch the definitions via ajax) we can just change our main <i>faq</i> method and everywhere we use it just gets updated. Or if there's a new version of jQuery released that changes the way things work, we can just go update our one method instead of a dozen copies everywhere. I call this  keeping a small footprint in my application. By keeping the points where my application touches my more generic code as small as possible, it makes it easier for me to fix bugs, upgrade frameworks, add features, or alter functionality. 
+					 Si mañana necesitamso cambiar como estas listas trabajan (puede ser agregar una lógica de seguimiento de clicks de esa manera podemos medir en nuestros logs o puede que querramos obtener las definiciones via ajax) nosotros solo cambieremos nuestro método principal <i>faq</i> y en cualquier otro lugar donde se use estará actualizado. O también si hubiera una nueva versión de jQuery que cambia la forma en que las cosas funcionan, solo actualizamos nuestro único método en vez de docenas de copias por todos lados. Yo llamo a esto  <em>keeping a small footprint in my application</em>. Manteniendo los puntos donde mi aplicación usa mi código mas genérico tan pequeña como sea posible, me hace mås fácil la corrección de errores, actualizar frameworks, agregar prestaciones, o alterar la funcionalidad.
 				</li>
 				<li>
-					 The second reason is that it's less code. By reusing the same method over and over again, I don't repeat myself and this is valuable in any programming environment. It also makes the code my visitors have to download smaller. 
+          La segunda razon es que esti es menos código. Reusando el mismo método una y otra vez, no me repito a mi mismo y esto es valioso en cualquier entorno de programación. Esto hace también que el código que mis visitantes tienen que bajar sea más pequeño.
 				</li>
 			</ol>  
 			<p>
-				jQuery actually has a slightly more refined system for writing reusable "widgets" like these. Rather than encourage you to drop them into functions like the above example (which is really rather crude) it encourages you to write <a href="http://docs.jquery.com/Plugins/Authoring">jQuery plug-ins</a>. Here's what that would look like:  
+        jQuery actualmente tiene un levemente refinado sistema para escribir "widgets" reusables como estos. En lugar de incitarte a escribirlo en funciones como el ejemplo  anterior (que en realidad es bastante crudo) te incita a escribir <a href="http://docs.jquery.com/Plugins/Authoring">jQuery plug-ins</a>. Así es como esto se vería:
 
 <pre class="js">jQuery.fn.faq = function(options) {
     var settings = jQuery.extend({
@@ -557,27 +557,27 @@ $(document).ready(function() {
 };</pre>
 
 			</p>
-			    which you would use thusly:
+			    lo cual lo podemos usar de esta manera:
 			</p>
 	<pre class="js">$('#faq').faq();</pre>
 
 			<p>
-				But looking at the example above, there's not much difference between declaring our <i>faq</i> function this way vs. declaring it as a stand alone function. Granted, it's not in the global namespace, but we could have just as easily added it to a namespace of our own. By attaching it to jQuery we can chain it with other jquery methods. The other benefit is that the "this" inside our function is the current context of whatever is in the jQuery chain at that moment. By using this pattern for plug-ins we're able to make our plug-in look like it's part of jQuery, but other than that, our plug-in is basically a single function that takes the current jQuery context, does stuff to it, and then returns the context for the next item in the chain. There's not a lot of complexity here, which makes it easy for anyone to write jQuery plug-ins - they're just single functions.
+			  Pero mirando el ejemplo anterior, no hay mucha diferencia entre declarar nuestra función <i>faq</i> de esta manera versus declararla como una función simple. Bueno, ella no esta en el namespace global, pero podríamos tenerla agregada facilmente a nuestro propio namespace. Asociandola con jQuery nosotros podemos anidarla con otros métodos jQuery. El otro beneficio es que el "this" dentro de nuestra función es el contexto corriente de lo que contiene el anidamiento jQuery en ese momento. Usando este patrón para plug-ins estamos en condiciones de hacer que nuestro plug-in se vea como parte de jQuery, pero por otro lado, nuestro plug-in es basicamente una simple función que toma el contexto actual de jQuery, hace cosas con eso, y después retorna el contexto para el siguiente item en el anidamiento o cadena (chain). No hay un monton de complejidad aqui, lo cual hace sencillo para cualquiera escribir plug-ins de jQuery - ya que son simplemente funciones.
 			</p>
 
 			<p>
-				Note that it is possible to write more complex plugins with jQuery with methods and state. This kind of pattern is supported with the jQuery UI plugin system and doesn't use the same mechanism as the basic plugin (like our faq example). Instead, you attach an object with methods and properties to the jQuery object (i.e. <em>$.ui.tabs</em>). There's a shortcut to invoke this object (<em>$(selector).tabs()</em>) so that you can continue chaining as with the faq plugin. But because it doesn't return a reference to the tabs object created for the items in your selector, you're forced to call that selector again to invoke methods on it. Instead of calling <em>myTabInstance.add(url, label, index)</em> you must execute the selector again and call your function by name (as a string): <em>$(selector).tabs('add', url, label, index);</em>. This means you're running your selector twice (unless you store it in a variable somewhere), and that you don't ever have a pointer to the "add" method that you can do things like bind or delay. This post is focused on the MooTools and jQuery cores, and while jQuery's UI system does provide this functionality, it's not something that comes with jQuery by default.
+        Nota que es posible escribir plug-ins más complejos con jQuery con métodos y estado. Esta clase de patrón es soportado con el plug-in de jQuery llamado UI system y no usa el mismo mecanismo del plug-in básico (como nuestro ejemplo de faq). En cambio, puedes anexar un objeto con métodos y propiedades al objeto jQuery (por ejemplo <em>$.ui.tabs</em>). Hay un acceso directo para invocar este objeto (<em>$(selector).tabs()</em>) de manera que puedes continuar anidando como el plug-in de faq. Pero como este no retorna una referencia al objeto tabs creado para los items en tu selector, te ves forzado a llamar a ese selector nuevamente para llamar a los métodos que contiene. En vez de llamar <em>myTabInstance.add(url, label, index)</em> debes ejecutar el selector nuevamente y llamar tu función por nombre (como string): <em>$(selector).tabs('add', url, label, index);</em>. Esto significa que estas ejecutando tu selector dos veces (al menos que lo almacenes en alguna variable en algún lugar), y que nunca tienes una referencia al método "add" que tu podrías facilmente hacer cosas como bind o delay. Este artículo está enfocado en el core  de MooTools y jQuery, y mientras UI system de jQuery provee esta funcionalidad, es algo que no viene por defecto.
 			</p>
 
 			<a name="classes"></a>
-			<h2>Reusing Code with MooTools</h2>
+			<h2>Reusando código con MooTools</h2>
 
 			<p>
-				In MooTools when you want to define a pattern, you're more likely to use either a <em><a href="http://mootools.net/docs/core/Class/Class">Class</a></em> or implement a method into a native object (into <em>String</em>, for example).
+			  En MooTools cuando quieres definir un patrón, tu puedes usar probablemente o una <em><a href="http://mootools.net/docs/core/Class/Class">Class</a></em> o implementar un método en un objeto nativo (en em>String</em>, por ejemplo).
 			</p>
 		
 			<p>
-				Rather than give you an almost completely different language from JavaScript's native style, MooTools attempts to walk the middle ground between defining its own custom syntax and extending JavaScript's own design patterns. One of the ways it does this is by extending the prototypes of the native objects in the language and in the DOM. This means that if you needed a method to trim a string, MooTools encourages you to add that method to String itself (note that <em><a href="http://mootools.net/docs/core/Native/String#String:trim">String.trim</a></em> is already in MooTools; you don't need to add this yourself):
+			  En lugar de darte un casi completamente diferente lenguaje del estilo nativo de JavaScript, MooTools intenta caminar en el terreno entre definir su propia sintaxis y extender los patrones existentes en JavaScript. Uno de las maneras de hacer esto es extendiendo los prototipos de los objetos nativos en el lenguaje y en el DOM. Esto significa que si necesitas un método para remover los espacios de un string, MooTools te incita a agregar un método a String (nota que <em><a href="http://mootools.net/docs/core/Native/String#String:trim">String.trim</a></em> ya está implementado en MooTools; no necesitas agregarlo tu mismo):
 			</p>
 
 <pre class="js">String.implement({
@@ -587,10 +587,10 @@ $(document).ready(function() {
 });</pre>
 
 			<p>
-				This means you can just execute <i>" no more spaces on the end! ".trim()</i> and get back <i>"no more spaces on the end!"</i>. Some would say that implementing properties into native prototypes is inappropriate. It's the reason why MooTools and <a href="http://www.prototypejs.org/">Prototype.js</a> can't play well with each other - any framework that manipulates prototypes of natives doesn't play well with any other framework that does the same. If I define <i>String.prototype.foo()</i> and another library on the same page defines it, too, which ever one comes last wins. In a way, this is similar to the problem we face with the global window namespace. This is how JavaScript works. This is how <a href="https://developer.mozilla.org/En/New_in_JavaScript_1.8">JavaScript 1.8</a> has added so many features. It adds them to the prototypes.
+			  Esto significa que simplemente puedes ejecutar <i>" no más espacios al final! ".trim()</i> y obtener <i>"no más espacios al final!"</i>. Alguien puede decir que implementar propiedades en los objetos nativos es inapropiado. Esta es la razón porque MooTools y <a href="http://www.prototypejs.org/">Prototype.js</a> no se llevan bien juntos - cualquier framework que manipula prototipos de nativos no puede llevarse bien con otro que hace lo mismo. Si yoi defino <i>String.prototype.foo()</i> y otra biblioteca en la misma página define lo mismo también, la que lo haga último ganará. De modo que, este es un problema similar al de global window namespace. Así es como funciona JavaScript. Esto es como  a href="https://developer.mozilla.org/En/New_in_JavaScript_1.8">JavaScript 1.8</a> ha agregado muchas prestaciones. Las agrega a los prototipos.
 			</p>
 			<p>	
-				The MooTools developers include a robust framework that is easy for you to extend with your own functionality with the intention that people who include the framework in the page are going to use it, not some other framework. It's actually kind of rude to ask users to download two frameworks. The only reason to include two frameworks is because you want to use plug-ins from both, and in the minds of the MooTools authors (myself included), if you want a plug-in that isn't available with the framework of your choice, it's more appropriate for you to spend the time porting it to your environment than to ask your users to download another framework.
+        Los programadores de MooTools incluyen un robusto framework que te facilita para extenderlo con tu propia funcionalidad con la intención de que la gente que incluya el framework en la pagina vaya a usarlo y no use algún otro framework. Actualmente pedir a los usuarios que descarguen dos frameworks sería un poco grosero. La única razón para incluir dos frameworks es porque deseas usar plug-ins de ambos, y en la mente de los autores de MooTools (me incluyo), si quieres un plug-in que no está disponible en el framework que elejiste, es más apropiado invertir tiempo portándolo a tu entorno que pedir que descarguen otro framework adicional.
 			</p>
 			<p>
 				Once you learn how JavaScript works and see the power of extending native objects, a whole new level of programming opens up. You can write plug-ins that alter Elements or Dates or Functions. While some might argue that adding methods to natives this way is a kind of pollution, I'd argue that this is how JavaScript is meant to be used. It is a design feature of the language. By attaching methods to natives you allow your code to be concise and compartmentalized. jQuery does this too, but limits its prototype	enhancements to the jQuery object.
