@@ -593,41 +593,37 @@ $(document).ready(function() {
         Los programadores de MooTools incluyen un robusto framework que te facilita para extenderlo con tu propia funcionalidad con la intención de que la gente que incluya el framework en la pagina vaya a usarlo y no use algún otro framework. Actualmente pedir a los usuarios que descarguen dos frameworks sería un poco grosero. La única razón para incluir dos frameworks es porque deseas usar plug-ins de ambos, y en la mente de los autores de MooTools (me incluyo), si quieres un plug-in que no está disponible en el framework que elejiste, es más apropiado invertir tiempo portándolo a tu entorno que pedir que descarguen otro framework adicional.
 			</p>
 			<p>
-				Once you learn how JavaScript works and see the power of extending native objects, a whole new level of programming opens up. You can write plug-ins that alter Elements or Dates or Functions. While some might argue that adding methods to natives this way is a kind of pollution, I'd argue that this is how JavaScript is meant to be used. It is a design feature of the language. By attaching methods to natives you allow your code to be concise and compartmentalized. jQuery does this too, but limits its prototype	enhancements to the jQuery object.
+			  Una vez que aprendes como funciona JavaScript y ves el poder de extender los objetos nativos, un nuevo nivel de programación se abre delante tuyo. Puedes escribir plug-ins que modifiquen Element o Date o Funcion. Mientras algunos pueden decir que agregar métodos a nativos de esta manera puede ser una clase de polución. Yo digo que esta es la manera que JavaScript fue pensado para ser usado. Es una cualidad de diseño del lenguaje. Agregando métodos a nativos te permite tener codigo conciso y compartimentado. jQuery hace esto también, pero limita las mejoras de prototipo al objeto jQuery.
 			</p>
 			
 			<p>
-				While you can easily chain multiple method calls on the jQuery object, on any other type of object you have to use
-			generics. For example, in jQuery if you want to trim a string and then iterate over each line, you would have to write:
+			  Mientras puedes anidar facilmente varias llamadas a métodos en el objeto jQuery, en cualquier otro tipo de objeto tendrás que usar generics. Por ejemplo, en jQuery si quieres hacer trim a un string e iterar sobre cada línea, deberías escribir:
 			</p>
 
 			<pre class="js">$.each( $.trim( $('span.something').html() ).split("\n"), function(i, line){alert(line);});</pre>
 
-			<p>But because MooTools modifies prototypes, you can do this:</p>
+			<p>Pero como MooTools modifica los prototipos, tu puedes hacer esto:</p>
 
 			<pre class="js">$('span.something').get('html').trim().split("\n").each(function(line){alert(line);});</pre>
 
 			<p>
-				Taking a look at this makes it extremely clear how powerful it is to
-			modify prototypes. Chaining on DOM elements isn't the only place chaining is
-			useful. MooTools lets you chain methods on any object, including
-			running a method on multiple elements at once.
+			  Hechando una mirada a esto pone extremadamente claro cuan potente es modificar prototipos. La anidación de elementos del DOM no es el unico lugar donde la anidación es util. MooTools te permite anidar métodos a cualquier objeto, incluyendo ejecutar un método en multiples elementos a la vez. 
 			</p>
 			
 			<p>
-				The key here is that at the heart of the MooTools framework is the notion that it's there to let you program what you want. If there's functionality that's not in the core, you can extend it and add your own. The job of the core is not to provide everyone with every bit of functionality that they could ever want, but to provide the tools that allow you write the things that you want. A big part of that is making it easier to extend the prototypes of natives, and take advantage of prototypal inheritance. You can do these things with vanilla JavaScript but MooTools makes it easier and more pleasant.
-				
+        La clave aquí es que en el corazón del framework MooTools está la noción que está ahí para permitirte programar lo que quieras. Si hay una funcionalidad que no esta en el core, puedes extenederlo y agregarla tu mismo. El trabajo del core no es proveer todas las funcionalidades que cada uno quiere, sino proveer las herrramientas que te permiten escribir las cosas que desees. Una gran parte de ello es hacer la extensión de nativos más facil para ti, y obtener ventaja de la herencia prototipada. Puedes hacer estas cosas con JavaScript básico pero MooTools lo hace más fácil y placentero.
 			</p>
 			
 			
 			<a name="mooinheritance"></a>
-			<h3>MooTools and Inheritance</h3>
+			<h3>MooTools y Herencia</h3>
 		
 			<p>
-				Despite its name, the MooTools <em>Class</em> function is not really a class nor does it create them. It has design patterns that might remind you of classes in a more traditional programming language, but really <em>Class</em> is all about objects and prototypal inheritance. (Unfortunately, using words like "class" are the most convenient way to describe these things, so for the purposes of this article, when I refer to "classes" I'm referring to functions that return objects - which I'll "instances" - that inherit from a prototype.)
+			  A pesar de su nombre, la funcion de MooTools <em>Class</em> no es relamente una clase ni crea ellas. Ella tiene un patrón de diseño que puede hacerte acordar a las clases en un lenguaje de programación más tradicional, pero 
+lo que <em>Class</em> realmente hace tiene que ver con objetos y herencia prototipada. (Desafortunadadmente, usando palabras como "class" es lo más conveniente para describir estas cosas, de modo que para el propósito de éste artículo, cuando me refiera a "classes" me estoy refiriendo a funciones que retornan objetos - los que "instanciaré" - que heredan de prototipos.)
 			</p>
 			<p>
-				To make a class, you pass an object to the <em>Class</em> constructor like this:
+        Para hacer una clase, debes pasarle un objeto al constructor <em>Class</em> de esta manera:
 			</p>
 		
 <pre class="js">var Human = new Class({
@@ -638,20 +634,20 @@ $(document).ready(function() {
     isAlive: true,
     energy: 1,
     eat: function() {
-        this.energy = this.energy + 1; //same as this.energy++
+        this.energy = this.energy + 1; //lo mismo que this.energy++
     }
 });</pre>
 		
 			<p>
-				You pass <em>Class</em> an object (above, we pass an object with members like "isAlive" and "eat") and this object becomes the prototype of every instance of that class. To create an instance, you call it like this:
+			  Tu le pasas a <em>Class</em> un objeto (en el ejemplo de arriba, le pasamos un objeto con miembros como "isAlive" y "eat") y este objeto se convierte en el prototipo de cada instancia de esa clase. Para crear una instancia, debes escribirlo de esta manera:
 			</p>
-<pre class="js">var bob = new Human("bob", 20); //bob's name is "bob" and he's 20 years old.</pre>
+<pre class="js">var bob = new Human("bob", 20); //el nombre de bob es "bob" y el tiene 20 años.</pre>
 			<p>
-				Now we have an instance of <em>Human</em>. <em>bob</em> has the properties of the object we defined when we created our <em>Human</em> class. But the important thing is that <em>bob</em> has these properties through inheritance. When we reference <i>bob.eat</i>, <i>bob</i> doesn't really have this property. JavaScript looks at <i>bob</i> and he doesn't have an <i>eat</i> method, so it looks up the inheritance chain and finds it on the object we passed when we created the <em>Human</em> class. This is true for <i>energy</i>, too. At first glance this looks potentially bad; we don't want all the humans we create to gain energy every time that <i>bob</i> eats. The important thing to recognize is that the first time we assign a value to <i>bob</i>'s energy, we assign him his own value and we no longer look at the prototype for it. So the first time <i>bob</i> eats, he gets his own definition for <em>energy</em> (set to 2).
+				Ahora tenemos una instancia de <em>Human</em>. <em>bob</em> tiene las propiedades de el objeto que definimos cuando nosotros creamos nuestra clase <em>Human</em>. Pero lo importante aquí es que <em>bob</em> tiene las propiedades a través de la herencia. Cuando referenciamos <i>bob.eat</i>, <i>bob</i>  no tiene realmente esta propiedad. JavaScript mira en <i>bob</i> y el no tiene un método <i>eat</i>, por eso busca hacia arriba en la cadena de herencia y lo encuentra en el objeto que le pasamos cuando creamos la clase <em>Human</em>. Esto es válido también para <i>energy</i>. A primera vista esto se ve potencialmente malo; nosotros no queremos que todos los humanos que creemos obtengan energía cada vez que <i>bob</i> come (eats). Lo importante a reconocer es que la primera vez que asignamos un valor a la energía de <i>bob</i>(bob's energy), estamos asignando a su propio valor y no buscamos más en el prototipo por el. De modo que, la primera vez que llamamos al método eat de <i>bob</i>, el obtiene su propia definicion para <em>energy</em> (seteada en 2).
 			</p>
 			<pre class="js">bob.eat(); //bob.energy == 2</pre>
 			<p>
-				Note that <em>bob</em>'s name and age are unique to him; these are assigned to him when the class is initialized in the <i>initialize</i> method.
+        Notar que el nombre de <em>bob</em> y la edad son solo de el; estos son asignados a el cuando la clase es inicializada en el método  <i>initialize</i>.
 			</p>
 			<p>
 				This whole pattern may seem a little odd to you, but the value here is that we can define functionality for a pattern and create instances of that pattern every time we need it. Each instance maintains its own state. So if we create another instance each one is independent of the other, but inherits from the same base pattern:
@@ -662,11 +658,11 @@ $(document).ready(function() {
 //bob.energy == 2</pre>
 		
 			<p>
-				Where things get really interesting is when we want to augment this behavior.
+			  Donde las cosas se ponen realmente interesantes es cuando queremos fundamentar este comportamiento.
 			</p>
 			
 			<a name="extension"></a>
-			<h3>Extending and Implementing Classes</h3>
+			<h3>Extendiendo e Implementando Clases</h3>
 		
 			<p>
 				Let's revisit our jQuery <i>faq</i> plug-in. What would happen if we wanted to add more functionality to that plug-in. What if we wanted to make an ajax version that fetched the answers to the questions from the server? Let's imagine that the <i>faq</i> plug-in was authored by someone else and we want to add more to it without altering it in any way (we don't want to fork it).
