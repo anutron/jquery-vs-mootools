@@ -665,29 +665,28 @@ lo que <em>Class</em> realmente hace tiene que ver con objetos y herencia protot
 			<h3>Extendiendo e Implementando Clases</h3>
 		
 			<p>
-				Let's revisit our jQuery <i>faq</i> plug-in. What would happen if we wanted to add more functionality to that plug-in. What if we wanted to make an ajax version that fetched the answers to the questions from the server? Let's imagine that the <i>faq</i> plug-in was authored by someone else and we want to add more to it without altering it in any way (we don't want to fork it).
+			  Revisitemos nuestro plug-in <i>faq</i> de jQuery. Qué deberia suceder so queremos agregar más funcionalidad a ese plug-in. Que si queremos hacer una versión ajax que obtiene las respuestas a las preguntas de el server? Imaginemos que el plug-in <i>faq</i> fué hecho por alguna otra persona y queremos agregarle más cosas sin modificarlo de ninguna manera (no queremos hacer un fork).
 			</p>
 			<p>
-				Our only real choices are to either duplicate the <em>faq</em> plug-in's logic entirely (remember, it's a single function), essentially forking it, or we can invoke it and then add more logic to it. Given a choice, the latter seems to save us the most trouble. It would look something like this:
+			  Nuestras unicas opciones reales son, o duplicar la lógica completa del plug-in <em>faq</em>(recuerda que es solo una simple función), haciendo un fork escencialmente, o podemos invocarlo y agregarle más logica a el. Dadas las opciones, la última parece traernos menos problemas. Entonces esto debería verse algo así:
 			</p>
 <pre class="js">jQuery.fn.ajaxFaq = function(options) {
     var settings = jQuery.extend({ 
-		//some ajax specific options like the url to request terms from
+      //algunas opciones especificas de ajax para obtener la información
         url: '/getfaq.php'
         definitions: 'dd'
     }, options); 
-	//"this" is the current context; in this case, the elements we want to turn into faq layouts
+	//"this" en el contexto actual; en este caso, el elemento que queremos transformarlo en el faq layout
     $(this).find(settings.definitions).click(function() {
-        $(this).load(.....); //the logic to load the content from the term
+        $(this).load(.....); //la lógica que obtiene el contenido
     });
-    this.faq(); //call our original faq plug-in
+    this.faq(); //la llamada a nuestro plug-in original
 });</pre>
 			<p>
-				This has some down sides. First of all, our <em>faq</em> class is going to repeat our selector for the definitions, which might be expensive; there's no way to store the retrieved definitions and pass it on for the second time they are needed. Secondly, we can't add our ajax logic into the middle of the <em>faq</em> plug-in's own logic for displaying the definition. The original plug-in called <em>slideToggle</em> which expands the definition using an effect. This is problematic because this effect is going to go off before our ajax finishes loading. There's no real solution here unless we just duplicate the entire <em>faq</em> plug-in.
+			  Esto tiene algunas cosas malas. Primero de todo, nuestra clase <em>faq</em> va a repetir nuestro selector para las definiciones, lo cual puede ser costoso; no hay forma de almacenar las definiciones obtenidas y pasarlas por segunda vez donde son requeridas. Secundariamente, no podemos agregar nuestra lógica ajax dentro de la propia lógica plug-in <em>faq</em> para mostrar la definición que obtuvimos via ajax. El plug-in original llamado <em>slideToggle</em> el cual expande la definición usando un efecto. Esto es problemático porque éste efecot va a finalizar antes que nuestro ajax se termine de cargar. No hay una solución real aquí al menos que dupliquemos completamente el plug-in <em>faq</em>.
 			</p>
 			<p>
-				Now let's consider our MooTools <em>Human</em> class. It has properties like <em>isAlive</em> and <em>energy</em> and it has a method called <em>eat</em>. What if we wanted to make a new version of <em>Human</em> that had additional properties? With MooTools, we extend the class:
-			</p>
+			  Consideremos ahora nuestra clase <em>Human</em> en MooTools. Esta tiene propiedades como <em>isAlive</em> y <em>energy</em> y ademas tiene un método llamado <em>eat</em>. Qué pása si queremos hacer una nueva versión de <em>Human</em> que tenga propiedades adicionales? Con MooTools, extendemos la clase:</p>
 <pre class="js">var Ninja = new Class({
     Extends: Human,
     initialize: function(name, age, side) {
@@ -701,7 +700,8 @@ lo que <em>Class</em> realmente hace tiene que ver con objetos y herencia protot
     }
 });</pre>
 			<p>
-				You can see that we've added a lot of functionality here into a subclass. This subclass has all these properties that are unique to <em>Ninjas</em>. <em>Ninjas</em> start off with an initial <em>energy</em> value of 100. <em>Ninjas</em> get a <em>side</em>. They also get an <em>attack</em> method that lets them kill other <em>Humans</em>, but it costs the <em>Ninja</em> energy.
+			  Puedes ver que hemos agregado un monton de funcionalidad en una subclase. Esta subclase tiene todas las propiedades que son únicas a <em>Ninjas</em>. <em>Ninjas</em> comienza con un valor inicial de <em>energy</em> de 100.
+			  <em>Ninjas</em> obtienen un <em>side</em> . Ellos también obtienen un método <em>attack</em> que les permite matar a otros <em>Humans</em>, pero esto consume la energía de <em>Ninja</em>.
 			</p>
 
 <pre class="js">var bob = new Human('Bob', 25);
@@ -712,13 +712,11 @@ blackNinja.attack(bob);
 //bob never had a chance</pre>
 
 			<p>
-				Picking this apart a bit, there are some interesting things to consider here. Note that we have an <em>initialize</em> method in the <em>Ninja</em> class. This would appear to overwrite the <em>initialize</em> method in the <em>Human</em> class, but we can still access it by calling <em>this.parent</em>, passing along the arguments that the parent class's <em>initialize</em> expects. Further, we can control when our logic occurs; before or after the call to the parent. We can assign new values to properties (like the <em>energy</em> value) and we can define new functionality. Imagine if we could do this with our <em>faq</em> plug-in for jQuery. We could load our ajax and THEN slide open the value.
+        Alejandonos de esto un momento, hay algunas cosas interesantes a considerar aquí. Nota que tenemos un método <em>initialize</em> en la clase <em>Ninja</em>. Esto podría parecer que sobreescribe el método <em>initialize</em> en la clase <em>Human</em>, pero podemos seguir accediendo al mismo llamando a <em>this.parent</em>, pasando los argunmentos que la clase padre espera en el método <em>initialize</em>.
+        Más adelante, podemos controlar dónde sucede nuestra lógica; antes o despues de la llamada del método padre (this.parent). Podemos asignar nuevos valores a las propiedades (como el valor de <em>energy</em>) y podemos definir una nueva funcionalidad. Imagina si podriamos hacer esto en nuestro plug-in <em>faq</em> en jQuery. Podriamos cargar nuestra respuesta ajax y ENTONCES mostrar el valor con un efecto slide open.
 			</p>
 			<p>
-				MooTools has another pattern called a Mixin. Unlike the parent to
-				child relationship that is defined by extending one class into a
-				subclass, you can also define classes that are mixed into other
-				classes to imbue them with their properties. Here's an example:
+			  MooTools tiene otro patron llamado Mixin. A diferencia de la relacion padre a hijo que es definida extendiendo una clase en una sublcase, puedes también definir clases que son mezcladas en otras clases para imbuir ellas con sus propiedades. Aqui un ejemplo:
 			</p>
 
 <pre class="js">var Warrior = new Class({
@@ -732,12 +730,12 @@ blackNinja.attack(bob);
 });</pre>
 
 			<p>
-				Here we've broken the qualities that make a <em>Ninja</em> different from a <em>Human</em> and put them in a class of their own. This lets us reuse this code outside of <em>Ninja</em>. We could then imbue our <em>Ninja</em> class with the qualities of a warrior like so:
+        Aquí hemos quebrado las cualidades que hacían a un <em>Ninja</em> diferente de un <em>Human</em> y pusimos esto en una clase. Esto nos permite reusar el codigo fuera de <em>Ninja</em>. Podríamos entonces imbuir nuestra clase <em>Ninja</em> con las cualidades de warrior así:
 			</p>
 
 <pre class="js">var Ninja = new Class({
     Extends: Human,
-    Implements: Warrior, //can be an array if you want to implement more than one
+    Implements: Warrior, //puede ser un array si deseas implementar más de uno
     initialize: function(name, age, side) {
         this.side = side;
         this.parent(name, age);
@@ -745,7 +743,7 @@ blackNinja.attack(bob);
 });</pre>
 		
 			<p>
-				<em>Ninja</em> still works as it did before, but <em>Warrior</em> is at our disposal to reuse:
+				<em>Ninja</em> continua funcionando como lo hice anteriormente, pero <em>Warrior</em> esta a nuestra disposición para ser reusado:
 			</p>
 
 <pre class="js">var Samurai = new Class({
@@ -755,15 +753,16 @@ blackNinja.attack(bob);
 });</pre>
 
 			<p>
-				Now we have a <em>Samurai</em> class and a <em>Ninja</em> class. But look at how little code both <em>Ninja</em> and <em>Samurai</em> took to define. Both of them are similar in that they are humans with warrior qualities, but they are different in that samurais are always, always good, while ninjas have shifting allegiances. By spending the time to write a <em>Human</em> class and a <em>Warrior</em> class, we're able to have three different classes with no repetition of code while maintaining a very granular level of control over when methods are called and how they relate to each other. Each instance we create has its own state and the code itself is very legible.
+			  Ahora tenemos una clase <em>Samurai</em> y una clase <em>Ninja</em>. Pero miremos cuan pequeño es el codigo para definir ambas clases <em>Ninja</em> y <em>Samurai</em>. Ambas son similares en que son humanos con cualidades de warrior, pero ellas son diferentes en que samurais son siempre, siempre buenos (good), mientras que los ninjas pueden cambiar sus lealtades. Invirtiendo el tiempo en escribir la clase <em>Human</em> y la clase <em>Warrior</em>, estaremos en condiciones de tener tres clases diferentes con ninguna repetición de codigo mientras mantiene un nivel de control muy granular sobre los métodos cuando son llamados y cómo se relacionan uno con otro. Cada instancia que creamos tiene su propio estado y el código en sí es muy legible.
 			</p>
 			
 			<p>
-				Now that you have an overview of how classes work in MooTools, let's look at our <em>faq</em> class that we wrote in jQuery and write it as we would in MooTools and then extend it to add Ajax to it just as we did with jQuery.				
+        Ahora que tienes un panorama de como las clases funcionan en MooTools, echémosle una mirada a nuestra clase <em>faq</em> que escribimos en jQuery y escribámosla en MooTools y luego extendámosla a Ajax como lo hicimos con jQuery.
+
 			</p>
 <pre class="js">
 var FAQ = new Class({
-	//Options is another class provided by MooTools
+	//Options es otra clase provista por MooTools
 	Implements: Options,
 	//these are the default options
 	options: {
@@ -771,75 +770,74 @@ var FAQ = new Class({
 		definitions: 'dd'
 	},
 	initialize: function(container, options) {
-		//we store a reference to our container
+		//guardamos una referencia a nuestro contenedor
 		this.container = $(container);
-		//setOptions is a method provided by the Options mixin
-		//it merges the options passed in with the defaults
+		//setOptions es un método provisto por el mixin Options
+		//éste une (merge) las opciones que le pasamos con las opciones por defecto
 		this.setOptions(options);
-		//we store the terms and definitions
+		//almacenamos los términos y definiciones
 		this.terms = this.container.getElements(this.options.terms);
 		this.definitions = this.container.getElements(this.options.definitions);
-		//we call our attach method
-		//by breaking this into its own method
-		//it makes our class easier to extend
+		//llamamos a nuestro método attach
+		//separando esto en su propio método
+		//hace nuestra clase más fácil de extender
 		this.attach();
 	},
 	attach: function(){
-		//loop through the terms
+		//iteramos por los términos
 		this.terms.each(function(term, index) {
-			//add a click event to each one
+			//agregamos el evento Click a cada uno
 			term.addEvent('click', function(){
-				//that calls our toggle method for
-				//the current index
+				//esto llama a nuestro método toggle para
+				//el index actual
 				this.toggle(index);
 			}, this);
 		}, this);
 	},
 	toggle: function(index){
-		//toggle open the definition for the given index
+		//invierte la definicion abierta por la recibida en index
 		this.definitions[index].slide('toggle');
 	}
 });
 </pre>
 
 			<p>
-				Woah. That's a lot of code. Even if we remove all the comments it's still two dozen lines long. I already illustrated above that we could build this plug-in with roughly the same amount of code as the jQuery version. So why is this one so much longer? Well, we've made it much more flexible. To use the class, we just call the constructor, like this:
+			  Woah (Necesito un traductor especial para esta palabra ;-) ).  Esto es un montón de código. Así y todo si elimino las líneas de comentarios quedan como dos docenas de líneas de código. Ya he ilustrado anteriormente que podríamos hacer este plug-in con la misma cantidad de código como la versión de jQuery. Entonces porqué éste es tanto mas largo? Bien, lo hemos hecho mucho más flexible. Para usasr la clase, simplemente llamamos el constructor, así:
 			</p>
 
 <pre class="js">var myFAQ = new FAQ(myContainer);
-//and now we can call methods on it if we want:
-myFAQ.toggle(2); //toggle the 3rd element
+//y ahora podemos llamar los métodos que contiene cuando querramos:
+myFAQ.toggle(2); //invierte el 3er elemento
 </pre>
 
 			<p>
-				We can access methods and properties of the instance. But what about our ajax functionality? The problem with our ajax extension to the jQuery version was that we couldn't delay the opening of the definition until after it loaded. We don't have that problem with our MooTools version:
-				
+			  Podemos acceder a los métodos y propiedades de la instancia. Pero que pasa con nuestra funcionalidad ajax? El problema con nuestra extensión ajax en nuestra versión jQuery era que no podíamos frenar la apertura de la definición hasta despues de la carga de la misma. No tenemos ese problema con nuestra versión de MooTools:
 			</p>
 
 <pre class="js">FAQ.Ajax({
-	//this class inherits the properties of FAQ
+	//esta clase hereda las propiedades de FAQ
 	Extends: FAQ,
-	//it also gets a new option in addition to the other defaults
-	//this one for url, that we're going to append the index of the
-	//term to; in reality we might make this more robust, but for
-	//this example it serves the purpose
+	//esta también obtiene una nueva opción sumada a las por defecto
+  //esta es para la url, lo que vamos a agregar al indice del término
+	//en realidad podemos hacer esto más robusto, pero para 
+	//este ejemplo es suficiente
 	options: {
 		url: null;
 	},
-	//we're going to cache the results, so if a section is opened
-	//twice, we won't hit the server for the data
+	//vamos a hacer caching de los resultados, de mode que si una seccion es
+	//abierta dos veces, no iremos al servidor por los datos nuevamente
 	indexesLoaded: [],
 	toggle: function(index){
-		//if we've already loaded the definition
+		//si ya hemos leído la definicion
 		if (this.indexesLoaded[index]) {
-			//just call the previous version of toggle
+			//solo llamamso la version previa de toggle
 			this.parent(index);
 		} else {
-			//otherwise, request the data from the server
+			//cualquier otro caso, obtenemos los datos del server
 			new Request.HTML({
 				update: this.definitions[index],
 				url: this.options.url + index,
-				//and when the data is loaded, expand the definition
+				//cuando los datos estan cargados, expandimos la definición
 				onComplete: function(){
 					this.indexesLoaded[index] = true;
 					this.definitions[index].slide('toggle');
@@ -851,27 +849,27 @@ myFAQ.toggle(2); //toggle the 3rd element
 </pre>
 
 			<p>
-				Now we have a version of our <em>FAQ</em> class that allows us to get the definitions from the server. Note that we were able to integrate the new logic in a way that doesn't expand the definition until <em>after</em> the content comes back from the server (which we couldn't do with the jQuery version). Also note that we really only had to describe the new functionality (the ajax) and little else. This extensibility makes it possible for you to create families of plug-ins that offer different shades of functionality. It also means that you can use someone else's plug-in and alter just the bits that you to be want different if you need to (without forking it). This helps explain why, for any given design pattern - a date picker, a tab interface, etc, that you typically only find a few plug-ins for MooTools. Most of the plug-ins you get either solve your problem or, if not, you can just extend them to add the things you need.
-				
+			  Ahora tenemos una versión de nuestra clase <em>FAQ</em> que nos permite obtener definiciones desde el servidor. Notar que ahora estamos en condiciones de integrar la nueva manera de no expandir la definicion hasta <em>después</em> que el contenido llegó del server (lo cual no hemos podido realizar con la versión de jQuery). También nota que nosotros realmente tenemos solamente que describir nueva funcionalidad (la ajax) y un poquito más. Esta extensibilidad hace te hace posible crear familias de plug-ins que ofrecen diferentes estilos de funcionalidades. Esto también significa que puedes usar el plug-in de alguien más y modificar solo el comportamiento que quieres que sea diferente si necesitas (sin realizar un fork). Esto ayuda a explicar porqué, para cualquier patron de diseño dado - un selector de fecha, una interfase con tabs, etc, que normalmente encuentras solo unos pocos plug-ins para MooTools. La mayoría de los plug-ins que obtienes o solucionan tu problema o, si no, simplemente puedes extenderlos para agregar las cosas que necesitas.
 			</p>
 			
 			<p>
-				As I illustrated earlier, it's possible to write complex jQuery widgets with methods and state. Most of the code you write when doing this is vanilla JavaScript when you need to express logic that isn't related to the DOM. But jQuery's model doesn't offer a system for extending these instances into subclasses. Nor does it help you with mixins that can be reused easily. Finally, jQuery's plugins are always attached to DOM elements. If you wanted to write a class that, say, processed URLs, there's no stateful system for such a thing unless you write it yourself.
+        Como he ilustrado anteriormente, es posible escribir código complejo con widtets de jQuery con métodos y estados. La mayoría del codigo que escribes cuando estas haciendo esto es JavaScript básico cuando necesitas expresar lógica que no está relacionada al DOM. Pero el modelo jQuery no ofrece un sistema para extender estas instancias en subclases. Ni tampoco te ayuda con mixins que pueden ser reusados fácilmente. Finalmente, los plug-ins de jQuery están siempre asociados a elementos DOM. Si quieres escribir una clase que, devuelva, URLs procesadas, no hay ningun sistema stateful para ese tipo de cosas excepto que lo escribas tu mismo.
 			</p>
 			
 			<a name="conclusion"></a>
-			<h2>Decision Time</h2>
+			<h2>Tiempo de decisión</h2>
 		
 			<p>
-				jQuery focuses on expressiveness, quick and easy coding, and the DOM while MooTools focuses on extension, inheritance, legibility, reuse, and maintainability. If you put those two things on opposite sides of a scale, the jQuery side translates into something with which it's easy to get started and see quick results but (in my experience) can turn into code that's harder to reuse and maintain (but really that's up to you; it's not jQuery's problem, per se), while the MooTools side takes longer to learn and requires you to write more code upfront before you see results, but afterwards is more reusable and more maintainable.
+			  jQuery se enfoca en expresividad, codificación fácil y rápido, y en el DOM mientras MooTools se enfoca en extensión, herencia, legibilidad, reuso, y mantenibilidad. Si tu pones estas dos cosas en la balanza, el lado de jQuery se traduce en algo que es fácil para empezar y se ven rápido los resultados pero (en mi experiencia) se puede convertir en código más dificil de mantener o reusar (pero realmente eso está de tu lado, no es un problema de jQuery), mientras el lado de MooTools toma más tiempo para aprender y requiere que escribas más código antes que puedas ver los resultados, pero luego es más reusable y mantenible.
 			</p>
 			<p>
-				Further, the MooTools core does not contain every feature you can imagine and neither does the jQuery core. Both frameworks keep their cores rather lean, leaving it to you and others to write plug-ins and extensions. Their job is not to give you every feature you could want but to give you the tools so that you can implement anything you can imagine. This is the power of JavaScript, and of JavaScript frameworks in general, and both frameworks excel at it. MooTools takes a more holistic approach and gives you tools to write anything you can imagine beyond the scope of the DOM, but pays the price by having a steeper learning curve. MooTools extensibility and holistic approach gives you a superset of jQuery's features, but jQuery's focus on a slick DOM API doesn't preclude you from using the native inheritance methods of JavaScript or from using a class system like MooTools if you want it.
+        El core de MooTools no contiene cada prestacione que puedes imaginar ni tampoco lo hace el core de jQuery. Ambos frameworks mantienen sus cores bastante limitados, dejandote a vos y a otros escribir plug-ins y extensiones. Su trabajo no es darte cada prestación que podrías querer sino darte las herramientas para que puedas implementar cualquier cosa que puedas imaginar. Este es el poder de JavaScript, y de los frameworks de JavaScript en general, y ambos frameworks sobresalen en esto. MooTools toma un acercamiento más holístico y te da un superset de las prestaciones de jQuery, pero jQuery se enfoca en ser una rápida API del DOM que no evita que uses la herencia nativa de los métodos de JavaScript o de usar un sistema de clases como MooTools si lo deseas.
 			</p>
 			<p>
-				This is why I say that both frameworks are excellent choices. My effort here has been to highlight the differences in philosophies between the two codebases and highlight their advantages and disadvantages. I doubt I've been successful in keeping my preference for MooTools completely in check, but hopefully this has been helpful. Regardless of which framework you choose to work with, you now know a lot more about both, hopefully. If you have the luxury of time, I strongly recommend implementing a site with each. Then write your own review of them both and maybe your perspective will highlight some things I missed.
+        Esto es porqúe yo digo que ambos frameworks son excelentes opciones. Mi esfuerzo aquí ha sido resaltar las diferencias de filosofías entre las dos lineas de codificación y resaltar sus ventajas y desventajas. Dudo que haya tenido éxito en mantener mi preferencia por MooTools en jaque, pero ojalá esto haya ayudado.  
+        Sin hablar de que framework elijas para trabajar, ahora sabes mucho más de ambos, al menos eso espero. Si tienes el lujo de tener tiempo, te recomiendo seriamente implementar un sitio con cada uno. Entonces escribes tu propia experiencia de ellos dos y probablemente tu perspectiva resalte algunas cosas que a mi se me han pasado.
 			</p>
-			<p>A history of this document <a href="http://github.com/anutron/jquery-vs-mootools/tree/master">can be viewed on github</a>.</p>
+			<p>La historia del documento <a href="http://github.com/anutron/jquery-vs-mootools/tree/master">puedes verla en github</a>.</p>
 			<p>
 			<script type="text/javascript" src="http://w.sharethis.com/button/sharethis.js#publisher=c327065b-efa0-4e12-afbc-5717f5cf62f9&amp;type=website&amp;post_services=facebook%2Cdigg%2Cdelicious%2Ctwitter%2Creddit%2Cfriendfeed%2Cmyspace%2Cybuzz%2Cstumbleupon%2Ctechnorati%2Cmixx%2Cblogger%2Cwordpress%2Ctypepad%2Cgoogle_bmarks%2Cwindows_live%2Cfark%2Cbus_exchange%2Cpropeller%2Cnewsvine%2Clinkedin"></script>
 			</p>
@@ -882,7 +880,7 @@ myFAQ.toggle(2); //toggle the 3rd element
 			
 			<a name="discussion"></a>
 			<hr/>
-			<p class="about" style="color: #700"><strong>A note on comments here</strong>: These comments are moderated. No comments will show up until they are approved. Comments that are not productive (i.e. inflammatory, rude, etc) will not be approved. Similarly, "fan" comments won't be approved either - i.e. no "FrameworkX Rulez! It's better than FrameworkY for realz!" are not constructive comments.
+			<p class="about" style="color: #700"><strong>Una nota sobre comentarios aquí</strong>: Estos comentarios son moderados. Los comentarios no se mostraran hasta que no sean aprobados. Comentarios que no son productivos (ej. mal educados, insultos, ofensas, etc) no serán aprobados. Similarmente, comentarios "fanáticos" tampoco serán aprobados - ej. no "El framework es lo máximo! Es el mejor framework de todos!!" no son comentarios constructivos.
 			</p>
 			<div id="disqus_thread"></div><script type="text/javascript" src="http://disqus.com/forums/jqueryvsmootools/embed.js"></script>
 		</div>
