@@ -1,0 +1,913 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>
+      jQuery vs MooTools: Choosing Between Two Great JavaScript Frameworks
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="Shortcut Icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print">  
+    <!--[if IE]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    <link rel="stylesheet" href="css/blueprint/src/typography.css" type="text/css" media="screen" title="no title" charset="utf-8">
+    <style>
+      body { 
+        font-size: 100%;
+        color: #444; 
+        background: #fff;
+        font-family: "Georgia", Arial, Helvetica, sans-serif;
+      }
+      h1, h2, h3, h4 {
+        color: #626262;
+      }
+      h1 {
+        text-align: center;
+        margin: 20px !important;
+        font-size: 90px;
+        padding: 0 !important;
+        padding:0 0 10px;
+      }
+      div.caption {
+        font-size: 14px;
+        text-align: right;
+        margin: auto;
+        width: 800px;
+        position: relative;
+        top: -25px;
+        background-color: none;
+      }
+      a, a.visited {
+        color: #004d9b;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      p.footnote {
+        font-size: 12px;
+        text-align:right;
+        margin-top: 0px;
+        position: relative;
+        top: -8px !important;
+        top: 0px;
+      }
+      p.about {
+        font-size: 12px;
+      }
+      tr td {
+        border-bottom: 1px solid #999;
+        vertical-align: top;
+      }
+      tr th {
+        background: #999;
+        color: #fff;
+      }
+      .dsq-item-cp {
+        display: none;
+      }
+      div.trans {
+        font-size: 10px;
+      }
+    </style>
+	
+	<!-- RTL CSS -->
+	<style type="text/css">
+		body { direction: rtl; text-align: right; font-family: Tahoma, Arial; font-size: 0.9em; }
+		.container th, .container tr, .container td { direction: rtl; text-align: right; }
+		pre { direction: ltr; text-align: left; margin-left: 20px; }
+		h3 { margin-top: 30px; }
+		h2 { margin-top: 40px; }
+	</style>
+	
+    <script src="http://www.google.com/jsapi"></script>
+    <script>
+      google.load("mootools", "1.2.2");
+    </script>
+    <script src="js/Lighter/Ligher.uncompressed.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script>
+        window.addEvent('domready', function(){
+            var toc = $$('ul a');
+            $$('a:not(.stbutton)').each(function(a) {
+                if (toc.contains(a)) return;
+                 a.set('target', '_blank');
+            });
+            if (Browser.Engine.trident) return;
+            // Highlight all "pre" elements in a document.
+            $$('pre').light({
+                altLines: 'hover',
+                indent: 2,
+                mode: 'pre',
+                path: 'js/Lighter/'
+            });
+        });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+ 
+      <h1 class="span-24 last">jQuery vs MooTools</h1>
+      <div class="caption">
+	  نوشته شده توسط <a href="http://www.clientcide.com">Aaron Newton</a> در مه 2009<br />ترجمه شده توسط <a href="http://boplo.ir" target="_blank">امیرحسین حجتی پور</a> در تیر ماه 1388
+        <div class="trans">
+			همچنین مقاله به زبانهای <a href="/index.html">انگلیسی</a>، <a href="/index_pt-br.html">برزیلی</a>، <a href="/index_es-ar.html">اسپانیایی</a> و <a href="/index_cn.html">چینی</a> در دسترس است.
+        </div>
+      </div>
+      <p>
+        خیلی از کاربران که این روزها کار با جاوااسکریپت را آغاز می کنند، با مسئله انتخاب مرجع (library) مواجه می شوند. حال چه برای استفاده و چه برای شروع یادگیری. اگر شما برای مجموعه یا شرکتی فعالیت می کنید احتمالا آنها قبلا برای شما فریم ورک (Framework) مورد نظرشان را انتخاب کرده اند. اگر آنها <a href="http://www.mootools.net">MooTools</a> را انتخاب کرده اند و شما به <a href="http://www.jquery.com">jQuery</a> عادت دارید، باز هم این مقاله می تواند برای شما تا حدی سودمند باشد.
+      </p>
+      <p>
+		<a href="http://twitter.com/joshink/statuses/1671986611">روزانه</a> <a href="http://twitter.com/jezusisstoer/statuses/1642244246">ارسالهای</a> <a href="http://twitter.com/digitalcampaign/statuses/1622094648">بسیار زیادی</a> <a href="http://twitter.com/jesswma/statuses/1605733380">در توییتر(Twitter)</a> به انتخاب بین MooTools  و jQuery پرداخته میشود و با توجه به پرطرفداری این موضوع، هدف این مقاله، راهنمایی جهت انتخاب گزینه مناسب برای شماست.
+      </p>
+      <h3>رفع مسئولیت</h3>
+      <p>
+		من یک توسعه دهنده(Developer) و کاربر مرجع MooTools هستم و بر روی این فریم ورک فعالیت می کنم. من وبلاگی درباره MooTools دارم همچنین مؤلف شاخصترین<a href="http://www.mootorial.com"> مرجع آموزشی آنلاین</a> و <a href="http://www.amazon.com/gp/product/1430209836?ie=UTF8&tag=clientside-20&link_code=as3&camp=211189&creative=373489&creativeASIN=1430209836">کتابی درباره MooTools</a> هستم. پس طبیعتا من تا حدی به MooTools متمایل تر می باشم. همچنین باید ذکر کنم که من چندان از jQuery  استفاده نکرده ام. اگر شما یک توسعه دهنده jQuery هستید و نکته اشتباهی در مقاله یافتید لطفا با من تماس بگیرید تا اصلاح گردد. هدف من بیان شفاف تفاوتها و ویژگیهاست نه برتری دادن فریم ورکی خاص به دیگری.
+      </p>
+ 
+      <h3>هدف</h3>
+      <p>
+        هدف همانطور که بطور ضمنی بیان شد، مسئله انتخاب بین این دو فریم ورک، با بررسی تفاوتهای آنهاست. مقاله با بیان این مطلب شروع خواهد شد که <b>هر دوی آنها، گزینه های کاملا مناسبی برای انتخاب می باشند</b>. هر کدام دارای نقاط قوت و ضعفی هستند ولی در کل هر دو انتخاب کاملی محسوب می شوند بنابراین شما از برگزیدن یکی، به هیچ وجه متضرر نخواهید شد. فریم ورکهای دیگری هم وجود دارند که هر کدام می توانند گزینه های کاملا مناسبی باشند از قبیل <a href="http://www.dojotoolkit.org/">Dojo</a>، <a href="http://www.prototypejs.org/">Prototype</a>، <a href="http://developer.yahoo.com/yui/">YUI</a>، <a href="http://extjs.com/">Ext</a> و غیره. هر کدام امکانات متعددی برای اهداف شما دارند. قصد این مقاله، تمرکز بر روی فریم ورکهایی است که بحث درباره انتخاب بینشان، بطور فزاینده ای مطرح می شود یعنی  MooTools و jQuery. امکانات قابل توجهی در هر دو تعبیه شده که می توانید با کمی تلاش، آنها را فرا بگیرید. در آخر باید عنوان کنم که من به هیچ وجه قصد متقاعد کردن کسی برای انتخاب گزینه ای خاص را ندارم.<br />شما می توانید <a href="http://www.clientcide.com/3rd-party-libraries/jquery-vs-mootools-mootools-vs-jquery/">مطلب کوتاه من درباره انگیزه ایجاد این مقاله</a> را در وبسایت من مطالعه کنید.
+      </p>
+      
+      <h3>سرفصل ها</h3>
+<ul>
+  <li><a href="#mottos">شعار سازندگان گویای همه چیز است</a></li>
+  <li><a href="#learning">شیوه آموزش و پشتیبانی</a></li>
+  <li><a href="#javascript">جاوااسکریپت برای چه مقاصدی مناسب است</a></li>
+    <ul style="margin-bottom: 0px">
+      <li><a href="#dom">کمی بیشتر همراه با DOM</a></li>
+      <li><a href="#inheritance">"ارث بری" یا Inheritance در جاوااسکریپت</a></li>
+      <li><a href="#self">"مرجع درونی" یا Self refrence</a></li>
+    </ul>
+  </li>
+  <li><a href="#jsfun">MooTools جاوااسکریپت را لذتبخش تر می کند</a></li>
+  <li><a href="#domfun">jQuery استفاده از DOM را لذتبخش تر می کند</a></li>
+  <li><a href="#cando">هر کاری که تو بتونی، من بهترش رو می تونم</a></li>
+  <li><a href="#yourway">MooTools به شما امکان حفظ ساختارتان را می دهد</a></li>
+  <li><a href="#chaining">انسجام توسط یک "الگوی طراحی"</a></li>
+  <li><a href="#reuse">استفاده چندباره ی کدها در jQuery</a></li>
+  <li><a href="#classes">استفاده چندباره ی کدها در MooTools</a>
+    <ul>
+      <li><a href="#mooinheritance">MooTools و "ارث بری"</a></li>
+      <li><a href="#extension">توسعه و بکارگیری کلاسها</a></li>
+    </ul>
+  </li>
+  <li><a href="#conclusion">زمان انتخاب</a></li>
+  <li><a href="#discussion">بحث و گفتگو</a></li>
+</ul>
+    
+      <h2>آمارها</h2>
+      <table>
+        <tr>
+          <th></th>
+          <th>هسته jQuery</th>
+          <th>هسته MooTools</th>
+        </tr>
+        <tr>
+          <td>حجم مرجع</td>
+          <td>55.9K</td>
+          <td>64.3K</td>
+        </tr>
+        <tr>
+          <th colspan="3">امکانات</th>
+        </tr>
+        <tr>
+          <td>مجوز</td>
+          <td><a href="http://en.wikipedia.org/wiki/MIT_License" title="MIT License">MIT</a> &amp; <a href="http://en.wikipedia.org/wiki/GPL" title="GPL">GPL</a></td>
+          <td><a href="http://en.wikipedia.org/wiki/MIT_License" title="MIT License">MIT</a></td>
+        </tr>
+        <tr>
+          <td>امکانات DOM</td>
+          <td>بلی</td>
+          <td>بلی</td>
+        </tr>
+        <tr>
+          <td>متحرک سازی</td>
+          <td>بلی</td>
+          <td>بلی</td>
+        </tr>
+        <tr>
+          <td>بدست گیری رویدادها (Events)</td>
+          <td>بلی</td>
+          <td>بلی</td>
+        </tr>
+        <tr>
+          <td>انتخابگرهای CSS3</td>
+          <td>بلی (به عنوان زیرمجموعه)</td>
+          <td>بلی (به عنوان زیرمجموعه)</td>
+        </tr>
+        <tr>
+          <td>Ajax</td>
+          <td>بلی</td>
+          <td>بلی</td>
+        </tr>  
+        <tr>
+          <td>توسعه های محلی (منهای توسعه های Element)</td>
+          <td>حدود یک جین برای  Array، Object ،  String</td>
+          <td>حدود شش جین برای Array، Object، String، Function و Number</td>
+        </tr>
+        <tr>
+          <td>ارث بری</td>
+          <td>مستقیما پشتیبانی نمی شود</td>
+          <td>بوسیله متد سازنده شی <em><a href="http://mootools.net/docs/core/Class/Class">Class</a></em></td>
+        </tr>
+        <tr>
+          <th colspan="3">معیارهای دیگر</th>
+        </tr>
+        <tr>
+          <td>افزونه ها</td>
+          <td>صدها افزونه غیررسمی بصورت مجموعه در <a href="http://plugins.jquery.com/">plugins.jquery.com</a></td>
+          <td>حدود 4 جین از افزونه ها بصورت رسمی در <a href="http://mootools.net/more">mootools.net/more</a> نمونه های بیشتر در وب و بصورت جمع آوری نشده.</td>
+        </tr>
+        <tr>
+          <td>مرجع UI رسمی</td>
+          <td>بلی</td>
+          <td>خیر</td>
+        </tr>
+      </table>
+      <p class="footnote">
+        اطلاعات براساس آمار موجود در <a href="http://jquery.com">jquery.com</a>، <a href="http://mootools.net">mootools.net</a> و <a href="http://en.wikipedia.org/wiki/Comparison_of_JavaScript_frameworks">wikipedia.com</a>.
+      </p>
+      
+      <a name="mottos"></a>
+      <h2>شعار سازندگان گویای همه چیز است</h2>
+      
+    
+      <p>
+          اگر به سایت jQuery مراجعه کنید این جمله را در بالای صفحه اصلی مشاهده خواهید کرد:
+      </p>
+      <blockquote>jQuery یک مرجع جاوااسکریپت سریع و کم حجم است. این مرجع، دسترسی به اجزا صفحه HTML، به دست گیری رویدادها، متحرک سازی، امکانات AJAX برای توسعه وب سریعتر را ساده می کند. jQuery برای تغییر شیوه نگارش جاوااسکریپت طراحی شده است.</blockquote>
+      <p>
+        و اگر به سایت MooTools مراجعه کنید:
+      </p>
+      <blockquote>MooTools یک فریم ورک فشرده، ماژولار و شیء گرای جاوااسکریپت، برای تبدیل کاربران متوسط جاوااسکریپت به توسعه دهندگان حرفه ای آن است. MooTools از طریـق APIهای قدرتمند، کاملا مسـتند و منسـجم خود، امـکان ایجاد کدهای قدرتمند، انعطاف پذیر و معتبر برای همه مرورگرها(cross-browser) را به شـــما می دهد.</blockquote>
+      <p>
+        به نظر من این جملات جمع بندی مناسبی را ارائه می دهند که تا اینجا اگر از من بپرسید (من اینطور فرض می کنم  که شما این مقاله را تا انتها مطالعه خواهید کرد) مفهوم این نیست که کدام فریم ورک بهتر یا بدتر است بلکه اینطور است که شما قصد چه کاری را دارید. این دو فریم ورک حرفهای مشابهی را نزده اند. دامنه امکانات آنها مشابه است ولی یکی نیست.
+      </p>
+      
+      <p>
+        jQuery درباره HTML، رویدادها، AJAX، متحرک سازی و توسعه وب صحبت می کند و MooTools درباره شیء گرایی، انعطاف پذیری و توانایی بالا. آرمان jQuery "تغییر شیوه نگارش جاوااسکریپت" بیان شده در حالیکه MooTools برای تبدیل کاربران متوسط به حرفه ای طراحی گشته.
+      </p>
+      
+      <p>
+       بخشی از این تصمیم گیری مربوط به درک مفهوم <em>"فریم ورک"</em> و <em>"ابزار (toolkit)"</em> می شود. MooTools <em>فریم ورکی</em> است که برای تعیین نحوه اجرای جاوااسکریپت <em>به شیوه ای که باید باشد</em> کوشش می کند (با توجه به نظر مؤلفان آن). هدف آن تعیین شیوه اجرای یک API، بصورتی که کاملا شبیه جاوااسکریپت باشد و همه امکانات مورد نیاز نه فقط برای DOM را فراهم آورد (مترجم: واژه DOM، مخفف عبارت Document Object Model است. DOM ساختار صفحه HTML را به شکل یک درخت تبدیل می کند تا دسترسی به تمام اجزای صفحه از طریق روابط والد و فرزندی و شیء گرایی امکانپذیر شود. بدون DOM، محتوای یک صفحه برای جاوااسکریپت، چیزی جز کوهی از کلمات و حرفهای بی معنی نیست). jQuery <em>ابزاریست</em> که به شما امکان استفاده آسان مجموعه ای از متدها و فرمانها را می دهد این متدها در یک سیستم طراحی شده اختصاصی، کار کردن با DOM را بسیار لذت بخش می سازد. بسیار پیش می آید که کاربران در حین نگارش جاوااسکریپت تلاش خود را معطوف کار با DOM می کنند و در این حالت jQuery همه آن چیزیست که نیاز دارید.
+      </p>
+      <p>
+        بسیاری از کدهایی که با MooTools نوشته می شوند حالت خود جاوااسکریپت را دارند. اگر شما به برنامه نویسی با جاوااسکریپت علاقه چندانی ندارید یادگیری MooTools بسیار کسل کننده خواهد بود در غیر اینصورت اگر به جاوااسکریپت و توانایی های آن علاقه مندید من شخصا MooTools را پیشنهاد می کنم.
+      </p>
+      
+      
+      <a name="learning"></a>
+      <h2>شیوه آموزش و پشتیبانی</h2>
+    
+      <p>
+        ابتدا باید ذکر کرد که jQuery روی هم رفته برای یادگیری آسانتر است. همچنین دارای حالت خاصی از نگارش است که به کدهای معمول کمتر شباهت دارد. اگر همه چیزی که لازم دارید راه اندازی سریع برخی امکانات جاوااسکریپت بدون یادگیری این زبان است، jQuery احتمالا گزینه مناسبتری برای شماست. این بدین معنا نیست که MooTools از انجام این کار ناتوان است بلکه باید قبول کرد که تسلط در MooTools برای کاربران تازه وارد در جاوااسکریپت کمی دشوارتر خواهد بود و یا می شود گفت کمتر بودن منابع آموزشی MooTools در مقابل jQuery خود بر این ادعا تاکید دارد.
+      </p>
+    
+      <p>
+        اگر به مقایسه انجمنهای گفتگوی jQuery (<a href="http://docs.jquery.com/Discussion">بخش Disscussion در سایت jQuery</a>) و MooTools (<a href="http://mooforum.net/">انجمن غیررسمی</a>، <a href="irc://irc.freenode.net/#mootools">irc</a> و <a href="http://groups.google.com/group/mootools-users">mailing list</a>) بپردازید، به سرعت متوجه دو نکته خواهید شد: 1) انجمنهای jQuery بطور قابل ملاحظه ای گسترده تر است (به دلیل یادگیری آسانتر که ذکر شد) و 2) آنها بسیار در ترویج مرجع خود فعال هستند. اگر بخواهیم این دو را اندازه گیری کنیم مثلا براساس تعداد کاربران، تعداد جستجو در گوگل، تعداد کتابهای فروش رفته و غیره؛ برتری متریک jQuery کاملا مشهود است.
+		</p>
+      <p>
+       با این تفاسیر، درباره اینکه چطور MooTools می تواند انتخاب شود باید اطلاعاتی درباره کاری که این دو انجام میدهند بیان کرد. در نهایت فریم ورکی که انتخاب می کنید کارهایی که مایلید انجام دهید و برنامه نویس شدن شما را محقق می کند (البته <i>اگر</i> دوست دارید برنامه نویس جاوااسکریپت شوید).
+      </p>
+      
+      <a name="javascript"></a>
+      <h2>جاوااسکریپت برای چه مقاصدی مناسب است</h2>
+    
+      <p>
+        بخشی از تصمیمی که می خواهید بگیرید ارتباط مستقیمی دارد با کاری می خواهید با جاوااسکریپت انجام دهید. جاوااسکریپت معمولی بدون فریم ورک را در نظر بگیرید. این زبان شیء های محلی (Native) از قبیل <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/String">Strings</a>، <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Number">Numbers</a>، <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Function">Functions</a>، <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Array">Arrays</a>، <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Date">Dates</a>، <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/RegExp">Regular Expressions</a> و غیره را در اختیار شما قرار می دهد به اضافه یک مدل ارث بری (Inheritance model) که برخی مواقع بطور غیرعلنی prototypal inheritance خطاب می شود (که در ادامه به آن پرداخته خواهد شد). امکانات و کدهای مربوط به ارث بری جزء بخشهای طبیعی و معمول زبانهای برنامه نویسی هستند و حقیقتا در قبال مرورگر یا وب یا CSS یا HTML کاری برای انجام ندارند. شما هر کدی را بصورت عادی می توانید با جاوااسکریپت بنویسید اما از آنجایی که نتیجه این زبان، در %99 مواقع توسط مرورگر قابل رؤیت است، به عنوان یک زبان برای مرورگرها شناخته شده و کاربران به توانایی پشت صحنه آن پی نمی برند.
+      </p>
+      <p>
+        قابل درک است که بیشترین برخورد ما با این زبان در مواجهه با مرورگر و DOM است ولی در واقع جاوااسکریپت یک زبان قدرتمند و عمیق است که می تواند تفاوتهای پراهمیت دو فریم ورک پرطرفدار یعنی MooTools و jQuery را بارز سازد.
+      </p>
+      
+      <a name="dom"></a>
+      <h3>کمی بیشتر همراه با DOM</h3>
+    
+      <p>
+        jQuery باز هم بهترین گزینه خواهد بود اگر تصور شما بر آن است که تمام کاری که جاوااسکریپت انجام می دهد به "بده بستان" با صفحه ختم می شود. این موضوع زمانی نمود پیدا می کند که این سیستم قدرتمند معمولا ظاهری شبیه به برنامه نویسی های معموال را ندارد. فعالیتهای دیگر در جاوااسکریپت هم توسط این سیستم قابل اجراست ولی اگر تمرکز و فوکوس شما روی DOM ،CSS، متحرک سازی، دریافت اطلاعات توسط AJAX است، jQuery این مسئله را پوشش می دهد در حالیکه نیاز به سبک معمولی و دمده جاوااسکریپت هم نباشد. jQuery متدهایی را برای موارد غیر از DOM نیز ارائه می دهد؛ مانند روشی که برای شمارش آرایه ها دارد - <i><a href="http://docs.jquery.com/Utilities/jQuery.each">(each(array, fn.$</a></i> – یا متدی برای پالایش رشته ها - <i><a href="http://docs.jquery.com/Utilities/jQuery.trim">(trim(str.$</a></i> . اما وجود اکثر این متدها چندان حیاتی نیستند وقتی فعالیت روی DOM و دسترسی به اجزای آن انجام می شود (از قبیل کار با CSS، مدیریت اطلاعات HTML و تعریف رویداد هنگام کلیک شدن بخشی از صفحه و غیره).
+      </p>
+      <p>
+        اما اگر عمیقتر به آن نگاه کنید متوجه خواهید شد که jQuery تمرکزی روی فعالیتهای خارج از DOM ندارد. این یکی از دلایلی است که یادگیری ساده آن را به ارمغان آورده ولی محدودیت در نگارش جاوااسکریپت هم با آن همراه شده. این توجیهی است که او تمایلی به حرکت از یک سیستم خشک <i>مختص DOM</i> را ندارد. او از خواص ارث بری و حتی امکانات ابتدایی محلی برای متغیرهای جاوااسکریپت محروم است، در واقع <i>او نیازی هم به آنها ندارد</i>. اگر نیاز به استفاده از regular expressions، arrays، strings، dates، functions را دارید، جاوااسکریپت کمک شما خواهد بود. jQuery برای شما DOM را به یک زمین بازی تبدیل می کند ولی سایر فعالیتها در حیطه تعریف آن نیستند.
+      </p>
+      <p>
+        این نکته ای است که MooTools را کاملا متمایز می سازد. به غیر از تمرکز انحصاری روی DOM، گستره این فریم ورک به کل زبان جاوااسکریپت می رسد (باید اضافه کرد که براساس تجربه ای که من با jQuery داشته ام، تمام فعالیتهای ممکن با jQuery، با MooTools هم قابل اجراست ولی به شکلی کاملا متفاوت). اگر jQuery محیط DOM را به زمین بازی شما مبدل می کند MooTools خود زبان جاوااسکریپت را زمین بازی شما می کند و این یکی از دلایلی است که یادگیری اش را مشکلتر ساخته.   
+      </p>
+      
+      <a name="inheritance"></a>
+      <h3>ارث بری یا Inheritance در جاوااسکریپت</h3>
+    
+      <p>
+       زبان جاوااسکریپت دارای قابلیتهای فوق العاده ای است. برای تازه کارها، این زبان براساس توابع یا <a href="http://en.wikipedia.org/wiki/Functional_programming">functional</a> است به این معنا که توابع به عنوان اشیاء رده بالایی اجرا میشوند که امکان ارسالشان بصورت متغیر وجود دارد مانند اشیاء String و Number و غیره. این زبان با همین مفهوم ذهنی طراحی شده و زمانی که از این روش استفاده می کنید اکثر متدها و الگوها(Patterns) بخوبی کار می کنند. به اختلاف بین دو مورد زیر توجه کنید:
+      </p>
+<pre class="js">for (var i = 0; i &lt; myArray.length; i++) { /* do stuff */ }</pre>
+      <p>
+          و        
+      </p>
+      <pre class="js">myArray.forEach(function(item, index) { /* do stuff */ });</pre>
+      <p>
+          جاوااسکریپت دارای یک <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Inheritance">مدل ارث بری</a> است. این مدل با اینکه منحصر به فرد نیست ولی کم نظیر است. در این زبان بجای تعریف کلاس و نمونه گیری آن، ارث بری بصورت <i><a href="http://en.wikipedia.org/wiki/Prototype-based_programming">prototypal</a></i> صورت می گیرد. بدین معنا که اشیاء مستقیما از اشیاء دیگر بدست می آیند (به ارث می رسند – inherit می شوند). اگر در یک شیء، مشخصه یا Propertyای درخواست گردد، جاوااسکریپت به دنبال آن در شیء فرزند (Child) جستجو می کند و اگر پیدا نکرد جستجو را در شی والد (Parent) ادامه می دهد. به همین دلیل است که یک آرایه، به هنگام تعریف می تواند متدهای آرایه ها را بپذیرد: 
+      </p>
+      <pre class="js">[1,2,3].forEach(function(item) { alert(item) }); //this alerts 1 then 2 then 3</pre>
+      <p>
+        متدی با عنوان "<a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference:Objects:Array:forEach">forEach</a>" برای آرایه بالا تعریف نشده پس جاوااسکریپت به دنبال این متد در شیء والد یعنی شیء Arrays می گردد. وقتی این متد را برای شیء از نوع آرایه بکار می برید، این زبان، در شیء شما، این متد را درخواست می کند و اگر متدی با این نام وجود نداشت، به سراغ متدهای شیء مخصوص همه آرایه ها می رود. این بدین معناست که متد <em>forEach</em>در حافظه مربوط به شیء بالا قرار نگرفته بلکه در حافظه مربوط به شیء اصلی آرایه ها (prototype of arrays) جای دارد. این یک شیوه فوق العاده کارآمد و مفید است (شایان گفتن است که متد <em>each</em> در MooTools متناظر با متد <em>forEach</em> است).
+      </p>
+      
+      <a name="self"></a>
+      <h3>مرجع درونی یا Self refrence</h3>
+      <p>
+        جاوااسکریپت یک عبارت خاص دارد: “this”. تعریف اجمالی این عبارت برای من کمی مشکل است ولی در کل می توان گفت این عبارت در یک متد، به شیءای که متد در آن واقع است اشاره دارد. این قابلیت به اشیاء امکان ارجاع به خودشان را در متدهایشان می دهد و کاربرد دیگری ندارد. اهمیت این ویژگی اینجاست که وقتی شما اشیاء فرزند و نمونه های متعددی از آنها را داشته باشید چطور متدها را، به شیء خودشان ارجاع می دهید؟ وقتی متد در کلاس والد وجود داشته باشد و در کلاس فرزند نباشد، این عبارت امکان ارجاع به متد اصلی را به نمونه ها می دهد (<a href="http://www.quirksmode.org/js/this.html">توضیحات تفصیلی درباره عبارت this</a> و <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Operators/Special_Operators/This_Operator">مقاله ای دیگر در موزیلا</a>).
+      </p>
+      <p>
+          عبارت this به اشیایی که به ارث برده شده اند، امکان ارجاع به متدهای خودشان را می دهد. اما گاهی پیش می آید که شما نیاز به ارجاع به مکان دیگری از طریق this را دارید که در این حالت باید از <a href="http://alternateidea.com/blog/articles/2007/7/18/javascript-scope-and-binding">binding</a> استفاده شود. binding مقدار <i>متفاوتی</i> را برای this در متد مشخص می کند. متد each از طریق پارامتر دوم خود امکان تعیین منبع شیء را فراهم می کند. به مثال زیر توجه کنید:        
+      </p>
+<pre class="js">var ninja = {
+    weapons: ['katana', 'throwing stars', 'exploding palm technique'],
+    log: function(message) {
+        console.log(message);
+    },
+    logInventory: function() {
+        this.weapons.each(function(weapon) {
+      //we want "this" to point to ninja...
+            this.log('this ninja can kill with its ' + weapon);
+        }, this); //so we pass "this" (which is ninja) to Array.each  
+    }
+};
+ninja.logInventory(); 
+//this ninja can kill with its katana
+//this ninja can kill with its throwing stars
+//this ninja can kill with its exploding palm technique</pre>
+ 
+      <p>
+       در مثال بالا و در متد <em>logInventory</em> ، ما ninja را به متدی که به آرایه منصوب شده ارجاع  دادیم که می تواند عملیات log را بر روی خود ninja انجام دهد در حالیکه اگر با استفاده از پارامتر دوم each، شیء را به اصطلاح bind نمی کردیم، عبارت this همچنان به <em>window</em> اشاره می داشت.
+      </p>
+      <p>
+        اینها نمونه هایی از روشهای قدرتمند جاوااسکریپت برای ارث بری، ارجاع درونی و binding و مشخصه های سودمند prototype بودند. نکته نامطلوب این است که جاوااسکریپت این امکانات را بطور کامل و سودمند ارائه نمی دهد و اینجاست که MooTools <i>جلوه نمایی </i> خواهد کرد. MooTools این الگوها را بسیار ساده و دلپذیر در دسترس قرار می دهد. شما می توانید کدهای خود را با کدهای abstract بیشتری تولید کنید (مترجم: الگوی abstract امکاناتی برای معرفی منابع ارجاعات به کدها را فراهم می کند) که در یک اجرای طولانی، بسیار قابل استفاده و قدرتمند نمایان می شود. فهمیدن اینکه الگوها چطور می توانند مقدارپذیر (valuable) باشند و چطور باید از آنها استفاده کرد به کمی تلاش نیازمند است اما در نهایت کدهای شما بطور فوق العاده ای چندبار مصرف (reusable) و قابل مدیریت می شود. درباره این دو خصوصیت در ادامه بحث خواهد شد.
+      </p>
+      
+      <a name="jsfun"></a>
+      <h2>MooTools جاوااسکریپت را لذتبخش تر می کند</h2>
+    
+      <p>
+       از آانجاییکه تمــرکز MooTools بر روی APIهای جاوااســکریــپت است، این زبان را پایدارتر و منسجم تر می کند. این فریم ورک تلاش زیادی برای تغییر شیوه کدنویسی نمی کند بلکه فوکوسی ویژه برای دلپذیرتر و قابل تحملتر کردن جاوااسکریپت دارد. می توان گفت در واقع MooTools یک extension یا توسعه برای زبان جاوااسکریپت است. سعی او بر آن است که جاوااسکریپت را به موقعیتی که باید باشد برساند. بخش اعظم هسته آن به تقویت اشیاء Function، String، Array، Number، Element و غیره اختصاص دارد و بخش دیگر امکانی مهمی که ارائه می دهد تابعیست با نام <em><a href="http://mootools.net/docs/core/Class/Class">Class</a></em>. 
+      </p>
+      <p>
+       حالا <em>Class</em>شباهت بیشتری به روشهای تعریف الگوهای ارث بری که در زبانهایی مثل Java یا ++C سراغ داریم، دارد اما <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Class-Based_vs._Prototype-Based_Languages">این همه موضـــوع نــیست</a>. کاری که <em>Class</em> انجام می دهد دسترسی و استفاده آسان از مدل ارث بری prototypal است (مترجم: شیء گرایی در بسیاری از زبانها بر پایه تعریف کلاس است و در جاوااسکریپت بر پایه prototype به معنای دسترسی و ارتباط نمونه هاست). این خواص توسط MooTools معرفی نشده اند و منحصر به فرد نیستند اما jQuery فاقد هر دوی آنهاست. jQuery هیچ مدلی برای ارث بری ندارد و امکاناتی هم برای اشیاء محلی مثل String و Array تعریف نکرده. این یک کاستی ساده نیست که نویسندگان jQuery به سادگی جبران کنند در واقع می توان گفت آنها ابزاری طراحی کرده اند با مقاصد متفاوت. همانطور که MooTools جاوااسکریپت را مفرح می سازد، jQuery نیز کار با DOM را دلپذیرتر می کند و آنها با این دیدگاه، محدودیتهای خود را پذیرفته اند.
+      </p>
+      
+      <a name="domfun"></a>
+      <h2>jQuery استفاده از DOM را لذتبخش تر می کند</h2>
+    
+      <p>
+        و این دلیل قابل دسترس تر بودن jQuery  است. او از شما فراگیری جاوااسکریپت را نمی خواهد. او شما را به اعماق مدلهای ارث بری و کاربرد this و binding و اشیاء محلی پرتاب نمی کند. وقتی از طریق <a href="http://docs.jquery.com/Tutorials:How_jQuery_Works">آموزش رسمی</a> خود jQuery، به یادگیری آن اقدام می کنید، این اولین مثالی است که آورده شده:
+      </p>
+    
+<pre class="js">window.onload = function() {
+    alert("welcome");
+}</pre>
+ 
+      <p>و این سومین است:</p>
+ 
+<pre class="js">$(document).ready(function() {
+    $("a").click(function(event) {
+        alert("Thanks for visiting!");
+    });
+});</pre>
+ 
+      <p>
+        اگر فراگیری MooTools را از طریق <a href="http://www.amazon.com/gp/product/1430209836?ie=UTF8&tag=clientside-20&link_code=as3&camp=211189&creative=373489&creativeASIN=1430209836">کتاب آن</a> یا <a href="http://www.mootorial.com/wiki">آموزش اینترنتی آن</a> (که مؤلف هر دوی آنها من هستم) آغاز کنید، خواهید دید که شیوه معرفی کاملا متفاوت است. با اینکه در آموزش MooTools امکان نادیده گرفتن ترتیب مباحث وجود دارد و می توان مستقیما سراغ افکتها و بخشهای DOM رفت ولی این آموزش با طرح چیزهایی مانند <em>Class</em> یا پرسیدن سوالاتی از قبیل آیا شما یک برنامه نویس مبتدی هستید یا آیا فقط قصد اضافه کردن امکاناتی به سایت خود هستید، شروع می شود. با این وضعیت، jQuery برای شما بسیار دوستانه تر است.
+      </p>
+      
+      <p>
+        به عبارت دیگر اگر قصد یادگیری خود زبان جاوااسکریپت را دارید، MooTools بهترین وسیله است. او امکاناتی را معرفی می کند که زبان جاوااسکریپت در حال حرکت به سمت آنهاست (بسیاری از متدهای Native در <a href="https://developer.mozilla.org/En/New_in_JavaScript_1.8">جاوااسکریپت 1.8</a> و بالاتر معرفی خواهند شد). اگر به برنامه نویسی آشنا هستید مخصوصا به مدلهای شیء گرایی <em>و</em> تابعی (functional)، فریم ورک MooTools الگوهای طراحی شگفت انگیز و فوق العاده زیادی را داراست.
+      </p>
+      
+      <a name="cando"></a>
+      <h2>هر کاری که تو بتونی، من بهترش رو می تونم</h2>
+    
+      <p>
+       اغلب به ازای امکاناتی که jQuery ارائه داده است نمونه مشابهی در MooTools یافت می شود. اما این ویژگی برای jQuery صادق نیست و بسیاری از امکانات MooTools را نمی توان در jQuery شبیه سازی کرد زیرا همانطور که گفته شد، تمرکز آن بر روی DOM قرار دارد. دامنه امکانات MooTools از jQuery بیشتر است ولی شما از استفاده گسترده تر منع نشده اید. برای مثال jQuery فاقد سیستم ارث بری است اما این مشکلی نیست زیرا می توانید از قابلیت <em>Class</em> موجود در MooTools بصورت تلفیقی در jQuery بهره ببرید (یا چنین قابلیتی را خودتان در jQuery طراحی کنید) و یا حتی از <a href="http://code.google.com/p/jquery-inheritance/updates/list">پلاگین مخصوص ارث بری در آن</a> استفاده کنید (من از این پلاگین استفاده نکرده ام ولی اینطور به نظر می رسد که قابلیتهای خوبی برای این منظور داشته باشد).
+      </p>
+  
+      <p>اگر به مثال ذیل از jQuery دقت کنید:</p>  
+    
+<pre class="js">$(document).ready(function() {
+    $("a").click(function(event) {
+        alert("Thanks for visiting!");
+    });
+});</pre>
+    
+      <p>
+        و آن را به MooTools ترجمه کنید، خواهید داشت:
+      </p>
+<pre class="js">window.addEvent('domready', function() {
+    $$('a').addEvent('click', function(event) {
+        alert('Thanks for visiting!');
+    });
+});</pre>
+      <p>
+          شباهت زیادی دارند، اینطور نیست؟
+      </p>
+      <p>
+         این یک مثال پیچیده تر از jQuery است:
+      </p>
+ 
+<pre class="js">$(document).ready(function() {
+    $("#orderedlist li:last").hover(function() {
+        $(this).addClass("green");
+    },
+    function() {
+        $(this).removeClass("green");
+    });
+});</pre>
+ 
+      <p>
+     و در MooTools داریم:
+      </p>
+ 
+<pre class="js">window.addEvent('domready',function() {
+    $$('#orderedlist li:last-child').addEvents({
+        mouseenter: function() {
+            this.addClass('green');
+        },
+        mouseleave: function() {
+            this.removeClass('green');
+        }
+    });
+});</pre>
+ 
+      <p>
+         مجددا بسیار شبیه هستند ولی من می توانم ثابت کنم که نسخه MooTools کد بالا، بسیار روشنتر است ولی این بحث باعث طولانی تر شدن مقاله می گردد. بصورت کوتاه، کد MooTools دو رویداد تعریف کرده یکی برای ورود ماوس (mouse enter) و یکی برای خروج ماوس (mouse leave) و برای هر یک متدی مشخص کرده در حالیکه کد jQuery فشرده تر می باشد. متد <em><a href="http://docs.jquery.com/Events/hover">hover</a></em> آن دو پارامتر دریافت می کند که اولی برای ورود ماوس و دومی برای خروج ماوس اجرا می شود. من شخصا معتقدم که نمونه کد MooTools منطقی تر و گویاتر است ولی نه کاملا ملموس.
+      </p>
+      
+      <p>
+        کدهای jQuery گاهی خیلی برای من مبهم می شوند. از نگاه کردن متدها اغلب چیز زیادی بدست نمی آید و تحلیل آنها مشکل است. این می تواند به این خاطر باشد که من با کدهای MooTools مأنوس تر هستم و خواندن درک آنها برای من آسانتر است. اما نکته ای که در MooTools قابل ستایش می دانم، نامگذاری مناسب متدها و کلاسهاست که تقریبا همیشه نام عمل با کارکرد آن متناظر است و کمترین شبهه در آن وجود دارد. شما در همه زبانهای برنامه نویسی باید به سراغ بخش آموزش آن بروید تا با نحوه استفاده و سینتکس کدها آشنا شوید ولی در MooTools کافی است تا با روش منسجم و پایدار APIهای آن آشنا شوید.
+      </p>
+      
+      <a name="yourway"></a>
+      <h2>MooTools به شما امکان حفظ ساختارتان را می دهد</h2>
+      
+      <p>اما اگر شما به شیوه یا سینتکس jQuery علاقه داشته باشید، یک نمونه دیگر از توانایی MooTools را می توان در سادگی تغییر شیوه ها براساس میلتان بیان کرد. اگر بخواهیم متد <em>hover</em> در jQuery را در MooTools شبیه سازی کنیم، کافی است مشابه زیر عمل کنیم:</p>
+      
+<pre class="js">Element.implement({
+    hover : function(enter,leave){
+       return this.addEvents({ mouseenter : enter, mouseleave : leave });
+    }
+});
+ 
+//and then you could use it exactly like the jQuery version:
+$$('#orderlist li:last').hover(function(){
+   this.addClass('green');
+},
+function(){
+   this.removeClass('green');
+});
+</pre>
+ 
+    <p>البته پلاگینهایی هم وجود دارد که <a href="http://github.com/cheeaun/mooj/tree/master">سینتکس (Syntax) استاندارد jQuery را برای MooTools</a> ایجاد می کنند. تمرکز MooTools روی توسعه آن است، به هر چیزی که مایلید.  این ویژگی است که اغلب با jQuery امکانپذیر نیست. MooTools می تواند کاملا شبیه jQuery شود (خود را به شکل آن را دربیاورد) ولی jQuery توانایی تبدیل شدن به MooTools را ندارد. اگر میخواهید کلاس ایجاد کنید، اشیاء محلی را توسعه دهید و یا کارهای مشابه انجام دهید، با MooTools می توانید. این کدها را خودتان تولید کنید.</p>
+    
+      <a name="chaining"></a>
+      <h2>انسجام توسط یک "الگوی طراحی"</h2> 
+    
+      <p>
+          به نمونه های بیشتری توجه کنید. این یک مثال از سایت jQuery است:
+      </p>
+ 
+<pre class="js">$(document).ready(function() {
+    $('#faq').find('dd').hide().end().find('dt').click(function() {
+        $(this).next().slideToggle();
+    });
+});</pre>
+ 
+      <p>
+          این شیوه ایست که من شخصا ترجیح نمی دهم. به کد دقت کنید، فهمیدن اینکه این کدها چه کاری انجام می دهند کار آسانی نیست. بصورت دقیقتر، درک اینکه <i>end.</i> چه کاری انجام می دهد و <i>find.</i> بعد از آن چطور عمل می کند و به کدام <i>end.</i> مرتبط است، کمی پیچیده به نظر می آید. حالا به سراغ مستندات jQuery در سایتش برویم، آنجا بطور شفاف نحوه کارکرد <i>end.</i> را توضیح داده (این متد مقادیر را براساس مرجع  faq# به حالت اول باز میگرداند یا موقعیت را reset می کند.). اما این برای من کمی غریب به نظر می آید. در زمان کار با jQuery، من اغلب اطمینان نداشتم که متدی خاص، چه مقداری را بر خواهد گرداند (return خواهد کرد). اما در عمل این موضوع از نظر تعداد بالایی از کاربران jQuery، اینطور به نظر نمی رسد و آنها راضی هستند پس من این مسئله را هم سلیقه ای در نظر میگیرم.
+      </p>
+      <p>
+            حالا به کد بالا در محیط MooTools توجه کنید:
+      </p>
+ 
+<pre class="js">window.addEvent('domready', function() {
+    var faq = $('faq');
+    faq.getElements('dd').hide();
+    faq.getElements('dt').addEvent('click', function() {
+        this.getNext().slide('toggle');
+    });
+});
+</pre>
+ 
+ 
+      <p>
+         مجددا نمونه کد با MooTools طولانی تر است ولی واضحتر نیز هست. همچنین دقت کنید که الگوی طراحی در اینجا ذخیره سازی مرجع به faq#، در یک متغیر است در حالیکه jQuery از متد <i>end.</i> خود برای بازگرداندن مرجع استفاده می کند. امکان ایجاد کدهای زنجیروار  (chained) سطح بالا در MooTools وجود دارد (مترجم: عبارت chain برای امکان استفاده از توابع و متدها، بلافاصله بعد از هم مانند نمونه های بالا می باشد. معنای لغوی chain زنجیر است که متدها به حلقه های زنجیر که به هم متصل و بصورت متوالی می آیند تشبیه شده). به نمونه زیر نگاه کنید:
+      </p>
+<pre class="js">item.getElements('input[type=checkbox]')
+  .filter(function(box) {
+    return box.checked != checked;
+  })
+  .set('checked', checked)
+  .getParent()[(checked) ? 'addClass' : 'removeClass']('checked')
+  .fireEvent((checked) ? 'check' : 'uncheck');</pre>
+      
+      <p>
+        ولی در واقع، این روش کدنویسی (وجود کدهای زیاد در رویداد domready) برای هر فریم ورکی، جالب به نظر نمی رسد. بهتر است که کدهای خود را به تکه های چندبار مصرف تبدیل کنیم.
+      </p>
+      
+      <a name="reuse"></a>
+      <h2>استفاده چندباره ی کدها در jQuery</h2>
+      
+      <p>
+        وقتی بر روی پروژه ای کار می کنید استفاده از برخی افکتها و امکانات فریم ورکها مانند انتخاب اجزاء DOM، اضافه کردن رویدادهای کلیک و mouseover و غیره بصورت کدهای معمولی بسیار وسوسه انگیز خواهد بود. ایجاد کد با این شیوه بسیار و کارآمد و سریع الوصول است. اما مشکل اصلی این شیوه یعنی نوشتن همه کدها در عبارت domready این است که بسیاری از کدها عملیات مشابه یا تکراری انجام می دهند ولی برای مکانهای متفاوت (مترجم: رویداد domready در MooTools و متد ready. در jQuery کاربردشان به این صورت است که زمانی اجرا می شوند که ساختار DOM بطور کامل در دسترس باشد بنابراین استفاده از آنها، تضمینی بر صحیح اجرا شدن کدهای مربوط به DOM است). اگر ما برای بخش FAQ (که مثالش در بالا ذکر شد) الگویی طراحی کنیم، می توانیم به جای تکرار و تولید کدها در همه صفحات، فقط از آنها استفاده کنیم. آیا روش ما برای این الگو، تکرار ساختار کدها در همه صفحات است؟
+      </p>
+      <p>
+           یک راه ساده برای ایجاد قابلیت چندبار مصرفی، قرار دادن کدها در یک تابع و ارسال داده ها از طریق پارامتر تابع است. این یک نمونه از کد بالا در jQuery است:
+      </p>
+ 
+<pre class="js">function faq(container, terms, definitions) {
+    $(container).find(terms).hide().end().find(definitions).click(function() {
+        $(this).next().slideToggle();
+    });
+};
+$(document).ready(function() {
+    faq('#faq', 'dd', 'dt');
+});</pre>
+ 
+      <p>
+        این روش به دو دلیل مهم و اساسی زیر بهتر است:
+      </p>
+      <ol>
+        <li>
+           اگر در آینده بخواهیم تفییری در نحوه کارکرد کدها داشته باشیم (مثلا فعالیتهای اضافی براساس رویداد کلیک داشته باشیم یا اطلاعات را توسط AJAX دریافت کنیم) کافیست تا متد اصلی <i>faq</i> را تغییر دهیم تا رفتار آن در همه صفحات و بخشهای بکار گرفته شده عوض شود و یا اگر نسخه جدیدی از jQuery عرضه گردد که تغییراتی در کدها لازم باشد، بجای جستجو و تغییر انبوهی از کدها، متد اصلی به سرعت یافت و اصلاح می شود. من تلاش می کنم تا بخشی از کدها که بصورت کلی اجرا می شوند را مشخص کنم و حجمشان را تا حد امکان پایین بیاورم به این ترتیب، رفع اشکال، توسعه، بروزرسانی فریم ورک و تغییر ساختار به راحتی بیشتری انجام می گیرد.
+        </li>
+        <li>
+          دلیل دوم حجم کم کدهاست. با استفاده چندباره از یک کد، مقادیری تکرار نمی گردد و در همه محیطهای برنامه نویسی قابل تغییر است همچنین بازدیدکنندگان به هنگام بارگذاری (Load) صفحه حجم کمتری را دریافت خواهند کرد.
+      </ol>  
+      <p>
+       jQuery در واقع سیستم تمیزی برای تعریف این قبیل کدهای چندبار مصرف نیست در حالیکه روش زیر به روش ساده استفاده از توابع ارجحیت دارد (و روش تابع به روش خام ارجحیت دارد). jQuery کاربران را به نگارش کدهای شخصی بصورت <a href="http://docs.jquery.com/Plugins/Authoring">jQuery plug-ins</a> تشویق می کند که در آن حالت، کد نمونه مذکور شبیه این خواهد شد:
+ 
+<pre class="js">jQuery.fn.faq = function(options) {
+    var settings = jQuery.extend({
+        terms: 'dt',
+        definitions: 'dd'
+    }, options); 
+  //"this" is the current context; in this case, the elements we want to turn into faq layouts
+    $(this).find(settings.terms).hide().end().find(settings.definitions).click(function() {
+        $(this).next().slideToggle();
+    });
+    return this;
+};</pre>
+ 
+      </p>
+         و چیزی که استفاده خواهید کرد:
+      </p>
+  <pre class="js">$('#faq').faq();</pre>
+ 
+      <p>
+		اما با کمی دقت در این شیوه و شیوه قبل، متوجه شباهت بالای آنهای خواهیم شد. با اینکه این تابع در محدوده اصلی فریم ورک (namespace) قرار ندارد ولی به سادگی می توان این کار را انجام داد (مترجم: واژه namespace به محدوده هایی اشاره دارد که متدها در آنها معتبر هستند. برای نمونه، در یک محیط، از دو متد همنام، متدی قابل اجراست که در محدوده namespace تعریف شده معتبر باشد. این محدوده ها معمولا قابل تعریف هستند). با الصاق این کدها به jQuery، ما می توانیم متدهای اصلی دیگر را همراه آن استفاده کنیم. حسن دیگر آن است که عبارت this در تابع به موقعیت فعلی که jQuery با آن روبروست اشاره دارد (مترجم: یعنی در بخش تعریف تابع، عبارت this به faq# اشاره دارد). با استفاده از این شیوه می توان کدها را به نحوی ایجاد کرد که گویی جزیی از ساختار jQuery هستند اما غیر از آن، این پلاگینها، در واقع توابع معمولی هستند که مرجع کنونی jQuery را دریافت می کنند، عملیاتی روی آن انجام می دهند و خود مرجع مورد اشاره را باز میگردانند. این حالت هیچ پیچیدگی ندارد و همه را قادر می سازد تا پلاگین تولید کنند زیرا همانطور که گفته شد، این پلاگینها در واقع همان توابع معمولی هستند که قابلیت دریافت مرجع مورد اشاره را دارند.
+      </p>
+ 
+      <p>
+       دقت کنید که با استفاده از دستورات و متدهای jQuery، امکان نگارش پلاگینهای پیچیده تر وجود دارد. این شیوه طراحی توسط پلاگین UI در jQuery پشتیبانی می شود و ساختار و مکانیسم مشابه آنچه ذکر شد ندارد. به جای آن ما یک شیء با همه متعلقاتش را به شیء jQuery وصل می کنیم (مانند ui.tabs.$). این یک راه کوتاه برای فراخوانی این شیء است (()selector).tabs)$) که می توان در آن اتصالات زنجیروار مانند پلاگین faq را هم داشت. اما به این علت که هیچ مرجعی بازگردانده نمی شود، شما مجبورید برای فراخوانی (invoke) متدهای شیء (در اینجا tab)، ابتدا انتخابگر (selector) را فراخوانی کنید تا متدها شناخته شوند. یعنی بجای (myTabInstance.add(url, label, index شما باید انتخابگر را اجرا کنید و نام متد را بصورت رشته به آن بدهید ;(selector).tabs('add', url, label, index)$ . این یعنی شما انتخابگر را دوبار اجرا کرده اید (حتی اگر آن را در یک متغیر ذخیره کرده باشید) و چون هیچ مرجعی برای اجرای متد add ندارید از امکاناتی مانند bind (تغییر مرجع) و delay (ایجاد وقفه) هم محرومید. این مقاله معطوف MooTools و jQuery است و با توجه به اینکه پلاگین UI بطور پیش فرض بر روی jQuery وجود ندارد، بیشتر از این بدان پرداخته نمی شود.
+      </p>
+ 
+      <a name="classes"></a>
+      <h2>استفاده چندباره ی کدها در MooTools</h2>
+ 
+      <p>
+        در  MooTools زمانی که قصد ایجاد یک الگو را دارید، احتمالا از <em><a href="http://mootools.net/docs/core/Class/Class">Class</a></em> و یا واردسازی متد به اشیاء Native (محلی) مانند <em>String</em> استفاده می کنید.
+      </p>
+    
+      <p>
+        همچنین او شیوه یا سینتکس تقریبا متفاوتی از جاوااسکریپت را هم ارائه می دهد. MooTools تلاش می کند تا حد وسطی بین سینتکس شخصی خود و سینتکس عمومی جاوااسکریپت داشته باشد. یکی از این راهها، توسعه اشیاء محلی در این زبان یا محیط DOM است این بدین معناست که اگر مثلا به متدی برای پاکسازی (trim) یک رشته نیاز دارید، MooTools شما را تشویق می کند تا این متد را مستقیما به خود شیء String اضافه کنید (البته باید دقت شود که شیء String در MooTools، بصورت پیشفرض دارای این متد به شکل  <em><a href="http://mootools.net/docs/core/Native/String#String:trim">String.trim</a></em> می باشد):
+      </p>
+ 
+<pre class="js">String.implement({
+    trim: function() {
+        return this.replace(/^\s+|\s+$/g, '');
+    }
+});</pre>
+ 
+      <p> 
+		این یعنی، اجرای متد trim بر روی یک جمله با فاصله های اضافی، نتیجه همان جمله  بدون این فاصله هاست (مترجم: یعنی ما برای شیء String یک متد جدید ایجاد کردیم که در زمان اجرا کاملا مشابه متدهای معمولی استفاده می شود). برخی شاید عنوان کنند که اضافه کردن اجزای جدید به اشیاء محلی کار مناسبی نیست. به همین دلیل است که MooTools با <a href="http://www.prototypejs.org/">Prototype.js</a> سازگاری ندارد؛ در واقع همه فریم ورکهایی که بر روی اشیاء محلی تاثیر می گذارند، قابلیت سازگاری با هم را ندارند. اگر من <i>()String.prototype.foo</i> را تعریف کنم و فریم ورک دیگری هم آن را تعریف کند، متدی اجرا خواهد شد که دیرتر تعریف شده باشد مشابه همین حالت مشکلی است که ما با محدوده نام (namespace) سراسری window داریم و البته این شیوه کارکرد جاوااسکریپت است. این روشی است که <a href="https://developer.mozilla.org/En/New_in_JavaScript_1.8">جاوااسکریپت 1.8</a> امکانات جدیدی را از طریق افزودن prototypeها معرفی کرده.
+      </p>
+      <p>  
+       توسعه دهندگان MooTools، فریم ورکی را طراحی کرده اند که گسترش آن برای شما آسان باشد با این قصد که کاربر فقط این فریم ورک را در صفحه وارد کند و نه فریم ورکهای دیگر را. این در واقع کمی گستاخانه خواهد بود که از کاربران خواسته شود تا مثلا دو فریم ورک را دریافت کنند. تنها دلیل این امر، نیاز به پلاگینهای موجود در هر دو فریم ورک است که توسعه دهندگان MooTools (از جمله خودم) پیشنهاد می کنیم تا زمانی را به انتقال پلاگینها با یک محیط واحد اختصاص دهید بجای اینکه از کاربران بخواهید دو فریم ورک را دریافت کنند.
+      </p>
+      <p>
+        زمانی که با نحوه کار جاوااسکریپت آشنا می شوید و امــکان توسعه اشیاء محلـــی را فرا می گیرید، دریچه جدیدی در برنامه نویسی را در مقابل خود خواهید دید. شما می توانید پلاگین بنویسید و مثلا در اشیاء Function، Element، Date و غیره تغییر ایجاد کنید. که البته شاید برخی معترض باشند ایـن شــیوه کدنویسی، شیوه شلوغ و نا به سامانی است و من در جواب خواهم گفت که این روش ماهیت اصلی استفاده از جاوااسکریپت است. این یک قابلیت طراحی در این زبان است. با اضافه کردن کدهای خود به اشیاء محلی، به آنها امکان کوتاه شدن و جزء جزء شدن را داده اید. jQuery هم، این چنین امکانی را دارد ولی با درنظر گرفتن محدودیتهایی در هسته اصلی خود.
+      </p>
+      
+      <p>
+        در حالیکه می توانید به سادگی چندین متد از شیء jQuery را زنجیروار به هم وصل و اجرا کنید، برای اشیاء دیگر باید از روشهای عمومی بهره گیرید. برای مثال اگر بخواهیم در jQuery یک رشته را پاکسازی (trim) کنیم و بر اساس خطهای آن شمارش داشته باشیم، باید:
+      </p>
+ 
+      <pre class="js">$.each( $.trim( $('span.something').html() ).split("\n"), function(i, line){alert(line);});</pre>
+ 
+      <p>اما MooTools می تواند اشیاء را تغییر دهد:</p>
+ 
+      <pre class="js">$('span.something').get('html').trim().split("\n").each(function(line){alert(line);});</pre>
+ 
+      <p>
+        با نگاه دقیق به این مثالها می توان قدرت MooTools را در تغییر prototypeها مشاهده کرد. اتصال زنجیروار (Chaining) متدها، فقط برای DOM مفید نیستند. MooTools به شما امکان این نوع اتصال را بر روی هر نوع شیء می دهد حتی قابلیت اجرای همزمان یک متد بر روی چندین بخش، نیز با استفاده این ویژگی ایجاد شده.
+      </p>
+      
+      <p>
+        کلید این ویژگی در قلب MooTools با این تئوری تعریف شده که کاربر بتواند هر آنچه مایل است را ایجاد کند. اگر این قابلیت بصورت تابع و خارج از هسته می بود، شما می توانستید با توسعه آن نیازهای خود را برطرف کنید اما  وظیفه هسته ایجاد همه نوع تابع برای هر نوع نیازی نیست بلکه وظیفه آن این است که ابزار ایجاد هر چه لازم دارید را فراهم کند. بخش اعظم این مقصود با امکان ساده توسعه اشیاء محلی و استفاده از مدل ارث بری prototypal ایجاد شده. تمام این کارها با جاوااسکریپت معمولی قابل اجراست ولی MooTools آنها را بسیار ساده تر و لذتبخش تر کرده است.
+        
+      </p>
+      
+      
+      <a name="mooinheritance"></a>
+      <h3>MooTools و "ارث بری"</h3>
+    
+      <p>
+        تابع <em>Class</em> در MooTools علی رغم نامش، نه یک کلاس واقعی است و نه کلاسی را ایجاد می کند. این تابع شامل یک الگوی ظاهری شبیه به کلاس در زبانهای دیگر است و در اصل وسیله دسترسی به اشیاء و مدل ارث بری است (متاسفانه استفاده از کلمه "کلاس" مناسبترین کلمه برای تشریح این تابع است. بنابراین در این مقاله، منظور از "کلاس"، توابعیست که شیء برمی گردانند و آنهایی که "نمونه" معرفی می شوند، مشخصه های ارث برده شده(Inherit from prototype) هستند).
+      </p>
+      <p>
+        برای ساختن یک کلاس باید یک شیء را به متد سازنده(Constructor) تابع <em>Class</em> فرستاد (مترجم: متد سازنده، متدی است که در زمان نمونه گیری از کلاس، بصورت خودکار اجرا می گردد):
+      </p>
+    
+<pre class="js">var Human = new Class({
+    initialize: function(name, age) {
+        this.name = name;
+        this.age = age;
+    },
+    isAlive: true,
+    energy: 1,
+    eat: function() {
+        this.energy = this.energy + 1; //same as this.energy++
+    }
+});</pre>
+    
+      <p>
+        ما در اینجا یک شیء (شیء شامل اعضایی مثل “isAlive” و “eat” و غیره) را به <em>Class</em> رساندیم و این شیء تبدیل به شیء اصلی همه نمونه های این کلاس شده است. برای تعریف یک نمونه باید به روش زیر عمل کرد:
+      </p>
+<pre class="js">var bob = new Human("bob", 20); //bob's name is "bob" and he's 20 years old.</pre>
+      <p>
+        حالا ما یک نمونه (Intstance) از Human داریم (مترجم: لازم به ذکر است که متد سازنده شیء Class، متد initialize است یعنی با نمونه گیری از هر Class، متد initialize آن خودبخود اجرا میگردد). شیء Bob مشخصه هایی که به نمونه گیری کلاس Human تنظیم شد را دریافت کرد. اما نکته مهم این است که bob از طریق ارث بری به همه مشخصه های کلاس دسترسی دارد. وقتی ارجاعی به مشخصه eat در bob داشته باشیم، این شیء دارای چنین مشخصه ای نیست. جاوااسکریپت در bob به جستجوی این متد می پردازد و آن را پیدا نمی کند پس جستجو را در ارتباطات موروثی bob که کلاس شامل شده از آن (Human) است، ادامه می دهد. این روش برای مشخصه energy هم صادق است. در نظر اول، این قابلیت جالبی به نظر نمی رسد زیرا ما علاقه نداریم مقداری که برای energy شیء bob ایجاد می کنیم، برای بقیه نمونه های Human بکار گرفته شود (مترجم: از آنجاییکه یک مشخصه از مرجع اصلی تغییر کرده، نمونه های دیگر هم که مشتق شده مرجع اصلی هستند، آن تغییر را احساس می کنند). نکته مهم این است که اولین باری که ما مقداری را برای energy در bob تعیین می کنیم، ما این مقدار را به خود bob داده ایم و نه به prototype آن (قابلیت ارث بری در اینجا، فقط برای تشخیص مشخصه ها که متعلق به کدام نمونه است، استفاده شده) پس اولین باری که متد eat اجرا می شود (مقدار energy در این متد تغییر می کند)، نتیجه مقدار تعریف شده برای خودش خواهد بود:
+      </p>
+      <pre class="js">bob.eat(); //bob.energy == 2</pre>
+      <p>
+        دقت کنید که مشخصه های name و age برای bob منحصر به فرد هستند. آنها در زمان نمونه گیری توسط متد خودکار تابع یعنی initialize تعریف شده اند.
+      </p>
+      <p>
+        چهره کلی این سبک شاید کمی برای شما ناآشنا به نظر برسد اما این همان مقادیری هستند که ما با آنها، نمونه های مجزا از یک کلاس را ایجاد می کنیم. هر نمونه (instance) موقعیت شخصی خود را دارد. اگر ما نمونه های دیگری ایجاد کنیم، هر کدام از بقیه مستقل هستند اما همه از یک منبع شامل می شوند:
+      </p>
+    
+<pre class="js">var Alice = new Human();
+//alice.energy == 1
+//bob.energy == 2</pre>
+    
+      <p>
+        جالبترین قسمت این موضوع زمانی است که این شیوه توسعه یابد.
+      </p>
+      
+      <a name="extension"></a>
+      <h3>توسعه و بکارگیری کلاسها</h3>
+    
+      <p>
+        ابتدا نگاهی دوباره به پلاگین faq که برای jQuery ایجاد کردیم بیاندازیم. چه اتفاقی می افتد اگر بخواهیم امکانات بیشتری به آن اضافه کنیم یا چه می شود اگر بخواهیم پاسخ سوالات FAQ را توسط AJAX از سرور دریافت کنیم؟ تصور کنید که این پلاگین توسط شخص دیگری نوشته شده و ما می خواهیم بدون تغییرات اساسی در آن امکانات مورد نظرمان را اضافه کنیم (ما نمی خواهیم انسجام فعلی اش دچار اشکال شود).
+      </p>
+      <p>
+        تنها راههای موجود اینها است که یا منطق پلاگین faq را کپی کنیم (بخاطر بیاورد که کل منطق بصورت یک تابع بود) و تغییرات را در منطق آن اعمال کنیم و یا، آن را فراخوانی (Invoke) کنیم و وظایف جدید را به آن اضافه کنیم. گزینه دوم می تواند جلوی مشکلات زیادی را بگیرد. به این مثال توجه کنید:
+      </p>
+<pre class="js">jQuery.fn.ajaxFaq = function(options) {
+    var settings = jQuery.extend({ 
+    //some ajax specific options like the url to request terms from
+        url: '/getfaq.php'
+        definitions: 'dd'
+    }, options); 
+  //"this" is the current context; in this case, the elements we want to turn into faq layouts
+    $(this).find(settings.definitions).click(function() {
+        $(this).load(.....); //the logic to load the content from the term
+    });
+    this.faq(); //call our original faq plug-in
+});</pre>
+      <p>
+        پلاگین جدید دارای نکاتی است. اول از همه اینکه پلاگین، انتخابگری که برای definition تعیین شده را تکرار می کند زیرا راهی برای ذخیره نتیجه و استفاده مجدد از آن نیست. دوم اینکه، امکان افزودن بخش مربوط به AJAX در قسمتی که ما اضافه کردیم (بخش پایینی) وجود ندارد و این کدها باید وارد منطق اصلی پلاگین شود. پلاگین اصلی از slideToggle که بخش definition را با افکت اسلاید نمایش می دهد، استفاده می کند و این، نکته ی مشکل ساز توسعه ماست زیرا، بخش definition در مدل ما توسط AJAX دریافت می شود. وقتی موردی از faq کلیک شود، افکت slideToggle بلافاصله فعال می گردد و definition را نمایش می دهد حتی اگر هنوز دریافت محتوای آن توسط AJAX به اتمام نرسیده باشد (به بیان دیگر، قاعده صحیح به این صورت است که با کلیک، AJAX فعال گردد و وقتی نتیجه AJAX آماده شد، افکت اسلاید برای نتیجه اعمال شود). پس این افکت باید حذف گردد چون متاسفانه هیچ راه حلی برای چنین مشکلی وجود ندارد مگر تکرار و کپی (duplicate) کل پلاگین.
+      <p>
+        حال به کلاس Human که تحت MooTools ایجاد کردیم دقت کنید. او مشخصه های مثل isAlive و energy، و متدی با نام eat دارد. برای اضافه کردن مشخصه های دیگر به این کلاس چه کار باید کرد؟ در MooTools ما کلاس را اینگونه توسعه (Extend) می دهیم:
+      </p>
+<pre class="js">var Ninja = new Class({
+    Extends: Human,
+    initialize: function(name, age, side) {
+        this.side = side;
+        this.parent(name, age);
+    },
+    energy: 100,
+    attack: function(target) {
+        this.energy = this.energy - 5;
+        target.isAlive = false;
+    }
+});</pre>
+      <p>
+        می بینید که ما به کلاس جدید وظایف زیادی اضافه کردیم. کلاس جدید همه مشخصه های موجود را برای خودش یعنی کلاس Ninja دارد. Ninja مقدار energy را با 100 آغاز می کند و مشخصه جدیدی به نام side هم دارد. همچنین او می تواند از طریق متد attack خود، Human های دیگر را نابود کند و در این راه مقداری انرژی از دست دهد.
+      </p>
+ 
+<pre class="js">var bob = new Human('Bob', 25);
+var blackNinja = new Ninja('Nin Tendo', 'unknown', 'evil');
+//blackNinja.isAlive = true
+//blackNinja.name = 'Nin Tendo'
+blackNinja.attack(bob);
+//bob never had a chance</pre>
+ 
+      <p>
+       جزییات جالب زیادی در این مثال وجود دارد. قابل توجه است که کلاس Ninja متد initialize مربوط به خود را دارد؛ این متد، متد مشابه در کلاس والد (اینجا Human) را رونویسی (overwrite) می کند ولی همچنان می توان از طریق this.parent، متد initialize کلاس والد را اجرا کرد. طبیعتا لازم است تا پارامترهای لازم برای اجرای متد initialize والد را در this.parent قرار داد. به علاوه می توانیم منطق کلاس را، قبل و بعد از فراخوانی parent کنترل کنیم. ما قادریم مقادیر جدیدی به مشخصه ها بدهیم (مثلا به energy) و وظایف جدید اضافه کنیم (قبل و بعد از اجرای this.parent). تصور کنید چقدر خوب می شد که می توانستیم این خاصیت را در پلاگین faq در jQuery وارد کنیم. حالا با این قابلیت می توانیم در این پلاگین، ابتدا محتوای AJAX را کامل دریافت کنیم و سپس افکت اسلاید را داشته باشیم.
+      </p>
+      <p>
+        MooTools یک الگوی دیگر با نام  Mixin دارد. درحالیکه روش extend رابطه موروثی بین کلاس والد و فرزند ایجاد می کند، شما قادرید تا کلاسهایی تعریف کنید تا با کلاسهای دیگر ادغام شوند و مشخصه های خود را منتقل کنند. برای مثال:
+      </p>
+ 
+<pre class="js">var Warrior = new Class({
+    energy: 100,
+    kills: 0,
+    attack: function(target) {
+        target.isAlive = false;
+        this.energy = this.energy - 5;
+        this.kills++;
+    }
+});</pre>
+ 
+      <p>
+        اینجا ما صفات را تغییر دادیم تا کلاس Ninja را از کلاس Human متمایز کنیم و صفات را در کلاس خودشان قرار دهیم. این به ما امکان استفاده مجدد این کدها را، خارج از کلاس Ninja می دهد. حال ما می توانیم کلاس Ninja را با صفات Warrior ادغام کنیم. یعنی:
+      </p>
+ 
+<pre class="js">var Ninja = new Class({
+    Extends: Human,
+    Implements: Warrior, //can be an array if you want to implement more than one
+    initialize: function(name, age, side) {
+        this.side = side;
+        this.parent(name, age);
+    }
+});</pre>
+    
+      <p>
+       تفاوتی در عملکرد Ninja بوجود نیامد فقط در این روش، ما Warrior را برای ایجاد خاصیت استفاده مجدد، اضافه کردیم.
+      </p>
+ 
+<pre class="js">var Samurai = new Class({
+  Extends: Human,
+  Implements: Warrior,
+  side: 'good'
+});</pre>
+ 
+      <p>
+        حالا ما یک کلاس Samurai و یک کلاس Ninja داریم اما به کوتاهی کدهایی که صرف تعریف این دو کلاس شده دقت کنید. هر دو از نظر داشتن صفات Human و Warrior مشترک هستند ولی Samurai همیشه دارای مقدار good برای مشخصه side است و Ninja اینطور نیست. با صرف زمان برای طراحی کلاسهای Human و Warrior، ما سه کلاس متفاوت بدون تکرار اضافی کد داریم که دارای قابلیت کنترل بصورت جزء جزء هستند؛ بطوریکه وقتی متدها فراخوانی می شوند  این کلاسها با یکدیگر در ارتباط قرار می گیرند. هر نمونه (Instance) محدوده مختص به خود را دارد و کدها کاملا واضح و خوانا هستند.
+      </p>
+      
+      <p>
+        در حال حاضر ما اطلاعاتی درباره اینکه کلاسهای MooTools چطور فعالیت می کنند داریم. اجازه بدهید تا به پلاگین faq که برای jQuery ایجاد کردیم و می خواستیم امکانات AJAX را به آن اضافه کنیم، بپردازیم و ببینیم که MooTools در ساختن نمونه مشابه چطور عمل می کند:
+      </p>
+<pre class="js">
+var FAQ = new Class({
+  //Options is another class provided by MooTools
+  Implements: Options,
+  //these are the default options
+  options: {
+    terms: 'dt',
+    definitions: 'dd'
+  },
+  initialize: function(container, options) {
+    //we store a reference to our container
+    this.container = $(container);
+    //setOptions is a method provided by the Options mixin
+    //it merges the options passed in with the defaults
+    this.setOptions(options);
+    //we store the terms and definitions
+    this.terms = this.container.getElements(this.options.terms);
+    this.definitions = this.container.getElements(this.options.definitions);
+    //we call our attach method
+    //by breaking this into its own method
+    //it makes our class easier to extend
+    this.attach();
+  },
+  attach: function(){
+    //loop through the terms
+    this.terms.each(function(term, index) {
+      //add a click event to each one
+      term.addEvent('click', function(){
+        //that calls our toggle method for
+        //the current index
+        this.toggle(index);
+      }, this);
+    }, this);
+  },
+  toggle: function(index){
+    //toggle open the definition for the given index
+    this.definitions[index].slide('toggle');
+  }
+});
+</pre>
+ 
+      <p>
+       باز هم مقدار کدها بیشتر از نمونه jQuery شد. اگر ما همه خطهای توضیحی (comment lines) را حذف کنیم باز هم این پلاگین حدود دوازده خط بیشتر دارد. البته من می توانم ثابت کنم که چنین پلاگینی را می توان با تقریبا همین اندازه برای jQuery ایجاد کرد ولی به هر حال چرا این روش طولانی تر است؟ پاسخ اینطور خواهد بود که این کلاس بسیار انعطاف پذیرتر است. برای استفاده از کلاس، کافیست متد سازنده آن اجرا شود:
+      </p>
+ 
+<pre class="js">var myFAQ = new FAQ(myContainer);
+//and now we can call methods on it if we want:
+myFAQ.toggle(2); //toggle the 3rd element
+</pre>
+ 
+      <p>
+       ما می توانیم به همه متدها و مشخصه ها دسترسی داشته باشیم اما درباره AJAX چه باید کرد؟ مشکل ما با AJAX در پلاگین jQuery این بود که نمی توانستیم، افکت اسلاید را بعد از اتمام عملیات AJAX اجرا کنیم ولی در پلاگین MooTools، چنین مشکلی نداریم:
+      </p>
+ 
+<pre class="js">FAQ.Ajax = new Class({
+  //this class inherits the properties of FAQ
+  Extends: FAQ,
+  //it also gets a new option in addition to the other defaults
+  //this one for url, that we're going to append the index of the
+  //term to; in reality we might make this more robust, but for
+  //this example it serves the purpose
+  options: {
+    url: null;
+  },
+  //we're going to cache the results, so if a section is opened
+  //twice, we won't hit the server for the data
+  indexesLoaded: [],
+  toggle: function(index){
+    //if we've already loaded the definition
+    if (this.indexesLoaded[index]) {
+      //just call the previous version of toggle
+      this.parent(index);
+    } else {
+      //otherwise, request the data from the server
+      new Request.HTML({
+        update: this.definitions[index],
+        url: this.options.url + index,
+        //and when the data is loaded, expand the definition
+        onComplete: function(){
+          this.indexesLoaded[index] = true;
+          this.definitions[index].slide('toggle');
+        }.bind(this)
+      }).send();
+    }
+  }
+});
+</pre>
+ 
+      <p>
+        حالا ما نسخه ای از کلاس FAQ داریم که اطلاعات را از سرور دریافت می کند. دقت کنید در این روش امکان استفاده از اسلاید بعد از بارگذاری کامل فراهم شد (کاری که در jQuery ممکن نشد) همچنین مدنظر داشته باشید که امکان اضافه شده جدید (AJAX) با تغییرات کمی در منطق اصلی صورت گرفت. این مدل توسعه ای، امکان ایجاد مجموعه ای از پلاگینهای مرتبط به هم ولی متفاوت را به سادگی فراهم می کند. همچنین شما قادر می شوید تا با تغییر اندک (نه اساسی) پلاگین های آماده دیگر را برای نیاز خود شخصی کنید. این پاسخ به این ابهام است که چرا وقتی در جستجوی پلاگین هایی مثل date picker یا tab interface برای MooTools هستید، با نتایج کمی روبرو می شوید. علت این است که اکثر پلاگین های آماده یا مشکل شما را کامل حل خواهند کرد یا این منظور با کمی تغییر و توسعه حاصل می شود.
+        
+      </p>
+      
+      <p>
+       همانطور که قبلا تاکید کردم، طراحی مجموعه ای از ابزارها و امکانات توسط jQuery امکانپذیر است ولی اکثر کدهایی که برای این منظور نوشته می شوند، ارتباطی با DOM (بخش تسلط jQuery) ندارد و کدهای معمولی جاوااسکریپت خواهد بود. اما مدل jQuery، برای توسعه این نمونه ها به کلاسهای زیرمجموعه، و برای مدل Mixin که استفاده چندباره کدها را آسان می کند، روشی را معرفی نمی کند. و در آخر اینکه پلاگینهای jQuery همیشه برای اجزاء DOM کار می کنند و اگر لازم باشد تا پردازش بر روی چیزی خارج از DOM مثل یک URL انجام گیرد، باید کدهای آن را خودتان بنویسید.
+      </p>
+      
+      <a name="conclusion"></a>
+      <h2>زمان انتخاب</h2>
+    
+      <p>
+       jQuery بر روی قابل فهم بودن و سادگی و سرعت کدنویسی برای DOM تمرکز دارد و MooTools بر روی توسعه، ارث بری، خوانایی، قابلیت استفاده چندباره کدها و خصوصیت حمل بالا تاکید دارد (مترجم: خصوصیت حمل در برنامه نویسی، به امکان کار بر روی کدها – چه استفاده، چه توسعه – در محیطهای مختلف، با شرایط مختلف اطلاق می گردد). اگر این دو فریم ورک را در دو کفه ترازو قرار دهیم، کفه jQuery را می توان اینگونه معرفی کرد: قابلیت فراگیری آسان و مشاهده فوری نتایج اما (براساس تجربیات من) قابلیت کم  چندبار مصرفی و عدم حمل بالا (البته این کاملا به شما بستگی دارد و فی نفسه مشکل jQuery محسوب نمی گردد) در حالیکه کفه MooTools بیانگر این خصوصیات است: یادگیری دشوارتر، صرف زمان و کدنویسی بیشتر برای حصول نتایج، قابلیت استفاده چندباره و حمل بالا.
+      <p>
+       به علاوه هسته MooTools همه قابلیتهایی که در تصور شماست یا در هسته jQuery موجود است را شامل نمی شود. هر دو فریم ورک ترجیح بر تولید پلاگینها و توسعه هایی دارند که توسط شما و سایر برنامه نویسان ایجاد می شود. وظیفه آنها فراهم کردن هر امکانی که شما نیاز دارید، نیست بلکه با ایجاد ابزاری برای تولید امکانات متفاوت، شما را به طراحی آنها ترغیب می کنند. بطورکلی این قدرت جاوااسکریپت و فریم ورکهای آن است که MooTools و jQuery در حصول آن تلاش می کنند. MooTools دسترسی کلی تری را فراهم کرده و ابزار نگارش هر قابلیتی را به شما می دهد حتی فراتر از محدوده DOM اما تلاش بیشتری را برای یادگــیری و تســـلط می طلبد. دید کلی و توسعه پذیری MooTools، سطح قابل توجهی از امکانات jQuery را تحت قلمرو خود قرار داده. اما jQuery تمرکز و فوکوس خود را معطوف توابع و APIهای جذاب DOM کرده اما در عین حال مثل MooTools شما را از توسعه اشیاء محلی و ارث بری در جاوااسکریپت منع نکرده است.
+      </p>
+      <p>
+        این دقیقا دلیل این گفته من است که هر کدام از آنها، به تنهایی گزینه کاملی هستند. تلاش من در این مقاله بیان تفاوتهای موجود در فلسفه کدهای آنها و نشان دادن مزایا و معایب این دو فریم ورک بود. من از موفقیت در دخیل نکردن سلیقه شخصی نزدیک به MooTools خود، در این مقاله مطمئن نیستم؛ اما امیدوارم که مقاله سودمندی بوده باشد. امیدوارم، صرفنظر از اینکه چه فریم ورکی را انتخاب می کنید، هر دوی آنها را بخوبی شناخته باشید. اگر وقت آزاد داریــد، من به شــدت توصیـــه می کنم تا سایتی را با هر یک از آنها ایجاد کنید. نقطه نظر شما از انجام یک پروژه با دو فریم ورک می تواند، نکته ای که من از قلم انداخته ام را به این مقاله بیافزاید.
+      </p>
+      <p>سابقه تغییرات این مقاله در <a href="http://github.com/anutron/jquery-vs-mootools/tree/master">github</a> قابل دسترسی است.</p>
+      <p>
+      <script type="text/javascript" src="http://w.sharethis.com/button/sharethis.js#publisher=c327065b-efa0-4e12-afbc-5717f5cf62f9&amp;type=website&amp;post_services=facebook%2Cdigg%2Cdelicious%2Ctwitter%2Creddit%2Cfriendfeed%2Cmyspace%2Cybuzz%2Cstumbleupon%2Ctechnorati%2Cmixx%2Cblogger%2Cwordpress%2Ctypepad%2Cgoogle_bmarks%2Cwindows_live%2Cfark%2Cbus_exchange%2Cpropeller%2Cnewsvine%2Clinkedin"></script>
+      </p>
+      <hr/>
+      <p class="about">
+       درباره من: من یکی از اعضای اصلی <a href="http://www.mootools.net">MooTools</a> هستم و در وبلاگ خود <a href="http://www.clientcide.com">Clientcide</a> درباره جاوااسکریپت و موارد دیگر مطلب می نویسم همچنین <a href="http://www.clientcide.com/js">پلاگین های بسیار زیادی برای MooTools</a> ایجاد کرده ام. من مؤلف کتاب <a href="http://www.amazon.com/gp/product/1430209836?ie=UTF8&tag=clientside-20&link_code=as3&camp=211189&creative=373489&creativeASIN=1430209836">MooTools Essentials</a> و <a href="http://www.mootorial.com">آموزش آنلاین MooTools</a> هستم. من در یک شرکت با نام <a href="http://www.cloudera.com">Cloudera</a> واقع در SF Bay Area فعالیت می کنم. و <a href="http://www.clientcide.com/shout-out">از اینجا قابل دسترسی هستم</a>.
+      </p>
+      
+      <a name="discussion"></a>
+      <hr/>
+      <p class="about" style="color: #700"><strong>نکته ای برای ثبت دیدگاه</strong>: نظرات ثبت شده، همگی بررسی می گردند و هیچ نظری بدون تایید منتشر نمی شود. نظرات بی محتوا (جنجالی یا بی ادبانه و غیره) یا طرفدارانه مثل "فریم ورک X از فریم ورک Y بهتر است چون..." نیز منتشر نخواهند شد.
+      </p>
+      <div id="disqus_thread"></div>
+      <script>
+        var disqus_url = "http://jqueryvsmootools.com/";
+      </script>
+      <script type="text/javascript" src="http://disqus.com/forums/jqueryvsmootools/embed.js"></script>
+    </div>
+    <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+    var pageTracker = _gat._getTracker("UA-539314-11");
+    pageTracker._trackPageview();
+    } catch(err) {}</script>
+    
+    <script type="text/javascript">
+    //<![CDATA[
+    (function() {
+        var links = document.getElementsByTagName('a');
+        var query = '?';
+        for(var i = 0; i < links.length; i++) {
+          if(links[i].href.indexOf('#disqus_thread') >= 0) {
+            query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+          }
+        }
+        document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/jqueryvsmootools/get_num_replies.js' + query + '"></' + 'script>');
+      })();
+    //]]>
+    </script>
+    
+  </body>
+</html>

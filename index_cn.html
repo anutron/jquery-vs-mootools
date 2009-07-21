@@ -1,0 +1,919 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>
+			jQuery vs MooTools: Choosing Between Two Great JavaScript Frameworks
+		</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="Shortcut Icon" href="favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection">
+		<link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print">	
+		<!--[if IE]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+		<link rel="stylesheet" href="css/blueprint/src/typography.css" type="text/css" media="screen" title="no title" charset="utf-8">
+		<style>
+			body { 
+			  font-size: 100%;
+			  color: #444; 
+			  background: #fff;
+			  font-family: "Georgia", Arial, Helvetica, sans-serif;
+			}
+			p {
+				font-size: 21px;
+				line-height: 1.7em;
+			}
+			h1, h2, h3, h4 {
+				color: #626262;
+			}
+			h1 {
+				text-align: center;
+				margin: 20px !important;
+				font-size: 90px;
+				padding: 0 !important;
+				padding:0 0 10px;
+			}
+			div.caption {
+				font-size: 14px;
+				text-align: right;
+				margin: auto;
+				width: 800px;
+				position: relative;
+				top: -25px;
+				background-color: none;
+			}
+			a, a.visited {
+				color: #004d9b;
+				text-decoration: none;
+			}
+			a:hover {
+				text-decoration: underline;
+			}
+			p.footnote {
+				font-size: 12px;
+				text-align:right;
+				margin-top: 0px;
+				position: relative;
+				top: -8px !important;
+				top: 0px;
+			}
+			p.about {
+				font-size: 12px;
+			}
+			tr td {
+				border-bottom: 1px solid #999;
+				vertical-align: top;
+			}
+			tr th {
+				background: #999;
+				color: #fff;
+			}
+			.dsq-item-cp {
+				display: none;
+			}
+			div.trans {
+				font-size: 10px;
+			}
+		</style>
+		<script src="http://www.google.com/jsapi"></script>
+		<script>
+			google.load("mootools", "1.2.2");
+		</script>
+		<script src="js/Lighter/Ligher.uncompressed.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script>
+        window.addEvent('domready', function(){
+            var toc = $$('ul a');
+            $$('a:not(.stbutton)').each(function(a) {
+                if (toc.contains(a)) return;
+                 a.set('target', '_blank');
+            });
+            if (Browser.Engine.trident) return;
+            // Highlight all "pre" elements in a document.
+            $$('pre').light({
+                altLines: 'hover',
+                indent: 2,
+                mode: 'pre',
+                path: 'js/Lighter/'
+            });
+        
+        });
+		</script>
+	</head>
+	<body>
+		<div class="container">
+
+			<h1 class="span-24 last">jQuery vs MooTools</h1>
+			<div class="caption">
+				2009年五月 - 
+				<a href="http://www.clientcide.com" target="_blank">Aaron Newton of Clientcide</a>
+				<div class="translator">翻譯: <a href="http://fuyei.blogspot.com">fuyei</a></div>
+				<div class="trans">
+					可用語言版本：
+					<a href="/index.html">英語</a>、 
+					<a href="/index_pt-br.html">葡萄牙語 (巴西)</a>、
+					<a href="index_fa.html">波斯語</a>、
+					<a href="/index_es-ar.html">西班牙語</a> | <a href="http://wiki.github.com/anutron/jquery-vs-mootools">如何上傳一個新的翻譯版本</a>.
+				</div>
+			</div>
+			<p>
+		大部分最近才剛接觸JavaScript的人會面臨到的困難是該選擇哪個套件(library)或是該先學哪個套件。如果你在一間公司裡上班，那麼可能公司已經有一套固定使用的套件，若是在這種情況下，問題就沒那麼重要。如果你的公司選擇使用<a href="http://www.mootools.net">MooTools</a>而你自己已經習慣使用<a href="http://www.jquery.com">jQuery</a>，那麼這篇文章也許對你還是有些幫助的。
+			</p>
+			<p>
+				<a href="http://twitter.com/joshink/statuses/1671986611">每天在</a> <a href="http://twitter.com/jezusisstoer/statuses/1642244246">Twitter上</a> <a href="http://twitter.com/digitalcampaign/statuses/1622094648">我看到</a> <a href="http://twitter.com/jesswma/statuses/1605733380">一堆人</a>討論著MooTools好還是jQuery的話題。這篇文章希望能幫助你做出這決定。
+			</p>
+			<h3>聲明</h3>
+			<p>
+				我是個MooTools的開發人員。我也專注於MooTools這個framework。我的部落格是有關MooTools。我寫過<a href="http://www.mootorial.com">MooTools的線上文件</a>以及<a href="http://www.amazon.com/gp/product/1430209836?ie=UTF8&tag=clientside-20&link_code=as3&camp=211189&creative=373489&creativeASIN=1430209836">一本有關MooTools的書</a>。很明顯的我的立場是有一點偏頗的。我也必須說明我並不常用jQuery。如果你是個jQuery的開發員，同時看到我文章裡任何謬誤之處，請聯絡我並不吝給予指教錯誤之處。我的目的是讓文章正確且有所助益而非去推銷特定的framework。
+			</p>
+
+			<h3>目的</h3>
+			<p>
+				透過我的說明，讓大家明白這兩個frameworks之間的差異進而能幫助大家做出一個選擇。我首先要說的是，<b>兩個frameworks都是很好的選擇</b>，你並不會選到一個糟糕的framework。兩者各有其強項與弱項，但是都是很棒的。除此之外還有很多也很優秀的frameworks值得考慮，如<a href="http://www.dojotoolkit.org/">Dojo</a>,<a href="http://www.prototypejs.org/">Prototype</a>, <a href="http://developer.yahoo.com/yui/">YUI</a>, <a href="http://extjs.com/">Ext</a> 等等的。這些選擇基本上也取決於自己的習慣跟需要完成甚麼樣的東西而定。這篇文章的重點在於MooTools跟jQuery之間的比較，因為我看到越來越多的人在這兩者之間猶豫不決著。最後我要聲明的是，我並不是想要說服誰誰誰從某個framework轉換到另一個，這兩個frameworks其實有很多有趣的地方值得我們學習。你可以從<a href="http://www.clientcide.com/3rd-party-libraries/jquery-vs-mootools-mootools-vs-jquery/">這個公告</a>看到我寫這篇文章的由來。
+			</p>
+			
+			<h3>內容</h3>
+<ul>
+	<li><a href="#mottos">標題說明一切</a></li>
+	<li><a href="#learning">學習曲線與社群</a></li>
+	<li><a href="#javascript">JavaScript過人之處</a></li>
+		<ul style="margin-bottom: 0px">
+			<li><a href="#dom">不只是DOM</a></li>
+			<li><a href="#inheritance">JavaScript的繼承</a></li>
+			<li><a href="#self">自我參照</a></li>
+		</ul>
+	</li>
+	<li><a href="#jsfun">MooTools把JavaScirpt變得更有趣</a></li>
+	<li><a href="#domfun">jQuery把DOM變得更有趣</a></li>
+	<li><a href="#cando">你行的我比你更行</a></li>
+	<li><a href="#yourway">MooTools讓你想怎樣就怎樣</a></li>
+	<li><a href="#chaining">連續技(Chaining)的設計模式</a></li>
+	<li><a href="#reuse">jQuery程式的重複利用</a></li>
+	<li><a href="#classes">MooTools程式的重複利用</a>
+		<ul>
+			<li><a href="#mooinheritance">MooTools與繼承</a></li>
+			<li><a href="#extension">延伸與實作(Extending and Implementing)</a></li>
+		</ul>
+	</li>
+	<li><a href="#conclusion">抉擇</a></li>
+	<li><a href="#discussion">討論</a></li>
+</ul>
+		
+			<h2>統計</h2>
+			<table>
+				<tr>
+					<th></th>
+					<th>jQuery 核心</th>
+					<th>MooTools 核心</th>
+				</tr>
+				<tr>
+					<td>檔案大小</td>
+					<td>55.9K</td>
+					<td>64.3K</td>
+				</tr>
+				<tr>
+					<th colspan="3">功能</th>
+				</tr>
+				<tr>
+					<td>授權</td>
+					<td><a href="http://en.wikipedia.org/wiki/MIT_License" title="MIT License">MIT</a> &amp; <a href="http://en.wikipedia.org/wiki/GPL" title="GPL">GPL</a></td>
+					<td><a href="http://en.wikipedia.org/wiki/MIT_License" title="MIT License">MIT</a></td>
+				</tr>
+				<tr>
+					<td>DOM 工具</td>
+					<td>yes</td>
+					<td>yes</td>
+				</tr>
+				<tr>
+					<td>動畫效果</td>
+					<td>yes</td>
+					<td>yes</td>
+				</tr>
+				<tr>
+					<td>事件處理</td>
+					<td>yes</td>
+					<td>yes</td>
+				</tr>
+				<tr>
+					<td>CSS3 選擇器</td>
+					<td>yes (Sizzle引擎)</td>
+					<td>yes (Sly引擎)</td>
+				</tr>
+				<tr>
+					<td>Ajax</td>
+					<td>yes</td>
+					<td>yes</td>
+				</tr>	
+				<tr>
+					<td>原生物件延伸 Native Extensions (不含Element)</td>
+					<td>10幾個關於 Array, Object, 以及 String的延伸</td>
+					<td>約70個 Array, Object, String, Function, 以及 Number 的延伸</td>
+				</tr>
+				<tr>
+					<td>繼承</td>
+					<td>沒有直接支援繼承</td>
+					<td>提供 <em><a href="http://mootools.net/docs/core/Class/Class">Class</a></em> 構件式</td>
+				</tr>
+				<tr>
+					<th colspan="3">其他考量項目</th>
+				</tr>
+				<tr>
+					<td>plug-ins</td>
+					<td>上百個非官方 plug-ins: <a href="http://plugins.jquery.com/">plugins.jquery.com</a></td>
+					<td>目前約四五十個官方 plug-ins: <a href="http://mootools.net/more">mootools.net/more</a> 還有其他的散落各處未計</td>
+				</tr>
+				<tr>
+					<td>官方UI套件</td>
+					<td>yes</td>
+					<td>no</td>
+				</tr>
+			</table>
+			<p class="footnote">
+				資料來源:  <a href="http://jquery.com">jquery.com</a>, <a href="http://mootools.net">mootools.net</a>, 與 <a href="http://en.wikipedia.org/wiki/Comparison_of_JavaScript_frameworks">wikipedia.com</a>.
+			</p>
+			
+			<a name="mottos"></a>
+			<h2>標題說明一切</h2>
+			
+		
+			<p>
+				  如果你去jQuery的網站看，它最上面的標語就寫著：
+			</p>
+			<blockquote>jQuery是個簡潔快速的JavaScript函式庫，能透過簡化HTML的操作、事件的處理、動畫效果以及Ajax互動來加速網頁開發。jQuery是一個可以改變你寫JavaScript方式的函式庫。</blockquote>
+			<p>
+				...然後如果你到了MooTools的網站，你也可以找到這段話：
+			</p>
+			<blockquote>MooTools是個精簡、模組化同時也物件導向的JavaScript框架，設計給中等與進階的JavaScript開發員使用。透過其優美、詳細而條理分明的API，可以讓您寫出強大、富有彈性且跨瀏覽器的程式。 </blockquote>
+			<p>
+				我想這就說明了全部了。如果你問我(因為你正在讀這篇文章，所以我假設你會問囉)：重點不在於哪個比較好，哪個比較差，而是在於這兩者的特性之間，該如何取捨衡量？這兩個框架(frameworks)試圖要做的事情並不相同，在功能上它們或有重疊但目標並非一致。
+			</p>
+			
+			<p>
+				jQuery的那段敘述講的是關於HTML、事件、動畫、Ajax與網頁開發，MooTools那段說的是有關物件導向、強大且彈性的程式架構。jQuery要改變你寫JavaScript的方式，而MooTools則是為了中高階JavaScript開發員而設計。
+			</p>
+			
+			<p>
+				這其中值得思考的是關於<em>框架</em>與<em>工具包</em>(framework vs. toolkit)的概念差異。MooTools是一個用JavaScript<em>原本應有的方式</em>來寫JavaScript的<em>框架</em>(framework)。其立意是實作一個跟JavaScript非常相似的API並且針對各個部分加以強化，而不只是針對DOM而已。jQuery則比較像是包好了很多很方便的函式在一個<em>工具包</em>裡(toolkit)，這個自成一個體系的工具包讓DOM的操作變得更簡單易用。而DOM剛好就是大多數的人寫JavaScript時花最多時間的地方，所以在大多數的情況下，jQuery就是你最好的選擇。
+			</p>
+			<p>
+				大部分你用MooTools所寫的程式還是跟JavaScript很像，如果你對JavaScript這個程式並不是很感興趣，那麼學MooTools對你來說就會是很討厭的事情。如果你對JavaScript有興趣，也想知道它哪裡有趣、強大而多樣，那麼我個人認為MooTools是個較好的選擇。
+			</p>
+			
+			
+			<a name="learning"></a>
+			<h2>學習曲線與社群</h2>
+		
+			<p>
+				首先，jQuery是非常非常容易學會的。它的撰寫風格如同口語般幾乎不像個程式語言。如果你要的就是快速搞定又不用刻意學習JavaScript的話，jQuery可能對你而言是較好的選擇，MooTools並不具備這些好處。我必須承認如果你是個JavaScript新手，MooTools會有點難上手。加上有很多現成的資源或教學可以幫助你學會jQuery，至少比MooTools多。
+			</p>
+		
+			<p>
+				如果你比較看看jQUery(<a href="http://docs.jquery.com/Discussion">jQuery的討論版</a>)跟MooTools的社群(<a href="irc://irc.freenode.net/#mootools">irc</a>, <a href="http://groups.google.com/group/mootools-users">mailing list</a>)，你馬上就會發現：一) jQuery的社群資源與數量<i>遠</i>大於MooTools(我認為是因為之前說的那個原因易學以及...)。二) 她們比較積極推廣。如果你用使用的人數、Google搜尋的次數以及賣出的書量來衡量jQuery與MooTools，你會看到jQuery是遙遙領先的。
+			</p>
+		
+			<p>
+				為了要完整說明為何你可以考慮用MooTools的原因，我必須先說一下這兩個frameworks在做什麼事情。最終你會選擇哪個framework還是取決於你想要達成什麼目的以及你想用什麼方式寫程式(甚至關乎你<i>是否</i>喜歡程式，或至少喜歡JavaScript)。
+			</p>
+			
+			<a name="javascript"></a>
+			<h2>JavaScript過人之處</h2>
+		
+			<p>
+				抉擇的過程裡，你得先問自己想要用JavaScript來做什麼。我們可以先想想純JavaScript的情況，不使用任何的framework；就是傳統的JavaScript程式。JavaScript提供一些原生的物件像是 <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/String">Strings</a>, <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Number">Numbers</a>, <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Function">Functions</a>, <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Array">Arrays</a>, <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Date">Dates</a>, <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/RegExp">Regular Expressions</a>, 等等，同時也提供了一個繼承的模型 - 一個有點難懂的模型叫做原型繼承(<a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Inheritance">prototypal inheritance</a>，我稍後會作說明)。這些基本架構跟繼承概念就是足以支撐著各種程式語言的基本要素，而且這些要素跟瀏覽器、網頁、CSS或HTML都沒有任何關聯。所以其實JavaScript是可以用來寫出各種程式的，不管是井字遊戲、西洋棋、相片編輯程式或是個網站伺服器。只是剛好百分之九十九的JavaScript都在瀏覽器上執行，所以我們通常就把它當作是瀏覽器專用的程式了。
+			</p>
+			<p>
+				絕大部分的JS都應用在瀏覽器跟DOM，但其實JavaScript是個非常健全且多樣的程式語言，如果能夠理解這點的話，會有助於你了解MooTools跟jQuery之間的差異。
+			</p>
+			
+			<a name="dom"></a>
+			<h3>不只是DOM</h3>
+		
+			<p>
+				如果你認為JavaScript做的事情就是"指定頁面中的某個東西，然後對它做一些動作"，那jQuery可能就是最好的選擇了。jQuery提供了一個非常好的架構讓你用幾乎不像是程式語言的方式去描述頁面中的行為。你還是可以用JavaScript的其他功能來寫出你想要的程式，但是如果你的重點在DOM - 動態改變CSS、動畫效果、透過AJAX來取得內容等等，你需要寫的大部分程式都可以用Jquery完成，其餘未包括的部份就會是原本JavaScript的寫作方式。此外jQuery也提供一些非DOM相關的程式，例如繞陣列迴圈(iterating)的方法 - <i><a href="http://docs.jquery.com/Utilities/jQuery.each">$.each(array, fn)</a></i> - 或是用<i><a href="http://docs.jquery.com/Utilities/jQuery.trim">$.trim(str)</a></i> 除掉字串前後空白的函式。這些公用程式並沒有很多，不過那也沒差，因為大部分情況下，如果你只是從DOM裡面指定了幾樣東西，繞了迴圈，變更了某些細節(插入HTML、改變樣式或是定義一個滑鼠點擊的事件等等)，其實並不需要那麼多公用程式。
+			</p>
+			<p>
+				不過如果你用比較廣泛的角度來看的話，jQuery並沒有把心思放在DOM以外的事物上。這也是它如此易學的原因之一，但同時也限制了從其他方面來幫助你撰寫JavaScript。它除了扮演著一個完整的<i>DOM</i>程式語言之外，便再無二心，沒有在繼承物件概念或是提供基本型別的公用程式上多下功夫，因為它本來就<i>沒這個必要</i>。如果你想在字串、時間、正規表示式、陣列或函式之間周旋的話，<i>可以</i>。只不過那並非jQuery的使命，JavaScriprt一直都在那，隨時要用都可以的。jQuery讓你能夠輕鬆駕馭DOM，但其他的東西就不是它的範疇了。
+			</p>
+			<p>
+				這點跟MooTools有很大的不同。MooTools把範疇放大到整個JavaScript語言，而不單單只是針對DOM而已(據我所知，MooTools也提供跟jQuery相同的功能，但是用很不一樣的方法寫的)。如果jQuery讓你能對DOM為所欲為，MooTools則是讓你能夠對整個JavaScript為所欲為，這也是它學習難度較高的原因之一。
+			</p>
+			
+			<a name="inheritance"></a>
+			<h3>JavaScript的繼承</h3>
+		
+			<p>
+				JavaScript裡面有些很棒的東西。首先，它是個<a href="http://en.wikipedia.org/wiki/Functional_programming">函數程式語言</a>。這代表著function被視為高階物件，像其他物件 - 如字串或數字般可以被互相傳遞。當你用這種方式來寫程式，很多模式跟方法可以藉由這個設計理念獲得最好的結果。兩者之間的差異：
+			</p>
+<pre class="js">for (var i = 0; i &lt; myArray.length; i++) { /* do stuff */ }</pre>
+			<p>
+				  以及          
+			</p>
+			<pre class="js">myArray.forEach(function(item, index) { /* do stuff */ });</pre>
+			<p>
+				  JavaScript有一種 <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Inheritance">繼承模型</a>，在程式語言的世界裡，不能說獨特但也算是相當罕見。JavaScript是用 <i><a href="http://en.wikipedia.org/wiki/Prototype-based_programming">原型繼承</a></i>的方式來做，而非類別(class)在延伸次類別的繼承方式，這表示物件是直接繼承另一個物件的原型。當你參照一個物件的property，程式會先從物件本身尋找是否有此property，如果沒有的話，就去找該物件的父親。這就是一個陣列可以有method的原理。當你寫了：
+			</p>
+			<pre class="js">[1,2,3].forEach(function(item) { alert(item) }); //this alerts 1 then 2 then 3</pre>
+			<p>
+				"<a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference:Objects:Array:forEach">forEach</a>"這個方法並不存在於你所定義的陣列(<em>[1,2,3]</em>)裡面，它存在於所有陣列的原型中。當你參照<em>forEach</em>這個方法時，JavaScript會在你定義的陣列中去找，如果沒有的找到的話就去陣列的原型去找。這表示說，並非所有陣列都在記憶體中有<em>forEach</em>這個方法，它只要在陣列的原型裡放一次就可以了。這種方式非常有效率也非常非常強大。(補充：MooTools裡面<em>forEach</em>的對應method是<em>each</em>)
+			</p>
+			
+			<a name="self"></a>
+			<h3>自我參照</h3>
+			<p>
+				JavaScript有一個特別的字眼："this"。我很難在這邊簡單的定義甚麼叫this，但是一般來說this就是指目前method的所有者。this允許物件可以在其所屬方法運行時參照到物件自己本身，也正是this存在的目的。當你產生很多子物件然後又有很多父物件的實體(instances)時，這就變得很重要了，否則還能甚麼其他方式來參照自己？當一個方法(method)原本屬於父物件而非子物件，this這個關鍵字就能讓實體們都能參照到它們自身。(<a href="http://www.quirksmode.org/js/this.html">這裡有this更完整的解釋</a>，還有<a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Operators/Special_Operators/This_Operator">Mozilla的</a>)
+			</p>
+			<p>
+				this可以讓那些繼承而來的子物件參照到它們自身，但是有時候也可能需要用this參照到其它的東西，你就要指定一個不同的this到方法(method)裡，這就叫做榜定(<a href="http://alternateidea.com/blog/articles/2007/7/18/javascript-scope-and-binding">binding</a>)。陣列的each方法的第二個參數可以讓你指定一個物件做榜定(binding)。可以參考一下這個範例傳了一個不一樣的 "this"：         
+			</p>
+<pre class="js">var ninja = {
+    weapons: ['katana', 'throwing stars', 'exploding palm technique'],
+    log: function(message) {
+        console.log(message);
+    },
+    logInventory: function() {
+        this.weapons.each(function(weapon) {
+			//we want "this" to point to ninja...
+            this.log('this ninja can kill with its ' + weapon);
+        }, this); //so we pass "this" (which is ninja) to Array.each  
+    }
+};
+ninja.logInventory(); 
+//this ninja can kill with its katana
+//this ninja can kill with its throwing stars
+//this ninja can kill with its exploding palm technique</pre>
+
+			<p>
+				上面的範例裡面，我們把ninja榜定(就是在<em>logInventory</em>裡面的this)在傳給陣列的那個方法(method)，所以在each裡面我們可以參照到ninja的log的屬性。如果我們沒這麼做的話，this得到的參照就會是<em>window</em>了。
+			</p>
+			<p>
+				這些只是幾個範例，用來說明JavaScript提供了強大多樣的繼承、自我參照、榜定跟原型特性。不幸的是，原本的JavaScript並沒有把這些強大的特點凸顯出來，這也是MooTools之所以發展的起頭。MooTools把這幾種類型的模式變得簡單也更和善。最終你會寫出更為抽象的程式，長遠來看這會是好事情 - 也會是很棒的程式。去理解這些模式的價值以及如何正確地使用它們是很需要花費心力的，但是從好的方面來看，你所寫的程式會具備高度的重複使用性也會非常容易維護。這些好處我等等會稍做說明。
+			</p>
+			
+			<a name="jsfun"></a>
+			<h2>MooTools把JavaScirpt變得更有趣</h2>
+		
+			<p>
+				因為MooTools專注在增加JavaScriptAPI的穩定性與連貫性，所以在"改變你寫JavaScript的方式"這件事情上就沒有太多著墨，整體來看它卻是降低了JavaScript使用上的不便。MooTools是JavaScript語言的擴充，也試著把JavaScript導向原本應走的路上。整個架構的核心有重要的一部份是在加強Function、Stirng、Array、Number、Element跟其他的原型物件。另一個重點是它提供了一個函數叫類別(<em><a href="http://mootools.net/docs/core/Class/Class">Class</a></em>)。
+			</p>
+			<p>
+				現在，對人們來說，<em>Class</em>看起來像是要重建一個像Java或是C++那種正統的繼承式模型，其實<a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Class-Based_vs._Prototype-Based_Languages">並不是那麼一回事</a>。這個<em>Class</em>n所做的是幫我們更簡單地存取JavaScript的原型繼承模型並且更加凸顯它的優勢。我要說明的是這概念並不是MooTools才有的(其他的一些frameworks也有提供類似的功能)。但是jQueryy並沒有這些的設計概念，jQuery沒有所謂繼承的系統也沒有任何加強原生物件(Function、String等)的架構。這並非jQuery的缺陷，因為作者其實可以輕而易舉的增加這些東西進來；而是他們是以不同的目標來設計這個工具包(toolkit)套件。MooTools的目的是讓JavaScript變的有趣，而jQuery是要把DOM變得有趣，所以它的設計者設定了這樣的範疇來達到目的。
+			</p>
+			
+			<a name="domfun"></a>
+			<h2>jQuery把DOM變得更有趣</h2>
+		
+			<p>
+				這也是為什麼jQuery比較有親和力，它並沒有要求你把JavaScript從裡到外都搞懂，它不會把你丟到底層去跟原型繼承架構、榜定、"this"和原生原型(native prototypes)打交道。當你開始從<a href="http://docs.jquery.com/Tutorials:How_jQuery_Works">官網</a>接觸jQuery，你可以看到它的第一個範例：
+			</p>
+		
+<pre class="js">window.onload = function() {
+    alert("welcome");
+}</pre>
+
+			<p>and here's the third: </p>
+
+<pre class="js">$(document).ready(function() {
+    $("a").click(function(event) {
+        alert("Thanks for visiting!");
+    });
+});</pre>
+
+			<p>
+				如果你讀過<a href="http://www.amazon.com/gp/product/1430209836?ie=UTF8&tag=clientside-20&link_code=as3&camp=211189&creative=373489&creativeASIN=1430209836">MooTools的書</a>或是<a href="http://www.mootorial.com/wiki">教學</a>(我寫的那兩個)，裡面開頭的章節就很不同。如果要學習怎麼使用MooTools的話，你必須從一些基本的概念開始看起，例如<em>Class</em>，雖然你也可以略過直接開始學有關特效或是DOM的部分。而且我也必須承認：如果你是寫程式的新手或你想要快速架站，而非得要先了解JavaScript的一些細節，可能對你來說jQuery會比較友善的多。
+			</p>
+			
+			<p>
+				反之，如果你想要好好學習JavaScript這個語言，MooTools是一個很好的管道。MooTools實做了很多JavaScript以後會有的功能(很多在Native的方法正是<a href="https://developer.mozilla.org/En/New_in_JavaScript_1.8">JavaScript 1.8</a>或更新版本會有的)。如果你是老手了，特別是熟悉物件導向<em>以及</em>函數式程式語言(functional programming)的人，MooTools有很多令人振奮且驚艷的設計模式(design patterns)。
+			</p>
+			
+			<a name="cando"></a>
+			<h2>你行的我比你更行</h2>
+		
+			<p>
+				如果你看一下jQuery所提供的功能，你會發現通常MooTools也有提供相同的功能。或如果你看一下MooTools的功能，你會發現jQuery通常沒辦法達到相同的目的，因為jQuery專注的是DOM相關功能，MooTools提供的功能則涵蓋的層面比jQuery還廣些。不過jQuery也不會阻礙你去實做那些MooTools才能達到的功能。舉例來說，jQuery並沒有提供繼承的架構，但是沒關係，如果你想要的話還是可以結合MooTools 的<em>Class</em>來達到(或自己寫一個)。甚至也有人寫了一個<a href="http://code.google.com/p/jquery-inheritance/updates/list">繼承的jQuery外掛</a>(我沒有用過不過我想它應該也能提供相同的功能)。
+			</p>
+	
+			<p>如果我們回頭看一下上面jQuery的那個範例：</p>  
+		
+<pre class="js">$(document).ready(function() {
+    $("a").click(function(event) {
+        alert("Thanks for visiting!");
+    });
+});</pre>
+		
+			<p>
+				如果我們要轉成MooTools的語法，就會變成：
+			</p>
+<pre class="js">window.addEvent('domready', function() {
+    $$('a').addEvent('click', function(event) {
+        alert('Thanks for visiting!');
+    });
+});</pre>
+			<p>
+				  非常相似吧？         
+			</p>
+			<p>
+				  或是這個比較複雜的jQuery範例：         
+			</p>
+
+<pre class="js">$(document).ready(function() {
+    $("#orderedlist li:last").hover(function() {
+        $(this).addClass("green");
+    },
+    function() {
+        $(this).removeClass("green");
+    });
+});</pre>
+
+			<p>
+	    and in MooTools:  
+			</p>
+
+<pre class="js">window.addEvent('domready',function() {
+    $$('#orderedlist li:last-child').addEvents({
+        mouseenter: function() {
+            this.addClass('green');
+        },
+        mouseleave: function() {
+            this.removeClass('green');
+        }
+    });
+});</pre>
+
+			<p>
+				也是非常類似。我想說明的是，MooTools的版本語法更為清楚，不過也因此較為累贅。MooTools的程式閱讀很清楚可以知道我們增加了兩個events，一個是滑鼠移入物件時的，一個是滑鼠離開物件的。而jQuery則較為簡潔，它的<em><a href="http://docs.jquery.com/Events/hover">hover</a></em>方法一次接收兩個functions，第一個是滑鼠移入物件時用，第二個是滑鼠離開物件時用。我個人比較偏好MooTools程式的可閱讀性，不過那是主觀的看法。 
+			</p>
+			
+			<p>
+				我有時候會覺得jQuery的語法過於艱澀隱晦，一個方法(method)裡可接收兩個function這回事我光是用看的的話，並非那麼容易理解。由於我對MooTools很熟悉，這說法多少有點不公平，因為讀MooTools的程式對我來說很簡單。不過MooTools方法與類別的命名方式很有名符其實的味道，這點我很欣賞。MooTools幾乎都是用動詞來命名，留下一絲絲疑惑是對"甚麼"做動作。當然在撰寫每一種程式語言時，你都需要去看文件來查語法，我意思不是說MooTools就不用，我只是覺得MooTools的API的命名邏輯比較連貫一致。
+			</p>
+			
+			<a name="yourway"></a>
+			<h2>MooTools讓你想怎樣就怎樣</h2>
+			
+			<p>可是如果你比較喜歡jQuery式的語法怎麼辦？MooTools也是有這種能力把程式變得更合你胃口，如果我們想在MooTools裡面實作jQuery的<em>hover</em>，我們只要加上這段： </p>
+			
+<pre class="js">Element.implement({
+    hover : function(enter,leave){
+       return this.addEvents({ mouseenter : enter, mouseleave : leave });
+    }
+});
+
+//然後你就可以用跟jQuery相同的語法：
+$$('#orderlist li:last').hover(function(){
+   this.addClass('green');
+},
+function(){
+   this.removeClass('green');
+});
+</pre>
+
+		<p>實際上確實有MooTools的plug-ins在幫你完成這些動作：<a href="http://github.com/cheeaun/mooj/tree/master">jQuery syntax for MooTools</a>。MooTools著重在延伸能力上，這意味著你可以做任何你想做的事情，這是jQuery沒辦法辦到的。MooTools可以模仿jQuery，但是jQuery沒辦法模仿MooTools，如果你想要用類別或是延伸的原生原型物件等等MooTools的功能，你就得自己手動去寫額外的程式。</p>
+		
+			<a name="chaining"></a>
+			<h2>連續技(Chaining)的設計模式</h2> 
+		
+			<p>
+				  我們來試試別的東西看看，這邊有一些jQuery的範例(從jQuery教學裡面擷取的)：
+			</p>
+
+<pre class="js">$(document).ready(function() {
+    $('#faq').find('dd').hide().end().find('dt').click(function() {
+        $(this).next().slideToggle();
+    });
+});</pre>
+
+			<p>
+				我個人並不是很推崇這個範例的語法，光是看上面那段程式碼我很難立刻了解在幹嘛。最明顯的部分是那個<i>.end</i>在做甚麼以及後面連接的<i>.find</i>是啥，跟<i>.end</i>又有甚麼關聯。jQuery文件可以找到關於.end很清楚的解說(重設目前選擇的物件(selector)，也就是#faq)，不過我是覺得滿怪的。當我在用jQuery的時候，我自己常常不太能確定一個方法(method)會回傳甚麼東西給我。不過很明顯的，這並沒有困擾到大家，因為jQuery有著一大票的愛用者，所以我也把這個歸類為個人偏好之一。
+			</p>
+			<p>
+				      我們來看看上面那段程式碼如果在MooTools裡面會怎麼寫：
+			</p>
+
+<pre class="js">window.addEvent('domready', function() {
+    var faq = $('faq');
+    faq.getElements('dd').hide();
+    faq.getElements('dt').addEvent('click', function() {
+        this.getNext().slide('toggle');
+    });
+});
+</pre>
+
+
+			<p>
+				 當然，MooTools還是比較累贅些，但是意思就更明確。同時也可以看到，jQuery用<i>.end</i>來回傳#faq這個物件，而MooTools的設計模式是把#faq放到一個變數裡。當然MooTools也可以寫出jQuery那樣的連續技(Chaining)：
+			</p>
+<pre class="js">item.getElements('input[type=checkbox]')
+	.filter(function(box) {
+		return box.checked != checked;
+	})
+	.set('checked', checked)
+	.getParent()[(checked) ? 'addClass' : 'removeClass']('checked')
+	.fireEvent((checked) ? 'check' : 'uncheck');</pre>
+			
+			<p>
+				 不過說真的，像這樣把一堆程式碼跟判斷塞到一個domready宣告裡，不管是用哪一種framework都不是個很好的做法。如果把這些邏輯都封裝成可以重複利用的片段會好很多。
+			</p>
+			
+			<a name="reuse"></a>
+			<h2>jQuery程式的重複利用</h2>
+			
+			<p>
+				當你在執行一個網站專案時，可重複利用的程式碼是很誘人的。只需要寫一點點程式就可以選取所需的DOM，然後隱藏掉某些、變更幾個屬性以及增加幾個滑鼠的event就搞定一切。這種開發方式會非常的有效率、非常的快。不過把你的程式碼都寫在domready裡面的問題在於：最後你會在不同地方寫了一堆在做同樣事情的程式碼。如果我們用上面那個FAQ的範例來看，我們其實可以輕易地套用相同的程式碼套在不同的頁面中類似的結構。難道我們每次遇到這種結構時都要重複做一次相同的事情嗎？
+			</p>
+			<p>
+				   有個很簡單的方法就可以把它變成可重複利用，我們只要把這段程式碼包裝起來然後給個參數讓它接收。在jQuery裡面可能會長這樣：
+			</p>
+
+<pre class="js">function faq(container, terms, definitions) {
+    $(container).find(terms).hide().end().find(definitions).click(function() {
+        $(this).next().slideToggle();
+    });
+};
+$(document).ready(function() {
+    faq('#faq', 'dd', 'dt');
+});</pre>
+
+			<p>
+				這樣一來程式會好很多，有兩個很重要的原因：
+			</p>
+			<ol>
+				<li>
+					 如果哪天我們得要變更這個FAQ清單的運作方式(例如我們要加上點擊次數追蹤，以便在記錄檔中計算或是我們可能改成要透過AJAX來取得清單資料)，我們只需要修改<i>faq</i>這個方法，在所有套用過的頁面都可以一次更新完畢。又或者是jQuery有個新的大改版，我們只需要把<i>faq</i>方法更新就好，不需要去每個頁面逐一修改。我稱之為把程式的資源最佳化，透過這樣的作法，我的應用程式中的其他一般程式碼盡可能地越少越好，我就能很輕鬆的除錯、更新整個framework、增加新功能或是修改原有的功能。
+				</li>
+				<li>
+					第二個理由是程式碼會變少。隨著相同的方法(method)被一再套用，我都不需做重複的工作，這在任何的程式語言裡面都是非常有價值的。而且我的網站訪客也可以節省下載那些程式的時間。
+				</li>
+			</ol>  
+			<p>
+				jQuery其實有在針對可重複使用的"wigdets"上做了一些調整。他們鼓勵人們使用<a href="http://docs.jquery.com/Plugins/Authoring">jQuery plug-ins</a>，而不是用上面那個範例(其實滿粗糙的)的方式。然後會長成像這個樣子：
+
+<pre class="js">jQuery.fn.faq = function(options) {
+    var settings = jQuery.extend({
+        terms: 'dt',
+        definitions: 'dd'
+    }, options); 
+	//"this" is the current context; in this case, the elements we want to turn into faq layouts
+    $(this).find(settings.terms).hide().end().find(settings.definitions).click(function() {
+        $(this).next().slideToggle();
+    });
+    return this;
+};</pre>
+
+			</p>
+			    接下來你就可以這樣用：
+			</p>
+	<pre class="js">$('#faq').faq();</pre>
+
+			<p>
+				從上面那個範例來看，寫一個<i>faq</i> 的plug-in跟寫成一個普通的function沒有很大的差別。是的，普通的function沒有放在一個全域的命名空間(global namespace)，不過我們也可以創一個nampespace，然後把function放進去。像plug-in那樣依附在jQuery中，我們就可以把其他的jQuery方法用連鎖動作串再一起。另外一個好處是，function裡面呼叫this就會得到目前的元素(current context)。用plug-in的作法，就會讓function看起來像是jQuery的一部份，但是除此之外plug-in基本上就是一個單一的function加上能存取到目前的jQuery元素(context)、操作那些元素然後再把那些元素傳給連鎖動作中的下一個method。它並不複雜，所以每個人都能輕鬆的寫出jQuery plug-ins，它們就是functions而已。
+			</p>
+
+			<p>
+				另外注意的是，jQuery也可以寫一些較為複雜，包含methods跟狀態的plug-ins。jQuery UI有支援這種模式，不過寫法跟基本plug-in(像faq那個範例)不同，取而代之的是你會在jQuery上附加一個具有methods跟properties的物件(如<em>$.ui.tabs</em>)。它有個快捷方式讓你直接使用(如<em>$(selector).tabs()</em>)，所以你還是可以使用連鎖動作，就像faq那個plug-in一樣。只不過它並不是回傳該物件本身(<em>$.ui.tabs</em>)，而是回傳jQuery 目前的元素(context)，所以當你要存取tab的methods時，你必須再次呼叫一次selector。你必須再執行一次selector然後再呼叫function的名稱：<em>$(selector).tabs('add', url, label, index);</em> ，而不是直接呼叫類似像<em>myTabInstance.add(url, label, index)</em> 的東西。這意味著你執行了兩次選擇器(除非你用個變數來參照)，你也沒有可以指向add這個method的參照讓你做像是綁定(bind)或是延遲(delay)的動作。這篇文章焦點在於MooTools跟jQuery的核心程式，而雖然jQuery UI有提供這些功能，但是jQuery本身並沒有。
+			</p>
+
+			<a name="classes"></a>
+			<h2>MooTools程式的重複利用</h2>
+
+			<p>
+				在MooTools裡面當你要定義一個模式(pattern)時，你會用<em><a href="http://mootools.net/docs/core/Class/Class">Class</a></em>或是實作一個方法到原生的物件上(如<em>String</em>)。
+			</p>
+		
+			<p>
+				MooTools介於一個獨有語法與擴充JavaScript原本的設計模式之間，它走的是一個較為中庸的道路，而非給你一個跟JavaScript完全迥異的程式語言。它的其中一個方式是去擴充程式本身跟DOM原生物件的prototype，如果你想要有個去掉字串空白的功能，MooTools鼓勵你在String物件上增加一個method(MooTools已經有提供<em><a href="http://mootools.net/docs/core/Native/String#String:trim">String.trim</a></em>，你不需要自己再寫一個)。
+			</p>
+
+<pre class="js">String.implement({
+    trim: function() {
+        return this.replace(/^\s+|\s+$/g, '');
+    }
+});</pre>
+
+			<p>
+				這意味著你可以直接在字串上使用： <i>" no more spaces on the end! ".trim()</i>，然後你就會得到 <i>"no more spaces on the end!"</i> 的結果。有些人可能會說，去實作原型(native prototype)並不妥當，這也是為什麼MooTools跟<a href="http://www.prototypejs.org/">Prototype.js</a>沒辦法同時並存，任何兩個會動到原生原型的frameworks都是沒辦法並存的。如果我定義了，而在另一個函式庫裡面也有相同的東西，那最後定義的會覆蓋原先的。某種程度來說，這也跟window的全域命名空間的問題類似，這就是JavaScript的特性。這也是<a href="https://developer.mozilla.org/En/New_in_JavaScript_1.8">JavaScript 1.8</a>增加新功能的方式，它們都是透過prototypes。
+			</p>
+			<p>	
+				MooTools的開發者包好了一個完整的framework讓你可以很輕易的擴充你想要的功能，其出發點是讓你把這個framework放到網頁裡面去使用，而不是讓你放其他的framework，要求訪客在一個頁面下載兩個不同的framework其實是有點不禮貌的。一次套用兩個framework唯一可能的理由是，兩個frameworks的plug-ins你都想要用。MooTools作者(包含我自己)的想法是，如果你想要的某個plug-in是你所選的那個framework裡面沒有的，那可能比較合理的作法是花時間去做出來，而非要求使用者去多下載一個framework的檔案。
+			</p>
+			<p>
+				一旦你學會了JavaScript的運作原理跟擴充原生物件的強大功能，一個全新層級的程式寫作方式就此開展。你可以寫plug-ins來改變Elements、Dates或是Functions。某些人可能會說，這種添加方式是一種對原生物件的汙染，我必須主張這種方式就是JavaScript原本的意圖。它是程式語言設計的特色，透過添加methods到原生物件上，你的程式碼會變得更簡潔，更有區隔性。jQuery也有這麼做，不過只限於強化jQuery自己本身的物件。
+			</p>
+			
+			<p>
+				雖然你可以輕鬆地在jQuery物件上連續呼叫methods，但是在其它一般物件上，你就不能用同樣的方式。舉例來說，如果你要一行一行地重複trim掉字串，在jQuery你可能得這麼做：
+			</p>
+
+			<pre class="js">$.each( $.trim( $('span.something').html() ).split("\n"), function(i, line){alert(line);});</pre>
+
+			<p>但是由於MooTools修改過prototypes，所以你可以：</p>
+
+			<pre class="js">$('span.something').get('html').trim().split("\n").each(function(line){alert(line);});</pre>
+
+			<p>
+				這個範例很清楚地示範了修改prototypes有多麼強大。連鎖動作並不是只能在DOM，連鎖可是個很有用的東西，MooTools讓你可以在任何物件上做連鎖動作，包括一次對多個元素(elements)執行一個method。
+			</p>
+			
+			<p>
+				這裡的重點是MooTools的精隨在於它主張你可以寫出任何你想要的東西。如果有個功能是裡面沒有的，你可以擴充它並增加你自己要的。它的工作並不提供大家任何可能該有的功能，它是提供一個工具讓你可以為所欲為。它有很大一部分在做的事情是把擴充原生prototypes這件事情變得更簡單，善用原型式繼承的優點。你也可以用傳統的JavaScript來寫出這些東西，但是MooTools把它變得更簡易和善。
+				
+			</p>
+			
+			
+			<a name="mooinheritance"></a>
+			<h3>MooTools 與繼承<</h3>
+		
+			<p>
+				儘管它名字叫MooTools，它的<em>Class</em>功能並不是真的類別也不是創造一個類別。它的設計模式也許會讓你想起傳統的程式語言，但<em>Class</em>的確是都是跟物件與原型繼承相關的。(很不幸地，用"class"這個字眼是用來描述這些東西最方便的方式，所以在這篇文章中，當我提到"class"的時候，就是指那些會回傳物件的函數，而這些物件就是我要用來"實體化"且繼承自某個原型。)
+			</p>
+			<p>
+				要建立一個class，你可以把一個物件傳進這個<em>類別</em>構建式，像這樣:
+			</p>
+		
+<pre class="js">var Human = new Class({
+    initialize: function(name, age) {
+        this.name = name;
+        this.age = age;
+    },
+    isAlive: true,
+    energy: 1,
+    eat: function() {
+        this.energy = this.energy + 1; //same as this.energy++
+    }
+});</pre>
+		
+			<p>
+				你把一個物件丟給<em>Class</em>(在上面，我們把一個有"isAlive"跟"eat"成員的物件傳進去)，這個物件就會變成任何類別實體(instance of class)的原型。要建立一個實體，你只要：
+			</p>
+<pre class="js">var bob = new Human("bob", 20); //bob's name is "bob" and he's 20 years old.</pre>
+			<p>
+				現在我們得到一個<em>Human</em>. <em>bob</em>實體，裡面有我們在建立我們自己的<em>Human</em>類別時所定義的屬性。但是重點是<em>bob</em>的那些屬性是透過繼承而來的，當我們參照到<i>bob.eat</i>時，<i>bob</i>並非真的具有這個屬性。JavaScript先看<i>bob</i>，發現他沒有<i>eat</i>這個方法，所以就從繼承鍊找到它，也就是從我們之前建立的<em>Human</em>類別裡面，<i>energy</i>這屬性也是同樣的道理。一開始這看起來有些潛在的壞處；我們並不希望每次<i>bob</i>吃(eat)的時候，每一個被建立的human都會得到一次energy。有一點需要知道的是，當一開始給enegey值的時候，<i>bob</i>會擁有自己的值，我們也不再從原型(prototype)中去尋找值了。所以第一次<i>bob</i>吃(eat)的時候，他會得到自己的<em>energy</em>值(enery=2)。
+			</p>
+			<pre class="js">bob.eat(); //bob.energy == 2</pre>
+			<p>
+				<em>bob</em>的name跟age都是獨有的；在<i>initialize</i>初始化的時候就分配給bob了。
+			</p>
+			<p>
+				這整個模式看起來可能對你來說有點怪，但是其價值在於我們可以為某種特定模式(pattern)定義功能，然後每次需要使用時便初始化這個東西。每個實體(instance)都有自己的狀態。所以如果我們建立另一個實體，那麼兩個實體個字都會是獨立的，且繼承自同一個基本的模式(pattern)。
+			</p>
+		
+<pre class="js">var Alice = new Human();
+//alice.energy == 1
+//bob.energy == 2</pre>
+		
+			<p>
+				當我們要把這種方式擴大時，事情會變得更有趣。
+			</p>
+			
+			<a name="extension"></a>
+			<h3>MooTools與繼承</h3>
+		
+			<p>
+				我們再回顧一下jQuery的<i>faq</i>外掛。如果我們要在這個外掛加入更多的功能會如何？如果我們要透過ajax從伺服器端取得問題所相對應的答案內容時該怎做？想像一下如果<i>faq</i>是另一位作者寫的，而我們要在不改變外掛程式碼的前提下增加新功能(不想把程式變成有分支的)。
+			</p>
+			<p>
+				我們唯一的選擇就是把整份<em>faq</em>程式碼複製(記得，它只是個單一函式)，實際上也就是分支。或者是我們可以呼叫這個外掛然後再多增加一些程式碼。如果可以選擇的話，後者看起來較能省去一些麻煩，程式碼看起來會像這樣：
+			</p>
+<pre class="js">jQuery.fn.ajaxFaq = function(options) {
+    var settings = jQuery.extend({ 
+		//some ajax specific options like the url to request terms from
+        url: '/getfaq.php'
+        definitions: 'dd'
+    }, options); 
+	//"this" is the current context; in this case, the elements we want to turn into faq layouts
+    $(this).find(settings.definitions).click(function() {
+        $(this).load(.....); //the logic to load the content from the term
+    });
+    this.faq(); //call our original faq plug-in
+});</pre>
+			<p>
+				這作法有些缺點。第一個，我們的<em>faq</em>會多執行一次有時會花很久時間的CSS選擇器；我們沒辦法把已經得到的選擇結果傳給第二次需要用到的場合。第二，我們沒辦法把ajax的程式碼插入在<em>faq</em>外掛程式邏輯的中間(例如要改寫顯示faq的規則)。原本的外掛呼叫了可以用特效展開內容的<em>slideToggle</em>。這將會產生問題，因為在ajax得到完整資料之前，這個效果可能會出錯，這邊除了複製一整份<em>faq</em>程式之外沒有甚麼解決方法。
+			</p>
+			<p>
+				現在我們再來看看MooTool的<em>Human</em>類別，它包含了<em>isAlive</em>跟<em>energy</em>兩個屬性以及一個<em>eat</em>方法。如果我們要建立一個新版本的<em>Human</em>且添加一些額外的屬性要怎做呢？用MooTools的話，我們可以延伸(extend)這個類別：
+			</p>
+<pre class="js">var Ninja = new Class({
+    Extends: Human,
+    initialize: function(name, age, side) {
+        this.side = side;
+        this.parent(name, age);
+    },
+    energy: 100,
+    attack: function(target) {
+        this.energy = this.energy - 5;
+        target.isAlive = false;
+    }
+});</pre>
+			<p>
+				你可以看到我們增加了許多功能到子類別裡面。這個子類別所有的屬性都<em>Ninjas</em>是獨有。<em>Ninjas</em>初始時得到<em>energy</em>值為100、<em>side</em>屬性以及可以擊殺其他但是會消耗的energy的<em>attac</em>方法。
+			</p>
+
+<pre class="js">var bob = new Human('Bob', 25);
+var blackNinja = new Ninja('Nin Tendo', 'unknown', 'evil');
+//blackNinja.isAlive = true
+//blackNinja.name = 'Nin Tendo'
+blackNinja.attack(bob);
+//bob never had a chance</pre>
+
+			<p>
+				把程式碼拆解開來看，其中有些有趣的地方值得思考。在<em>Ninja</em>類別裡面有個<em>initialize</em>方法，這個<em>initialize</em>方法會覆蓋掉原本在<em>Human</em>裡面的，但是我們還是會透過<em>this.parent</em>叫用原本的<em>initialize</em>，把兩個原本該有的兩個參數傳過去。更進一步地，我們可以控制新的程式碼要出現在原來程式碼的前面或是後面。我們可以給屬性新的值(像是新的<em>energy</em>值)還可以定義新的功能，想想看這些是不是能在jQuery的<em>faq</em>外掛裡做到。我們可以載入我們自己的ajax然後用滑動效果來展開內容。
+			</p>
+			<p>
+				MooTools還有另一個模式叫做Mixin。不同於延伸一個類別到其子類別來定義父子關係，你也可以定義一個類別去混合其他類別進而感染(imbue)其他類別的屬性。如這個範例：
+			</p>
+
+<pre class="js">var Warrior = new Class({
+    energy: 100,
+    kills: 0,
+    attack: function(target) {
+        target.isAlive = false;
+        this.energy = this.energy - 5;
+        this.kills++;
+    }
+});</pre>
+
+			<p>
+				這裡我們把<em>Ninja</em>不同於<em>Human</em>的特性拆散開來並且放在一個類別裡。這樣我們就可以在<em>Ninja</em>以外的地方重複使用這些程式碼。我們可以讓<em>Ninja</em>染上戰士(warrior)的特質：
+			</p>
+
+<pre class="js">var Ninja = new Class({
+    Extends: Human,
+    Implements: Warrior, //can be an array if you want to implement more than one
+    initialize: function(name, age, side) {
+        this.side = side;
+        this.parent(name, age);
+    }
+});</pre>
+		
+			<p>
+				<em>Ninja</em> 依然跟之前的功能完全一樣，而<em>Warrior</em>變成我們可以重複利用的部分：
+			</p>
+
+<pre class="js">var Samurai = new Class({
+  Extends: Human,
+  Implements: Warrior,
+  side: 'good'
+});</pre>
+
+			<p>
+				現在我們擁有了武士(<em>Samurai</em>)跟忍者(<em>Ninja</em>)，不過我們只需要很少的程式碼就可以定義出<em>Samurai</em>跟<em>Ninja</em>。兩者相同的是它們都有戰士的特質，不同的是武士永遠只會是善良的一方，而忍者可以有搖擺的善惡立場。我們只需要花時間寫出<em>Human</em>跟<em>Warrior</em>類別。當我們能在方法叫用時機以及它們彼此之間相互關係上擁有細微的控制，就能寫出不重複的程式碼而得到三種不同類別。每個我們所建立的實體都有自己的狀態，而程式碼本身也具有很好的可讀性。
+			</p>
+			
+			<p>
+				現在你對MooTools類別的運作方式有個概括的了解了，讓我們看看把之前寫的jQuery的<em>faq</em>寫成MooTools類別，然後延伸出Ajax功能。			
+			</p>
+<pre class="js">
+var FAQ = new Class({
+	//Options is another class provided by MooTools
+	Implements: Options,
+	//these are the default options
+	options: {
+		terms: 'dt',
+		definitions: 'dd'
+	},
+	initialize: function(container, options) {
+		//we store a reference to our container
+		this.container = $(container);
+		//setOptions is a method provided by the Options mixin
+		//it merges the options passed in with the defaults
+		this.setOptions(options);
+		//we store the terms and definitions
+		this.terms = this.container.getElements(this.options.terms);
+		this.definitions = this.container.getElements(this.options.definitions);
+		//we call our attach method
+		//by breaking this into its own method
+		//it makes our class easier to extend
+		this.attach();
+	},
+	attach: function(){
+		//loop through the terms
+		this.terms.each(function(term, index) {
+			//add a click event to each one
+			term.addEvent('click', function(){
+				//that calls our toggle method for
+				//the current index
+				this.toggle(index);
+			}, this);
+		}, this);
+	},
+	toggle: function(index){
+		//toggle open the definition for the given index
+		this.definitions[index].slide('toggle');
+	}
+});
+</pre>
+
+			<p>
+				蛤？好多行程式。即使我們把註解拿掉還是有二十幾行。我之前有說明過，我們可以用跟jQuery版本差不多的行數就寫完這個外掛，那為什麼還要搞得這麼長？就是要把它做得更彈性化。要使用這個類別，只要呼叫他的構建式：
+			</p>
+
+<pre class="js">var myFAQ = new FAQ(myContainer);
+//and now we can call methods on it if we want:
+myFAQ.toggle(2); //toggle the 3rd element
+</pre>
+
+			<p>
+				我們可以存取這個實體的方法跟屬性，但是ajax在哪？我們在jQuery版本遇到的問題是我們沒辦法延遲特效的展開時間來等待ajax取得資料完成，在MooTools版本我們沒這困擾了：
+				
+			</p>
+
+<pre class="js">FAQ.Ajax = new Class({
+	//this class inherits the properties of FAQ
+	Extends: FAQ,
+	//it also gets a new option in addition to the other defaults
+	//this one for url, that we're going to append the index of the
+	//term to; in reality we might make this more robust, but for
+	//this example it serves the purpose
+	options: {
+		url: null;
+	},
+	//we're going to cache the results, so if a section is opened
+	//twice, we won't hit the server for the data
+	indexesLoaded: [],
+	toggle: function(index){
+		//if we've already loaded the definition
+		if (this.indexesLoaded[index]) {
+			//just call the previous version of toggle
+			this.parent(index);
+		} else {
+			//otherwise, request the data from the server
+			new Request.HTML({
+				update: this.definitions[index],
+				url: this.options.url + index,
+				//and when the data is loaded, expand the definition
+				onComplete: function(){
+					this.indexesLoaded[index] = true;
+					this.definitions[index].slide('toggle');
+				}.bind(this)
+			}).send();
+		}
+	}
+});
+</pre>
+
+			<p>
+				現在我們有另一個能夠從遠端取得資料的<em>FAQ</em>，整合成了一個可以在資料讀取完<em>之後</em>才展開的新方式(之前在jQuery版做不到的)。而且我們的程式只需要寫多出來的那部分跟其他寥寥數行。這種擴充性允許你建立一整個系列的外掛，可包含了各種不同的變化。同時也意味著你可以沿用別人寫好的外掛，變更你所需要的部分(不用整份程式複製)。這也解釋了為什麼每一種特定的設計模式裡面，你只能找到很少數的MooTools外掛，大多數你所取得的外掛，若不能夠解決你的需求，你都可以自行擴充你所需要的部分。
+				
+			</p>
+			
+			<p>
+				如同我之前說的，你當然可以用jQuery寫出包含方法與屬性的複雜widgets。大部分的你所寫的這種程式如果是跟DOM無關的邏輯，那麼就會是屬於傳統的JavaScript，但是jQuery沒有提供一個能夠把實體擴充為次類別的系統，也不能幫你用混搭的方式，來使你的程式更容易被重複使用。最後，jQuery的外掛總是被指定到DOM元素中，如果你要寫一個像是處理URL字串的類別，它並沒有一個能記錄這些狀態的架構可用，除非你自己寫一個。
+			</p>
+			
+			<a name="conclusion"></a>
+			<h2>抉擇</h2>
+		
+			<p>
+				jQuery專注於表述性、快速簡易開發以及DOM上面，而MooTools著重於擴充性、繼承、可讀性、重複使用與易維護性。如果把這兩者放在一把尺的兩個極端，jQuery可視為一種好入門且快速得到結果的東西，不過(以我的經驗)也會讓程式變得難以再利用與維護(不過這真的看你怎麼做，這並不是jQuery本身的問題)，而MooTools需要較長的學習時間，得要寫較多的程式碼才能得到你要的結果，但是之後更容易重複使用與維護。
+			</p>
+			<p>
+				更進一步地說，MooTools並沒有涵括每一個你能想像可能需要的功能，當然jQuery也沒有。兩者都盡量給你簡潔的程式碼，讓你去寫你要的plug-in或是擴充功能。其目的不是提供你所有你有可能需要的功能，而是給你一個工具讓你能夠做出你能想像的任何東西。這就是JavaScript強大的地方所在，也是JavaScript framework強大之處，而這兩個frameworks更是擅長於此。MooTools用一個更全面的角度讓你擁有一個在DOM的範圍中為所欲為的工具，但代價是一個較為陡峭的學習曲線。MooTools的延展性與整體性的方法提供你一個涵蓋jQuery功能的大集合，但是jQuery注重在一個靈活的DOM API，同時又不會阻礙你應用JavaScript原生的繼承模型，如果你想要的話，甚至也可以額外使用像是MooTools這樣的類別系統。
+			</p>
+			<p>
+				這就是為什麼我說兩者都是很棒的選者，我花很大的利器在凸顯出兩者之間在程式設計哲學上的不同以及它們各自的優缺點。我不知道自己是否有在對MooTools的偏好這個事實上維持中立，但是我希望這些文章是有幫助的。非關於你選擇使用哪個framework，而是你現在更了解這兩個framework了，但願。如果你有充裕的時間，我強烈建議你分別用這兩個framework實作一個網站，然後寫下你自己對兩者的見解，也許你的觀點會出現我所未及之處。
+			</p>
+			<p><a href="http://github.com/anutron/jquery-vs-mootools/tree/master">檢視此文件的歷史紀錄</a>.</p>
+			<p>
+			<script type="text/javascript" src="http://w.sharethis.com/button/sharethis.js#publisher=c327065b-efa0-4e12-afbc-5717f5cf62f9&amp;type=website&amp;post_services=facebook%2Cdigg%2Cdelicious%2Ctwitter%2Creddit%2Cfriendfeed%2Cmyspace%2Cybuzz%2Cstumbleupon%2Ctechnorati%2Cmixx%2Cblogger%2Cwordpress%2Ctypepad%2Cgoogle_bmarks%2Cwindows_live%2Cfark%2Cbus_exchange%2Cpropeller%2Cnewsvine%2Clinkedin"></script>
+			</p>
+			<hr/>
+			<p class="about">
+				關於我： 我是個<a href="http://www.mootools.net">MooTools</a>的貢獻者，我在我的網站<a href="http://www.clientcide.com">Clientcide</a>撰寫JavaScript等相關主題的部落格，同時也發布一些<a href="http://www.clientcide.com/js">MooTools的外掛</a>。我是<a href="http://www.amazon.com/gp/product/1430209836?ie=UTF8&tag=clientside-20&link_code=as3&camp=211189&creative=373489&creativeASIN=1430209836">MooTools Essentials</a>這本書以及<a href="http://www.mootorial.com">MooTools線上教學</a>的作者，在舊金山灣區一間叫<a href="http://www.clientcide.com/shout-out">Cloudera</a>的公司工作，歡迎<a href="http://www.clientcide.com/shout-out">與我聯絡</a>。
+			</p>
+			
+			<a name="discussion"></a>
+			<hr/>
+			<p class="about" style="color: #700"><strong>A note on comments here</strong>: These comments are moderated. No comments will show up until they are approved. Comments that are not productive (i.e. inflammatory, rude, etc) will not be approved. Similarly, "fan" comments won't be approved either - i.e. no "FrameworkX Rulez! It's better than FrameworkY for realz!" are not constructive comments.
+			</p>
+			<div id="disqus_thread"></div>
+			<script>
+				var disqus_url = "http://jqueryvsmootools.com/";
+			</script>
+			<script type="text/javascript" src="http://disqus.com/forums/jqueryvsmootools/embed.js"></script>
+		</div>
+		<script type="text/javascript">
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+		<script type="text/javascript">
+		try {
+		var pageTracker = _gat._getTracker("UA-539314-11");
+		pageTracker._trackPageview();
+		} catch(err) {}</script>
+		
+		<script type="text/javascript">
+		//<![CDATA[
+		(function() {
+				var links = document.getElementsByTagName('a');
+				var query = '?';
+				for(var i = 0; i < links.length; i++) {
+					if(links[i].href.indexOf('#disqus_thread') >= 0) {
+						query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+					}
+				}
+				document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/jqueryvsmootools/get_num_replies.js' + query + '"></' + 'script>');
+			})();
+		//]]>
+		</script>
+		
+	</body>
+</html>
