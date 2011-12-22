@@ -815,13 +815,19 @@ $(document).ready(function() {
 			</p>
 			
 			<a name="mooinheritance"></a>
-			<h3>MooTools and Inheritance</h3>
+			<h3>MooTools and Inheritance MooToolsと継承</h3>
 		
 			<p>
 				Despite its name, the MooTools <em>Class</em> function is not really a class nor does it create them. It has design patterns that might remind you of classes in a more traditional programming language, but really <em>Class</em> is all about objects and prototypal inheritance. (Unfortunately, using words like "class" are the most convenient way to describe these things, so for the purposes of this article, when I refer to "classes" I'm referring to functions that return objects - which I'll call "instances" - that inherit from a prototype.)
 			</p>
 			<p>
+				MooToolsの<em>Class</em>関数は、その名前に反して、実のところクラスではなく、クラスを創り出すこともありません。伝統的なプログラミング言語のクラスを思い起こさせるようなデザインパターンを持ってはいますが、しかし実際の<em>Class</em>では、オブジェクトとプロトタイプ型継承のことでもちきりなのです。（不運なことに、そうしたことを説明するにも「クラス」のような言葉を使うのが最も便利な方法なのです。この文章ではここまで、私が「クラス」という言葉を使うとき、オブジェクトを返す関数という意味で使っていました。ここからは同じものを「インスタンス」と呼びます。いずれにせよ、それはプロトタイプから継承されてきています）
+			</p>
+			<p>
 				To make a class, you pass an object to the <em>Class</em> constructor like this:
+			</p>
+			<p>
+				クラスを作るには、<em>Class</em>コンストラクタにオブジェクトをこんな風に渡します:
 			</p>
 		
 <pre class="js">var Human = new Class({
@@ -839,16 +845,28 @@ $(document).ready(function() {
 			<p>
 				You pass <em>Class</em> an object (above, we pass an object with members like "isAlive" and "eat") and this object becomes the prototype of every instance of that class. To create an instance, you call it like this:
 			</p>
+			<p>
+				あるオブジェクトを<em>Class</em>に渡すと（上の例では &quot;isAlive&quot; と &quot;eat&quot; というメンバーを持つオブジェクトを渡している）、そのオブジェクトは、そのクラスの全インスタンスのプロトタイプとなり、次のように呼び出すことができます:
+			</p>
 <pre class="js">var bob = new Human("bob", 20); //bob's name is "bob" and he's 20 years old.</pre>
 			<p>
 				Now we have an instance of <em>Human</em>. <em>bob</em> has the properties of the object we defined when we created our <em>Human</em> class. But the important thing is that <em>bob</em> has these properties through inheritance. When we reference <i>bob.eat</i>, <i>bob</i> doesn't really have this property. JavaScript looks at <i>bob</i> and he doesn't have an <i>eat</i> method, so it looks up the inheritance chain and finds it on the object we passed when we created the <em>Human</em> class. This is true for <i>energy</i>, too. At first glance this looks potentially bad; we don't want all the humans we create to gain energy every time that <i>bob</i> eats. The important thing to recognize is that the first time we assign a value to <i>bob</i>'s energy, we assign him his own value and we no longer look at the prototype for it. So the first time <i>bob</i> eats, he gets his own definition for <em>energy</em> (set to 2).
+			</p>
+			<p>
+				こうして<em>Human</em>のインスタンスができました。<em>bob</em>は、私たちが<em>Human</em>クラスを作ったときに定義したオブジェクトのプロパティを持っています。ここで重要なのは、<em>bob</em>がそれらのプロパティを継承を通じて保持している点です。私たちが<i>bob.eat</i>を参照するとき、<i>bob</i>が実際にこのプロパティを持っているわけではありません。JavaScriptはまず<i>bob</i>を見ますが、彼は<i>eat</i>メソッドを持っていないので、次に継承チェーンを上へさかのぼり、<i>eat</i>メソッドを見つけます。このメソッドは、私たちが<em>Human</em>クラスを作り出すときに渡したオブジェクトが持っているものです。<i>energy</i>についても同じことです。パッと見ると、このことは潜在的なマズさを抱えているように見えます。私たちは、<i>bob</i>が何か食べたとき、これから作り出す人間たち（humans）全員もエネルギー（energy）を得てしまうことを望んではいません。［訳注：継承元がプロパティを持っているなら、<i>bob.eat()</i>したときに他の<em>Human</em>インスタンスの<i>energy</i>もインクリメントされてしまうのではないか？という疑問を指している］
 			</p>
 			<pre class="js">bob.eat(); //bob.energy == 2</pre>
 			<p>
 				Note that <em>bob</em>'s name and age are unique to him; these are assigned to him when the class is initialized in the <i>initialize</i> method.
 			</p>
 			<p>
+				<em>bob</em>の名前（name）と年齢（age）は彼だけがユニークに保持していることを忘れないでください。この2つは<i>initialize</i>メソッドでクラスが初期化されたときに割り当てられたものです。
+			</p>
+			<p>
 				This whole pattern may seem a little odd to you, but the value here is that we can define functionality for a pattern and create instances of that pattern every time we need it. Each instance maintains its own state. So if we create another instance each one is independent of the other, but inherits from the same base pattern:
+			</p>
+			<p>
+				このパターン全体は少し奇妙に感じられるかもしれません。しかしここで価値あるのは、私たちは任意のパターンに沿った機能を定義することができ、そして必要な場合にはいつでもそのパターンのインスタンスを作り出すことができる点です。各インスタンスは各自の状態を維持します。なので、別のインスタンスを作るたび、各インスタンスはその他のものと独立しています。が、しかし同じ基礎パターンを継承します。
 			</p>
 		
 <pre class="js">var Alice = new Human();
@@ -857,6 +875,9 @@ $(document).ready(function() {
 		
 			<p>
 				Where things get really interesting is when we want to augment this behavior.
+			</p>
+			<p>
+				本当に興味深いのは、when we want to augment this behavior.
 			</p>
 			
 			<a name="extension"></a>
