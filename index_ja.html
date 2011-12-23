@@ -780,7 +780,7 @@ $(document).ready(function() {
 			generics. For example, in jQuery if you want to trim a string and then iterate over each line, you would have to write:
 			</p>
 			<p>
-				jQueryオブジェクトで複数のメソッドコールをつなげる（チェーンする）ことは簡単にできますが、あなたが使わなければならない他の型やオブジェクトではできません。例えば、文字列をトリミングしてから1行ごとにイテレートしたい場合、jQueryではこう書かなければいけないでしょう:
+				jQueryオブジェクトで複数のメソッドコールをつなげる〔チェーンする〕ことは簡単にできますが、あなたが使わなければならない他の型やオブジェクトではできません。例えば、文字列をトリミングしてから1行ごとにイテレートしたい場合、jQueryではこう書かなければいけないでしょう:
 			</p>
 
 			<pre class="js">$.each( $.trim( $('span.something').html() ).split("\n"), function(i, line){alert(line);});</pre>
@@ -853,7 +853,7 @@ $(document).ready(function() {
 				Now we have an instance of <em>Human</em>. <em>bob</em> has the properties of the object we defined when we created our <em>Human</em> class. But the important thing is that <em>bob</em> has these properties through inheritance. When we reference <i>bob.eat</i>, <i>bob</i> doesn't really have this property. JavaScript looks at <i>bob</i> and he doesn't have an <i>eat</i> method, so it looks up the inheritance chain and finds it on the object we passed when we created the <em>Human</em> class. This is true for <i>energy</i>, too. At first glance this looks potentially bad; we don't want all the humans we create to gain energy every time that <i>bob</i> eats. The important thing to recognize is that the first time we assign a value to <i>bob</i>'s energy, we assign him his own value and we no longer look at the prototype for it. So the first time <i>bob</i> eats, he gets his own definition for <em>energy</em> (set to 2).
 			</p>
 			<p>
-				こうして<em>Human</em>のインスタンスができました。<em>bob</em>は、私たちが<em>Human</em>クラスを作ったときに定義したオブジェクトのプロパティを持っています。ここで重要なのは、<em>bob</em>がそれらのプロパティを継承を通じて保持している点です。私たちが<i>bob.eat</i>を参照するとき、<i>bob</i>が実際にこのプロパティを持っているわけではありません。JavaScriptはまず<i>bob</i>を見ますが、彼は<i>eat</i>メソッドを持っていないので、次に継承チェーンを上へさかのぼり、<i>eat</i>メソッドを見つけます。このメソッドは、私たちが<em>Human</em>クラスを作り出すときに渡したオブジェクトが持っているものです。<i>energy</i>についても同じことです。パッと見ると、このことは潜在的なマズさを抱えているように見えます。私たちは、<i>bob</i>が何か食べたとき、これから作り出す人間たち（humans）全員もエネルギー（energy）を得てしまうことを望んではいません。［訳注：継承元がプロパティを持っているなら、<i>bob.eat()</i>したときに他の<em>Human</em>インスタンスの<i>energy</i>もインクリメントされてしまうのではないか？という疑問を指している］
+				こうして<em>Human</em>のインスタンスができました。<em>bob</em>は、私たちが<em>Human</em>クラスを作ったときに定義したオブジェクトのプロパティを持っています。ここで重要なのは、<em>bob</em>がそれらのプロパティを継承を通じて保持している点です。私たちが<i>bob.eat</i>を参照するとき、<i>bob</i>が実際にこのプロパティを持っているわけではありません。JavaScriptはまず<i>bob</i>を見ますが、彼は<i>eat</i>メソッドを持っていないので、次に継承チェーンを上へさかのぼり、<i>eat</i>メソッドを見つけます。このメソッドは、私たちが<em>Human</em>クラスを作り出すときに渡したオブジェクトが持っているものです。<i>energy</i>についても同じことです。パッと見ると、このことは潜在的なマズさを抱えているように見えます。私たちは、<i>bob</i>が何か食べたとき、これから作り出す人間たち〔humans〕全員もエネルギー〔energy〕を得てしまうことを望んではいません。〔訳注：継承元がプロパティを持っているなら、<i>bob.eat()</i>したときに他の<em>Human</em>インスタンスの<i>energy</i>もインクリメントされてしまうのではないか？という疑問を指している〕
 			</p>
 			<pre class="js">bob.eat(); //bob.energy == 2</pre>
 			<p>
@@ -866,7 +866,7 @@ $(document).ready(function() {
 				This whole pattern may seem a little odd to you, but the value here is that we can define functionality for a pattern and create instances of that pattern every time we need it. Each instance maintains its own state. So if we create another instance each one is independent of the other, but inherits from the same base pattern:
 			</p>
 			<p>
-				このパターン全体は少し奇妙に感じられるかもしれません。しかしここで価値あるのは、私たちは任意のパターンに沿った機能を定義することができ、そして必要な場合にはいつでもそのパターンのインスタンスを作り出すことができる点です。各インスタンスは各自の状態を維持します。なので、別のインスタンスを作るたび、各インスタンスはその他のものと独立しています。が、しかし同じ基礎パターンを継承します。
+				このパターン全体は少し奇妙に感じられるかもしれません。しかしここでが価値あるのは、私たちは任意のパターンに沿った機能を定義することができ、そして必要な場合にはいつでもそのパターンのインスタンスを作り出すことができる点です。各インスタンスは各自の状態を維持します。なので、別のインスタンスを作るたび、各インスタンスはその他のものと独立しています。が、しかし同じ基礎パターンを継承します。
 			</p>
 		
 <pre class="js">var Alice = new Human();
@@ -881,31 +881,46 @@ $(document).ready(function() {
 			</p>
 			
 			<a name="extension"></a>
-			<h3>Extending and Implementing Classes</h3>
+			<h3><!-- Extending and Implementing Classes -->Classの拡張と実装</h3>
 		
 			<p>
 				Let's revisit our jQuery <i>faq</i> plug-in. What would happen if we wanted to add more functionality to that plug-in. What if we wanted to make an ajax version that fetched the answers to the questions from the server? Let's imagine that the <i>faq</i> plug-in was authored by someone else and we want to add more to it without altering it in any way (we don't want to fork it).
 			</p>
 			<p>
+				再び<i>faq</i>プラグインに戻りましょう。このプラグインにもっと機能を追加しようとしたら何が起きるでしょうか。質問への回答をサーバーから取ってくるようなAJAXバージョンを作りたいとしたらどうしますか？ <i>faq</i>プラグインは他の誰かが書いたものだとして、私たちはいかなる方法でもそれ本体を変更せず、機能を追加したい場合を想像してみましょう。
+			</p>
+			<p>
 				Our only real choices are to either duplicate the <em>faq</em> plug-in's logic entirely (remember, it's a single function), essentially forking it, or we can invoke it and then add more logic to it. Given a choice, the latter seems to save us the most trouble. It would look something like this:
+			</p>
+			<p>
+				現実的な選択肢は次のどちらかででしょう。まず、<em>faq</em>プラグインのロジック全体を複製する（思い出してください、あれは1つの関数でした）こと、つまり本質的にはフォークすることになります。あるいは、プラグインを起動してからそれにロジックを付け加えることもできます。この選択を迫られたら、後者を選んでおくほうがトラブルが少なく済みそうです。以下のようなコードになるでしょう：
 			</p>
 <pre class="js">jQuery.fn.ajaxFaq = function(options) {
     var settings = jQuery.extend({ 
 		//some ajax specific options like the url to request terms from
+		// リクエスト先URLなどAJAX特有のオプション
         url: '/getfaq.php'
         definitions: 'dd'
     }, options); 
 	//"this" is the current context; in this case, the elements we want to turn into faq layouts
+	// "this" はカレントコンテクスト。ここではfaqのレイアウトへturn intoしたい要素となる。
     $(this).find(settings.definitions).click(function() {
         $(this).load(.....); //the logic to load the content from the term
     });
-    this.faq(); //call our original faq plug-in
+    this.faq(); //call our original faq plug-in オリジナルのfaqプラグインをコール
 });</pre>
 			<p>
 				This has some down sides. First of all, our <em>faq</em> class is going to repeat our selector for the definitions, which might be expensive; there's no way to store the retrieved definitions and pass it on for the second time they are needed. Secondly, we can't add our ajax logic into the middle of the <em>faq</em> plug-in's own logic for displaying the definition. The original plug-in called <em>slideToggle</em> which expands the definition using an effect. This is problematic because this effect is going to go off before our ajax finishes loading. There's no real solution here unless we just duplicate the entire <em>faq</em> plug-in.
 			</p>
 			<p>
+				〔訳注：この<em>faq</em>プラグインでは、用語＝termをサーバへリクエストし、それに対応する定義＝definitionをサーバから取得するという動作が想定されています〕
+				これにはいくつか欠点があります。何よりもまず、<em>faq</em>クラスは定義のためにセレクターを繰り返し使っており、負荷が高まる可能性があります。取得した定義を保存したり、必要なときにそれを使い回す方法は存在しないのです。第二に、私たちのAJAXロジックを、<em>faq</em>プラグインが定義を表示する固有ロジックの中に追加することができません。<em>slideToggle</em>というオリジナルのプラグインは、エフェクトを使って定義を表示（展開）します。私たちのAJAXプラグインのロードが完了する前にこのエフェクトが終了してしまうため、問題をはらんでいます。<em>faq</em>プラグイン全体のロジックを複製することを除いて、この問題を解決する方法はないのです。
+			</p>
+			<p>
 				Now let's consider our MooTools <em>Human</em> class. It has properties like <em>isAlive</em> and <em>energy</em> and it has a method called <em>eat</em>. What if we wanted to make a new version of <em>Human</em> that had additional properties? With MooTools, we extend the class:
+			</p>
+			<p>
+				では、MooToolsを使った<em>Human</em>クラスで考えてみましょう。このクラスは<em>isAlive</em>と<em>energy</em>というプロパティと、<em>eat</em>というメソッドを持っています。プロパティが追加された<em>Human</em>の新バージョンを作りたいとしたらどすればよいでしょう。MooToolsを使って、次のようにクラスを拡張します：
 			</p>
 <pre class="js">var Ninja = new Class({
     Extends: Human,
@@ -922,6 +937,9 @@ $(document).ready(function() {
 			<p>
 				You can see that we've added a lot of functionality here into a subclass. This subclass has all these properties that are unique to <em>Ninjas</em>. <em>Ninjas</em> start off with an initial <em>energy</em> value of 100. <em>Ninjas</em> get a <em>side</em>. They also get an <em>attack</em> method that lets them kill other <em>Humans</em>, but it costs the <em>Ninja</em> energy.
 			</p>
+			<p>
+				派生クラスにたくさんの機能を追加しているのがわかると思います。この派生クラス<em>Ninja</em>は、全プロパティを<em>Ninja</em>固有のものとして持っています。<em>Ninja</em>は<em>energy</em>の初期値が100から始まります。<em>Ninja</em>は<em>side</em>プロパティを獲得しています。また<em>attack</em>メソッドで他の<em>Human</em>を殺すことができますが、その代わりに<em>Ninja</em>のenergyが消費されます。
+			</p>
 
 <pre class="js">var bob = new Human('Bob', 25);
 var blackNinja = new Ninja('Nin Tendo', 'unknown', 'evil');
@@ -934,10 +952,16 @@ blackNinja.attack(bob);
 				Picking this apart a bit, there are some interesting things to consider here. Note that we have an <em>initialize</em> method in the <em>Ninja</em> class. This would appear to overwrite the <em>initialize</em> method in the <em>Human</em> class, but we can still access it by calling <em>this.parent</em>, passing along the arguments that the parent class's <em>initialize</em> expects. Further, we can control when our logic occurs; before or after the call to the parent. We can assign new values to properties (like the <em>energy</em> value) and we can define new functionality. Imagine if we could do this with our <em>faq</em> plug-in for jQuery. We could load our ajax and THEN slide open the value.
 			</p>
 			<p>
+				Picking this apart a bit, ここで考えるには興味深いことがあります。<em>Ninja</em>クラス内に<em>initialize</em>メソッドを持っていることに注意してください。ということは、このメソッドが<em>Human</em>クラス内の<em>initialize</em>メソッドを上書きするように思えるのですが、しかし、私たちはまだこのメソッドにアクセスすることができます。<em>this.parent</em>を呼び出し、親クラスの<em>initialize</em>が求める引数を渡してやればよいのです。さらに、私たちのロジックが実行されるタイミングを制御することもできます。親クラスのメソッドが呼び出される前に、または呼び出された後に、子クラスのロジックを実行できるのです。プロパティに（例えば<em>energy</em>に）新しい値を割り当てることも、新しい機能を割り当てることも可能です。これがjQueryの<em>faq</em>プラグインで可能だったかどうか考えてみてください。私たちは、まずAJAXをロードし、<em>その後になって</em>スライドしながら値が表示されていました。
+			</p>
+			<p>
 				MooTools has another pattern called a Mixin. Unlike the parent to
 				child relationship that is defined by extending one class into a
 				subclass, you can also define classes that are mixed into other
 				classes to imbue them with their properties. Here's an example:
+			</p>
+			<p>
+				MooToolsにはもう一つ、Mixinと呼ばれるパターンを持っています。これは、あるクラスを基にサブクラスへと拡張するという、親から子への関係とは異なるものです。他のクラスへミックスし、別のプロパティを共存させる目的に使うクラスを定義することができるのです。ここに例を示します：
 			</p>
 
 <pre class="js">var Warrior = new Class({
@@ -953,10 +977,13 @@ blackNinja.attack(bob);
 			<p>
 				Here we've broken the qualities that make a <em>Ninja</em> different from a <em>Human</em> and put them in a class of their own. This lets us reuse this code outside of <em>Ninja</em>. We could then imbue our <em>Ninja</em> class with the qualities of a warrior like so:
 			</p>
+			<p>
+				ここでは、<em>Ninja</em>を<em>Human</em>とは違うものに仕立て上げている特性だけを取り出して、独立したクラスの中に入れ込みました。これで<em>Ninja</em>の外でも特性を再利用できるようになりました。これで、戦士〔warrior〕の特性を<em>Ninja</em>へと浸透させることもできます。このように：
+			</p>
 
 <pre class="js">var Ninja = new Class({
     Extends: Human,
-    Implements: Warrior, //can be an array if you want to implement more than one
+    Implements: Warrior, // 2つ以上を実装したいなら配列でもOK
     initialize: function(name, age, side) {
         this.side = side;
         this.parent(name, age);
@@ -965,6 +992,9 @@ blackNinja.attack(bob);
 		
 			<p>
 				<em>Ninja</em> still works as it did before, but <em>Warrior</em> is at our disposal to reuse:
+			</p>
+			<p>
+				これで<em>Ninja</em>は以前と同じように動作します。しかし私たちは<em>Warrior</em>をまだ自由に再利用できるのです：
 			</p>
 
 <pre class="js">var Samurai = new Class({
@@ -976,46 +1006,65 @@ blackNinja.attack(bob);
 			<p>
 				Now we have a <em>Samurai</em> class and a <em>Ninja</em> class. But look at how little code both <em>Ninja</em> and <em>Samurai</em> took to define. Both of them are similar in that they are humans with warrior qualities, but they are different in that samurais are always, always good, while ninjas have shifting allegiances. By spending the time to write a <em>Human</em> class and a <em>Warrior</em> class, we're able to have three different classes with no repetition of code while maintaining a very granular level of control over when methods are called and how they relate to each other. Each instance we create has its own state and the code itself is very legible.
 			</p>
+			<p>
+				これで<em>Samurai</em>クラスと<em>Ninja</em>クラスができました。ですが、<em>Ninja</em>と<em>Samurai</em>を定義するのに必要なコードがどれほど少ないか見てください。両クラスは、戦士〔warrior〕の特性を持った人間〔human〕である点は同じですが、サムライはいつも、常に善の側に立ち、対するニンジャは立場を変えられるという点で違いがあります。<em>Human</em>クラスと<em>Warrior</em>クラスを書くことに時間を使ったおかげで、私たちは3つの異なるクラスを、コードを繰り返さずに得ることができました while maintaining a very granular level of control over when methods are called and how they relate to each other. 私たちが作り出した各インスタンスはそれぞれ固有の状態を持ち、コードそのものもとても読みやすいものです。
+			</p>
 			
 			<p>
 				Now that you have an overview of how classes work in MooTools, let's look at our <em>faq</em> class that we wrote in jQuery and write it as we would in MooTools and then extend it to add Ajax to it just as we did with jQuery.				
 			</p>
+			<p>
+				ここまでで、あなたはMooToolsにおけるクラスの働き方を概観したことになります。では<em>faq</em>クラスを見てみましょう。さきほどはjQueryで書きましたが、今度はMooToolsで書き、jQuery版のときと同じく、さらに拡張してAJAX機能を追加します。
+			</p>
 <pre class="js">
 var FAQ = new Class({
 	//Options is another class provided by MooTools
+	// OptionsはMooToolsが提供する別のクラス
 	Implements: Options,
 	//these are the default options
+	// オプションのデフォルト値を設定
 	options: {
 		terms: 'dt',
 		definitions: 'dd'
 	},
 	initialize: function(container, options) {
 		//we store a reference to our container
+		// containerへのリファレンスを格納
 		this.container = $(container);
 		//setOptions is a method provided by the Options mixin
 		//it merges the options passed in with the defaults
+		// setOptionsはOptionをmixinすることで提供されるメソッド
+		// 渡されたオプションをデフォルトのものとマージする
 		this.setOptions(options);
 		//we store the terms and definitions
+		// 用語〔terms〕と定義〔definitions〕を格納
 		this.terms = this.container.getElements(this.options.terms);
 		this.definitions = this.container.getElements(this.options.definitions);
 		//we call our attach method
 		//by breaking this into its own method
 		//it makes our class easier to extend
+		// attachメソッドを呼び出す
+		// これを固有メソッドとして分割したので
+		// クラスを簡単に拡張できる
 		this.attach();
 	},
 	attach: function(){
 		//loop through the terms
+		// terms全体をループ
 		this.terms.each(function(term, index) {
 			//add a click event to each one
+			// 各要素にクリックイベントを追加
 			term.addEvent('click', function(){
 				//that calls our toggle method for
 				//the current index
+				// 現在のindexに対してtoggleメソッドを呼び出す
 				this.toggle(index);
 			}, this);
 		}, this);
 	},
 	toggle: function(index){
 		//toggle open the definition for the given index
+		// 与えられたindexに対応する定義〔definition〕の開閉状態をトグル
 		this.definitions[index].slide('toggle');
 	}
 });
@@ -1023,6 +1072,9 @@ var FAQ = new Class({
 
 			<p>
 				Woah. That's a lot of code. Even if we remove all the comments it's still two dozen lines long. I already illustrated above that we could build this plug-in with roughly the same amount of code as the jQuery version. So why is this one so much longer? Well, we've made it much more flexible. To use the class, we just call the constructor, like this:
+			</p>
+			<p>
+				うわ、コードが多い。全コメントを削除してもまだ24行あります。すでに上で実例を示したように、このプラグインを、jQueryを使って、だいたい同じ量のコードで構築することもできるのでした。ではなぜこのコードはこれほど長くなるのでしょう？ そう、よりフレキシブルにしたからなのです。このクラスを使うには、ただコンストラクタを呼び出せばよいのです、こんな風に：
 			</p>
 
 <pre class="js">var myFAQ = new FAQ(myContainer);
@@ -1034,31 +1086,43 @@ myFAQ.toggle(2); //toggle the 3rd element
 				We can access methods and properties of the instance. But what about our ajax functionality? The problem with our ajax extension to the jQuery version was that we couldn't delay the opening of the definition until after it loaded. We don't have that problem with our MooTools version:
 				
 			</p>
+			<p>
+				インスタンスのメソッドとプロパティにアクセスすることもできます。しかしAJAX機能はどうでしょう？ jQuery版のAJAX拡張部分の問題は、定義部分をオープンするエフェクトを定義がロードされるまで待たせることができないという点です。MooTools版にはこの問題はありません：
+			</p>
 
 <pre class="js">FAQ.Ajax = new Class({
 	//this class inherits the properties of FAQ
+	// このクラスはFAQのプロパティを継承
 	Extends: FAQ,
 	//it also gets a new option in addition to the other defaults
 	//this one for url, that we're going to append the index of the
 	//term to; in reality we might make this more robust, but for
 	//this example it serves the purpose
+	// さらに新たなオプションも追加
+	// 
 	options: {
 		url: null;
 	},
 	//we're going to cache the results, so if a section is opened
 	//twice, we won't hit the server for the data
+	// 結果をキャッシュするので、あるセクションが2度開かれた場合
+	// サーバにデータをリクエストしない
 	indexesLoaded: [],
 	toggle: function(index){
 		//if we've already loaded the definition
+		// もし定義をすでにロードしている場合
 		if (this.indexesLoaded[index]) {
 			//just call the previous version of toggle
+			// 前バージョンのトグルを呼び出すだけ
 			this.parent(index);
 		} else {
 			//otherwise, request the data from the server
+			// 他の場合、サーバへデータをリクエスト
 			new Request.HTML({
 				update: this.definitions[index],
 				url: this.options.url + index,
 				//and when the data is loaded, expand the definition
+				// そして、データがロードされたら定義を展開する
 				onComplete: function(){
 					this.indexesLoaded[index] = true;
 					this.definitions[index].slide('toggle');
@@ -1073,9 +1137,15 @@ myFAQ.toggle(2); //toggle the 3rd element
 				Now we have a version of our <em>FAQ</em> class that allows us to get the definitions from the server. Note that we were able to integrate the new logic in a way that doesn't expand the definition until <em>after</em> the content comes back from the server (which we couldn't do with the jQuery version). Also note that we really only had to describe the new functionality (the ajax) and little else. This extensibility makes it possible for you to create families of plug-ins that offer different shades of functionality. It also means that you can use someone else's plug-in and alter just the bits that you to be want different if you need to (without forking it). This helps explain why, for any given design pattern - a date picker, a tab interface, etc, that you typically only find a few plug-ins for MooTools. Most of the plug-ins you get either solve your problem or, if not, you can just extend them to add the things you need.
 				
 			</p>
+			<p>
+				さて、これでサーバから定義を取得できるバージョンの<em>FAQ</em>クラスができました。私たちは、サーバからコンテンツが返された<em>後</em>まで定義の展開表示を待機するという新しいロジック（jQuery版ではできませんでした）を統合できたことを忘れないでください。また、本当に新しい機能部分（AJAX機能）とその他少しだけを記述すればよかった〔訳注：＝以前のコードを反復する必要はなかった〕ことも覚えておいてください。この拡張性のおかげで、提供する細部機能が微妙に異なるプラグインファミリーを創り出すことも可能となります。また、他の人のプラグインを使いながら、ごく一部だけを自分に必要なかたちへ変更することも（コードをフォークすることなく）可能です。このことは、よくあるデザインのパターン（デート・ピッカー、タブインターフェースなど）が、なぜMooToolsプラグインでは2～3個しか見つからないのかを説明する理由となります。ほとんどのプラグインは、あなたの問題を直接に解決してくれるからであり、あるいは解決されない場合であっても、あなたはすぐそれを拡張して必要な機能を追加できるからなのです。
+			</p>
 			
 			<p>
 				As I illustrated earlier, it's possible to write complex jQuery widgets with methods and state. Most of the code you write when doing this is vanilla JavaScript when you need to express logic that isn't related to the DOM. But jQuery's model doesn't offer a system for extending these instances into subclasses. Nor does it help you with mixins that can be reused easily. Finally, jQuery's plugins are always attached to DOM elements. If you wanted to write a class that, say, processed URLs, there's no stateful system for such a thing unless you write it yourself.
+			</p>
+			<p>
+				前に実例を示しましたが、メソッドと状態を使って複雑なjQueryメソッドを書くことも可能です。それを実現する際、DOMとは関わりのないロジックを表現する必要があれば、書くコードの大半は素朴なJavaScriptとなるはずです。しかしjQueryのモデルは、これらのインスタンスを拡張するシステムを提供していませんし、簡単に再利用できるMixinの助けもありません。最終的には、jQueryのプラグインは常にDOMエレメントに接続されます。例えば、URLを処理するクラスを書きたい場合でも、状態を持ったシステムは存在せず、自分で書くしかないのです。
 			</p>
 			
 			<a name="conclusion"></a>
