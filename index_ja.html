@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<title>
-			jQuery vs MooTools: Choosing Between Two Great JavaScript Frameworks
+			jQuery vs MooTools: 偉大な2つの JavaScript を選択する
 		</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<link rel="Shortcut Icon" href="favicon.ico" type="image/x-icon">
@@ -105,10 +105,11 @@
 
 			<h1 class="span-24 last">jQuery vs MooTools</h1>
 			<div class="caption">
-				May, 2009 - <a href="http://www.clientcide.com" target="_blank">Aaron Newton of Clientcide</a>
+				2009年5月 - <a href="http://www.clientcide.com" target="_blank">Aaron Newton of Clientcide</a>
+				<div class="translator">翻訳: <a href="http://d.hatena.ne.jp/cu39/" target="_blank">cu39</a></div>
 				<div class="trans">
 					Also available in 
-					<a href="/index_pt-br.html">Portuguese (Brazil)</a>, <a href="/index_cn.html">Chinese</a>, <a href="index_fa.html">Farsi (Persian)</a> and <a href="/index_es-ar.html">Spanish</a>. | <a href="http://wiki.github.com/anutron/jquery-vs-mootools">How to submit a translation</a>.
+					<a href="/index_pt-br.html">ポルトガル語（ブラジル）</a>, <a href="/index_cn.html">中国語</a>, <a href="index_fa.html">ファルシ語（ペルシア）</a>, <a href="/index_es-ar.html">スペイン語</a> | <a href="http://wiki.github.com/anutron/jquery-vs-mootools">翻訳版を送るには</a>
 				</div>
 			</div>
 			<!--
@@ -137,7 +138,7 @@
 				私はMooToolsの開発者の一人で、MooToolsフレームワークに取り組んでいます。ブログでもMooToolsについて書いています。<a href="http://www.mootrial.com">代表的なオンラインチュートリアル</a>と<a href="http://www.amazon.com/gp/product/1430209836?ie=UTF8&tag=clientside-20&link_code=as3&camp=211189&creative=373489&creativeASIN=1430209836">MooToolsの書籍</a>も書きました。明らかに、いくらか偏った視点に立っています。また、そこまで頻繁にjQueryを使ってはいないことも指摘しておきます。もしあなたがjQuery開発者で、私がここで間違った説明をしているのを見つけたら、ぜひ私に連絡して問題点の修正を助けて下さい。ここでの私の目的は、人々に正確かつ役に立つ情報を提供することにあります―どちらかのフレームワークだけを売り込むことではありません。
 			</p>
 
-			<h3>Purpose 目的</h3>
+			<h3><!-- Purpose -->目的</h3>
 			<!--
 			<p>
 				Helping you make a choice between these two frameworks involves me telling you how they are different. I'll start out by saying that <b>both of them are excellent choices</b>. You can't make a wrong choice here. Both frameworks have their strengths and weaknesses, but, in general, they are both great choices. There are other frameworks out there that are worth digging into as well. <a href="http://www.dojotoolkit.org/">Dojo</a>, <a href="http://www.prototypejs.org/">Prototype</a>, <a href="http://developer.yahoo.com/yui/">YUI</a>, <a href="http://extjs.com/">Ext</a> and others are all great choices. Which one you choose really has more to do with your own style and what you need to accomplish. The purpose of this article is to focus on MooTools and jQuery, as increasingly these are the two frameworks that I see a lot of people considering. Finally, I'm not trying to convince anyone to switch from one framework to the other. There are interesting things about both frameworks from which you can learn. You can read a little more about this article and why I wrote it in <a href="http://www.clientcide.com/3rd-party-libraries/jquery-vs-mootools-mootools-vs-jquery/">my blog post on Clientcide where I announced it</a>.
@@ -149,37 +150,37 @@
 			
 			<h3><!-- Table o' Contents -->目次</h3>
 <ul>
-	<li><a href="#mottos">The Mottos Say It All</a></li>
+	<li><a href="#mottos"><!-- The Mottos Say It All -->モットーはすべてを語る</a></li>
 	<li><a href="#learning"><!-- The Learning Curve and The Community -->学習曲線とコミュニティ</a></li>
-	<li><a href="#javascript">What JavaScript Is Good For</a></li>
+	<li><a href="#javascript"><!-- What JavaScript Is Good For -->JavaScriptが適しているもの</a></li>
 		<ul style="margin-bottom: 0px">
-			<li><a href="#dom">More Than Just The DOM</a></li>
-			<li><a href="#inheritance">Inheritance with JavaScript</a></li>
-			<li><a href="#self">Self Reference</a></li>
+			<li><a href="#dom"><!-- More Than Just The DOM -->DOMだけではない</a></li>
+			<li><a href="#inheritance"><!-- Inheritance with JavaScript -->JavaScriptの継承モデル</a></li>
+			<li><a href="#self"><!-- Self Reference -->自己参照</a></li>
 		</ul>
 	</li>
-	<li><a href="#jsfun">MooTools Makes JavaScript Itself More Fun MooToolsはJavaScriptそのものをもっと楽しくする</a></li>
-	<li><a href="#domfun">jQuery Makes the DOM More Fun jQueryはDOMをもっと楽しくする</a></li>
-	<li><a href="#cando">Anything You Can Do I Can Do Better</a></li>
-	<li><a href="#yourway">MooTools Let's You Have It Your Way</a></li>
-	<li><a href="#chaining">Chaining as a Design Pattern</a></li>
-	<li><a href="#reuse">Reusing Code with jQuery jQueryを使ってコードを再利用する</a></li>
-	<li><a href="#classes">Reusing Code with MooTools MooToolsを使ってコードを再利用する</a>
+	<li><a href="#jsfun"><!-- MooTools Makes JavaScript Itself More Fun -->MooToolsはJavaScriptそのものをもっと楽しくする</a></li>
+	<li><a href="#domfun"><!-- jQuery Makes the DOM More Fun -->jQueryはDOMをもっと楽しくする</a></li>
+	<li><a href="#cando"><!-- Anything You Can Do I Can Do Better -->あなたができることは何でも、私はもっとよくできる</a></li>
+	<li><a href="#yourway"><!-- MooTools Let's You Have It Your Way -->あなたの好きな方法で</a></li>
+	<li><a href="#chaining"><!-- Chaining as a Design Pattern -->デザインパターンとしてのチェーン</a></li>
+	<li><a href="#reuse"><!-- Reusing Code with jQuery -->jQueryを使ってコードを再利用する</a></li>
+	<li><a href="#classes"><!-- Reusing Code with MooTools -->MooToolsを使ってコードを再利用する</a>
 		<ul>
-			<li><a href="#mooinheritance">MooTools and Inheritance MooToolsと継承</a></li>
-			<li><a href="#extension">Extending and Implementing Classes クラスの拡張と実装</a></li>
+			<li><a href="#mooinheritance"><!-- MooTools and Inheritance -->MooToolsと継承</a></li>
+			<li><a href="#extension"><!-- Extending and Implementing Classes -->クラスの拡張と実装</a></li>
 		</ul>
 	</li>
-	<li><a href="#conclusion">Decision Time 決断の時</a></li>
-	<li><a href="#discussion">Discussion</a></li>
+	<li><a href="#conclusion"><!-- Decision Time -->決断の時</a></li>
+	<li><a href="#discussion"><!-- Discussion -->ディスカッション</a></li>
 </ul>
 		
-			<h2>The Stats</h2>
+			<h2><!-- The Stats -->統計</h2>
 			<table>
 				<tr>
 					<th></th>
-					<th>jQuery Core</th>
-					<th>MooTools Core</th>
+					<th>jQueryコア</th>
+					<th>MooToolsコア</th>
 				</tr>
 				<tr>
 					<td>ライブラリのファイルサイズ</td>
@@ -187,7 +188,7 @@
 					<td>64.3K</td>
 				</tr>
 				<tr>
-					<th colspan="3">Features 機能</th>
+					<th colspan="3">機能</th>
 				</tr>
 				<tr>
 					<td>ライセンス</td>
@@ -230,11 +231,11 @@
 					<td><em><a href="http://mootools.net/docs/core/Class/Class">Class</a></em>コンストラクタにより提供される</td>
 				</tr>
 				<tr>
-					<th colspan="3">Other Considerations 他に考慮すべき点</th>
+					<th colspan="3">他に考慮すべき点</th>
 				</tr>
 				<tr>
 					<td>プラグイン</td>
-					<td><a href="http://plugins.jquery.com/">plugins.jquery.com</a> <a href="http://plugins.jquery.com/">plugins.jquery.com</a>のディレクトリで数百もの非公式プラグインが提供されている</td>
+					<td><a href="http://plugins.jquery.com/">plugins.jquery.com</a> のディレクトリで数百もの非公式プラグインが提供されている</td>
 					<td>大まかに50ほどの公式プラグインが <a href="http://mootools.net/more">mootools.net/more</a> で提供されている。非公式プラグインディレクトリーは <a href="http://mootools.net/plugins">mootools.net/plugins</a> 。</td>
 				</tr>
 				<tr>
@@ -243,15 +244,17 @@
 					<td>no</td>
 				</tr>
 			</table>
+			<!--
 			<p class="footnote">
 				Information based on data from <a href="http://jquery.com">jquery.com</a>, <a href="http://mootools.net">mootools.net</a>, and <a href="http://en.wikipedia.org/wiki/Comparison_of_JavaScript_frameworks">wikipedia.com</a>.
 			</p>
+			-->
 			<p class="footnote">
-				<a href="http://jquery.com">jquery.com</a>, <a href="http://mootools.net">mootools.net</a>, and <a href="http://en.wikipedia.org/wiki/Comparison_of_JavaScript_frameworks">wikipedia.com</a>のデータにもとづいた情報
+				<a href="http://jquery.com">jquery.com</a>, <a href="http://mootools.net">mootools.net</a>, <a href="http://en.wikipedia.org/wiki/Comparison_of_JavaScript_frameworks">wikipedia.com</a>のデータにもとづいた情報
 			</p>
 			
 			<a name="mottos"></a>
-			<h2>The Mottos Say It All</h2>
+			<h2><!-- The Mottos Say It All -->モットーはすべてを語る</h2>
 			
 		
 			<!--
@@ -344,7 +347,7 @@
 			</p>
 			
 			<a name="javascript"></a>
-			<h2>What JavaScript Is Good For</h2>
+			<h2><!-- What JavaScript Is Good For -->JavaScriptが適しているもの</h2>
 		
 			<!--
 			<p>
@@ -364,7 +367,7 @@
 			</p>
 			
 			<a name="dom"></a>
-			<h3>More Than Just The DOM</h3>
+			<h3><!-- More Than Just The DOM -->DOMだけではない</h3>
 		
 			<!--
 			<p>
@@ -372,7 +375,7 @@
 			</p>
 			-->
 			<p>
-				「ページ上の何かを取ってきてそれに対して何かをする」という言葉で厳密に表せるような作業をしたいケースを考えた場合、jQueryはベストな選択となるでしょう。非常に表現力豊かにページ上の振る舞いを記述できるシステムを提供する点においてjQueryはずば抜けており、その方法はしばしばプログラミングだと感じさせないものです。それでもなお、JavaScriptの残りの部分を使って何かをすることは可能ですが、DOMに焦点を合わせる限り―CSSプロパティを変更する、何かをアニメーションさせる、AJAXを通してコンテンツを取ってくる、など―あなたが書くであろうことのほとんどはjQueryによってカバーされ、古く素朴なJavaScriptにはならないでしょう。jQueryはDOMに関わらないメソッドもいくつか提供します。例えば、配列をイテレートする仕組みも提供します― <i><a href="http://docs.jquery.com/Utilities/jQuery.each">$.each(array, fn)</a></i> ― あるいは例えば、文字列をトリムするメソッドも提供します― <i><a href="http://docs.jquery.com/Utilities/jQuery.trim">$.trim(str)</a></i>。しかしこの種のユーティリティメソッドを大量には提供していません。それはむしろ素晴らしいことです。なぜなら、単にDOMから何か要素を取り出して、その全体をイテレートし、何らかのかたちで変更（HTMLを付け加える、スタイルを変える、クリックやマウスオーバー用のイベントリスナーを追加する、など）したいだけであれば、たいていの場合はそれ以上の何かは必要ないからです。
+				「ページ上の何かを取ってきてそれに対して何かをする」という言葉で厳密に表せるような作業をしたいケースを考えた場合、jQueryはベストな選択となるでしょう。非常に表現力豊かにページ上の振る舞いを記述できるシステムを提供する点においてjQueryはずば抜けており、その方法はしばしばプログラミングだと感じさせないものです。それでもなお、JavaScriptの残りの部分を使って何かをすることは可能ですが、DOMに焦点を合わせる限り―CSSプロパティを変更する、何かをアニメーションさせる、Ajaxを通してコンテンツを取ってくる、など―あなたが書くであろうことのほとんどはjQueryによってカバーされ、古く素朴なJavaScriptにはならないでしょう。jQueryはDOMに関わらないメソッドもいくつか提供します。例えば、配列をイテレートする仕組みも提供します― <i><a href="http://docs.jquery.com/Utilities/jQuery.each">$.each(array, fn)</a></i> ― あるいは例えば、文字列をトリムするメソッドも提供します― <i><a href="http://docs.jquery.com/Utilities/jQuery.trim">$.trim(str)</a></i>。しかしこの種のユーティリティメソッドを大量には提供していません。それはむしろ素晴らしいことです。なぜなら、単にDOMから何か要素を取り出して、その全体をイテレートし、何らかのかたちで変更（HTMLを付け加える、スタイルを変える、クリックやマウスオーバー用のイベントリスナーを追加する、など）したいだけであれば、たいていの場合はそれ以上の何かは必要ないからです。
 			</p>
 			<!--
 			<p>
@@ -392,7 +395,7 @@
 			</p>
 			
 			<a name="inheritance"></a>
-			<h3>Inheritance with JavaScript</h3>
+			<h3><!-- Inheritance with JavaScript -->JavaScriptの継承モデル</h3>
 		
 			<!--
 			<p>
@@ -502,7 +505,7 @@ ninja.logInventory();
 			</p>
 			
 			<a name="jsfun"></a>
-			<h2><!--MooTools Makes JavaScript Itself More Fun -->MooToolsはJavaScriptそのものをもっと楽しくする</h2>
+			<h2><!-- MooTools Makes JavaScript Itself More Fun -->MooToolsはJavaScriptそのものをもっと楽しくする</h2>
 		
 			<!--
 			<p>
@@ -664,9 +667,11 @@ ninja.logInventory();
 			</p>
 			
 			<a name="yourway"></a>
-			<h2>MooTools Lets You Have It Your Way</h2>
+			<h2><!-- MooTools Lets You Have It Your Way -->あなたの好きな方法で</h2>
 			
+			<!--
 			<p>But what if you like the jQuery syntax? One way to illustrate the power of MooTools is to show you how easy it is to change it to suit your tastes. If we wanted to implement the <em>hover</em> method from jQuery in MooTools, we could easily do so:</p>
+			-->
 			<p>ところで、あなたがjQueryの文法を好きであれば、何が好きでしょうか？ MooToolsの実力を例示する方法の一つは、MooToolsの文法をあなた好みのものに変更するのがどれほど簡単なのか、あなたにお見せすることでしょう。もしjQueryの<em>hover</em>メソッドをMooToolsに実装したいと思ったら、次のように簡単にできるのです：</p>
 <pre class="js">Element.implement({
     hover : function(enter,leave){
@@ -689,11 +694,13 @@ function(){
 		<p>もちろん、まったく同じ事をしてくれるMooToolsプラグインも存在します。これは<a href="http://github.com/cheeaun/mooj/tree/master">jQueryの文法でMooToolsを使えるようにしてくれます</a>。MooToolsが拡張性に焦点を合わせているということは、何でもあなたの好きなように実装できることを意味します。これはjQueryにはできないことです。あなたがそう望むなら、MooToolsはjQueryを真似ることができますが、jQueryはMooToolsを真似られません。クラスを書いたり、ネイティブプロトタイプを拡張したり、その他MooToolsが可能なことをしたい場合にも、あなたは自分でそれを書かなければならないでしょう。</p>
 		
 			<a name="chaining"></a>
-			<h2>Chaining as a Design Pattern</h2> 
+			<h2><!-- Chaining as a Design Pattern -->デザインパターンとしてのチェーン</h2> 
 		
+			<!--
 			<p>
 				  Let's do another of these. Here's some jQuery (from the jQuery tutorial):  
 			</p>
+			-->
 			<p>
 				Let's do another of these. こういうjQueryのコードがあります（jQueryチュートリアルより）:
 			</p>
@@ -805,7 +812,7 @@ $(document).ready(function() {
 			-->
 			<ol>
 				<li>
-					明日もしこのリストの動作方法を変える必要が生じたら（クリック追跡ロジックを追加したいのでログに記録させたくなったり、その定義をajax経由で持ってきたくなったりするかもしれません）、メインとなる<i>faq</i>メソッドを変更するだけで、このメソッドを使ったあらゆる場所が即アップデートされます。あるいは、新バージョンのjQueryがリリースされ、動作方法が変わった場合も、色々な場所にあるたくさんのコピーをアップデートするのでなく、ただメソッドを一つアップデートするだけでよくなります。私はこれを、「アプリケーション内で足跡を小さく保つ」こと〔keeping a small footprint in my application〕と呼んでいます。私のアプリケーションが、よりジェネリックなコードに触れるポイントを可能な限り少なく保つことで、バグ修正、フレームワークのアップデート、機能の追加や変更をより容易にできるのです。
+					明日もしこのリストの動作方法を変える必要が生じたら（クリック追跡ロジックを追加したいのでログに記録させたくなったり、その定義をAjax経由で持ってきたくなったりするかもしれません）、メインとなる<i>faq</i>メソッドを変更するだけで、このメソッドを使ったあらゆる場所が即アップデートされます。あるいは、新バージョンのjQueryがリリースされ、動作方法が変わった場合も、色々な場所にあるたくさんのコピーをアップデートするのでなく、ただメソッドを一つアップデートするだけでよくなります。私はこれを、「アプリケーション内で足跡を小さく保つ」こと〔keeping a small footprint in my application〕と呼んでいます。私のアプリケーションが、よりジェネリックなコードに触れるポイントを可能な限り少なく保つことで、バグ修正、フレームワークのアップデート、機能の追加や変更をより容易にできるのです。
 				</li>
 				<li>
 					第二の理由は、コードを減らせることです。同じメソッドを何度も繰り返し使うことで、同じことを何度もせずに済みます。このことはあらゆるプログラミング環境において価値あることです。また、私のサイトの訪問者がダウンロードするコードも小さくしてくれます。
@@ -850,9 +857,11 @@ $(document).ready(function() {
 				でも上の例を見ると、私たちの<i>faq</i>関数をこの方法で宣言するのと、これを独立した〔スタンドアローンな〕関数として宣言するのとの間に大きな違いはありません。たしかに、ウィジェット版はグローバル名前空間内に置かれてはいませんが、しかし私たちの例も独自の名前空間内に追加するのは簡単です。それをjQueryに結びつければ、他のjQueryメソッドとつなげて書くことができます。もう一つの利点は、私たちの関数の内側にある &quot;this&quot; が、その時点のjQueryチェーンの内側にある何のカレント・コンテキストにでもなるということです。このパターンをプラグインのために使うことにより、プラグインはjQueryの一部に見えるようになりますが、そのことを除けば基本的に単独の関数となります。この関数はjQueryのカレント・コンテキストを取り、それに対して何かを行って、そのコンテキストをチェーンの中の次のアイテムのために返します。複雑なことはそれほど多くなく、jQueryプラグインを書くことを簡単にしています―ただ関数を1つ書けばよいのです。
 			</p>
 
+			<!--
 			<p>
 				Note that it is possible to write more complex plugins with jQuery with methods and state. This kind of pattern is supported with the jQuery UI plugin system and doesn't use the same mechanism as the basic plugin (like our faq example). Instead, you attach an object with methods and properties to the jQuery object (i.e. <em>$.ui.tabs</em>). There's a shortcut to invoke this object (<em>$(selector).tabs()</em>) so that you can continue chaining as with the faq plugin. But because it doesn't return a reference to the tabs object created for the items in your selector, you're forced to call that selector again to invoke methods on it. Instead of calling <em>myTabInstance.add(url, label, index)</em> you must execute the selector again and call your function by name (as a string): <em>$(selector).tabs('add', url, label, index);</em>. This means you're running your selector twice (unless you store it in a variable somewhere), and that you don't ever have a pointer to the "add" method that you can do things like bind or delay. This post is focused on the MooTools and jQuery cores, and while jQuery's UI system does provide this functionality, it's not something that comes with jQuery by default.
 			</p>
+			-->
 			<p>
 				ただし、複数のメソッドや状態を持つような、もっと込み入ったjQueryプラグインを書くこともできることを忘れないでください。この種のパターンはjQuery UIプラグインシステムでサポートされており、これはベーシックプラグインと同じメカニズム（faqの例のようなもの）は使用しません。その代わり、複数のメソッドとプロパティを持った一つのオブジェクトをjQueryオブジェクト（すなわち<em>$.ui.tabs</em>）に結びつけるのです。このオブジェクトをinvokeするショートカット（<em>$(selector).tabs()</em>）があり、これによってfaqプラグインの後にチェーンを継続することができるようになります。しかしこれは、あなたのセレクタ内のアイテム用に作られたtabsオブジェクトへの参照を返さないため、そこに付いているメソッドを呼び出すためには再度そのセレクタを呼び出すことを強制されます。<em>myTabInstance.add(url, label, index)</em>を呼び出す代わりに、あなたはセレクタをもう一度実行し、あなたの関数を名前で（文字列として）呼び出さなければなりません: <em>$(selector).tabs('add', url, label, index);</em>。つまり、あなたは自分のセレクタを2回実行している（どこかでそれを変数内に入れていない限り）ことを意味します。そして、あなたは &quot;add&quot; メソッドへのポインタをまったく持っていません。 &quot;add&quot; メソッドがあればbindやdelayのようなことができるのに。この記事はMooToolsとjQueryのコアに焦点を合わせており、jQueryのUIシステムならこの機能が提供されるのですが、デフォルトのjQueryにそれが付いてくるわけではありません。
 			</p>
@@ -1031,11 +1040,13 @@ $(document).ready(function() {
 //alice.energy == 1
 //bob.energy == 2</pre>
 		
+			<!--
 			<p>
 				Where things get really interesting is when we want to augment this behavior.
 			</p>
+			-->
 			<p>
-				本当に興味深いのは、when we want to augment this behavior.
+				本当に興味深いのは、この振る舞いをさらに積極的に利用しようとするときです。
 			</p>
 			
 			<a name="extension"></a>
@@ -1047,7 +1058,7 @@ $(document).ready(function() {
 			</p>
 			-->
 			<p>
-				再びjQueryの<i>faq</i>プラグインに戻りましょう。このプラグインにもっと機能を追加しようとしたら何が起きるでしょうか。質問への回答をサーバーから取ってくるようなAJAXバージョンを作りたいとしたらどうしますか？ <i>faq</i>プラグインは他の誰かが書いたものだとして、私たちはいかなる方法でもそれ本体を変更しないまま機能を追加したい場合を想像してみましょう。
+				再びjQueryの<i>faq</i>プラグインに戻りましょう。このプラグインにもっと機能を追加しようとしたら何が起きるでしょうか。質問への回答をサーバーから取ってくるようなAjaxバージョンを作りたいとしたらどうしますか？ <i>faq</i>プラグインは他の誰かが書いたものだとして、私たちはいかなる方法でもそれ本体を変更しないまま機能を追加したい場合を想像してみましょう。
 			</p>
 			<!--
 			<p>
@@ -1059,7 +1070,7 @@ $(document).ready(function() {
 			</p>
 <pre class="js">jQuery.fn.ajaxFaq = function(options) {
     var settings = jQuery.extend({ 
-		// リクエスト先のURLなどAJAX特有のオプション
+		// リクエスト先のURLなどAjax特有のオプション
         url: '/getfaq.php'
         definitions: 'dd'
     }, options); 
@@ -1069,7 +1080,7 @@ $(document).ready(function() {
     });
     this.faq(); // オリジナルのfaqプラグインをコール
 });</pre>
-			<p>〔訳注：この<em>faq</em>プラグインでは、用語＝termをキーとしてサーバへリクエストし、それに対応する定義＝definitionをサーバから取得するという動作が想定されている〕</p>
+			<p>〔訳注：用語＝termをキーとしてサーバへリクエストし、それに対応する定義＝definitionをサーバから取得するという動作が想定されている〕</p>
 
 			<!--
 			<p>
@@ -1077,7 +1088,7 @@ $(document).ready(function() {
 			</p>
 			-->
 			<p>
-				これにはいくつか欠点があります。何よりもまず、<em>faq</em>クラスは定義のためにセレクターを繰り返し使っており、負荷が高まる可能性があります。取得した定義を保存したり、必要なときにそれを使い回す方法は存在しないのです。第二に、私たちのAJAXロジックを、<em>faq</em>プラグインが定義を表示する固有ロジックの中に追加することができません。<em>slideToggle</em>というオリジナルのプラグインは、エフェクトを使って定義を表示（展開）します。私たちのAJAXプラグインのロードが完了する前にこのエフェクトが終了してしまうため、問題をはらんでいます。<em>faq</em>プラグイン全体のロジックを複製することを除いて、この問題を解決する方法はないのです。
+				これにはいくつか欠点があります。何よりもまず、<em>faq</em>クラスは定義のためにセレクターを繰り返し使っており、負荷が高まる可能性があります。取得した定義を保存したり、必要なときにそれを使い回す方法は存在しないのです。第二に、私たちのAjaxロジックを、<em>faq</em>プラグインが定義を表示する固有ロジックの中に追加することができません。<em>slideToggle</em>というオリジナルのプラグインは、エフェクトを使って定義を表示（展開）します。私たちのAjaxプラグインのロードが完了する前にこのエフェクトが終了してしまうため、問題をはらんでいます。<em>faq</em>プラグイン全体のロジックを複製することを除いて、この問題を解決する方法はないのです。
 			</p>
 			<!--
 			<p>
@@ -1122,7 +1133,7 @@ blackNinja.attack(bob);
 			</p>
 			-->
 			<p>
-				もう少し詳しく見てみると、ここで考えるには興味深いことがあります。<em>Ninja</em>クラス内に<em>initialize</em>メソッドを持っていることに注意してください。ということは、このメソッドが<em>Human</em>クラス内の<em>initialize</em>メソッドを上書きするように思えるのですが、しかし、私たちはまだこのメソッドにアクセスすることができます。<em>this.parent</em>を呼び出し、親クラスの<em>initialize</em>が求める引数を渡してやればよいのです。さらに、私たちのロジックが実行されるタイミングを制御することもできます。親クラスのメソッドが呼び出される前や呼び出された後に、子クラスのロジックを実行できるのです。プロパティに（例えば<em>energy</em>に）新しい値を割り当てることも、新しい機能を割り当てることも可能です。これがjQueryの<em>faq</em>プラグインで可能だったかどうか考えてみてください。私たちは、まずAJAXをロードし、<em>その後で</em>値をスライドオープンすることしかできませんでした。
+				もう少し詳しく見てみると、ここで考えるには興味深いことがあります。<em>Ninja</em>クラス内に<em>initialize</em>メソッドを持っていることに注意してください。ということは、このメソッドが<em>Human</em>クラス内の<em>initialize</em>メソッドを上書きするように思えるのですが、しかし、私たちはまだこのメソッドにアクセスすることができます。<em>this.parent</em>を呼び出し、親クラスの<em>initialize</em>が求める引数を渡してやればよいのです。さらに、私たちのロジックが実行されるタイミングを制御することもできます。親クラスのメソッドが呼び出される前や呼び出された後に、子クラスのロジックを実行できるのです。プロパティに（例えば<em>energy</em>に）新しい値を割り当てることも、新しい機能を割り当てることも可能です。これがjQueryの<em>faq</em>プラグインで可能だったかどうか考えてみてください。私たちは、まずAjaxをロードし、<em>その後で</em>値をスライドオープンすることしかできませんでした。
 			</p>
 			<!--
 			<p>
@@ -1194,13 +1205,12 @@ blackNinja.attack(bob);
 			</p>
 			-->
 			<p>
-				ここまでで、あなたはMooToolsにおけるクラスの働き方を概観したことになります。では<em>faq</em>クラスを見てみましょう。さきほどはjQueryで書きましたが、今度はMooToolsで書き、jQuery版のときと同じく、さらに拡張してAJAX機能を追加します。
+				ここまでで、あなたはMooToolsにおけるクラスの働き方を概観したことになります。では<em>faq</em>クラスを見てみましょう。さきほどはjQueryで書きましたが、今度はMooToolsで書き、jQuery版のときと同じく、さらに拡張してAjax機能を追加します。
 			</p>
 <pre class="js">
 var FAQ = new Class({
 	// OptionsはMooToolsが提供する別のクラス
 	Implements: Options,
-	//these are the default options
 	// オプションのデフォルト値を設定
 	options: {
 		terms: 'dt',
@@ -1216,8 +1226,7 @@ var FAQ = new Class({
 		this.terms = this.container.getElements(this.options.terms);
 		this.definitions = this.container.getElements(this.options.definitions);
 		// attachメソッドを呼び出す
-		// これを固有メソッドとして分割したので
-		// クラスを簡単に拡張できる
+		// これを固有メソッドとして分割したのでクラスを簡単に拡張できる
 		this.attach();
 	},
 	attach: function(){
@@ -1237,9 +1246,11 @@ var FAQ = new Class({
 });
 </pre>
 
+			<!--
 			<p>
 				Woah. That's a lot of code. Even if we remove all the comments it's still two dozen lines long. I already illustrated above that we could build this plug-in with roughly the same amount of code as the jQuery version. So why is this one so much longer? Well, we've made it much more flexible. To use the class, we just call the constructor, like this:
 			</p>
+			-->
 			<p>
 				うわ、コードが多い。全コメントを削除してもまだ24行あります。すでに上で実例を示したように、このプラグインを、jQueryを使って、だいたい同じ量のコードで構築することもできるのでした。ではなぜこのコードはこれほど長くなるのでしょう？ そう、よりフレキシブルにしたからです。このクラスを使うには、ただコンストラクタを呼び出せばよいのです、こんな風に：
 			</p>
@@ -1256,16 +1267,12 @@ myFAQ.toggle(2); // 3番目の要素をトグル
 			</p>
 			-->
 			<p>
-				インスタンスのメソッドとプロパティにアクセスすることもできます。しかしAJAX機能はどうでしょう？ jQuery版のAJAX拡張部分の問題は、定義部分をオープンするエフェクトを定義がロードされるまで待たせることができないという点です。MooTools版にはこの問題はありません：
+				インスタンスのメソッドとプロパティにアクセスすることもできます。しかしAjax機能はどうでしょう？ jQuery版のAjax拡張部分の問題は、定義部分をオープンするエフェクトを定義がロードされるまで待たせることができないという点です。MooTools版にはこの問題はありません：
 			</p>
 
 <pre class="js">FAQ.Ajax = new Class({
 	// このクラスはFAQのプロパティを継承
 	Extends: FAQ,
-	//it also gets a new option in addition to the other defaults
-	//this one for url, that we're going to append the index of the
-	//term to; in reality we might make this more robust, but for
-	//this example it serves the purpose
 	// さらに新たなオプションも追加
 	// URL用のもので、用語のインデックスに追加する
 	// 実用ではもっとたくさんオプションが付くかもしれないが
@@ -1304,7 +1311,7 @@ myFAQ.toggle(2); // 3番目の要素をトグル
 			</p>
 			-->
 			<p>
-				さて、これでサーバから定義を取得できるバージョンの<em>FAQ</em>クラスができました。私たちは、サーバからコンテンツが返された<em>後</em>まで定義の展開表示を待機するという新しいロジック（jQuery版ではできませんでした）を統合できたことを忘れないでください。また、本当に新しい機能部分（AJAX機能）とその他少しだけを記述すればよかった〔訳注：＝以前のコードを反復する必要はなかった〕ことも覚えておいてください。この拡張性のおかげで、提供する細部機能が微妙に異なるプラグインファミリーを創り出すことも可能となります。また、他の人のプラグインを使いながら、ごく一部だけを自分に必要なかたちへ変更することも（コードをフォークすることなく）可能です。このことは、よくあるデザインのパターン（デート・ピッカー、タブインターフェースなど）が、なぜMooToolsプラグインでは2～3個しか見つからないのかを説明する理由となります。ほとんどのプラグインは、あなたの問題を直接に解決してくれるからであり、あるいは解決されない場合であっても、あなたはすぐそれを拡張して必要な機能を追加できるからなのです。
+				さて、これでサーバから定義を取得できるバージョンの<em>FAQ</em>クラスができました。私たちは、サーバからコンテンツが返された<em>後</em>まで定義の展開表示を待機するという新しいロジック（jQuery版ではできませんでした）を統合できたことを忘れないでください。また、本当に新しい機能部分（Ajax機能）とその他少しだけを記述すればよかった〔訳注：＝以前のコードを反復する必要はなかった〕ことも覚えておいてください。この拡張性のおかげで、提供する細部機能が微妙に異なるプラグインファミリーを創り出すことも可能となります。また、他の人のプラグインを使いながら、ごく一部だけを自分に必要なかたちへ変更することも（コードをフォークすることなく）可能です。このことは、よくあるデザインのパターン（デート・ピッカー、タブインターフェースなど）が、なぜMooToolsプラグインでは2～3個しか見つからないのかを説明する理由となります。ほとんどのプラグインは、あなたの問題を直接に解決してくれるからであり、あるいは解決されない場合であっても、あなたはすぐそれを拡張して必要な機能を追加できるからなのです。
 			</p>
 			
 			<!--
@@ -1343,16 +1350,20 @@ myFAQ.toggle(2); // 3番目の要素をトグル
 			<p>
 				両フレームワークとも素晴らしい選択であると言う理由はそういうことです。私がここで努力してきたのは、2つのコードベースが持つ哲学の違いを明確にするにすることであり、また両者の長所と短所を明確にすることでした。自分のMooToolsに対する思い入れをうまく抑え込めたかどうか疑わしいですが、あなたの役に立つことを願っています。どちらのフレームワークを選ぶとしても、あなたが両者について以前より多くの知識を得られたことを願います。もし充分に時間があるなら、それぞれを使ってサイトを1つ実装してみることを強く薦めます。そしてあなたが独自に両フレームワークのレビューを書いてくれれば、あなたの視点はきっと、私が見過ごした何かを浮かび上がらせることでしょう。
 			</p>
+			<!--
 			<p>A history of this document <a href="http://github.com/anutron/jquery-vs-mootools/tree/master">can be viewed on github</a>.</p>
+			-->
 			<p>この文章の履歴は<a href="http://github.com/anutron/jquery-vs-mootools/tree/master">githubで見られます</a>。
 			</p>
 			<p>
 			<script type="text/javascript" src="http://w.sharethis.com/button/sharethis.js#publisher=c327065b-efa0-4e12-afbc-5717f5cf62f9&amp;type=website&amp;post_services=facebook%2Cdigg%2Cdelicious%2Ctwitter%2Creddit%2Cfriendfeed%2Cmyspace%2Cybuzz%2Cstumbleupon%2Ctechnorati%2Cmixx%2Cblogger%2Cwordpress%2Ctypepad%2Cgoogle_bmarks%2Cwindows_live%2Cfark%2Cbus_exchange%2Cpropeller%2Cnewsvine%2Clinkedin"></script>
 			</p>
 			<hr/>
+			<!--
 			<p class="about">
 				About me: I am a <a href="http://www.mootools.net">MooTools</a> contributor and I blog about JavaScript and other things on my site <a href="http://www.clientcide.com">Clientcide</a> as well as release <a href="http://www.clientcide.com/js">numerous plug-ins for MooTools</a>. I am the author of <a href="http://www.amazon.com/gp/product/1430209836?ie=UTF8&tag=clientside-20&link_code=as3&camp=211189&creative=373489&creativeASIN=1430209836">MooTools Essentials</a> as well as the <a href="http://www.mootorial.com">MooTools online tutorial</a>. I work at a company in the SF Bay Area called <a href="http://www.cloudera.com">Cloudera</a>. <a href="http://www.clientcide.com/shout-out">I can be contacted thusly</a>.
 			</p>
+			-->
 			<p class="about">
 				私について：私はMooToolsのコントリビューターであり、私のサイト<a href="http://www.clientcide.com">Clientcide</a>で、JavaScriptやその他のことに関してブログしたり、<a href="http://www.clientcide.com/js">MooToolsプラグインをたくさん</a>リリースしたりしています。私は<a href="http://www.amazon.com/gp/product/1430209836?ie=UTF8&tag=clientside-20&link_code=as3&camp=211189&creative=373489&creativeASIN=1430209836">MooTools Essentials</a>という本や<a href="http://www.mootorial.com">MooToolsオンラインチュートリアル</a>の著者でもあります。サンフランシスコ・ベイエリアの<a href="http://www.cloudera.com">Cloudera</a>という企業で働いています。<a href="http://www.clientcide.com/shout-out">いつでもコンタクトできます</a>。
 			</p>
