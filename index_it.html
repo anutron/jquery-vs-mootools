@@ -113,7 +113,7 @@
 				</div>
 			</div>
 			<p>
-				Sempre pi&ugrave; spesso chi si avvicina alla programmazione in JavaScipt si imbatte nella difficile scelta della libreria da adottare, o quantomeno della prima da imparare. Se lavori all'interno di un team probabilmente gi&agrave; ti &egrave; stato imposto un framework, con motivazioni pi&ugrave; o meno discutibili. Se questo &egrave; il tuo caso, se sei costretto a usare <a href="http://www.mootools.net">MooTools</a> ma sei pratico con <a href="http://www.jquery.com">jQuery</a>, allora questo articolo pu&ograve; ugualmente esserti d'aiuto.
+				Sempre pi&ugrave; spesso chi si avvicina alla programmazione in JavaScript si imbatte nella difficile scelta della libreria da adottare, o quantomeno della prima da imparare. Se lavori all'interno di un team probabilmente gi&agrave; ti &egrave; stato imposto un framework, con motivazioni pi&ugrave; o meno discutibili. Se questo &egrave; il tuo caso, se sei costretto a usare <a href="http://www.mootools.net">MooTools</a> ma sei pratico con <a href="http://www.jquery.com">jQuery</a>, allora questo articolo pu&ograve; ugualmente esserti d'aiuto.
 			</p>
 			<p>
 				<a href="http://twitter.com/joshink/statuses/1671986611">Ogni</a> <a href="http://twitter.com/jezusisstoer/statuses/1642244246">giorno</a> <a href="http://twitter.com/digitalcampaign/statuses/1622094648">su</a> <a href="http://twitter.com/jesswma/statuses/1605733380">Twitter</a> leggo innumerevoli post del tipo "MooTools o jQuery?". Questo articolo vuole aiutarti a scegliere.
@@ -139,7 +139,7 @@
 			<li><a href="#self">Autoreferenza</a></li>
 		</ul>
 	</li>
-	<li><a href="#jsfun">MooTools Rende JavaScipt Pi&ugrave; Divertente</a></li>
+	<li><a href="#jsfun">MooTools Rende JavaScript Pi&ugrave; Divertente</a></li>
 	<li><a href="#domfun">jQuery Rende il DOM Pi&ugrave; Divertente</a></li>
 	<li><a href="#cando">Qualunque Cosa Tu Faccia Posso Farla Meglio</a></li>
 	<li><a href="#yourway">MooTools Fa Ci&ograve; Che Vuoi Come Vuoi</a></li>
@@ -229,46 +229,72 @@
 			</p>
 			
 			<a name="mottos"></a>
-			<h2>The Mottos Say It All</h2>
+			<h2>Il Motto Dice Tutto</h2>
 			
 		
 			<p>
-				  If you go to the jQuery site, here's what it says at the top of the page:
+				Se vai sul sito di jQuery, a inizio pagina puoi leggere quanto segue:
 			</p>
-			<blockquote>jQuery is a fast and concise JavaScript Library that simplifies HTML document traversing, event handling, animating, and Ajax interactions for rapid web development. jQuery is designed to change the way that you write JavaScript.</blockquote>
+			<blockquote>
+				jQuery &egrave; una libreria JavaScript veloce e compatta che semplifica l'esplorazione del documento HTML, la gestione degli eventi, le animazioni e l'uso di Ajax per velocizzare lo sviluppo web. jQuery &egrave; concepito per cambiare il modo in cui viene scritto il JavaScript.</blockquote>
 			<p>
-				...and if you go to MooTools, this is what you'll find:  
+				...e sul sito ufficiale di MooTools, troverai: 
 			</p>
-			<blockquote>MooTools is a compact, modular, Object-Oriented JavaScript framework designed for the intermediate to advanced JavaScript developer. It allows you to write powerful, flexible, and cross-browser code with its elegant, well documented, and coherent API. </blockquote>
+			<blockquote>
+				MooTools &egrave; un framework JavaScript compatto, modulare e orientato agli oggetti, pensato per lo sviluppatore JavaScript di livello intermedio ed avanzato.
+				Permette di scrivere codice potente, flessibile e cross-browser usando API eleganti, ben documentate e coerenti.</blockquote>
 			<p>
-				I think this really sums it up. If you ask me (and you're reading this, so I'll assume you just have), the question isn't about which framework is better or worse. It's which one of these things above do you want to do? These two frameworks just aren't trying to do the same things. They overlap in the functionality they provide, but they are not trying to do the same things.
+				Penso che queste poche righe possano ben riassumere la questione.
+				Se vuoi sapere cosa ne penso io (e se stai leggendo qui, direi sia questo che vuoi), il problema non &egrave; quale framework sia migliore o peggiore.
+				Quale delle cose dette qui sopra ti interessa avere? Questi due framework non cercano di fare le stesse cose.
+				Certo, si sovrappongono su alcune delle funzionalit&agrave; che offrono, ma non cercano di fare le stesse cose.
 			</p>
 			
 			<p>
-				jQuery's description of itself talks about HTML, events, animations, Ajax, and web development. MooTools talks about object oriented-ness and writing powerful and flexible code. jQuery aspires to "change the way you write JavaScript" while MooTools is designed for the intermediate to advanced JavaScript developer.
+				La descrizione che jQuery fa di s&egrave; parla di HTML, eventi, animazioni, Ajax e sviluppo web.
+				MooTools parla di orientamento agli oggetti, di codice potente e flessibile.
+				jQuery vuole "cambiare il modo in cui viene scritto il JavaScript", mentre MooTools &egrave; "pensato per lo sviluppatore di livello intermedio ed avanzato".
 			</p>
 			
 			<p>
-				Part of this consideration is the notion of a <em>framework</em> vs a <em>toolkit</em>. MooTools is a <em>framework</em> that attempts to implement JavaScript <em>as it should be</em> (according to MooTools' authors). The aim is to implement an API that feels like JavaScript and enhances everything; not just the DOM. jQuery is a <em>toolkit</em> that gives you an easy to use collection of methods in a self-contained system designed to make the DOM itself more pleasant. It just so happens that the DOM is where most people focus their effort when writing JavaScript, so in many cases, jQuery is all you need.
+				I concetti di <em>framework</em> e <em>toolkit</em> sono parte di questa considerazione.
+				MooTools &egrave; un <em>framework</em> che cerca di implementare JavaScript <em>cos&igrave; come dovrebbe essere</em> (secondo gli autori di MooTools).
+				L'obiettivo &egrave; di implementare una interfaccia (API) che si comporta coerentemente con JavaScript e ne migliora ogni aspetto; non solo il DOM, ovvero l'esplorazione e la manipolazione del documento HTML.
+				jQuery &egrave; un <em>toolkit</em> che fornisce una serie di metodi facili da utilizzare in un sistema chiuso, dai contorni ben definiti, che mira a rendere il DOM stesso pi&ugrave; piacevole.
+				&Egrave; un fatto che il DOM sia l'ambito in cui la maggior parte delle persone focalizza la propria attenzione quando scrive JavaScript, perci&ograve; in molti casi jQuery &egrave; tutto quello che ti serve.
 			</p>
 			<p>
-				Most of the code you write when you write MooTools still feels like JavaScript. If you aren't interested in JavaScript as a language, then learning MooTools is going to feel like a chore. If you are interested in JavaScript and what makes it interesting, powerful, and expressive, then, personally, I think MooTools is the better choice.
+				Gran parte del codice che scrivi quando usi MooTools assomiglia ancora al JavaScript.
+				Se non sei interessato al JavaScript come linguaggio, allora imparare MooTools sar&agrave; un duro lavoro.
+				Se sei interessato al JavaScript e a ci&ograve; che lo rende potente ed espressivo, allora credo che MooTools sia la scelta migliore.
 			</p>
 			
 			
 			<a name="learning"></a>
-			<h2>The Learning Curve and The Community</h2>
+			<h2>La Curva di Apprendimento e la Community</h2>
 		
 			<p>
-				First, jQuery is, by and large, easier to learn. It has an almost colloquial style that almost doesn't feel like programming. If all you want is to get something working quickly without learning JavaScript, jQuery is probably a better choice for you. It's not that MooTools can't help you accomplish the same things, but I'll admit that MooTools can be a little harder to get the hang of if you're new to JavaScript and also that there are just a lot of resources out there to help you learn jQuery - more than there are for MooTools at least.
+				Diciamo subito che jQuery &egrave; di gran lunga pi&ugrave; semplice da imparare. Ha uno stile quasi colloquiale che neanche ti sembrer&agrave; di programmare.
+				Se ti interessa avere qualcosa che funzioni subito senza dover imparare JavaScript, probabilmente jQuery &egrave; la scelta migliore per te.
+				Non che MooTools non sia in grado di aiutarti ad ottenere gli stessi risultati, ma devo ammetere che potrebbe essere un po' pi&ugrave; difficile capire come funziona se sei nuovo al linguaggio JavaScript. 
+				Inoltre ci sono un sacco di risorse sul web per aiutarti a imparare jQuery - sicuramente pi&ugrave; di quante ce ne siano per MooTools.
 			</p>
 		
 			<p>
-				If you compare the jQuery community (<a href="http://docs.jquery.com/Discussion">see the "Discussion" page on jQuery</a>) and the MooTools community (<a href="irc://irc.freenode.net/#mootools">irc</a>, <a href="http://groups.google.com/group/mootools-users">mailing list</a>, and <a href="http://mooforum.net/">unofficial forum</a>) you'll quickly discover two things: 1) the jQuery community is <i>far</i> larger (I attribute this mostly to the point I made above about how easy it is to learn, but also because...) and 2) they are more active in promoting the library. If you measure jQuery and MooTools on metrics like the number of people using it, the number of search queries run on Google, the number of books sold, etc, you'll see jQuery is ahead by a wide margin.
+				Se conforonti la community di jQuery (<a href="http://docs.jquery.com/Discussion">vedi la pagina "Discussion"</a>) e quella
+				di MooTools (<a href="irc://irc.freenode.net/#mootools">irc</a>, <a href="http://groups.google.com/group/mootools-users">mailing list</a>, 
+				e <a href="http://mooforum.net/">forum non ufficiale</a>) scoprirai subito due cose: 1) la community di jQuery &egrave; <i>molto</i>
+				pi&ugrave; grande (personalmente attribuisco questo fatto a quanto detto prima sulla facilit&agrave; di apprendimento, ma non solo...) e 2) sono
+				molto pi&ugrave; attivi nel promuovere la libreria.
+				Se misuri jQuery e MooTools sul numero degli utenti, sul numero delle ricerche su Google, sul numero di libri venduti, etc, 
+				vedrai che jQuery ha parecchio vantaggio.
 			</p>
 		
 			<p>
-				To tell you why you might consider MooTools I'll first need to talk a little bit about what both the frameworks do. Ultimately which framework you choose is going to come down to what you want to accomplish and how you like to program (and maybe even <i>if</i> you like to program, at least in JavaScript).
+				Detto questo, per spiegarti perch&egrave; dovresti prendere in considerazione anche MooTools 
+				devo prima parlare un po' di cosa fanno i due framework (e di come lo fanno).
+				Alla fine la tua scelta sar&agrave; dettata da cosa vuoi realizzare e da come preferisci programmare
+				(e forse anche dal <i>se</i> ti piace programmare, almeno in JavaScript).
 			</p>
 			
 			<a name="javascript"></a>
@@ -316,7 +342,7 @@
 			<a name="self"></a>
 			<h3>Self Reference</h3>
 			<p>
-				Javascript has a special word: "this". It's hard for me to succinctly define what "this" is all about but, by default, "this" is the object to which the current method belongs. It allows objects to refer to themselves within their methods as they would otherwise have no means to do so. This becomes important when you create children objects and have numerous instances of that object; how else could the method of an object refer to itself? When the actual copy of the method exists on the parent, not the child, the "this" keyword allows these instances to refer to their own state. (<a href="http://www.quirksmode.org/js/this.html">here's a much more complete description of the "this" keyword</a>, and <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Operators/Special_Operators/This_Operator">another from Mozilla</a>.)  
+				JavaScript has a special word: "this". It's hard for me to succinctly define what "this" is all about but, by default, "this" is the object to which the current method belongs. It allows objects to refer to themselves within their methods as they would otherwise have no means to do so. This becomes important when you create children objects and have numerous instances of that object; how else could the method of an object refer to itself? When the actual copy of the method exists on the parent, not the child, the "this" keyword allows these instances to refer to their own state. (<a href="http://www.quirksmode.org/js/this.html">here's a much more complete description of the "this" keyword</a>, and <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Operators/Special_Operators/This_Operator">another from Mozilla</a>.)  
 			</p>
 			<p>
 				  The "this" keyword allows objects that inherit from other objects to refer to themselves, but there are times when you may want to reference something else through "this". This is called <a href="http://alternateidea.com/blog/articles/2007/7/18/javascript-scope-and-binding">binding</a>, wherein you specify a <i>different</i> "this" for a method. The "each" method on Array allows you to specify the bound object with a second argument. Here's an example of where you might want to pass in a different "this":          
@@ -497,7 +523,7 @@ function(){
 
 
 			<p>
-				 Again, the MooTools code is a bit more verbose, but also more explicit. Also note that the design pattern here is to store the reference to #faq in a variable, where jQuery uses its <i>.end</i> method to return to it. I'll note that it's possible to write highly chained code with Mootools. For example:
+				 Again, the MooTools code is a bit more verbose, but also more explicit. Also note that the design pattern here is to store the reference to #faq in a variable, where jQuery uses its <i>.end</i> method to return to it. I'll note that it's possible to write highly chained code with MooTools. For example:
 			</p>
 <pre class="js">item.getElements('input[type=checkbox]')
 	.filter(function(box) {
