@@ -235,17 +235,17 @@
 			<p>
 				  Se si va sul sito di jQuery, all'inizio della pagina c'&egrave; scritto:
 			</p>
-			<blockquote>jQuery &egrave; una libreria Javascript veloce e concisa che semplifica la navigazione del documento HTML, la gestione degli eventi, le animazioni e le interazioni Ajax per un rapido sviluppo web. jQuery &egrave; progettato per cambiare il modo in cui si scrive Javascript.</blockquote>
+			<blockquote>jQuery &egrave; una libreria JavaScript veloce e concisa che semplifica la navigazione del documento HTML, la gestione degli eventi, le animazioni e le interazioni Ajax per un rapido sviluppo web. jQuery &egrave; progettato per cambiare il modo in cui si scrive JavaScript.</blockquote>
 			<p>
 				...mentre se si va sul sito di MooTools, ecco cosa si trover&agrave; scritto:
 			</p>
-			<blockquote>MooTools &egrave; un framework Javascript Object-Oriented compatto e modulare, progettato per lo sviluppatore Javascript medio/avanzato. Permette di scrivere codice potente, flessibile e cross-browser con le sue eleganti, ben documentate e coerenti API.</blockquote>
+			<blockquote>MooTools &egrave; un framework JavaScript Object-Oriented compatto e modulare, progettato per lo sviluppatore JavaScript medio/avanzato. Permette di scrivere codice potente, flessibile e cross-browser con le sue eleganti, ben documentate e coerenti API.</blockquote>
 			<p>
 				Penso che questo dica gi&agrave; tutto. Se vuoi sapere cosa ne penso io (e stai leggendo, quindi assumo che tu lo voglia), la domanda non &egrave; quale sia il framework migliore o peggiore. Quale delle cose scritte qui sopra vuoi fare? Questi due frameworks non stanno cercando di fare le stesse cose. Si sovrappongono un po' rispetto alle funzionalit&agrave; che mettono a disposizione, ma non stanno cercando di fare le stesse cose.
 			</p>
 			
 			<p>
-			  La descrizione di jQuery stesso parla di HTML, eventi, animazioni, Ajax e sviluppo web. MooTools parla di orientamento agli oggetti (OOP) e riguarda lo scrivere codice potente e flessibile. jQuery aspira a "cambiare il modo di scrivere Javascript" mentre MooTools &egrave; progettato per lo sviluppatore Javascript medio/avanzato.
+			  La descrizione di jQuery stesso parla di HTML, eventi, animazioni, Ajax e sviluppo web. MooTools parla di orientamento agli oggetti (OOP) e riguarda lo scrivere codice potente e flessibile. jQuery aspira a "cambiare il modo di scrivere JavaScript" mentre MooTools &egrave; progettato per lo sviluppatore JavaScript medio/avanzato.
 			</p>
 			
 			<p>
@@ -284,7 +284,7 @@
 			<h2>I Punti di Forza di JavaScript</h2>
 		
 			<p>
-			  Parte della decisione sta nel domandarsi che cosa si vuole fare con Javascript. Consideriamo il JavaScript base. Senza nessun framework; solamente vecchio e puro JS. Mette a disposizione oggetti nativi come
+			  Parte della decisione sta nel domandarsi che cosa si vuole fare con JavaScript. Consideriamo il JavaScript base. Senza nessun framework; solamente vecchio e puro JS. Mette a disposizione oggetti nativi come
 			  <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/String">Strings</a>, <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Number">Numbers</a>, <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Function">Functions</a>, <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Array">Arrays</a>, <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Date">Dates</a>, <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/RegExp">Espressioni regolari</a>, e pi&ugrave;. Inoltre predispone un modello di ereditariet&agrave; - un qualche esoterico modello chiamato <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Inheritance">ereditariet&agrave; prototipale</a> (a riguardo ci torner&ograve; pi&ugrave; avanti). Questi blocchi portanti ed il concetto di ereditariet&agrave; sono pane e burro di ogni linguaggio di programmazione e non hanno assolutamente niente a che vedere con i browsers o con il web o con CSS o HTML. Si potrebbe scrivere qualsiasi cosa si voglia con JavaScript. Tris, scacchi, photo editing, un server web, qualunque cosa. Il fatto &egrave; che il 99% di tutto il JS che c'&egrave; in giro lo vediamo eseguire nei browsers ed &egrave; in questo contesto che lo pensiamo. Ossia il linguaggio di programmazione per il browser.
 			</p>
 			<p>
@@ -632,13 +632,17 @@ $(document).ready(function() {
 			
 			
 			<a name="mooinheritance"></a>
-			<h3>MooTools and Inheritance</h3>
+			<h3>L'Ereditariet&agrave; in MooTools</h3>
 		
 			<p>
-				Despite its name, the MooTools <em>Class</em> function is not really a class nor does it create them. It has design patterns that might remind you of classes in a more traditional programming language, but really <em>Class</em> is all about objects and prototypal inheritance. (Unfortunately, using words like "class" are the most convenient way to describe these things, so for the purposes of this article, when I refer to "classes" I'm referring to functions that return objects - which I'll call "instances" - that inherit from a prototype.)
+			
+				Nonostante il suo nome, in MooTools la funzione <em>Class</em> non &agrave; veramente una classe e non crea classi. Ha uno schema di progettazione che potrebbe ricordare le classi di un
+				linguaggio di programmazione tradizionale, ma in realt&agrave; <em>Class</em> riguarda sempre oggetti ed ereditariet&agrave; prototipale. (Sfortunatamente la parola "class"
+				&egrave; quella che meglio descrive queste cose, quindi nell'articolo quando parlo di "classi" faccio riferimento a funzioni che ritornano oggetti - che chiamer&ograve; 
+				"istanze" - che ereditano da un prototipo.)
 			</p>
 			<p>
-				To make a class, you pass an object to the <em>Class</em> constructor like this:
+				Per creare una classe, devi passare un oggetto al costruttore <em>Class</em> in questo modo:
 			</p>
 		
 <pre class="js">var Human = new Class({
@@ -649,23 +653,34 @@ $(document).ready(function() {
     isAlive: true,
     energy: 1,
     eat: function() {
-        this.energy = this.energy + 1; //same as this.energy++
+        this.energy = this.energy + 1; //oppure this.energy++
     }
 });</pre>
 		
 			<p>
-				You pass <em>Class</em> an object (above, we pass an object with members like "isAlive" and "eat") and this object becomes the prototype of every instance of that class. To create an instance, you call it like this:
+			
+				Passando l'oggetto a <em>Class</em> (nell'esempio abbiamo passato un oggetto con propriet&agrave; e metodi come "isAlive" e "eat") l'oggetto diventa il prototipo
+				di ogni istanza di quella classe. Dopo aver creato la classe, puoi crearne le istanze, ad esempio:
 			</p>
-<pre class="js">var bob = new Human("bob", 20); //bob's name is "bob" and he's 20 years old.</pre>
+<pre class="js">var bob = new Human("bob", 20); //bob si chiama "bob" e ha 20 anni.</pre>
 			<p>
-				Now we have an instance of <em>Human</em>. <em>bob</em> has the properties of the object we defined when we created our <em>Human</em> class. But the important thing is that <em>bob</em> has these properties through inheritance. When we reference <i>bob.eat</i>, <i>bob</i> doesn't really have this property. JavaScript looks at <i>bob</i> and he doesn't have an <i>eat</i> method, so it looks up the inheritance chain and finds it on the object we passed when we created the <em>Human</em> class. This is true for <i>energy</i>, too. At first glance this looks potentially bad; we don't want all the humans we create to gain energy every time that <i>bob</i> eats. The important thing to recognize is that the first time we assign a value to <i>bob</i>'s energy, we assign him his own value and we no longer look at the prototype for it. So the first time <i>bob</i> eats, he gets his own definition for <em>energy</em> (set to 2).
+				Ora abbiamo una istanza di <em>Human</em>. <em>bob</em> ha le propriet&agrave; dell'oggetto definito al momento della creazione della class <em>Human</em>.
+				Ma la cosa importante &egrave; che <em>bob</em> ha queste propriet&agrave; per ereditariet&agrave;. Quando facciamo riferimento a <i>bob.eat</i>, <i>bob</i> non
+				ha davvero quel metodo. JavaScript sa che <i>bob</i> non ha un metodo <i>eat</i>, e quindi lo cerca lungo la catena di ereditariet&agrave;, 
+				trovandolo sull'oggetto che abbiamo passato quando abbiamo creato la classe <em>Human</em>. Questo vale anche per <i>energy</i>. A prima vista ci&ograve;
+				pu&ograve; sembrare sbagliato; non vogliamo che tutti gli umani acquisiscano energia ogni volta che <i>bob</i> mangia. La cosa importante da capire &egrave;
+				che appena assegnamo un valore all'energia di <i>bob</i>, assegnamo a <i>bob</i> un valore proprio, e non guardiamo pi&ugrave; al valore del prototipo.
+				Perci&ograve; la prima volta che <i>bob</i> manger&agrave;, acquisir&agrave; una sua definizione di <em>energy</em> (pari a 2).
 			</p>
 			<pre class="js">bob.eat(); //bob.energy == 2</pre>
 			<p>
-				Note that <em>bob</em>'s name and age are unique to him; these are assigned to him when the class is initialized in the <i>initialize</i> method.
+				Da notare che il nome e l'et&agrave; di <em>bob</em> sono unicamente suoi; infatti queste due propriet&agrave; vengono ad esso assegnate durante l'inizializzazione
+				della classe, nel metodo <i>initialize</i>.
 			</p>
 			<p>
-				This whole pattern may seem a little odd to you, but the value here is that we can define functionality for a pattern and create instances of that pattern every time we need it. Each instance maintains its own state. So if we create another instance each one is independent of the other, but inherits from the same base pattern:
+				Tutto questo comportamento potr&agrave; sembrarti un po' strano, ma il suo punto di forza sta nel fatto che possiamo definire funzionalit&agrave; per un certo modello e
+				creare istanze di quel modello ogni volta che ne abbiamo bisogno. Ogni istanza manterr&agrave; il proprio stato. Dunque se creiamo un'altra
+				istanza, ciascuna sar&agrave; indipendente dalle altre, ma erediter&agrave; dallo stesso modello base:
 			</p>
 		
 <pre class="js">var Alice = new Human();
@@ -673,7 +688,7 @@ $(document).ready(function() {
 //bob.energy == 2</pre>
 		
 			<p>
-				Where things get really interesting is when we want to augment this behavior.
+				Le cose si fanno veramente interessanti quando cominciamo a sfruttare questo meccanisco aggiungendo dell'altro.
 			</p>
 			
 			<a name="extension"></a>
