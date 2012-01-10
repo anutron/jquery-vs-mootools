@@ -105,7 +105,7 @@
 
 			<h1 class="span-24 last">jQuery vs MooTools</h1>
 			<div class="caption">
-				May, 2009 - <a href="http://www.clientcide.com" target="_blank">Aaron Newton of Clientcide</a><br />
+				Maggio 2009 - <a href="http://www.clientcide.com" target="_blank">Aaron Newton, Clientcide</a><br />
   				Traduzione di <a href="http://www.lorenzostanco.com">Lorenzo Stanco</a> e <a href="http://www.steweb.it">Stefano Ceschi Berrini</a>
 				<div class="trans">
 					Also available in 
@@ -697,7 +697,7 @@ var Human = new Class({
 		
 			<p>
 				Proviamo a rivisitare il plugin jQuery per le <i>faq</i>. Cosa accadrebbe se volessimo aggiungere un'ulteriore funzionalit&agrave; al plugin?
-				Se volessimo, ad esempio, fare una version AJAX del plugin che legga le risposte alle domande dal server? Supponiamo che 
+				Se volessimo, ad esempio, fare una versione AJAX del plugin che legga le risposte alle domande dal server? Supponiamo che 
 				il plugin <i>faq</i> sia stato scritto da qualcun altro e che vogliamo arricchirlo senza modificare in alcun modo l'originale.
 			</p>
 			<p>
@@ -754,7 +754,7 @@ var blackNinja = new Ninja('Nin Tendo', 'unknown', 'evil');
 //blackNinja.isAlive = true
 //blackNinja.name = 'Nin Tendo'
 blackNinja.attack(bob);
-//bob never had a chance</pre>
+//bob non ha chance</pre>
 
 			<p>
 				Uccisioni a parte, ci sono alcune cose interessanti da considerare. Il metodo <em>initialize</em> nella classe
@@ -862,43 +862,47 @@ var FAQ = new Class({
 </pre>
 
 			<p>
-				Woah. That's a lot of code. Even if we remove all the comments it's still two dozen lines long. I already illustrated above that we could build this plug-in with roughly the same amount of code as the jQuery version. So why is this one so much longer? Well, we've made it much more flexible. To use the class, we just call the constructor, like this:
+				Per&ograve;! &Egrave; un sacco di codice. Anche se togliessimo tutti i commenti, sarebbero ancora due dozzine di linee.
+				Ho gi&agrave; mostrato come sia possibile realizzare questo plugin con pi&ugrave; o meno la stessa quantit&agrave; di codice 
+				della versione jQuery. Allora perch&eacute; questa versione &egrave; cos&igrave; tanto lunga? Beh, l'abbiamo resa molto pi&ugrave; flessibile.
+				Per usare la classe ci basta chiamare il costruttore, in questo modo.
 			</p>
 
 <pre class="js">var myFAQ = new FAQ(myContainer);
-//and now we can call methods on it if we want:
-myFAQ.toggle(2); //toggle the 3rd element
+//volendo ora possiamo chiamare dei metodi:
+myFAQ.toggle(2); //mostra il terzo elemento
 </pre>
 
 			<p>
-				We can access methods and properties of the instance. But what about our ajax functionality? The problem with our ajax extension to the jQuery version was that we couldn't delay the opening of the definition until after it loaded. We don't have that problem with our MooTools version:
-				
+				Possiamo accedere a metodi e propriet&agrave; dell'istanza. E la nostra versione ajax?
+				Il problema con jQuery era che non potevamo ritardare l'apertura animata della definizione 
+				aspettando il completamento della richiesta ajax. Non abbiamo pi&ugrave; questo problema con MooTools:
 			</p>
 
 <pre class="js">FAQ.Ajax = new Class({
-	//this class inherits the properties of FAQ
+	//questa classe eredita le propriet&agrave; della classe FAQ
 	Extends: FAQ,
-	//it also gets a new option in addition to the other defaults
-	//this one for url, that we're going to append the index of the
-	//term to; in reality we might make this more robust, but for
-	//this example it serves the purpose
+	//aggiungiamo anche un'altra opzione a quelle di default.
+	//questa &agrave; l'url, alla quale aggiungeremo l'indice del
+	//termine; veramente potremmo fare qualcosa di pi&ugrave; robusto,
+	//ma come esempio va bene cos&igrave;
 	options: {
 		url: null;
 	},
-	//we're going to cache the results, so if a section is opened
-	//twice, we won't hit the server for the data
+	//memorizzeremo i risultati delle chiamate ajax, cos&igrave; se una sezione verr&agrave;
+	//aperta due volte non avremo bisogno di interrogare nuovamente il server
 	indexesLoaded: [],
 	toggle: function(index){
-		//if we've already loaded the definition
+		//se abbiamo gi&agrave; caricato la definizione
 		if (this.indexesLoaded[index]) {
-			//just call the previous version of toggle
+			//ci basta chiamare la versione precedente di toggle
 			this.parent(index);
 		} else {
-			//otherwise, request the data from the server
+			//altrimenti, invia la richiesta al server
 			new Request.HTML({
 				update: this.definitions[index],
 				url: this.options.url + index,
-				//and when the data is loaded, expand the definition
+				//e quando i dati sono pronti, espandi la definizione
 				onComplete: function(){
 					this.indexesLoaded[index] = true;
 					this.definitions[index].slide('toggle');
@@ -910,12 +914,25 @@ myFAQ.toggle(2); //toggle the 3rd element
 </pre>
 
 			<p>
-				Now we have a version of our <em>FAQ</em> class that allows us to get the definitions from the server. Note that we were able to integrate the new logic in a way that doesn't expand the definition until <em>after</em> the content comes back from the server (which we couldn't do with the jQuery version). Also note that we really only had to describe the new functionality (the ajax) and little else. This extensibility makes it possible for you to create families of plug-ins that offer different shades of functionality. It also means that you can use someone else's plug-in and alter just the bits that you to be want different if you need to (without forking it). This helps explain why, for any given design pattern - a date picker, a tab interface, etc, that you typically only find a few plug-ins for MooTools. Most of the plug-ins you get either solve your problem or, if not, you can just extend them to add the things you need.
-				
+				Ora abbiamo una versione della classe <em>FAQ</em> che ci permette di caricare le definizioni dal server.
+				Da notare che siamo riusciti ad integrare la nuova logica in modo da non far apparire la definizione
+				prima della ricezione del contenuto dal server (cosa che non potevamo fare nella versione jQuery).
+				Da notare anche come sia stato necessario descrivere solamente la nuova funzionalit&agrave; (ajax) e poco altro.
+				Questa estensibilit&agrave; rende possibile la creazione di famiglie di plugin che offrono diverse
+				sfumature di medesime funzionalit&agrave;. Ci&ograve; significa anche che possiamo usare plugin scritti 
+				da altri e modificarne solo quelle piccole parti che vogliamo diverse (senza dover duplicare tutto).
+				Questo spiega perch&eacute;, data una certa funzione - un selettore di date, una interfaccia a tabs, etc - 
+				si trovano pochi plugin per MooTools. Molti plugin infatti risolvono il problema oppure, se non lo fanno,
+				&egrave; possibile estenderli facilmente aggiungendo quello che serve.
 			</p>
 			
 			<p>
-				As I illustrated earlier, it's possible to write complex jQuery widgets with methods and state. Most of the code you write when doing this is vanilla JavaScript when you need to express logic that isn't related to the DOM. But jQuery's model doesn't offer a system for extending these instances into subclasses. Nor does it help you with mixins that can be reused easily. Finally, jQuery's plugins are always attached to DOM elements. If you wanted to write a class that, say, processed URLs, there's no stateful system for such a thing unless you write it yourself.
+				Come ho illustrato prima, &egrave; possibile scrivere widget complessi con jQuery, con metodi e stato.
+				Gran parte del codice scritto facendo ci&ograve; &egrave; JavaScipt puro quando c'&egrave; necessita di 
+				esprimere logiche non relative al DOM. Ma il modello di jQuery non offre un sistema per estendere queste 
+				istanze	in sottoclassi. E nemmeno aiuta con mixin riutilizzabili facilmente.
+				Infine, i plugin di jQuery sono sempre collegati a elementi del DOM. Se si vuole scrivere una classe 
+				che, diciamo, elabora degli URL, non c'&egrave; un sistema con stato per fare cose di questo tipo, a meno che non lo si scriva appositamente.
 			</p>
 			
 			<a name="conclusion"></a>
@@ -954,12 +971,18 @@ myFAQ.toggle(2); //toggle the 3rd element
 			</p>
 			<hr/>
 			<p class="about">
-				About me: I am a <a href="http://www.mootools.net">MooTools</a> contributor and I blog about JavaScript and other things on my site <a href="http://www.clientcide.com">Clientcide</a> as well as release <a href="http://www.clientcide.com/js">numerous plug-ins for MooTools</a>. I am the author of <a href="http://www.amazon.com/gp/product/1430209836?ie=UTF8&tag=clientside-20&link_code=as3&camp=211189&creative=373489&creativeASIN=1430209836">MooTools Essentials</a> as well as the <a href="http://www.mootorial.com">MooTools online tutorial</a>. I work at a company in the SF Bay Area called <a href="http://www.cloudera.com">Cloudera</a>. <a href="http://www.clientcide.com/shout-out">I can be contacted thusly</a>.
+				
+				Chi sono: sono un collaboratore <a href="http://www.mootools.net">MooTools</a> e ho un blog su JavaScript e altro sul mio sito 
+				<a href="http://www.clientcide.com">Clientcide</a>, insieme a <a href="http://www.clientcide.com/js">numerosi plugin 
+				per MooTools</a>. Sono l'autore di 
+				<a href="http://www.amazon.com/gp/product/1430209836?ie=UTF8&tag=clientside-20&link_code=as3&camp=211189&creative=373489&creativeASIN=1430209836">MooTools Essentials</a> 
+				e del <a href="http://www.mootorial.com">tutorial di MooTools</a>. Lavoro in una societ&agrave; nella baia di San Francisco chiamata <a href="http://www.cloudera.com">Cloudera</a>. 
+				Puoi contattarmi <a href="http://www.clientcide.com/shout-out">qui</a>.
 			</p>
 			
 			<a name="discussion"></a>
 			<hr/>
-			<p class="about" style="color: #700"><strong>A note on comments here</strong>: These comments are moderated. No comments will show up until they are approved. Comments that are not productive (i.e. inflammatory, rude, etc) will not be approved. Similarly, "fan" comments won't be approved either - i.e. no "FrameworkX Rulez! It's better than FrameworkY for realz!" are not constructive comments.
+			<p class="about" style="color: #700"><strong>Una nota sui commenti</strong>: I commenti sono moderati. Nessun commento verr&agrave; pubblicato prima di essere controllato. Commenti non costruttivi (polemici, sgarbati, ecc) non saranno approvati. Allo stesso modo, commenti da "tifoso" non saranno accettati - ad esempio "Il FrameworkX spacca! Sicuramente meglio di FrameworkY!" non &egrave; considerato un commento costruttivo.
 			</p>
 			<div id="disqus_thread"></div>
 			<script>
