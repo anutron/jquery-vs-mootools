@@ -264,20 +264,20 @@
 			</p>
 		
 			<p>
-				Se conforonti la community di jQuery (<a href="http://docs.jquery.com/Discussion">vedi la pagina "Discussion"</a>) e quella
+				Se si mette a confronto la community di jQuery (<a href="http://docs.jquery.com/Discussion">vedi la pagina "Discussion"</a>) e quella
 				di MooTools (<a href="irc://irc.freenode.net/#mootools">irc</a>, <a href="http://groups.google.com/group/mootools-users">mailing list</a>, 
-				e <a href="http://mooforum.net/">forum non ufficiale</a>) scoprirai subito due cose: 1) la community di jQuery &egrave; <i>molto</i>
+				e <a href="http://mooforum.net/">forum non ufficiale</a>) si notano subito due cose: 1) la community di jQuery &egrave; <i>molto</i>
 				pi&ugrave; grande (personalmente attribuisco questo fatto a quanto detto prima sulla facilit&agrave; di apprendimento, ma non solo...) e 2) sono
 				molto pi&ugrave; attivi nel promuovere la libreria.
-				Se misuri jQuery e MooTools sul numero degli utenti, sul numero delle ricerche su Google, sul numero di libri venduti, ecc, 
+				Misurando jQuery e MooTools sul numero degli utenti, sul numero delle ricerche su Google, sul numero di libri venduti, ecc, 
 				jQuery stravince.
 			</p>
 		
 			<p>
-				Detto questo, per spiegarti perch&eacute; dovresti prendere in considerazione anche MooTools 
-				devo prima mostrarti cosa fanno i due framework (e come lo fanno).
-				Alla fine la tua scelta sar&agrave; dettata da cosa vuoi realizzare e da come preferisci programmare
-				(e forse anche dal <i>se</i> ti piace programmare, almeno in JavaScript).
+				Detto questo, per spiegare perch&eacute; si dovrebbe prendere in considerazione anche MooTools 
+				devo prima mostrare cosa fanno i due framework (e come lo fanno).
+				Alla fine la scelta sar&agrave; dettata da cosa si vuol realizzare e da come si preferisce programmare
+				(e forse anche dal <i>se</i> piace programmare, almeno in JavaScript).
 			</p>
 			
 			<a name="javascript"></a>
@@ -285,7 +285,7 @@
 		
 			<p>
 			  Parte della decisione sta nel domandarsi che cosa si vuole fare con JavaScript. Consideriamo il JavaScript base. Senza nessun framework; solamente vecchio e puro JS. Mette a disposizione oggetti nativi come
-			  <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/String">Strings</a>, <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Number">Numbers</a>, <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Function">Functions</a>, <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Array">Arrays</a>, <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Date">Dates</a>, <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/RegExp">Espressioni regolari</a>, e pi&ugrave;. Inoltre predispone un modello di ereditariet&agrave; - un qualche esoterico modello chiamato <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Inheritance">ereditariet&agrave; prototipale</a> (a riguardo ci torner&ograve; pi&ugrave; avanti). Questi blocchi portanti ed il concetto di ereditariet&agrave; sono pane e burro di ogni linguaggio di programmazione e non hanno assolutamente niente a che vedere con i browsers o con il web o con CSS o HTML. Si potrebbe scrivere qualsiasi cosa si voglia con JavaScript. Tris, scacchi, photo editing, un server web, qualunque cosa. Il fatto &egrave; che il 99% di tutto il JS che c'&egrave; in giro lo vediamo eseguire nei browsers ed &egrave; in questo contesto che lo pensiamo. Ossia il linguaggio di programmazione per il browser.
+			  <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/String">Strings</a>, <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Number">Numbers</a>, <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Function">Functions</a>, <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Array">Arrays</a>, <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Date">Dates</a>, <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/RegExp">Espressioni regolari</a>, e pi&ugrave;. Inoltre predispone un modello di ereditariet&agrave; - un qualche esoterico modello chiamato <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Inheritance">ereditariet&agrave; prototipale</a> (ne parler&ograve; pi&ugrave; avanti). Questi blocchi portanti ed il concetto di ereditariet&agrave; sono pane e burro di ogni linguaggio di programmazione e non hanno assolutamente niente a che vedere con i browsers o con il web o con CSS o HTML. Si potrebbe scrivere qualsiasi cosa si voglia con JavaScript. Tris, scacchi, photo editing, un server web, qualunque cosa. Il fatto &egrave; che il 99% di tutto il JS che c'&egrave; in giro lo vediamo eseguito sui browsers ed &egrave; in questo contesto che lo pensiamo. Ossia il linguaggio di programmazione per il browser.
 			</p>
 			<p>
 			  Sapere che il browser, il DOM, &egrave; l'area dove la maggior parte delle volte utilizziamo JavaScript ma che quest'ultimo &egrave; anche un liguaggio di programmazione molto robusto ed espressivo aiuter&agrave; a capire le differenze tra MooTools e jQuery.
@@ -299,21 +299,21 @@
 			  Se si pensa a cosa si vuole fare con JavaScript in termini di "prendere elementi nella pagina per farne qualcosa" allora jQuery &egrave; probabilmente la scelta migliore. Eccelle nell'offrire un sistema molto espressivo per descrivere il comportamento nelle pagine in un modo che quasi non sembra programmazione vera e propria. Si pu&ograve; sempre continuare ad usare il resto in JavaScript per fare quello che si vuole, ma se si &egrave; focalizzati sul DOM - per cambiare propriet&agrave; CSS, animare elementi, recuperare dei contenuti via Ajax, etc - tutto quello che si vorr&agrave; fare sar&agrave; ottenibile tramite jQuery, pi&ugrave; qualcosa - se mancante in jQuery - in vecchio e puro JavaScript. jQuery mette anche a disposizione metodi che non riguardano prettamente il DOM; ad esempio, offre un meccanismo per iterare sugli array - <i><a href="http://docs.jquery.com/Utilities/jQuery.each">$.each(array,fn)</a></i> - oppure, ad esempio, offre un metodo per il trim delle stringhe - <a href="http://docs.jquery.com/Utilities/jQuery.trim">$.trim(str)</a></i>. Ma non sono presenti molti metodi di questo tipo, che &egrave; un bene, perch&eacute;, per la maggior parte, se si stanno solo prendendo elementi dal DOM, ci si itera sopra, e li si altera (aggiungendo html, cambiando stili, aggiungendo dei listener per eventi quali click e mouseover, etc) non serve molto altro.
 			</p>
 			<p>
-			  Ma se si pensa al JavaScript nella sua totalit&agrave;, si pu&ograve; notare come jQuery non si focalizzi in cose al di fuori del DOM. Questa &egrave; una delle ragioni per cui &egrave; cos&igrave; facile da imparare, ma altres&igrave; limita il modo in cui pu&ograve; aiutare a scrivere JavaScript. Sta solamente cercando di essere nientemeno che un solido sistema di programmazione per il DOM. Non prevede ereditariet&agrave; e nemmeno dispone di utilit&agrave; per tutti i tipi nativi del linguaggio JavaScript, ma non ne ha la necessit&agrave;. Se si vogliono fare magie con stringhe, date, espressioni regolari, array e funzioni, &egrave; possibile. Ma aiutare in questo non &egrave; compito di jQuery. JavaScript come linguaggio &egrave; quello che serve. jQuery rende il DOM il tuo ambiente, ma il resto del linguaggio JavaScript &egrave; fuori dalla sua ottica.
+			  Ma se si pensa al JavaScript nella sua totalit&agrave;, si pu&ograve; notare come jQuery non si focalizzi in cose al di fuori del DOM. Questa &egrave; una delle ragioni per cui &egrave; cos&igrave; facile da imparare, ma altres&igrave; limita il modo in cui pu&ograve; aiutare a scrivere JavaScript. Vuol essere niente pi&ugrave; che un solido sistema di programmazione per il DOM. Non prevede ereditariet&agrave; e nemmeno dispone di utilit&agrave; per tutti i tipi nativi del linguaggio JavaScript, ma non ne ha la necessit&agrave;. Se si vogliono fare magie con stringhe, date, espressioni regolari, array e funzioni, &egrave; possibile. Ma aiutare in questo non &egrave; compito di jQuery. JavaScript come linguaggio &egrave; quello che serve. jQuery rende il DOM il tuo ambiente, ma il resto del linguaggio JavaScript &egrave; fuori dalla sua ottica.
 			</p>
 			<p>
-			  &Egrave; qui dove si differenzia maggiormente MooTools. Piuttosto che focalizzarsi esclusivamente sul DOM (comunque, e ci torner&ograve; piu avanti, offre tutte le stesse funzionalit&agrave; di jQuery ma consegue lo scopo in maniera totalmente differente), MooTools prende sotto suo dominio tutto l'intero linguaggio. Se jQuery rende il DOM l'ambiente operativo, MooTools mira a rendere tutto JavaScript come ambiente operativo, e questa &egrave; una delle ragioni per cui &egrave; pi&ugrave; ostico da imparare.
+			  &Egrave; qui la differenza maggiore rispetto a MooTools. Piuttosto che focalizzarsi esclusivamente sul DOM (comunque, e ci torner&ograve; piu avanti, offre tutte le stesse funzionalit&agrave; di jQuery ma consegue lo scopo in maniera totalmente differente), MooTools prende sotto suo dominio tutto l'intero linguaggio. Se jQuery rende il DOM l'ambiente operativo, MooTools mira a rendere tutto JavaScript come ambiente operativo, e questa &egrave; una delle ragioni per cui &egrave; pi&ugrave; ostico da imparare.
 			</p>
 			
 			<a name="inheritance"></a>
 			<h3>L'Ereditariet&agrave; in JavaScript</h3>
 		
 			<p>
-			  Il linguaggio di programmazione JavaScript offre alcune cose veramente fantastiche a riguardo. Per i principianti, &egrave; un <a href="http://en.wikipedia.org/wiki/Functional_programming">linguaggio funzionale</a>, significa che tratta le funzioni come oggetti di ordine superiore che possono essere passati come variabili praticamente come tutti gli altri oggetti - stringhe o numeri ad esempio. &Egrave; progettato con questo concetto nella mente e molti dei metodi e dei pattern presenti funzionano al meglio quando il codice viene scritto in questo modo. &Egrave; la differenza tra: 
+			  Il linguaggio di programmazione JavaScript offre alcune cose veramente fantastiche a riguardo. Per i principianti, &egrave; un <a href="http://en.wikipedia.org/wiki/Functional_programming">linguaggio funzionale</a>, significa che tratta le funzioni come oggetti di ordine superiore che possono essere passati come variabili praticamente come tutti gli altri oggetti - stringhe o numeri ad esempio. &Egrave; progettato su questo concetto base e molti dei metodi e dei pattern presenti funzionano al meglio quando il codice viene scritto in questo modo. &Egrave; la differenza tra: 
 			</p>
 <pre class="js">for (var i = 0; i &lt; myArray.length; i++) { /* fai qualcosa */ }</pre>
 			<p>
-				  e
+				  e:
 			</p>
 			<pre class="js">myArray.forEach(function(item, index) { /* fai qualcosa */ });</pre>
 			<p>
@@ -327,10 +327,10 @@
 			<a name="self"></a>
 			<h3>Autoreferenza</h3>
 			<p>
-			  In JavaScript esiste una keyword speciale: "this". &Egrave; difficile per me in poche parole definirla ma, di default, "this" &egrave; l'oggetto al quale il metodo corrente appartiene. Permette agli oggetti di riferirsi a se stessi all'interno dei loro metodi, in quanto altrimenti non avrebbero altri mezzi per farlo. Tutto questo inizia a diventare importante quando si creano ogetti figli e numerose istanze di quell'oggetto; come altro potrebbe il metodo di un oggetto riferirsi all'oggetto stesso? Quando la copia attuale del metodo esiste nel padre, non nel figlio, la keyword "this" permette a queste istanze di riferirsi al loro stato. (<a href="http://www.quirksmode.org/js/this.html">qui c'&egrave; una piu completa descrizione a riguardo</a>, ed <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Operators/Special_Operators/This_Operator">un'altra da Mozilla</a>)
+			  In JavaScript esiste una keyword speciale: "this". &Egrave; difficile per me in poche parole definirla ma, di default, "this" &egrave; l'oggetto al quale il metodo corrente appartiene. Permette agli oggetti di riferirsi a se stessi all'interno dei loro metodi, in quanto altrimenti non avrebbero altri mezzi per farlo. Tutto questo inizia a diventare importante quando si creano oggetti figli e numerose istanze di quell'oggetto; come altro potrebbe il metodo di un oggetto riferirsi all'oggetto stesso? Quando la copia attuale del metodo esiste nel padre, non nel figlio, la keyword "this" permette a queste istanze di riferirsi al loro stato. (<a href="http://www.quirksmode.org/js/this.html">qui c'&egrave; una piu completa descrizione a riguardo</a>, ed <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Operators/Special_Operators/This_Operator">un'altra da Mozilla</a>)
 			</p>
 			<p>
-			  La keyword "this" permette agli oggetti che ereditano da altri oggetti di riferirsi a loro stessi, ma ci sono volte in cui si vorrebbe far riferimento a qualcos altro attraverso il "this". Questo procedimento &egrave; chiamato <a href="http://alternateidea.com/blog/articles/2007/7/18/javascript-scope-and-binding">binding</a>, ossia quando si specifica un "this" <i>diverso</i> per un metodo. Il metodo "each" (del tipo Array) permette di specificare l'oggetto a cui far riferimento attraverso un secondo argomento. Qui sotto c'&egrave; un esempio che esplica il passaggio di un "this" differente:
+			  La keyword "this" permette agli oggetti che ereditano da altri oggetti di riferirsi a loro stessi, ma ci sono volte in cui si vorrebbe far riferimento a qualcos'altro attraverso il "this". Questo procedimento &egrave; chiamato <a href="http://alternateidea.com/blog/articles/2007/7/18/javascript-scope-and-binding">binding</a>, ossia quando si specifica un "this" <i>diverso</i> per un metodo. Il metodo "each" (del tipo Array) permette di specificare l'oggetto a cui far riferimento attraverso un secondo argomento. Qui sotto c'&egrave; un esempio che esplica il passaggio di un "this" differente:
 			</p>
 <pre class="js">var ninja = {
     weapons: ['katana', 'throwing stars', 'exploding palm technique'],
@@ -339,7 +339,7 @@
     },
     logInventory: function() {
         this.weapons.each(function(weapon) {
-			//vogliamo che "this" faccia riferimento a ninja...
+            //vogliamo che "this" faccia riferimento a ninja...
             this.log('this ninja can kill with its ' + weapon);
         }, this); //quindi passiamo "this" (che &egrave; ninja) ad Array.each
     }
@@ -360,10 +360,10 @@ ninja.logInventory();
 			<h2>MooTools Rende JavaScipt Pi&ugrave; Divertente</h2>
 		
 			<p>
-			  Dato che MooTools si focalizza nel rendere le API JavaScript stesse piu stabili e coerenti, perde un p&ograve; nel dare un'interfaccia che "cambia il modo in cui si scrive JavaScript" e nel rendere JavaScript nell'insieme meno frustrante; MooTools &egrave; un'estensione del liguaggio JavaScript. MooTools prova a rendere il JavaScript com'&egrave; stato pensato. Una parte significante del "core" &egrave; viene utilizzata per arricchire Funzioni, Stringhe, Array, Number, Element ed altri prototipi. L'altra enorme cosa che offre &egrave; una funzione chiamata <em><a href="http://mootools.net/docs/core/Class/Class">Class</a></em>.
+			  Dato che MooTools si focalizza nel rendere le API JavaScript stesse piu stabili e coerenti, perde un p&ograve; nel dare un'interfaccia che "cambia il modo in cui si scrive JavaScript" e nel rendere JavaScript nell'insieme meno frustrante; MooTools &egrave; un'estensione del liguaggio JavaScript. MooTools prova a rendere il JavaScript cos&igrave; com'&egrave; stato pensato. Una parte significativa del "core" viene utilizzata per arricchire Funzioni, Stringhe, Array, Number, Element ed altri prototipi. L'altro enorme aspetto del "core" di MooTools &egrave; che offre una funzione chiamata <em><a href="http://mootools.net/docs/core/Class/Class">Class</a></em>.
 			</p>
 			<p>
-			  Ora, attraverso <em>Class</em> sembrerebbe si stesse cercando di ricreare un pi&ugrave; classico modello di ereditariet&agrave; che si puo trovare in Java o C++, ma <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Class-Based_vs._Prototype-Based_Languages">non &egrave; cos&igrave;</a>. Quello che fa <em>Class</em> &egrave; rendere il modello di ereditariet&agrave; prototipale del JavaScript pi&ugrave; facile ed accessibile e qualcosa da cui prendere vantaggio. Da notare che questi concetti non sono unici in MooTools (altri frameworks offrono funzionalit&agrave; similari), ma non sono presenti in jQuery. Quest'ultimo non offre un sistema di ereditariet&agrave; n&egrave; offre estensioni per gli oggetti nativi (Function, String, etc). Sia chiaro, non &egrave; un difetto di jQuery, in quanto i suoi autori potrebbero rendere facilmente disponibili queste cose. Loro hanno invece progettato un toolkit con un obiettivo diverso in mente. Dove MooTools mira a rendere JavaScript pi&ugrave; divertente, jQuery mira a rendere il DOM pi&ugrave; divertente ed i progettisti hanno scelto di limitare i loro scopi a questi compiti.
+			  Ora, attraverso <em>Class</em> sembrerebbe si stesse cercando di ricreare un pi&ugrave; classico modello di ereditariet&agrave; che si puo trovare in Java o C++, ma <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Class-Based_vs._Prototype-Based_Languages">non &egrave; cos&igrave;</a>. Quello che fa <em>Class</em> &egrave; rendere il modello di ereditariet&agrave; prototipale del JavaScript pi&ugrave; facile ed accessibile e qualcosa da cui prendere vantaggio. Da notare che questi concetti non sono unici in MooTools (altri frameworks offrono funzionalit&agrave; similari), ma non sono presenti in jQuery. Quest'ultimo non offre un sistema di ereditariet&agrave; n&eacute; offre estensioni per gli oggetti nativi (Function, String, etc). Sia chiaro, non &egrave; un difetto di jQuery, in quanto i suoi autori potrebbero rendere facilmente disponibili queste cose. Loro hanno invece progettato un toolkit con un obiettivo diverso in mente. Mentre MooTools mira a rendere JavaScript pi&ugrave; divertente, jQuery mira a rendere il DOM pi&ugrave; divertente ed i progettisti hanno scelto di limitare i loro scopi a questi compiti.
 			</p>
 			
 			<a name="domfun"></a>
@@ -386,7 +386,7 @@ ninja.logInventory();
 });</pre>
 
 			<p>
-			  Se si legge il <a href="http://www.amazon.com/gp/product/1430209836?ie=UTF8&tag=clientside-20&link_code=as3&camp=211189&creative=373489&creativeASIN=1430209836">libro su MooTools</a> oppure il <a href="http://www.mootorial.com/wiki">tutorial MooTools</a> (dei quali ne sono l'autore) questi approcciano in maniera completamente differente. Mentre si pu&ograve; saltare gran parte ed andare direttamente ad imparare cose su effetti e DOM, se si vuol imparare seriamene MooTools, bisognerebbe iniziare con cose come <em>Class</em>, e, lo ammetto: se si &egrave; alle prime armi con la programmazione, o si vuol solamente qualcosa che funzioni nel proprio sito senza approfondire il linguaggio JavaScript, jQuery sicuramente risulter&agrave; molto pi&ugrave; semplice ed "amichevole".
+			  Se si legge il <a href="http://www.amazon.com/gp/product/1430209836?ie=UTF8&tag=clientside-20&link_code=as3&camp=211189&creative=373489&creativeASIN=1430209836">libro su MooTools</a> oppure il <a href="http://www.mootorial.com/wiki">tutorial di MooTools</a> (dei quali ne sono l'autore) questi approcciano in maniera completamente differente. Mentre si pu&ograve; saltare gran parte ed andare direttamente ad imparare cose su effetti e DOM, se si vuol imparare seriamene MooTools, bisognerebbe iniziare con cose come <em>Class</em>, e, lo ammetto, se si &egrave; alle prime armi con la programmazione, o si vuol solamente qualcosa che funzioni nel proprio sito senza approfondire il linguaggio JavaScript, jQuery sicuramente risulter&agrave; molto pi&ugrave; semplice ed "amichevole".
 			</p>
 			
 			<p>
@@ -452,7 +452,7 @@ ninja.logInventory();
 			</p>
 			
 			<p>
-			  Devo dire inoltre che qualche volta jQuery pu&ograve; diventare troppo esoterico per i miei gusti. I metodi non sempre hanno senso per me ed a prima vista li trovo difficili da analizzare. Comunque anche se non sarebbe molto giusto da dire, dato che sono in intimit&agrave; con MooTools, per me leggere MooTools &egrave; pi&ugrave; facile. Una delle cose che apprezzo di MooTools riguarda il fatto che praticamente tutti i nomi dei metodi e delle classi danno il vero nome alle cose. I metodi sono quasi sempre verbi e lasciano pochi dubbi riguardo quello che fanno. Ogni linguaggio di programmazione richiede una ricerca nella documentazione per la sintassi quando si scrive il codice - Non parlo di questo. Sto dicendo solamente che trovo le API di MooTools piu coerenti e consistenti.
+			  Devo dire inoltre che qualche volta jQuery pu&ograve; diventare troppo esoterico per i miei gusti. I metodi non sempre hanno senso per me ed a prima vista li trovo difficili da analizzare. Comunque, anche se non sarebbe molto giusto da dire dato che sono in intimit&agrave; con MooTools, per me leggere MooTools &egrave; pi&ugrave; facile. Una delle cose che apprezzo di MooTools riguarda il fatto che praticamente tutti i nomi dei metodi e delle classi danno il vero nome alle cose. I metodi sono quasi sempre verbi e lasciano pochi dubbi riguardo quello che fanno. Ogni linguaggio di programmazione richiede una ricerca nella documentazione per la sintassi quando si scrive il codice - Non parlo di questo. Sto dicendo solamente che trovo le API di MooTools piu coerenti e consistenti.
 			</p>
 			
 			<a name="yourway"></a>
@@ -477,7 +477,7 @@ function(){
 </pre>
 
 		<p>
-		  Ci sono addirittura plugins MooTools che fanno questo; <a href="http://github.com/cheeaun/mooj/tree/master">forniscono una sintassi jQuery per MooTools</a>. Il focalizzarsi di MooTools riguardo l'estensibilit&agrave; significa che si pu&ograve; implementare praticamente qualsiasi cosa si voglia. Questo &egrave; qualcosa che jQuery non pu&ograve; fare. MooTools pu&ograve; simulare jQuery volendo, ma jQuery non pu&ograve; mimare MooTools. Se si vogliono scrivere classi oppure estendere i prototipi nativi o fare qualcosa che MooTools puo' fare, avendo adottato jQuery bisogner&agrave; farlo a mano.
+		  Ci sono addirittura plugins MooTools che fanno questo; <a href="http://github.com/cheeaun/mooj/tree/master">forniscono una sintassi jQuery per MooTools</a>. Il focalizzarsi di MooTools riguardo l'estensibilit&agrave; significa che si pu&ograve; implementare praticamente qualsiasi cosa si voglia. Questo &egrave; qualcosa che jQuery non pu&ograve; fare. MooTools pu&ograve; simulare jQuery volendo, ma jQuery non pu&ograve; mimare MooTools. Se si vogliono scrivere classi oppure estendere i prototipi nativi o fare qualcosa che MooTools pu&ograve; fare, avendo adottato jQuery bisogner&agrave; farlo a mano.
 		  </p>
 		
 			<a name="chaining"></a>
@@ -495,7 +495,7 @@ function(){
 
 			<p>
 			  
-			  Questo &egrave; un esempio di sintassi che personalmente non mi alletta. Guardando il codice qui sopra, non sono molto sicuro di quello che stia facendo. In particolare sarei curioso di capire cosa fa <em>.end</em> e come <em>.find</em>, che lo segue, sia in relazione a quello che fa <em>.end</em>? Ora, guardando la documentazione jQuery si capisce benissimo cosa fa <em>.end </em>(resetta il valore del selettore originale, in questo caso #faq). Ma a me sembra strano. Quando lavoro con jQuery, spesso mi ritrovo ad essere insicuro riguardo cosa faccia un particolare metodo. Ovviamente ci&ograve; riguarda solo me dato che jQuery viene utilizzato da tantissime persone (che sono contente di usarlo), quindi anche questa &egrave; una preferenza personale.
+			  Questo &egrave; un esempio di sintassi che personalmente non mi alletta. Guardando il codice qui sopra, non sono molto sicuro di quello che stia facendo. In particolare sarei curioso di capire cosa fa <em>.end</em> e come <em>.find</em>, che lo segue, sia in relazione a quello che fa <em>.end</em>. Ora, guardando la documentazione jQuery si capisce benissimo cosa fa <em>.end </em>(resetta il valore del selettore originale, in questo caso #faq). Ma a me sembra strano. Quando lavoro con jQuery, spesso mi ritrovo ad essere insicuro riguardo cosa faccia un particolare metodo. Ovviamente ci&ograve; riguarda solo me dato che jQuery viene utilizzato da tantissime persone (che sono contente di usarlo), quindi anche questa &egrave; una preferenza personale.
 			</p>
 			<p>
 				      Vediamo la logica spiegata sopra in MooTools:  
@@ -523,7 +523,7 @@ function(){
 	.fireEvent((checked) ? 'check' : 'uncheck');</pre>
 			
 			<p>
-			  Comunque, scrivere codice come questo - molta logica dentro domready - con entrambi i frameworks, direi che &egrave; una brutta abitudine. &Egrave;' molto meglio incapsulare la logica in moduli riusabili.
+			  Comunque, scrivere codice come questo - con molta logica dentro domready - con entrambi i frameworks, direi che &egrave; una brutta abitudine. &Egrave;' molto meglio incapsulare la logica in moduli riusabili.
 			</p>
 			
 			<a name="reuse"></a>
@@ -550,7 +550,7 @@ $(document).ready(function() {
 			</p>
 			<ol>
 				<li>
-				  Se in futuro ci sar&agrave; bisogno di cambiare il modo in cui queste liste funzionano (ad esempio se si volesse tener traccia dei click in un log web oppure se si volessero recuperare le definizioni tramite ajax) potremmo solamente cambiare il nostro metodo <i>faq</i> invece che andare a modificare svariate copie ovunque. Di questo ne tengo una piccola traccia nella mia applicazione. Tenendo appunto traccia dei punti dove la mia applicazione tocca il codice generico, sar&agrave; pi&ugrave; facile sistemare i bugs, aggiornare i frameworks, aggiungere features, o alterare funzionalit&agrave;
+				  Se in futuro ci sar&agrave; bisogno di cambiare il modo in cui queste liste funzionano (ad esempio se si volesse tener traccia dei click in un log web oppure se si volessero recuperare le definizioni tramite ajax) potremmo solamente cambiare il nostro metodo <i>faq</i> invece che andare a modificare svariate copie ovunque. Di questo ne tengo una piccola traccia nella mia applicazione. Tenendo appunto traccia dei punti dove la mia applicazione tocca il codice generico, sar&agrave; pi&ugrave; facile sistemare i bugs, aggiornare i frameworks, aggiungere features, o alterare funzionalit&agrave;.
 				</li>
 				<li>
 				  La seconda: c'&egrave; meno codice. Riusando lo stesso metodo pi&ugrave; volte, non bisogner&agrave; ripetersi e questo &egrave; un valore aggiunto in ogni ambiente di programmazione. Rende inoltre il codice che i visitatori devono scaricare meno pesante.
@@ -577,7 +577,7 @@ $(document).ready(function() {
 	<pre class="js">$('#faq').faq();</pre>
 
 			<p>
-			  Guardando all'esempio qui sopra, non c'&egrave; molta differenza tra dichiarare la nostra funzione <i>faq</i> in questo modo e dichiararla come una funzione vera e propria. Ammesso che, non &egrave; nel namespace globale, ma potremmo aggiungerlo facilmente. Rendendolo plugin jQuery potremmo quindi concatenarlo ad altri suoi metodi. L'altro beneficio riguarda il "this" che all'interno della nostra funzione &egrave; il contesto corrente dell'elemento nella concatenazione jQuery in quel momento. Utilizzando questo pattern per i plugins si potr&agrave; essere in grado di renderli parte integrante di jQuery, ma a parte quello, un plugin &egrave; praticamente una singola funzione che prende il contesto corrente jQuery, ci fa qualcosa, e poi ritorna il contesto per il prossimo elemento nella catena. Non &egrave; molto complesso il discorso, ed infatti questo rende molto semplice per chiunque scrivere plugins jQuery - sono solamente delle singole funzioni.
+			  Guardando all'esempio qui sopra, non c'&egrave; molta differenza tra dichiarare la nostra funzione <i>faq</i> in questo modo e dichiararla come una funzione vera e propria. Non &egrave; nel namespace globale, ma potremmo aggiungerlo facilmente. Rendendolo plugin jQuery potremmo quindi concatenarlo ad altri suoi metodi. L'altro beneficio riguarda il "this" che all'interno della nostra funzione &egrave; il contesto corrente dell'elemento nella concatenazione jQuery in quel momento. Utilizzando questo pattern per i plugins si potr&agrave; essere in grado di renderli parte integrante di jQuery, ma a parte quello, un plugin &egrave; praticamente una singola funzione che prende il contesto corrente jQuery, ci fa qualcosa, e poi ritorna il contesto per il prossimo elemento nella catena. Non &egrave; molto complesso il discorso, ed infatti questo rende molto semplice per chiunque scrivere plugins jQuery - sono solamente delle singole funzioni.
 			</p>
 
 			<p>
@@ -593,7 +593,7 @@ $(document).ready(function() {
 			</p>
 		
 			<p>
-			  Piuttosto che dare un linguaggio completamente differente dallo stile nativo di JavaScript, MooTools cerca di stare in mezzo alla definizione di una sintassi personalizzata e di estendere i design patterns propri di JavaScript. Uno dei modi in cui lo fa &egrave; tramite l'estensione dei prototipi degli oggetti nativi nel linguaggio e nel DOM. Questo significa che se ci fosse bisogno di un metodo che fa la trim di una stringa, MooTools incoraggia ad aggiungere quel metodo nell'oggetto String (notare che <em><a href="http://mootools.net/docs/core/Native/String#String:trim">String.trim</a></em> &egrave; gi&agrave; presente in MooTools; non serve aggiungerlo a mano):
+			  Piuttosto che dare un linguaggio completamente differente dallo stile nativo di JavaScript, MooTools cerca di stare in mezzo alla definizione di una sintassi personalizzata e l'estensione dei design patterns propri di JavaScript. Uno dei modi in cui lo fa &egrave; tramite l'estensione dei prototipi degli oggetti nativi nel linguaggio e nel DOM. Questo significa che se ci fosse bisogno di un metodo che fa il trim di una stringa, MooTools incoraggia ad aggiungere quel metodo nell'oggetto String (notare che <em><a href="http://mootools.net/docs/core/Native/String#String:trim">String.trim</a></em> &egrave; gi&agrave; presente in MooTools; non serve aggiungerlo a mano):
 			</p>
 
 <pre class="js">String.implement({
@@ -627,7 +627,7 @@ $(document).ready(function() {
 			</p>
 			
 			<p>
-			  La chiave qui, ed &egrave; il cuore del framework MooTools, &egrave; il guidare a programmare ci&ograve; che si vuole. Se una funzionalit&agrave; non &egrave; presente nel core, quest'ultimo lo si pu&ograve; estendere aggiungendola. L'obiettivo del core non &egrave; provvedere ad ogni singola funzionalit&agrave; possibile ed immaginabile, ma &egrave; mettere a disposizione gli strumenti che fanno scrivere ci&ograve; che si vuole. Una grossa parte riguarda la facilit&agrave; con la quale si possono estendere i tipi nativi, traendo vantaggio dall'ereditariet&agrave; prototipale. Si possono fare tutte queste cose in JavaScript nativo, ma MooTools rende il tutto pi&ugrave; semplice e pi&ugrave; piacevole.				
+			  La chiave qui, ed &egrave; il cuore del framework MooTools, &egrave; il guidare a programmare ci&ograve; che si vuole. Se una funzionalit&agrave; non &egrave; presente nel core, lo si pu&ograve; estendere aggiungendola. L'obiettivo del core non &egrave; provvedere ad ogni singola funzionalit&agrave; possibile ed immaginabile, ma &egrave; mettere a disposizione gli strumenti per scrivere ci&ograve; che si vuole. Una grossa parte riguarda la facilit&agrave; con la quale si possono estendere i tipi nativi, traendo vantaggio dall'ereditariet&agrave; prototipale. Si possono fare tutte queste cose in JavaScript nativo, ma MooTools rende il tutto pi&ugrave; semplice e pi&ugrave; piacevole.				
 			</p>
 			
 			
@@ -636,7 +636,7 @@ $(document).ready(function() {
 		
 			<p>
 			
-				Nonostante il suo nome, in MooTools la funzione <em>Class</em> non &agrave; veramente una classe e non crea classi. Ha uno schema di progettazione che potrebbe ricordare le classi di un
+				Nonostante il suo nome, in MooTools la funzione <em>Class</em> non &egrave; veramente una classe e non crea classi. Ha uno schema di progettazione che potrebbe ricordare le classi di un
 				linguaggio di programmazione tradizionale, ma in realt&agrave; <em>Class</em> riguarda sempre oggetti ed ereditariet&agrave; prototipale. (Sfortunatamente la parola "class"
 				&egrave; quella che meglio descrive queste cose, quindi nell'articolo quando parlo di "classi" faccio riferimento a funzioni che ritornano oggetti - che chiamer&ograve; 
 				"istanze" - che ereditano da un prototipo.)
