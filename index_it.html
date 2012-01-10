@@ -296,7 +296,7 @@
 		
 			<p>
 			  
-			  Se si pensa a cosa si vuole fare con JavaScript in termini di "prendere elementi nella pagina per farne qualcosa" allora jQuery &egrave; probabilmente la scelta migliore. Eccelle nell'offrire un sistema molto espressivo per descrivere il comportamento nelle pagine in un modo che quasi non sembra programmazione vera e propria. Si pu&ograve; sempre continuare ad usare il resto in JavaScript per fare quello che si vuole, ma se si &egrave; focalizzati sul DOM - per cambiare propriet&agrave; CSS, animare elementi, recuperare dei contenuti via Ajax, etc - tutto quello che si vorr&agrave; fare sar&agrave; ottenibile tramite jQuery, pi&ugrave; qualcosa - se mancante in jQuery - in vecchio e puro JavaScript. jQuery mette anche a disposizione metodi che non riguardano prettamente il DOM; ad esempio, offre un meccanismo per iterare sugli array - <i><a href="http://docs.jquery.com/Utilities/jQuery.each">$.each(array,fn)</a></i> - oppure, ad esempio, offre un metodo per il trim delle stringhe - <a href="http://docs.jquery.com/Utilities/jQuery.trim">$.trim(str)</a></i>. Ma non sono presenti molti metodi di questo tipo, che &egrave; un bene, perch&egrave;, per la maggior parte, se si stanno solo prendendo elementi dal DOM, ci si itera sopra, e li si altera (aggiungendo html, cambiando stili, aggiungendo dei listener per eventi quali click e mouseover, etc) non serve molto altro.
+			  Se si pensa a cosa si vuole fare con JavaScript in termini di "prendere elementi nella pagina per farne qualcosa" allora jQuery &egrave; probabilmente la scelta migliore. Eccelle nell'offrire un sistema molto espressivo per descrivere il comportamento nelle pagine in un modo che quasi non sembra programmazione vera e propria. Si pu&ograve; sempre continuare ad usare il resto in JavaScript per fare quello che si vuole, ma se si &egrave; focalizzati sul DOM - per cambiare propriet&agrave; CSS, animare elementi, recuperare dei contenuti via Ajax, etc - tutto quello che si vorr&agrave; fare sar&agrave; ottenibile tramite jQuery, pi&ugrave; qualcosa - se mancante in jQuery - in vecchio e puro JavaScript. jQuery mette anche a disposizione metodi che non riguardano prettamente il DOM; ad esempio, offre un meccanismo per iterare sugli array - <i><a href="http://docs.jquery.com/Utilities/jQuery.each">$.each(array,fn)</a></i> - oppure, ad esempio, offre un metodo per il trim delle stringhe - <a href="http://docs.jquery.com/Utilities/jQuery.trim">$.trim(str)</a></i>. Ma non sono presenti molti metodi di questo tipo, che &egrave; un bene, perch&eacute;, per la maggior parte, se si stanno solo prendendo elementi dal DOM, ci si itera sopra, e li si altera (aggiungendo html, cambiando stili, aggiungendo dei listener per eventi quali click e mouseover, etc) non serve molto altro.
 			</p>
 			<p>
 			  Ma se si pensa al JavaScript nella sua totalit&agrave;, si pu&ograve; notare come jQuery non si focalizzi in cose al di fuori del DOM. Questa &egrave; una delle ragioni per cui &egrave; cos&igrave; facile da imparare, ma altres&igrave; limita il modo in cui pu&ograve; aiutare a scrivere JavaScript. Sta solamente cercando di essere nientemeno che un solido sistema di programmazione per il DOM. Non prevede ereditariet&agrave; e nemmeno dispone di utilit&agrave; per tutti i tipi nativi del linguaggio JavaScript, ma non ne ha la necessit&agrave;. Se si vogliono fare magie con stringhe, date, espressioni regolari, array e funzioni, &egrave; possibile. Ma aiutare in questo non &egrave; compito di jQuery. JavaScript come linguaggio &egrave; quello che serve. jQuery rende il DOM il tuo ambiente, ma il resto del linguaggio JavaScript &egrave; fuori dalla sua ottica.
@@ -642,10 +642,11 @@ $(document).ready(function() {
 				"istanze" - che ereditano da un prototipo.)
 			</p>
 			<p>
-				Per creare una classe, devi passare un oggetto al costruttore <em>Class</em> in questo modo:
+				Per creare una classe, si deve passare un oggetto al costruttore <em>Class</em> in questo modo:
 			</p>
 		
-<pre class="js">var Human = new Class({
+<pre class="js">//classe per gli essere umani
+var Human = new Class({
     initialize: function(name, age) {
         this.name = name;
         this.age = age;
@@ -660,7 +661,7 @@ $(document).ready(function() {
 			<p>
 			
 				Passando l'oggetto a <em>Class</em> (nell'esempio abbiamo passato un oggetto con propriet&agrave; e metodi come "isAlive" e "eat") l'oggetto diventa il prototipo
-				di ogni istanza di quella classe. Dopo aver creato la classe, puoi crearne le istanze, ad esempio:
+				di ogni istanza di quella classe. Dopo aver creato la classe, &egrave; possibile crearne le istanze, ad esempio:
 			</p>
 <pre class="js">var bob = new Human("bob", 20); //bob si chiama "bob" e ha 20 anni.</pre>
 			<p>
@@ -678,7 +679,7 @@ $(document).ready(function() {
 				della classe, nel metodo <i>initialize</i>.
 			</p>
 			<p>
-				Tutto questo comportamento potr&agrave; sembrarti un po' strano, ma il suo punto di forza sta nel fatto che possiamo definire funzionalit&agrave; per un certo modello e
+				Tutto questo comportamento pu&ograve; sembrare un po' strano, ma il suo punto di forza sta nel fatto che possiamo definire funzionalit&agrave; per un certo modello e
 				creare istanze di quel modello ogni volta che ne abbiamo bisogno. Ogni istanza manterr&agrave; il proprio stato. Dunque se creiamo un'altra
 				istanza, ciascuna sar&agrave; indipendente dalle altre, ma erediter&agrave; dallo stesso modello base:
 			</p>
@@ -692,31 +693,42 @@ $(document).ready(function() {
 			</p>
 			
 			<a name="extension"></a>
-			<h3>Extending and Implementing Classes</h3>
+			<h3>Estendere ed Implementare le Classi</h3>
 		
 			<p>
-				Let's revisit our jQuery <i>faq</i> plug-in. What would happen if we wanted to add more functionality to that plug-in. What if we wanted to make an ajax version that fetched the answers to the questions from the server? Let's imagine that the <i>faq</i> plug-in was authored by someone else and we want to add more to it without altering it in any way (we don't want to fork it).
+				Proviamo a rivisitare il plugin jQuery per le <i>faq</i>. Cosa accadrebbe se volessimo aggiungere un'ulteriore funzionalit&agrave; al plugin?
+				Se volessimo, ad esempio, fare una version AJAX del plugin che legga le risposte alle domande dal server? Supponiamo che 
+				il plugin <i>faq</i> sia stato scritto da qualcun altro e che vogliamo arricchirlo senza modificare in alcun modo l'originale.
 			</p>
 			<p>
-				Our only real choices are to either duplicate the <em>faq</em> plug-in's logic entirely (remember, it's a single function), essentially forking it, or we can invoke it and then add more logic to it. Given a choice, the latter seems to save us the most trouble. It would look something like this:
+				Abbiamo solo due possibili scelte. O duplichiamo l'intera logica del plugin <i>faq</i> (ricordo, &egrave; una singola funzione),
+				praticamente realizzando un "fork", oppure lo invochiamo e aggiungiamo successivamente le nuove funzionalit&agrave; ad esso.
+				Dovendo scegliere, la seconda alternativa pare quella meno faticosa. Il plugin diventerebbe allora qualcosa come:
 			</p>
 <pre class="js">jQuery.fn.ajaxFaq = function(options) {
     var settings = jQuery.extend({ 
-		//some ajax specific options like the url to request terms from
+		//alcune opzioni specifiche per ajax, come l'url per la richiesta dei termini
         url: '/getfaq.php'
         definitions: 'dd'
     }, options); 
-	//"this" is the current context; in this case, the elements we want to turn into faq layouts
+	//"this" &egrave il contesto corrente; in questo caso, gli elementi ai quali vogliamo applicare un layout faq
     $(this).find(settings.definitions).click(function() {
-        $(this).load(.....); //the logic to load the content from the term
+        $(this).load(.....); //la logica per caricare il contenuto dei termini
     });
-    this.faq(); //call our original faq plug-in
+    this.faq(); //chiamata al plugin originale faq
 });</pre>
 			<p>
-				This has some down sides. First of all, our <em>faq</em> class is going to repeat our selector for the definitions, which might be expensive; there's no way to store the retrieved definitions and pass it on for the second time they are needed. Secondly, we can't add our ajax logic into the middle of the <em>faq</em> plug-in's own logic for displaying the definition. The original plug-in called <em>slideToggle</em> which expands the definition using an effect. This is problematic because this effect is going to go off before our ajax finishes loading. There's no real solution here unless we just duplicate the entire <em>faq</em> plug-in.
+				Questo codice ha alcuni lati negativi. Prima di tutto, la nostra classe <em>faq</em> ripete la selezione delle definizioni,
+				cosa che potrebbe anche essere pesante; non c'&egrave; alcun modo di memorizzare le definizioni recuperate e riutilizzarle
+				quando servono nuovamente. In secondo luogo, non possiamo aggiungere il codice per la gestione di ajax in mezzo a quello
+				per la visualizzazione delle definizioni, presente nel plugin originale. Il plugin originale chiama <em>slideToggle</em> per espandere le definizioni utilizzando 
+				una animazione. Questo &egrave; un problema in quanto l'effetto sicuramente partir&agrave; prima che la nostra richiesta ajax finisca di caricare. Non c'&egrave;
+				nessuna soluzione definitiva se non quella di duplicare l'intero plugin <em>faq</em>.
 			</p>
 			<p>
-				Now let's consider our MooTools <em>Human</em> class. It has properties like <em>isAlive</em> and <em>energy</em> and it has a method called <em>eat</em>. What if we wanted to make a new version of <em>Human</em> that had additional properties? With MooTools, we extend the class:
+				Ora consideriamo la nostra classe <em>Human</em> realizzata con MooTools. Ha le propriet&agrave; <em>isAlive</em> e <em>energy</em> e ha un
+				metodo chiamato <em>eat</em>. Se volessimo creare una nuova versione di <em>Human</em> con propriet&agrave; aggiuntive? 
+				Con MooTools possiamo estendere la classe in questo modo:
 			</p>
 <pre class="js">var Ninja = new Class({
     Extends: Human,
@@ -731,7 +743,10 @@ $(document).ready(function() {
     }
 });</pre>
 			<p>
-				You can see that we've added a lot of functionality here into a subclass. This subclass has all these properties that are unique to <em>Ninjas</em>. <em>Ninjas</em> start off with an initial <em>energy</em> value of 100. <em>Ninjas</em> get a <em>side</em>. They also get an <em>attack</em> method that lets them kill other <em>Humans</em>, but it costs the <em>Ninja</em> energy.
+				Si pu&ograve; vedere come abbiamo aggiunto molte funzionalit&agrave; in una sottoclasse. 
+				Questa sottoclasse ha alcune propriet&agrave; che sono unicamente presenti nei <em>Ninja</em>.
+				I <em>Ninja</em> hanno una energia (<em>energy</em>) iniziale pari a 100, un orientamento (<em>side</em>) e un metodo <em>attack</em> 
+				che gli permette di uccidere gli altri <em>Humans</em> a costo di alcuni punti <em>energy</em>.
 			</p>
 
 <pre class="js">var bob = new Human('Bob', 25);
@@ -742,16 +757,24 @@ blackNinja.attack(bob);
 //bob never had a chance</pre>
 
 			<p>
-				Picking this apart a bit, there are some interesting things to consider here. Note that we have an <em>initialize</em> method in the <em>Ninja</em> class. This would appear to overwrite the <em>initialize</em> method in the <em>Human</em> class, but we can still access it by calling <em>this.parent</em>, passing along the arguments that the parent class's <em>initialize</em> expects. Further, we can control when our logic occurs; before or after the call to the parent. We can assign new values to properties (like the <em>energy</em> value) and we can define new functionality. Imagine if we could do this with our <em>faq</em> plug-in for jQuery. We could load our ajax and THEN slide open the value.
+				Uccisioni a parte, ci sono alcune cose interessanti da considerare. Il metodo <em>initialize</em> nella classe
+				<em>Ninja</em> sembra ridefinire, sovrascrivendo, il metodo <em>initialize</em> della classe <em>Human</em>, ma &egrave; ancora
+				possibile accedere ad esso chiamando <em>this.parent</em>, passando quindi gli argomenti che il metodo <em>initialize</em> della classe padre si aspetta.
+				Inoltre possiamo decidere quando il nostro nuovo codice viene eseguito; prima o dopo la chiamata al padre. Possiamo assegnare nuovi valori alle propriet&agrave;
+				(come <em>energy</em>, pari a 100 anzich&eacute; 1), e definire nuove funzionalit&agrave;. Immagina se avessimo potuto fare questo nel nostro
+				plugin jQuery <em>faq</em>. Avremmo potuto caricare il nostro ajax e POI lanciare l'animazione di comparsa del contenuto.
 			</p>
 			<p>
-				MooTools has another pattern called a Mixin. Unlike the parent to
-				child relationship that is defined by extending one class into a
-				subclass, you can also define classes that are mixed into other
-				classes to imbue them with their properties. Here's an example:
+				MooTools ha un altro pattern chiamato Mixin. Invece di avere una
+				relazione padre-figlio definita creando una sottoclasse per estensione
+				di un'altra classe, &egrave; possibile anche definire una classe che 
+				viene miscelata ad altre classi affinch&egrave; possa mettere a 
+				disposizione di queste le sue propriet&agrave;.
+				Ecco un esempio:
 			</p>
 
-<pre class="js">var Warrior = new Class({
+<pre class="js">//class guerriero (mixin)
+var Warrior = new Class({
     energy: 100,
     kills: 0,
     attack: function(target) {
@@ -762,12 +785,14 @@ blackNinja.attack(bob);
 });</pre>
 
 			<p>
-				Here we've broken the qualities that make a <em>Ninja</em> different from a <em>Human</em> and put them in a class of their own. This lets us reuse this code outside of <em>Ninja</em>. We could then imbue our <em>Ninja</em> class with the qualities of a warrior like so:
+				Abbiamo preso le qualit&agrave; che rendono un <em>Ninja</em> diverso da un <em>Human</em> e le abbiamo messe in una classe a parte.
+				Questo ci permette di usare il codice non solo per i <em>Ninja</em>. Possiamo infatti mettere a disposizione dei 
+				<em>Ninja</em> le qualit&agrave; di <em>Warrior</em> (guerriero) in questo modo:
 			</p>
 
 <pre class="js">var Ninja = new Class({
     Extends: Human,
-    Implements: Warrior, //can be an array if you want to implement more than one
+    Implements: Warrior, //pu&ograve; essere un array se vogliamo implementare pi&ugrave; di una classe
     initialize: function(name, age, side) {
         this.side = side;
         this.parent(name, age);
@@ -775,58 +800,62 @@ blackNinja.attack(bob);
 });</pre>
 		
 			<p>
-				<em>Ninja</em> still works as it did before, but <em>Warrior</em> is at our disposal to reuse:
+				<em>Ninja</em> funziona ancora come prima, ma <em>Warrior</em> &egrave; a nostra disposizione per essere riusato:
 			</p>
 
 <pre class="js">var Samurai = new Class({
   Extends: Human,
   Implements: Warrior,
-  side: 'good'
+  side: 'good' //orientamento "buono"
 });</pre>
 
 			<p>
-				Now we have a <em>Samurai</em> class and a <em>Ninja</em> class. But look at how little code both <em>Ninja</em> and <em>Samurai</em> took to define. Both of them are similar in that they are humans with warrior qualities, but they are different in that samurais are always, always good, while ninjas have shifting allegiances. By spending the time to write a <em>Human</em> class and a <em>Warrior</em> class, we're able to have three different classes with no repetition of code while maintaining a very granular level of control over when methods are called and how they relate to each other. Each instance we create has its own state and the code itself is very legible.
+				Ora abbiamo una classe <em>Samurai</em> e una classe <em>Ninja</em>. Si osservi quanto poco codice &egrave; stato
+				necessario per definirle. Sono simili tra loro, perch&eacute; entrambi umani con abilit&agrave; da guerriero, 
+				ma sono differenti in quanto un samurai sar&agrave; sempre buono ("good"), mentre un ninja pu&ograve; cambiare il suo orientamento.
+				Spendendo un po' di tempo per scrivere una classe <em>Human</em> e una classe <em>Warrior</em>, siamo in grado di avere tre diverse
+				classi senza nessuna ripetizione di codice, mantenendo al tempo stesso un buon controllo sull'esecuzione dei metodi 
+				e sulla loro relazione con gli altri. Ogni istanza che creiamo ha un proprio stato, e il codice in s&eacute; &egrave; molto leggibile.
 			</p>
 			
 			<p>
-				Now that you have an overview of how classes work in MooTools, let's look at our <em>faq</em> class that we wrote in jQuery and write it as we would in MooTools and then extend it to add Ajax to it just as we did with jQuery.				
+				Ora che abbiamo visto come funzionano le classi in MooTools, torniamo alla nostra classe jQuery <em>faq</em> e proviamo a
+				riscriverla in MooTools, aggiungendo poi la parte Ajax come abbiamo fatto con jQuery.			
 			</p>
 <pre class="js">
 var FAQ = new Class({
-	//Options is another class provided by MooTools
+	//Options &egrave; un'altra classe, disponibile con MooTools
 	Implements: Options,
-	//these are the default options
+	//queste sono le opzioni di default
 	options: {
 		terms: 'dt',
 		definitions: 'dd'
 	},
 	initialize: function(container, options) {
-		//we store a reference to our container
+		//memorizziamo un riferimento al contenitore
 		this.container = $(container);
-		//setOptions is a method provided by the Options mixin
-		//it merges the options passed in with the defaults
+		//setOptions &egrave; un metodo messo a disposizione dal mixin Options,
+		//serve a "fondere" le opzioni di default con quelle passate al metodo
 		this.setOptions(options);
-		//we store the terms and definitions
+		//memorizziamo termini e definizioni
 		this.terms = this.container.getElements(this.options.terms);
 		this.definitions = this.container.getElements(this.options.definitions);
-		//we call our attach method
-		//by breaking this into its own method
-		//it makes our class easier to extend
+		//chiamiamo il metodo attach
+		//separare questo metodo dal costruttore rende la nostra classe pi&ugrave; facile da estendere
 		this.attach();
 	},
 	attach: function(){
-		//loop through the terms
+		//cicla sui termini
 		this.terms.each(function(term, index) {
-			//add a click event to each one
+			//aggiungi l'evento click a ognuno
 			term.addEvent('click', function(){
-				//that calls our toggle method for
-				//the current index
+				//il click chiama il metodo toggle sull'indice corrente
 				this.toggle(index);
 			}, this);
 		}, this);
 	},
 	toggle: function(index){
-		//toggle open the definition for the given index
+		//apre la definizione per l'indice passato
 		this.definitions[index].slide('toggle');
 	}
 });
