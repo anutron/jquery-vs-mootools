@@ -112,162 +112,212 @@
 				</div>
 			</div>
 			<p>
-				Most people getting started with JavaScript these days are faced with the challenging task of picking a library to use, or at least which one to learn first. If you're working for a company chances are they have already chosen a framework for you, in which case the point is somewhat moot. If this is the case and they've chosen <a href="http://www.mootools.net">MooTools</a> and you're used to <a href="http://www.jquery.com">jQuery</a>, then this article might still be of some use to you.
+                В наши дни большинство людей, начинающих использовать JavaScript, сталкиваются с непростой задачей выбора библиотеки
+                для дальнейшего использования, или, по крайней мере, какую из них изучать в первую очередь.
+                Если вы работаете в какой-либо компании, то выбор, вероятно, уже сделан за вас, и тогда этот вопрос отпадает. Тем не менее, если
+                вы привыкли к <a href="http://www.jquery.com">jQuery</a>, а компания заставляет использовать <a href="http://www.mootools.net">MooTools</a>,
+                эта статья все-таки может оказаться вам полезной.
 			</p>
 			<p>
-				<a href="http://twitter.com/joshink/statuses/1671986611">Every</a> <a href="http://twitter.com/jezusisstoer/statuses/1642244246">day</a> <a href="http://twitter.com/digitalcampaign/statuses/1622094648">on</a> <a href="http://twitter.com/jesswma/statuses/1605733380">twitter</a> I see numerous posts that boil down to "MooTools or jQuery?" This article aims to help you make that choice.
+				<a href="http://twitter.com/joshink/statuses/1671986611">Каждый</a> <a href="http://twitter.com/jezusisstoer/statuses/1642244246">день</a>
+                <a href="http://twitter.com/digitalcampaign/statuses/1622094648">в</a> <a href="http://twitter.com/jesswma/statuses/1605733380">твиттере</a>
+                я вижу множество постов, которые сводятся к "MooTools или jQuery?". Эта статья поможет вам определиться с выбором.
 			</p>
-			<h3>Disclaimer</h3>
+			<h3>Отказ от ответственности</h3>
 			<p>
-				I am a MooTools developer. I work on the MooTools framework. I blog about MooTools. I wrote <a href="http://www.mootorial.com">the main online tutorial</a> and <a href="http://www.amazon.com/gp/product/1430209836?ie=UTF8&tag=clientside-20&link_code=as3&camp=211189&creative=373489&creativeASIN=1430209836">the book about MooTools</a>. Obviously, I have a perspective that is somewhat biased. I'll also point out that I don't use jQuery that often. If you're a jQuery developer and see anything that I have misrepresented here, please contact me and help me rectify the issue. My objective here is to be helpful and accurate to people - not to sell one framework over another.
+                Я &mdash; разработчик MooTools. Я работаю над этим фреймворком. Я веду блог про MooTools. Я написал
+                <a href="http://www.mootorial.com">основное онлайн руководство</a> и
+                <a href="http://www.amazon.com/gp/product/1430209836?ie=UTF8&tag=clientside-20&link_code=as3&camp=211189&creative=373489&creativeASIN=1430209836">книгу о MooTools</a>.
+                Очевидно, моя точка зрения несколько предвзята. Подчеркну также, что я не особо часто использую jQuery.
+                Если вы разработчик jQuery и увидели, что я исказил что-нибудь, пожалуйста, свяжитесь со
+                мной, чтобы помочь исправить это недоразумение. Моя задача здесь &mdash; помочь людям сделать выбор,
+                а не выставлять один фреймворк перед другим в более выгодном свете.
 			</p>
 
-			<h3>Purpose</h3>
+			<h3>Цель данной статьи</h3>
 			<p>
-				Helping you make a choice between these two frameworks involves me telling you how they are different. I'll start out by saying that <b>both of them are excellent choices</b>. You can't make a wrong choice here. Both frameworks have their strengths and weaknesses, but, in general, they are both great choices. There are other frameworks out there that are worth digging into as well. <a href="http://www.dojotoolkit.org/">Dojo</a>, <a href="http://www.prototypejs.org/">Prototype</a>, <a href="http://developer.yahoo.com/yui/">YUI</a>, <a href="http://extjs.com/">Ext</a> and others are all great choices. Which one you choose really has more to do with your own style and what you need to accomplish. The purpose of this article is to focus on MooTools and jQuery, as increasingly these are the two frameworks that I see a lot of people considering. Finally, I'm not trying to convince anyone to switch from one framework to the other. There are interesting things about both frameworks from which you can learn. You can read a little more about this article and why I wrote it in <a href="http://www.clientcide.com/3rd-party-libraries/jquery-vs-mootools-mootools-vs-jquery/">my blog post on Clientcide where I announced it</a>.
+                Желание помочь вам выбрать между jQuery и MooTools заставляет меня рассказать вам, насколько
+                они отличаются друг от друга. Начну с того, что <b>они оба являются прекрасными фреймворками</b>. Сделать неправильный выбор здесь невозможно.
+                Разумеется, у каждого из них есть свои достоинства и недостатки, но, в целом, они оба &mdash; отличный выбор.
+                Есть также и другие фреймворки, которые стоят того, чтобы взглянуть на них более подробно. <a href="http://www.dojotoolkit.org/">Dojo</a>,
+                <a href="http://www.prototypejs.org/">Prototype</a>, <a href="http://developer.yahoo.com/yui/">YUI</a>,
+                <a href="http://extjs.com/">Ext</a> и прочие &mdash; тоже прекрасный выбор. Какой именно из них подойдет,
+                больше зависит от вашего стиля и от того, что именно вы хотите сделать. Цель данной статьи &mdash; сфокусироваться
+                на MooTools и jQuery, так как именно из них двоих все больше и больше людей пытаются выбирать. В конце концов,
+                я не пытаюсь никого убедить переключиться с одного фреймворка на другой. В них обоих есть что почерпнуть
+                и чему научиться. Более подробно о том, что побудило меня написать эту статью, вы можете прочитать
+                <a href="http://www.clientcide.com/3rd-party-libraries/jquery-vs-mootools-mootools-vs-jquery/">в моем посте на Clientcide</a>.
 			</p>
 			
-			<h3>Table o' Contents</h3>
-<ul>
-	<li><a href="#mottos">The Mottos Say It All</a></li>
-	<li><a href="#learning">The Learning Curve and The Community</a></li>
-	<li><a href="#javascript">What JavaScript Is Good For</a></li>
-		<ul style="margin-bottom: 0px">
-			<li><a href="#dom">More Than Just The DOM</a></li>
-			<li><a href="#inheritance">Inheritance with JavaScript</a></li>
-			<li><a href="#self">Self Reference</a></li>
-		</ul>
-	</li>
-	<li><a href="#jsfun">MooTools Makes JavaScript Itself More Fun</a></li>
-	<li><a href="#domfun">jQuery Makes the DOM More Fun</a></li>
-	<li><a href="#cando">Anything You Can Do I Can Do Better</a></li>
-	<li><a href="#yourway">MooTools Let's You Have It Your Way</a></li>
-	<li><a href="#chaining">Chaining as a Design Pattern</a></li>
-	<li><a href="#reuse">Reusing Code with jQuery</a></li>
-	<li><a href="#classes">Reusing Code with MooTools</a>
-		<ul>
-			<li><a href="#mooinheritance">MooTools and Inheritance</a></li>
-			<li><a href="#extension">Extending and Implementing Classes</a></li>
-		</ul>
-	</li>
-	<li><a href="#conclusion">Decision Time</a></li>
-	<li><a href="#discussion">Discussion</a></li>
-</ul>
+			<h3>Содержание</h3>
+            <ul>
+                <li><a href="#mottos">Девизы говорят сами за себя</a></li>
+                <li><a href="#learning">Сложность изучения и сообщество</a></li>
+                <li><a href="#javascript">Для чего подходит JavaScript</a></li>
+                    <ul style="margin-bottom: 0px">
+                        <li><a href="#dom">Больше, чем просто DOM</a></li>
+                        <li><a href="#inheritance">Наследование в JavaScript</a></li>
+                        <li><a href="#self">Ссылки на самого себя</a></li>
+                    </ul>
+                </li>
+                <li><a href="#jsfun">MooTools делает Javascript более крутым</a></li>
+                <li><a href="#domfun">jQuery делает DOM более крутым</a></li>
+                <li><a href="#cando">Все, что можете вы, я могу сделать лучше</a></li>
+                <li><a href="#yourway">Настройте MooTools, как это нужно вам</a></li>
+                <li><a href="#chaining">Chaining как паттерн проектирования</a></li>
+                <li><a href="#reuse">Повторное использование кода в jQuery</a></li>
+                <li><a href="#classes">Повторное использование кода в MooTools</a>
+                    <ul>
+                        <li><a href="#mooinheritance">MooTools и наследование</a></li>
+                        <li><a href="#extension">Расширение и реализация классов</a></li>
+                    </ul>
+                </li>
+                <li><a href="#conclusion">Пора принимать решение</a></li>
+                <li><a href="#discussion">Обсуждение</a></li>
+            </ul>
 		
-			<h2>The Stats</h2>
+			<h2>Сухие цифры</h2>
 			<table>
 				<tr>
 					<th></th>
-					<th>jQuery Core</th>
-					<th>MooTools Core</th>
+					<th>Ядро jQuery</th>
+					<th>Ядро MooTools</th>
 				</tr>
 				<tr>
-					<td>Library Size</td>
+					<td>Размер библиотеки</td>
 					<td>55.9K</td>
 					<td>64.3K</td>
 				</tr>
 				<tr>
-					<th colspan="3">Features</th>
+					<th colspan="3">Особенности</th>
 				</tr>
 				<tr>
-					<td>License</td>
+					<td>Лицензия</td>
 					<td><a href="http://en.wikipedia.org/wiki/MIT_License" title="MIT License">MIT</a> &amp; <a href="http://en.wikipedia.org/wiki/GPL" title="GPL">GPL</a></td>
 					<td><a href="http://en.wikipedia.org/wiki/MIT_License" title="MIT License">MIT</a></td>
 				</tr>
 				<tr>
-					<td>DOM Utilites</td>
-					<td>yes</td>
-					<td>yes</td>
+					<td>Функции для работы с DOM</td>
+					<td>есть</td>
+					<td>есть</td>
 				</tr>
 				<tr>
-					<td>Animation</td>
-					<td>yes</td>
-					<td>yes</td>
+					<td>Анимация</td>
+					<td>есть</td>
+					<td>есть</td>
 				</tr>
 				<tr>
-					<td>Event Handling</td>
-					<td>yes</td>
-					<td>yes</td>
+					<td>Обработка событие</td>
+					<td>есть</td>
+					<td>есть</td>
 				</tr>
 				<tr>
-					<td>CSS3 Selectors</td>
-					<td>yes (a subset)</td>
-					<td>yes (a subset)</td>
+					<td>CSS3 селекторы</td>
+					<td>есть (подмножество)</td>
+					<td>есть (подмножество)</td>
 				</tr>
 				<tr>
 					<td>Ajax</td>
-					<td>yes</td>
-					<td>yes</td>
+					<td>есть</td>
+					<td>есть</td>
 				</tr>	
 				<tr>
-					<td>Native Extensions (excluding Element)</td>
-					<td>about a dozen for Array, Object, and String</td>
-					<td>about six dozen for Array, Object, String, Function, and Number</td>
+					<td>Нативные расширения (кроме Element)</td>
+					<td>около 12 для Array, Object, и String</td>
+					<td>70+ для Array, Object, String, Function, и Number</td>
 				</tr>
 				<tr>
-					<td>Inheritance</td>
-					<td>Not supported directly with jQuery</td>
-					<td>Provided with <em><a href="http://mootools.net/docs/core/Class/Class">Class</a></em> constructor</td>
+					<td>Наследование</td>
+					<td>Напрямую не поддерживается jQuery</td>
+					<td>Предоставляется конструктором <em><a href="http://mootools.net/docs/core/Class/Class">Class</a></em></td>
 				</tr>
 				<tr>
-					<th colspan="3">Other Considerations</th>
+					<th colspan="3">Прочие соображения</th>
 				</tr>
 				<tr>
-					<td>plug-ins</td>
-					<td>Hundreds of unofficial plug-ins in a directory at <a href="http://plugins.jquery.com/">plugins.jquery.com</a></td>
-					<td>Roughly 4 dozen official plug-ins available at <a href="http://mootools.net/more">mootools.net/more</a>. Unofficial plugin directory at <a href="http://mootools.net/plugins">mootools.net/plugins</a>.</td>
+					<td>Плагины</td>
+					<td>Сотни неофициальных плагинов &mdash; <a href="http://plugins.jquery.com/">plugins.jquery.com</a></td>
+					<td>Около 50 официальных плагинов тут &mdash; <a href="http://mootools.net/more">mootools.net/more</a>. Неофициальные плагины тут &mdash; <a href="http://mootools.net/plugins">mootools.net/plugins</a>.</td>
 				</tr>
 				<tr>
-					<td>Official UI library</td>
-					<td>yes</td>
-					<td>no</td>
+					<td>Официальная библиотека UI</td>
+					<td>есть</td>
+					<td>нет</td>
 				</tr>
 			</table>
 			<p class="footnote">
-				Information based on data from <a href="http://jquery.com">jquery.com</a>, <a href="http://mootools.net">mootools.net</a>, and <a href="http://en.wikipedia.org/wiki/Comparison_of_JavaScript_frameworks">wikipedia.com</a>.
+				Информация основана на данных <a href="http://jquery.com">jquery.com</a>, <a href="http://mootools.net">mootools.net</a>, и <a href="http://en.wikipedia.org/wiki/Comparison_of_JavaScript_frameworks">wikipedia.com</a>.
 			</p>
 			
 			<a name="mottos"></a>
-			<h2>The Mottos Say It All</h2>
-			
-		
+			<h2>Девизы говорят сами за себя</h2>
 			<p>
-				  If you go to the jQuery site, here's what it says at the top of the page:
+                Если вы зайдете на сайт jQuery, вот что вы увидите вверху страницы:
 			</p>
-			<blockquote>jQuery is a fast and concise JavaScript Library that simplifies HTML document traversing, event handling, animating, and Ajax interactions for rapid web development. jQuery is designed to change the way that you write JavaScript.</blockquote>
+			<blockquote>
+                jQuery &mdash; быстрая и компактная JavaScript библиотека, которая упрощает работу с HTML документами,
+                обработкой событий, анимацией и Ajax для быстрой веб-разработки. jQuery cоздан, чтобы изменить
+                то, как вы обычно пишете JavaScript.
+            </blockquote>
 			<p>
-				...and if you go to MooTools, this is what you'll find:  
+				...а вот что написано на официальном сайте MooTools:
 			</p>
-			<blockquote>MooTools is a compact, modular, Object-Oriented JavaScript framework designed for the intermediate to advanced JavaScript developer. It allows you to write powerful, flexible, and cross-browser code with its elegant, well documented, and coherent API. </blockquote>
+			<blockquote>MooTools &mdash; это компактный, модульный, объектно-ориентированный JavaScript фреймворк, созданный для
+                JavaScript разработчиков среднего и продвинутого уровня. Он позволяет писать мощный, гибкий и кроссбраузерный
+                код с элегантным, понятным, логичным и хорошо документированным API.
+            </blockquote>
 			<p>
-				I think this really sums it up. If you ask me (and you're reading this, so I'll assume you just have), the question isn't about which framework is better or worse. It's which one of these things above do you want to do? These two frameworks just aren't trying to do the same things. They overlap in the functionality they provide, but they are not trying to do the same things.
-			</p>
-			
-			<p>
-				jQuery's description of itself talks about HTML, events, animations, Ajax, and web development. MooTools talks about object oriented-ness and writing powerful and flexible code. jQuery aspires to "change the way you write JavaScript" while MooTools is designed for the intermediate to advanced JavaScript developer.
-			</p>
-			
-			<p>
-				Part of this consideration is the notion of a <em>framework</em> vs a <em>toolkit</em>. MooTools is a <em>framework</em> that attempts to implement JavaScript <em>as it should be</em> (according to MooTools' authors). The aim is to implement an API that feels like JavaScript and enhances everything; not just the DOM. jQuery is a <em>toolkit</em> that gives you an easy to use collection of methods in a self-contained system designed to make the DOM itself more pleasant. It just so happens that the DOM is where most people focus their effort when writing JavaScript, so in many cases, jQuery is all you need.
+                Я думаю, это действительно все неплохо суммирует. Если вы спросите меня (а поскольку вы это читаете,
+                я полагаю, что вы уже спросили), вопрос не в том, какой фреймворк лучше или хуже. А в том, что из вышеперечисленных вещей
+                вы хотели бы делать? Эти два фреймворка просто разработаны с разной целью. Разумеется, есть
+                некоторая функциональность, которая присутствует в них обоих, но, тем не менее, они не пытаются делать одно и то же.
 			</p>
 			<p>
-				Most of the code you write when you write MooTools still feels like JavaScript. If you aren't interested in JavaScript as a language, then learning MooTools is going to feel like a chore. If you are interested in JavaScript and what makes it interesting, powerful, and expressive, then, personally, I think MooTools is the better choice.
+                Описание jQuery говорит о HTML, событиях, анимациях, Ajax и веб-разработке. MooTools говорит об
+                объектно-ориентированности и написании мощного и гибкого кода. jQuery стремится "изменить то, как вы обычно пишете JavaScript",
+                в то время как MooTools разработан для разработчиков среднего и продвинутого уровня.
 			</p>
-			
-			
+			<p>
+                Важно различать концепции <em>фреймворка</em> и <em>набора инструментов (toolkit)</em>. MooTools &mdash; это <em>фреймворк</em>, который
+                пытается сделать JavaScript таким, <em>каким он должен быть</em> (согласно авторам MooTools).
+                Его цель &mdash; реализовать API, который выглядел бы как JavaScript, но расширял бы все, не только DOM.
+                jQuery &mdash; это <em>toolkit</em>, который дает вам удобный набор методов, которые делают работу с DOM более приятной.
+                Просто так получилось, что DOM &mdash; это то, на чем концентрируется большинство людей, которые пишут JavaScript,
+                так что, в большинстве случаев jQuery &mdash; все, что вам нужно.
+			</p>
+			<p>
+                Большая часть кода, которую вы пишете, используя MooTools, все еще выглядит как JavaScript.
+                Если вам не интересен JavaScript как язык, то изучение MooTools, скорей всего, станет для вас неприятной рутиной.
+                А если вам интересен JavaScript сам по себе, и то, что делает его таким мощным и выразительным, то
+                лично я думаю, что MooTools подойдет вам больше.
+			</p>
+
 			<a name="learning"></a>
-			<h2>The Learning Curve and The Community</h2>
-		
+			<h2>Сложность изучения и сообщество</h2>
 			<p>
-				First, jQuery is, by and large, easier to learn. It has an almost colloquial style that almost doesn't feel like programming. If all you want is to get something working quickly without learning JavaScript, jQuery is probably a better choice for you. It's not that MooTools can't help you accomplish the same things, but I'll admit that MooTools can be a little harder to get the hang of if you're new to JavaScript and also that there are just a lot of resources out there to help you learn jQuery - more than there are for MooTools at least.
+                Во-первых, jQuery, по большому счету, легче в освоении. Стиль его кода близок к разговорному и даже почти не
+                ощущается как программирование. Если вам нужно склепать что-нибудь по-быстрому, не изучая JavaScript, то
+                jQuery, вероятно, лучший выбор для вас. Это не значит, что MooTools не сможет вам помочь в таких вещах, но
+                я признаю, что MooTools может оказаться слегка сложнее в изучении, если вы новичок в JavaScript, а также
+                что ресурсов, готовых помочь в изучении jQuery, ощутимо больше, чем аналогичных для MooTools.
 			</p>
-		
 			<p>
-				If you compare the jQuery community (<a href="http://docs.jquery.com/Discussion">see the "Discussion" page on jQuery</a>) and the MooTools community (<a href="irc://irc.freenode.net/#mootools">irc</a>, <a href="http://groups.google.com/group/mootools-users">mailing list</a>, and <a href="http://mooforum.net/">unofficial forum</a>) you'll quickly discover two things: 1) the jQuery community is <i>far</i> larger (I attribute this mostly to the point I made above about how easy it is to learn, but also because...) and 2) they are more active in promoting the library. If you measure jQuery and MooTools on metrics like the number of people using it, the number of search queries run on Google, the number of books sold, etc, you'll see jQuery is ahead by a wide margin.
+                Если вы сравните сообщество jQuery (<a href="http://docs.jquery.com/Discussion">смотрите страницу "Обсуждение" на сайте jQuery</a>)
+                и сообщество MooTools (<a href="irc://irc.freenode.net/#mootools">irc</a>,
+                <a href="http://groups.google.com/group/mootools-users">mailing list</a>, и
+                <a href="http://mooforum.net/">unofficial forum</a>),
+                вы быстро обнаружите две вещи:
+                1) сообщество jQuery <i>гораздо</i> больше (я приписываю это большей частью тому, насколько легче его изучать, однако есть еще одна причина...),
+                2) оно более активно продвигает свою библиотеку.
+                Если вы измерите jQuery и MooTools с той точки зрения, сколько
+                человек их использует, сколько запросов о них делается в Гугле, сколько было продано книг и так далее,
+                вы увидите, что jQuery находится впереди с большим отрывом.
 			</p>
-		
 			<p>
-				To tell you why you might consider MooTools I'll first need to talk a little bit about what both the frameworks do. Ultimately which framework you choose is going to come down to what you want to accomplish and how you like to program (and maybe even <i>if</i> you like to program, at least in JavaScript).
+                Чтобы рассказать о том, почему вам, возможно, стоит поглядеть в сторону MooTools, я сперва должен поговорить о том,
+                что вообще оба эти фреймворка делают. В конечном счете, какой фреймворк вы выберете, зависит от того, что вы хотели бы
+                получить, и как вам нравится программировать (а может быть, и <i>нравится ли</i> вам программировать вообще,
+                по крайней мере на JavaScript).
 			</p>
 			
 			<a name="javascript"></a>
