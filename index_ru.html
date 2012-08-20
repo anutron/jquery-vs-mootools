@@ -479,7 +479,7 @@ ninja.logInventory();
                 Element и других прототипов. Также, очень важная часть &mdash; функция <em><a href="http://mootools.net/docs/core/Class/Class">Class</a></em>.
             </p>
             <p>
-                <em>Class</em> для многих людей выглядит так, как будто мы попытались воссоздать более классическое
+                <em>Class</em> для многих людей выглядит как попытка воссоздать более классическое
                 наследование, как в Java или C++, но
                 <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Class-Based_vs._Prototype-Based_Languages">это не так</a>.
                 Основная задача <em>Class</em> &mdash; сделать модель прототипного наследования более простой
@@ -492,17 +492,19 @@ ninja.logInventory();
             </p>
 
             <a name="domfun"></a>
-            <h2>jQuery Makes the DOM More Fun</h2>
-
+            <h2>jQuery делает DOM более крутым</h2>
             <p>
-                And this is why jQuery is more accessible. It doesn't ask that you learn JavaScript inside and out. It doesn't throw you into the deep end with prototypal inheritance, binding, "this", and native prototypes. When you get started with jQuery in its <a href="http://docs.jquery.com/Tutorials:How_jQuery_Works">official tutorial</a>, this is the first jQuery code example you find:
+                И поэтому jQuery более доступен. Он не заставляет вас учить JavaScript с головы до пят.
+                Он не кидает вас в дебри прототипного наследования, связываний, "this" и тому подобного.
+                Когда вы начинаете изучать jQuery с его <a href="http://docs.jquery.com/Tutorials:How_jQuery_Works">официального руководства</a>,
+                вот первый пример кода, который вы увидите:
             </p>
 
 <pre class="js">window.onload = function() {
     alert("welcome");
 }</pre>
 
-            <p>and here's the third: </p>
+            <p>а вот третий: </p>
 
 <pre class="js">$(document).ready(function() {
     $("a").click(function(event) {
@@ -511,21 +513,36 @@ ninja.logInventory();
 });</pre>
 
             <p>
-                If you read <a href="http://www.amazon.com/gp/product/1430209836?ie=UTF8&tag=clientside-20&link_code=as3&camp=211189&creative=373489&creativeASIN=1430209836">the MooTools book</a> or the <a href="http://www.mootorial.com/wiki">MooTools tutorial</a> (both of which I authored) they start in a much different place. While you can skip ahead and quickly learn about effects and the DOM, if you want to learn MooTools, you have to start with things like <em>Class</em>, and, I'll admit: if you're new to programming, or you just want to get something working on your site without having to learn everything about JavaScript, chances are jQuery is going to look a lot more friendly to you.
+                Если вы читали
+                <a href="http://www.amazon.com/gp/product/1430209836?ie=UTF8&tag=clientside-20&link_code=as3&camp=211189&creative=373489&creativeASIN=1430209836">the MooTools book</a>
+                или <a href="http://www.mootorial.com/wiki">MooTools tutorial</a> (и то, и другое написал я),
+                они начинаются совсем с других вещей.
+                Вы могли бы пропустить основы и начать читать об эффектах на странице и о DOM, но если вы хотите
+                изучить MooTools, придется начать с вещей типа <em>Class</em>, и я признаю:
+                если вы новичок в программировании, или просто хотите, чтобы на вашем сайте что-то быстро
+                заработало, а вам бы не пришлось изучать JavaScript, скорей всего, jQuery вам понравится гораздо больше.
             </p>
-
             <p>
-                On the other hand, if you want to learn JavaScript itself, MooTools is a great way to do it. It implements a lot of things that JavaScript is going to have (many of the methods on Natives are just the <a href="https://developer.mozilla.org/En/New_in_JavaScript_1.8">JavaScript 1.8</a> spec and beyond). If you're used to programming, especially both object oriented <em>and</em> functional programming, MooTools has a lot of design patterns that are very exciting and expressive.
+                С другой стороны, если вы хотите изучить сам JavaScript, MooTools &mdash; отличный способ это сделать.
+                Если вы привыкли программировать, особенно в функциональном и объектно-ориентированном стилях,
+                у MooTools есть много чего вам предложить.
             </p>
 
             <a name="cando"></a>
-            <h2>Anything You Can Do I Can Do Better</h2>
-
+            <h2>Все, что можете вы, я могу сделать лучше</h2>
             <p>
-                If you look at the things jQuery can do, there's often a counterpart in MooTools. If you look at the things MooTools can do, there is often no way to emulate it using jQuery code because of jQuery's focus on the DOM. MooTools has a broader functionality than jQuery, but  there's nothing about jQuery that prevents you from doing those things. For example, jQuery does not come with any sort of inheritance system, but that's ok. You could, if you want, use the MooTools <em>Class</em> in conjunction with jQuery if you wanted to (or write your own). There's even <a href="http://code.google.com/p/jquery-inheritance/updates/list">an inheritance plug-in for jQuery</a> (I haven't used it, but I assume it offers pretty much the same kind of functionality).
+                Если вы взглянете на вещи, которые может делать jQuery, вы увидите, что
+                часто у них есть аналог в MooTools. Если вы взглянете на вещи, которые может делать MooTools,
+                часто не найдется способа повторить их с помощью jQuery, поскольку jQuery сфокусирован только на DOM.
+                MooTools обладает более широкой функциональностью нежели jQuery, но в этом нет ничего плохого.
+                Например, jQuery не предлагает никакой системы наследования, ну и хорошо. Вы можете использовать <em>Class</em>
+                из MooTools вместе с jQuery, если хотите (или написать свою). Есть даже
+                <a href="http://code.google.com/p/jquery-inheritance/updates/list">плагин для наследования в jQuery</a>
+                (Я его не использовал, но предполагаю, что он предоставляет весьма схожую функциональность).
             </p>
-
-            <p>If we look at the example from jQuery above:</p>
+            <p>
+                Если мы посмотрим на пример из jQuery выше:
+            </p>
 
 <pre class="js">$(document).ready(function() {
     $("a").click(function(event) {
@@ -534,7 +551,7 @@ ninja.logInventory();
 });</pre>
 
             <p>
-                and we wanted to translate this to MooTools, we'd have:
+                и захотим перевести это на MooTools, то получится:
             </p>
 <pre class="js">window.addEvent('domready', function() {
     $$('a').addEvent('click', function(event) {
@@ -542,10 +559,10 @@ ninja.logInventory();
     });
 });</pre>
             <p>
-                  These are very similar no?
+                  Довольно похоже, нет?
             </p>
             <p>
-                  Here's a more complex example from jQuery:
+                  Вот более сложный пример из jQuery:
             </p>
 
 <pre class="js">$(document).ready(function() {
@@ -558,7 +575,7 @@ ninja.logInventory();
 });</pre>
 
             <p>
-        and in MooTools:
+                и из MooTools:
             </p>
 
 <pre class="js">window.addEvent('domready',function() {
@@ -573,11 +590,22 @@ ninja.logInventory();
 });</pre>
 
             <p>
-                      Again, very similar. I'd argue that the MooTools version is more explicit, but also more verbose because of it. It's clear reading the MooTools code that we're adding two events - one for mouse enter and one on mouse leave, while the jQuery version is more concise; its <em><a href="http://docs.jquery.com/Events/hover">hover</a></em> method accepts two methods - the first for mouse enter and the second for mouse leave. I personally like the fact that the MooTools code is more legible but that's a very subjective observation.
+                И снова очень похоже. Я бы сказал, что версия MooTools более явная, но поэтому и писать приходится чуть больше.
+                Глядя на код для MooTools, понятно что мы добавляем два события &mdash; одно для mouseenter и одно для mouseleave,
+                в то время как версия для jQuery более краткая. Его метод <em><a href="http://docs.jquery.com/Events/hover">hover</a></em>
+                принимает две функции &mdash; первую для mouseenter и вторую для mouseleave.
+                Лично мне нравится, что код для MooTools более разборчивый, но это мое субъективное наблюдение.
             </p>
 
             <p>
-                I will say that sometimes jQuery can become too esoteric for my taste. The methods don't always make sense to me just looking at them and I find it hard to parse. This is somewhat unfair though, as I am intimately familiar with MooTools, so reading MooTools is easy for me. But one of the things I appreciate about MooTools is how almost all the method and class names really name the thing. Methods are almost always verbs and leave little doubt as to what they do. Every programming language requires you to go to the docs to look up syntax when you write it - I'm not saying that. I'm just saying that I find the API of MooTools to be more coherent and consistent.
+                Я бы сказал, иногда jQuery может быть слишком эзотерическим, на мой вкус. Например, мне не очевидно,
+                что делают методы из примера выше, если просто на них посмотреть, и поэтому этот код сложнее прочитать.
+                Хотя, это может быть несправедливо, так как я глубоко знаю MooTools, поэтому читать код MooTools для меня
+                легче. Но есть одна вещь, которую я очень ценю в MooTools &mdash; это то, что почти все методы и
+                названия классов обозначают именно то, как и называются. Методы почти всегда &mdash; глаголы, и практически
+                всегда по названию понятно, что они делают. Любой язык программирования требует время от времени пойти
+                и заглянуть в документацию, чтобы посмотреть синтаксис, и я не говорю, что в MooTools этого делать не надо,
+                я просто говорю, что нахожу API MooTools более понятным и последовательным.
             </p>
 
             <a name="yourway"></a>
