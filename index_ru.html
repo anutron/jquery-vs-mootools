@@ -153,7 +153,7 @@
             <ul>
                 <li><a href="#mottos">Девизы говорят сами за себя</a></li>
                 <li><a href="#learning">Сложность изучения и сообщество</a></li>
-                <li><a href="#javascript">Для чего подходит JavaScript</a></li>
+                <li><a href="#javascript">Для чего годится JavaScript</a></li>
                     <ul style="margin-bottom: 0px">
                         <li><a href="#dom">Больше, чем просто DOM</a></li>
                         <li><a href="#inheritance">Наследование в JavaScript</a></li>
@@ -321,26 +321,64 @@
 			</p>
 			
 			<a name="javascript"></a>
-			<h2>What JavaScript Is Good For</h2>
-		
+			<h2>Для чего годится JavaScript</h2>
 			<p>
-				Part of making this choice is asking what you want to do with JavaScript. Let's consider vanilla JavaScript. No framework; just plain old JS. JavaScript gives you native objects like <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/String">Strings</a>, <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Number">Numbers</a>, <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Function">Functions</a>, <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Array">Arrays</a>, <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Date">Dates</a>, <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/RegExp">Regular Expressions</a>, and more. JavaScript also gives you an inheritance model - a somewhat esoteric model called <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Inheritance">prototypal inheritance</a> (which I'll talk about more later). These building blocks and the concept of inheritance are the bread and butter of any programming language and they have absolutely nothing to do with browsers or the web or CSS or HTML. You could write anything you wanted to in JavaScript. Tic-tac-toe, chess, photoediting, a web server, whatever. It just so happens that 99% of all the JavaScript out there is run in browsers and that's what we think of it as. The programming language for browsers.
+                Важно понять, что именно вы хотите делать с помощью JavaScript. Давайте рассмотрим "чистый" JavaScript. Без фреймворков, просто старый добрый JS.
+                JavaScript предоставляет изначально нативные объекты вроде
+                <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/String">Strings</a>,
+                <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Number">Numbers</a>,
+                <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Function">Functions</a>,
+                <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Array">Arrays</a>,
+                <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Date">Dates</a>,
+                <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/RegExp">Regular Expressions</a>,
+                и так далее.
+                JavaScript также предоставляет вам способ наследования &mdash; довольно эзотерический способ,
+                называемый <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Inheritance">прототипное наследование</a>
+                (о котором мы поговорим позже). Вот эти строительные блоки и концепция наследования &mdash; хлеб с маслом
+                любого языка программирования, и они не имеют совершенно никакого отношения к браузерам, вебу или CSS с HTML.
+                Вы можете написать на JavaScript все, что хотите. Крестики-нолики, шахматы, обработчик фотографий,
+                веб-сервер, что угодно. Просто так получилось, что 99% всего JavaScript запускается в браузерах, и поэтому
+                мы так о нем думаем. Как о языке программирования для браузеров.
 			</p>
 			<p>
-				Understanding that the browser, the DOM, is just where we happen to use JS most of the time but that it's actually a very robust and expressive programming language will help you understand the difference between MooTools and jQuery.
+                Понимание того, что браузеры и DOM &mdash; всего лишь то, для чего мы исторически больше всего используем
+                JavaScript, а на самом деле это очень надежный и выразительный язык программирования, поможет вам
+                понять различия между MooTools и jQuery.
 			</p>
 			
 			<a name="dom"></a>
-			<h3>More Than Just The DOM</h3>
-		
+			<h3>Больше, чем просто DOM</h3>
 			<p>
-				If you think of the tasks that we want to accomplish in JavaScript strictly in terms of "get stuff on the page and do stuff to it" then jQuery is probably the best choice. It excels at offering a very expressive system for describing behavior on the page in a way that doesn't feel like programming sometimes. You can still use the rest of JavaScript to do what you want to do, but if you're focused on the DOM - changing CSS properties, animating things, fetching content via AJAX, etc - most of what you'll end up writing will be covered by jQuery, and what isn't will likely be plain-old JavaScript. jQuery does provide some methods that aren't about the DOM; for example, it provides a mechanism for iterating over arrays - <i><a href="http://docs.jquery.com/Utilities/jQuery.each">$.each(array, fn)</a></i> - or, for example, it offers a trim method for strings - <i><a href="http://docs.jquery.com/Utilities/jQuery.trim">$.trim(str)</a></i>. But there aren't a ton of these types of utility methods, which is fine because, for the most part, if you're just getting stuff out of the DOM, iterating over them, and altering them in some way (adding html, changing styles, adding event listeners for click and mouseover, etc) you don't need much else.
+                Если все ваши задачи, которые вы хотите решить с помощью JavaScript &mdash; это "взять эту штуку
+                со страницы и сделать с ней вот эти вот штуки", то jQuery, вероятно, для вас лучший выбор.
+                Ему прекрасно удается предоставлять очень выразительный способ описания поведения объектов на странице,
+                который иногда даже не похож на программирование. Вы по-прежнему можете использовать остальную часть
+                JavaScript для других целей, но если вы в основном сконцентрированы на DOM &mdash; изменении CSS свойств,
+                анимации объектов, получении данных через AJAX и тому подобном &mdash; большая часть того, что вы пишете,
+                будет покрыта jQuery, и эта часть не будет выглядеть как старый добрый JavaScript.
+                jQuery предоставляет несколько методов, не относящихся к DOM. Например, механизм для итерации
+                по массивам &mdash; <i><a href="http://docs.jquery.com/Utilities/jQuery.each">$.each(array, fn)</a></i> &mdash;
+                или, например, функцию для обрезания строк &mdash; <i><a href="http://docs.jquery.com/Utilities/jQuery.trim">$.trim(str)</a></i>.
+                Но этих методов там совсем немного, что и хорошо, поскольку в большей части кода вы просто
+                получаете всякие штуки из DOM, итерируете по ним и меняете каким-либо образом (добавляете html,
+                изменяете стили, добавляете обработчики события для click и mouseover и т.п.), и вам особо
+                ничего больше не нужно.
 			</p>
 			<p>
-				But if you think of JavaScript's scope in its full breadth, you can see that jQuery doesn't focus on things outside of the DOM. This is one of the reasons it is so easy to learn, but it also limits the ways it can help you write JavaScript. It's just not trying to be anything other than a solid programming system <i>for the DOM</i>. It doesn't address inheritance nor does it address the basic utilities of all the native types in the JavaScript language, <i>but it doesn't need to</i>. If you want to mess around with strings, dates, regular expressions, arrays and functions, <i>you can</i>. It's just not jQuery's job to help you do it. JavaScript as a language is there at your feet. jQuery makes the DOM your playground, but the rest of JavaScript is just not in its scope.
+                Но если вы подумаете о JavaScript в более широком смысле, вы увидете, что jQuery не фокусируется на
+                вещах помимо DOM. Это, кстати, одна из причин, почему его так легко изучать, но это также ограничивает
+                вас в предоставляемых библиотекой возможностях. Он даже просто не пытается быть чем-то большим,
+                чем отличной системой программирования <i>для DOM</i>. Он не обращает внимания ни на наследование,
+                ни на все нативные типы в языке JavaScript, <i>но ему этого и не нужно</i>. Если вам нужно возится со
+                строками, датами, регулярными выражениями, массивами и функциями, <i>без проблем</i>. Просто это уже
+                не работа jQuery. К вашим услугам обычный JavaScript. jQuery делает вам конфетку из DOM, но все остальное
+                уже выходит за его рамки.
 			</p>
 			<p>
-				This is where MooTools is vastly different. Rather than focusing exclusively on the DOM (though, as I'll get into in a bit, it offers all the functionality that jQuery does but accomplishes this in a very different manner), MooTools takes into its scope the entire language. If jQuery makes the DOM your playground, MooTools aims to make JavaScript your playground, and this is one of the reasons why it's harder to learn.         
+                Вот в чем отличие MooTools. Вместо того чтобы фокусироваться только на DOM (хотя, как вам дальше будет
+                видно, он предлагает всю ту же функциональность, что и jQuery, просто в совершенно другой манере),
+                MooTools включает в свои рамки весь язык. Если jQuery делает вам конфетку из DOM, MooTools пытается
+                сделать конфетку из самого JavaScript, и это одна из причин, по которой его сложнее изучать.
 			</p>
 			
 			<a name="inheritance"></a>
