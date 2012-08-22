@@ -609,9 +609,12 @@ ninja.logInventory();
             </p>
 
             <a name="yourway"></a>
-            <h2>MooTools Lets You Have It Your Way</h2>
-
-            <p>But what if you like the jQuery syntax? One way to illustrate the power of MooTools is to show you how easy it is to change it to suit your tastes. If we wanted to implement the <em>hover</em> method from jQuery in MooTools, we could easily do so:</p>
+            <h2>Настройте MooTools, как это нужно вам</h2>
+            <p>
+                Но что если вам нравится синтаксис jQuery? Не проблема, я покажу, как просто можно изменить синтаксис
+                MooTools на любой вкус. Если бы, например, мы хотели создать метод hover, как в jQuery, мы могли бы
+                просто сделать так:
+            </p>
 
 <pre class="js">Element.implement({
     hover : function(enter,leave){
@@ -619,7 +622,7 @@ ninja.logInventory();
     }
 });
 
-//and then you could use it exactly like the jQuery version:
+// и теперь используем его точно так же, как в jQuery
 $$('#orderlist li:last').hover(function(){
    this.addClass('green');
 },
@@ -628,13 +631,18 @@ function(){
 });
 </pre>
 
-        <p>Indeed, there are MooTools plug-ins that do just that; <a href="http://github.com/cheeaun/mooj/tree/master">give you the jQuery syntax for MooTools</a>. MooTools' focus on extensibility means you can implement anything you like. This is something jQuery can't do. MooTools can mimic jQuery if you want it to, but jQuery can't mimic MooTools. If you want to write classes or extend native prototypes or do some of the other things MooTools can, you'll have to write it yourself.</p>
+            <p>
+                В самом деле, для MooTools есть плагины, которые делают <a href="http://github.com/cheeaun/mooj/tree/master">именно это</a>.
+                То, что MooTools фокусируется на расширяемости, означает, что вы можете реализовать все, что захотите.
+                Это то, что jQuery не умеет. MooTools может маскироваться под jQuery, а jQuery под MooTools &mdash; нет.
+                Если вы захотите писать классы, или расширять существующие прототипы, или делать другие вещи, которые
+                умеет MooTools, вам придется писать это самим.
+            </p>
 
             <a name="chaining"></a>
-            <h2>Chaining as a Design Pattern</h2>
-
+            <h2>Chaining как паттерн проектирования</h2>
             <p>
-                  Let's do another of these. Here's some jQuery (from the jQuery tutorial):
+                Давайте взглянем на кое-что еще. Вот немного jQuery (из официального руководства):
             </p>
 
 <pre class="js">$(document).ready(function() {
@@ -644,10 +652,16 @@ function(){
 });</pre>
 
             <p>
-                  This is an example of a syntax that I personally don't prefer. Looking at the code above I am hard pressed to be sure of what it's doing. Most notably I'm curious about what <i>.end</i> does and how does <i>.find</i>, which follows it, relate to what <i>.end</i> does? Now, looking at the docs on jQuery makes it very clear what .end does (it resets to the value of the original selector, in this case #faq). But this seems very odd to me. When I do work with jQuery, I often find myself unsure what a method is going to return to me. Obviously this doesn't bother everyone else as jQuery has a lot of people happily using it, so I'll chalk it up to personal preference again.
+                Это пример синтаксиса, который лично я не очень люблю. Глядя на кусок кода вверху, я с трудом смогу
+                сказать, что он делает. Особенно интересно, что делает <i>.end</i> и как <i>.find</i>, который идет
+                за ним, относится к тому, что делает <i>.end</i>? Поглядев в документацию jQuery, становится понятно,
+                что делает .end (он сбрасывает до значения самого первого селектора, в данном случае #faq).
+                Но для меня это выглядит очень странно. Когда я работаю с jQuery, я часто обнаруживаю, что не уверен,
+                что какой-либо метод собирается мне вернуть. Очевидно, это не беспокоит больше никого, так как
+                многие люди используют jQuery и вполне счастливы, так что припишу это опять своим личным предпочтениям.
             </p>
             <p>
-                      Let's look at the above logic as MooTools:
+                Давайте посмотрим, как это выглядело бы в MooTools:
             </p>
 
 <pre class="js">window.addEvent('domready', function() {
@@ -659,9 +673,11 @@ function(){
 });
 </pre>
 
-
             <p>
-                 Again, the MooTools code is a bit more verbose, but also more explicit. Also note that the design pattern here is to store the reference to #faq in a variable, where jQuery uses its <i>.end</i> method to return to it. I'll note that it's possible to write highly chained code with Mootools. For example:
+                И снова, кода для MooTools слегка побольше, но он зато и более явный. Также заметьте, что
+                подход здесь заключается в хранении ссылки на #faq в переменной, тогда как jQuery
+                использует специальный метод <i>.end</i>, чтобы вернуться к нему. В MooTools тоже возможно
+                написать код в одну цепочку, например:
             </p>
 <pre class="js">item.getElements('input[type=checkbox]')
     .filter(function(box) {
@@ -672,17 +688,26 @@ function(){
     .fireEvent((checked) ? 'check' : 'uncheck');</pre>
 
             <p>
-                 But really, writing code like this - lots of logic in a domready statement - with either framework, I'd argue, is itself a bad practice. It's far better to encapsulate your logic into reusable chunks.
+                Но, в самом деле, писать код вроде этого &mdash; куча логики в выражении domready &mdash; в любом
+                фреймворке, само по себе не очень хорошо. Гораздо лучше разбить вашу логику на куски, пригодные для
+                повторного использования.
             </p>
 
             <a name="reuse"></a>
-            <h2>Reusing Code with jQuery</h2>
-
+            <h2>Повторное использование кода в jQuery</h2>
             <p>
-                 It's very tempting when you're working on a web project to write code this way. Just add some logic on the page that selects the DOM elements and "sets them up" by hiding some, altering others, and adding event listeners for click or mouseover. Developing code this way is very efficient, very fast. The problem with writing all your logic in domready statements is that you end up with a lot of code that does the same thing in different places. If we take the FAQ pattern above we could easily apply the same logic elsewhere on a different page with any list of terms and definitions. Are we going to repeat the same logic every time we find this pattern?
+                Когда вы работаете над веб-проектом, писать код таким образом очень заманчиво. Просто добавить на страницу
+                немного кода, который выбирает элементы из DOM, и "обрабатывает их", скрывая одни, изменяя другие и
+                добавляя обработчики событий click и mouseover. Писать код таким образом очень эффективно и очень быстро.
+                Однако, проблема в написании всей логики в выражении domready в том, что у вас в итоге окажется
+                множество кода в разных местах, делающее одно и то же. Если взять код про FAQ из примера выше,
+                мы можем легко поместить такую же логику в другое место, на другую страницу, с любым списком
+                заголовков и определений. Надо ли нам повторять ту же самую логику каждый раз, когда мы сталкиваемся с
+                подобной задачей?
             </p>
             <p>
-                   A simple way to make it reusable is to wrap the logic in a function and pass in arguments. Here's what that might look like in jQuery:
+                Простой способ написать реюзабельный код &mdash; это обернуть его в функцию и передать ей аргументы.
+                Вот как это может выглядеть на jQuery:
             </p>
 
 <pre class="js">function faq(container, terms, definitions) {
@@ -695,25 +720,39 @@ $(document).ready(function() {
 });</pre>
 
             <p>
-                This is much better for two really big and important reasons:
+                Это гораздо лучше по двум большим и важным причинам:
             </p>
             <ol>
                 <li>
-                     If tomorrow we need to change how these lists work (maybe we want to add click tracking logic so we can measure it in our web logs or maybe we want to fetch the definitions via ajax) we can just change our main <i>faq</i> method and everywhere we use it just gets updated. Or if there's a new version of jQuery released that changes the way things work, we can just go update our one method instead of a dozen copies everywhere. I call this  keeping a small footprint in my application. By keeping the points where my application touches my more generic code as small as possible, it makes it easier for me to fix bugs, upgrade frameworks, add features, or alter functionality.
+                    Если завтра мы захотим изменить то, как эти списки работают (например, добавить трекинг кликов, чтобы
+                    можно было потом их отслеживать в логах; или, например, получать куски кода через ajax), нам нужно
+                    будет изменить только главный метод <i>faq</i>, и везде, где он был использован, все будет работать
+                    нормально. Или если вдруг обновится версия jQuery, в которой были сделаны изменения, требующие
+                    изменить код, нам придется изменить один метод, а не десять в разных местах. Я называю это
+                    "стараться оставлять маленькие следы" (keeping a small footprint). Если стараться держать код,
+                    где приложение затрагивает более общий код, насколько маленьким, насколько возможно, становится
+                    гораздо проще исправлять ошибки, обновлять фреймворки, добавлять фичи или изменять функциональность.
                 </li>
                 <li>
-                     The second reason is that it's less code. By reusing the same method over and over again, I don't repeat myself and this is valuable in any programming environment. It also makes the code my visitors have to download smaller.
+                    Вторая причина &mdash; меньше кода. Используя один и тот же метод несколько раз, мы не плодим
+                    дубликаты, а это важно при программировании чего угодно. Ну, и посетителям сайта приходится скачивать
+                    меньше кода.
                 </li>
             </ol>
             <p>
-                jQuery actually has a slightly more refined system for writing reusable "widgets" like these. Rather than encourage you to drop them into functions like the above example (which is really rather crude) it encourages you to write <a href="http://docs.jquery.com/Plugins/Authoring">jQuery plug-ins</a>. Here's what that would look like:
+                На самом деле, у jQuery есть немного более проработанная система для написания "виджетов" вроде этих,
+                пригодных для повторного использования. Вместо того, чтобы поощрять вас разбивать код на функции,
+                как в предыдущем примере (что и правда довольно грубо), он побуждает вас писать
+                <a href="http://docs.jquery.com/Plugins/Authoring">jQuery плагины</a>.
+                Вот как это примерно может выглядеть:
 
 <pre class="js">jQuery.fn.faq = function(options) {
     var settings = jQuery.extend({
         terms: 'dt',
         definitions: 'dd'
     }, options); 
-    //"this" is the current context; in this case, the elements we want to turn into faq layouts
+    // "this" - это текущий контекст,
+    // в данном случае - элементы, которые мы хотим превратить в разделы FAQ
     $(this).find(settings.terms).hide().end().find(settings.definitions).click(function() {
         $(this).next().slideToggle();
     });
@@ -721,27 +760,55 @@ $(document).ready(function() {
 };</pre>
 
             </p>
-                which you would use thusly:
+                а использовать это вы будете таким образом:
             </p>
     <pre class="js">$('#faq').faq();</pre>
 
             <p>
-                But looking at the example above, there's not much difference between declaring our <i>faq</i> function this way vs. declaring it as a stand alone function. Granted, it's not in the global namespace, but we could have just as easily added it to a namespace of our own. By attaching it to jQuery we can chain it with other jquery methods. The other benefit is that the "this" inside our function is the current context of whatever is in the jQuery chain at that moment. By using this pattern for plug-ins we're able to make our plug-in look like it's part of jQuery, but other than that, our plug-in is basically a single function that takes the current jQuery context, does stuff to it, and then returns the context for the next item in the chain. There's not a lot of complexity here, which makes it easy for anyone to write jQuery plug-ins - they're just single functions.
+                Но, глядя на пример выше, видно, что нет большой разницы между объявлением нашей функции <i>faq</i>
+                таким образом и объявлением ее как обычной функции. Конечно, тогда она не мусорит в глобальном неймспейсе,
+                но мы могли бы и руками добавить ее в свой неймспейс, что ничуть не сложнее. Присоединив
+                ее к jQuery, мы получаем возможность добавлять ее в цепочки с другими методами. Другое преимущество
+                в том, что "this" внутри нашей функции тогда будет являться текущим контекстом всего, что будет
+                в цепочке к тому моменту. Поэтому, если создавать плагины таким образом, они выглядят совсем как часть
+                jQuery, но, вообще говоря, наш плагин по существу &mdash; обычная
+                функция, которая принимает текущий контекст, делает с ним разные штуки и затем возвращает, чтобы
+                следующая функция в цепочке могла им воспользоваться. Ничего особенно сложного в этом нет, поэтому
+                писать плагины для jQuery довольно легко, т.к. они всего лишь обычные функции.
             </p>
 
             <p>
-                Note that it is possible to write more complex plugins with jQuery with methods and state. This kind of pattern is supported with the jQuery UI plugin system and doesn't use the same mechanism as the basic plugin (like our faq example). Instead, you attach an object with methods and properties to the jQuery object (i.e. <em>$.ui.tabs</em>). There's a shortcut to invoke this object (<em>$(selector).tabs()</em>) so that you can continue chaining as with the faq plugin. But because it doesn't return a reference to the tabs object created for the items in your selector, you're forced to call that selector again to invoke methods on it. Instead of calling <em>myTabInstance.add(url, label, index)</em> you must execute the selector again and call your function by name (as a string): <em>$(selector).tabs('add', url, label, index);</em>. This means you're running your selector twice (unless you store it in a variable somewhere), and that you don't ever have a pointer to the "add" method that you can do things like bind or delay. This post is focused on the MooTools and jQuery cores, and while jQuery's UI system does provide this functionality, it's not something that comes with jQuery by default.
+                Заметьте, что в jQuery можно писать более сложные плагины, с методами и хранением состояния.
+                Это позволяет сделать система плагинов jQuery UI, которая не использует тот механизм, который я
+                описал выше, в примере с faq. Вместо этого, вы привязываете свой объект к объекту jQuery
+                (например, <em>$.ui.tabs</em>) и можете потом использовать его в коде примерно как <em>$(selector).tabs()</em>,
+                чтобы можно было продолжать строить цепочку, как в примерах выше. Однако, поскольку это выражение не
+                возвращает ссылку на объект, который мы создали для наших табов внутри селектора, вам придется
+                снова выполнять поиск по селектору, чтобы вызывать его методы. И вместо того, чтобы просто вызвать
+                <em>myTabInstance.add(url, label, index)</em>, вам придется вызывать функции, передавая их имена
+                строками, например <em>$(selector).tabs('add', url, label, index);</em>. Таким образом, вы
+                выполняете поиск по селектору дважды, если, конечно, не сохранили результат в переменную, и не имеете
+                под рукой ссылку на функцию add, чтобы можно было использовать штуки вроде bind или delay. Но поскольку этот
+                пост про ядро jQuery и ядро MooTools, надо сказать, что данная функциональность предоставляется
+                jQuery UI и в ядро по умолчанию не входит.
             </p>
 
             <a name="classes"></a>
-            <h2>Reusing Code with MooTools</h2>
-
+            <h2>Повторное использование кода в MooTools</h2>
             <p>
-                In MooTools when you want to define a pattern, you're more likely to use either a <em><a href="http://mootools.net/docs/core/Class/Class">Class</a></em> or implement a method into a native object (into <em>String</em>, for example).
+
+                In MooTools when you want to define a pattern, you're more likely to use either a
+                <em><a href="http://mootools.net/docs/core/Class/Class">Class</a></em> or implement a method into a
+                native object (into <em>String</em>, for example).
             </p>
-
             <p>
-                Rather than give you an almost completely different language from JavaScript's native style, MooTools attempts to walk the middle ground between defining its own custom syntax and extending JavaScript's own design patterns. One of the ways it does this is by extending the prototypes of the native objects in the language and in the DOM. This means that if you needed a method to trim a string, MooTools encourages you to add that method to String itself (note that <em><a href="http://mootools.net/docs/core/Native/String#String:trim">String.trim</a></em> is already in MooTools; you don't need to add this yourself):
+                Rather than give you an almost completely different language from JavaScript's native style,
+                MooTools attempts to walk the middle ground between defining its own custom syntax and extending
+                JavaScript's own design patterns. One of the ways it does this is by extending the prototypes of the
+                native objects in the language and in the DOM. This means that if you needed a method to trim a string,
+                MooTools encourages you to add that method to String itself
+                (note that <em><a href="http://mootools.net/docs/core/Native/String#String:trim">String.trim</a></em> is
+                already in MooTools; you don't need to add this yourself):
             </p>
 
 <pre class="js">String.implement({
@@ -751,13 +818,32 @@ $(document).ready(function() {
 });</pre>
 
             <p>
-                This means you can just execute <i>" no more spaces on the end! ".trim()</i> and get back <i>"no more spaces on the end!"</i>. Some would say that implementing properties into native prototypes is inappropriate. It's the reason why MooTools and <a href="http://www.prototypejs.org/">Prototype.js</a> can't play well with each other - any framework that manipulates prototypes of natives doesn't play well with any other framework that does the same. If I define <i>String.prototype.foo()</i> and another library on the same page defines it, too, which ever one comes last wins. In a way, this is similar to the problem we face with the global window namespace. This is how JavaScript works. This is how <a href="https://developer.mozilla.org/En/New_in_JavaScript_1.8">JavaScript 1.8</a> has added so many features. It adds them to the prototypes.
+                This means you can just execute <i>" no more spaces on the end! ".trim()</i> and get back <i>"no more
+                spaces on the end!"</i>. Some would say that implementing properties into native prototypes is
+                inappropriate. It's the reason why MooTools and <a href="http://www.prototypejs.org/">Prototype.js</a>
+                can't play well with each other - any framework that manipulates prototypes of natives doesn't play
+                well with any other framework that does the same. If I define <i>String.prototype.foo()</i> and another
+                library on the same page defines it, too, which ever one comes last wins. In a way, this is similar to
+                the problem we face with the global window namespace. This is how JavaScript works. This is how
+                <a href="https://developer.mozilla.org/En/New_in_JavaScript_1.8">JavaScript 1.8</a> has added so many
+                features. It adds them to the prototypes.
             </p>
             <p>
-                The MooTools developers include a robust framework that is easy for you to extend with your own functionality with the intention that people who include the framework in the page are going to use it, not some other framework. It's actually kind of rude to ask users to download two frameworks. The only reason to include two frameworks is because you want to use plug-ins from both, and in the minds of the MooTools authors (myself included), if you want a plug-in that isn't available with the framework of your choice, it's more appropriate for you to spend the time porting it to your environment than to ask your users to download another framework.
+                The MooTools developers include a robust framework that is easy for you to extend with your own
+                functionality with the intention that people who include the framework in the page are going to use
+                it, not some other framework. It's actually kind of rude to ask users to download two frameworks.
+                The only reason to include two frameworks is because you want to use plug-ins from both, and in the
+                minds of the MooTools authors (myself included), if you want a plug-in that isn't available with the
+                framework of your choice, it's more appropriate for you to spend the time porting it to your
+                environment than to ask your users to download another framework.
             </p>
             <p>
-                Once you learn how JavaScript works and see the power of extending native objects, a whole new level of programming opens up. You can write plug-ins that alter Elements or Dates or Functions. While some might argue that adding methods to natives this way is a kind of pollution, I'd argue that this is how JavaScript is meant to be used. It is a design feature of the language. By attaching methods to natives you allow your code to be concise and compartmentalized. jQuery does this too, but limits its prototype	enhancements to the jQuery object.
+                Once you learn how JavaScript works and see the power of extending native objects, a whole new level
+                of programming opens up. You can write plug-ins that alter Elements or Dates or Functions. While some
+                might argue that adding methods to natives this way is a kind of pollution, I'd argue that this is how
+                JavaScript is meant to be used. It is a design feature of the language. By attaching methods to natives
+                you allow your code to be concise and compartmentalized. jQuery does this too, but limits its prototype
+                enhancements to the jQuery object.
             </p>
 
             <p>
@@ -779,7 +865,12 @@ $(document).ready(function() {
             </p>
 
             <p>
-                The key here is that at the heart of the MooTools framework is the notion that it's there to let you program what you want. If there's functionality that's not in the core, you can extend it and add your own. The job of the core is not to provide everyone with every bit of functionality that they could ever want, but to provide the tools that allow you write the things that you want. A big part of that is making it easier to extend the prototypes of natives, and take advantage of prototypal inheritance. You can do these things with vanilla JavaScript but MooTools makes it easier and more pleasant.
+                The key here is that at the heart of the MooTools framework is the notion that it's there to let you
+                program what you want. If there's functionality that's not in the core, you can extend it and add your
+                own. The job of the core is not to provide everyone with every bit of functionality that they could
+                ever want, but to provide the tools that allow you write the things that you want. A big part of that
+                is making it easier to extend the prototypes of natives, and take advantage of prototypal inheritance.
+                You can do these things with vanilla JavaScript but MooTools makes it easier and more pleasant.
 
             </p>
 
@@ -788,7 +879,12 @@ $(document).ready(function() {
             <h3>MooTools and Inheritance</h3>
 
             <p>
-                Despite its name, the MooTools <em>Class</em> function is not really a class nor does it create them. It has design patterns that might remind you of classes in a more traditional programming language, but really <em>Class</em> is all about objects and prototypal inheritance. (Unfortunately, using words like "class" are the most convenient way to describe these things, so for the purposes of this article, when I refer to "classes" I'm referring to functions that return objects - which I'll call "instances" - that inherit from a prototype.)
+                Despite its name, the MooTools <em>Class</em> function is not really a class nor does it create them.
+                It has design patterns that might remind you of classes in a more traditional programming language,
+                but really <em>Class</em> is all about objects and prototypal inheritance. (Unfortunately, using words
+                like "class" are the most convenient way to describe these things, so for the purposes of this article,
+                when I refer to "classes" I'm referring to functions that return objects - which I'll call "instances"
+                - that inherit from a prototype.)
             </p>
             <p>
                 To make a class, you pass an object to the <em>Class</em> constructor like this:
@@ -807,18 +903,33 @@ $(document).ready(function() {
 });</pre>
 
             <p>
-                You pass <em>Class</em> an object (above, we pass an object with members like "isAlive" and "eat") and this object becomes the prototype of every instance of that class. To create an instance, you call it like this:
+                You pass <em>Class</em> an object (above, we pass an object with members like "isAlive" and "eat") and
+                this object becomes the prototype of every instance of that class. To create an instance, you call it
+                like this:
             </p>
 <pre class="js">var bob = new Human("bob", 20); //bob's name is "bob" and he's 20 years old.</pre>
             <p>
-                Now we have an instance of <em>Human</em>. <em>bob</em> has the properties of the object we defined when we created our <em>Human</em> class. But the important thing is that <em>bob</em> has these properties through inheritance. When we reference <i>bob.eat</i>, <i>bob</i> doesn't really have this property. JavaScript looks at <i>bob</i> and he doesn't have an <i>eat</i> method, so it looks up the inheritance chain and finds it on the object we passed when we created the <em>Human</em> class. This is true for <i>energy</i>, too. At first glance this looks potentially bad; we don't want all the humans we create to gain energy every time that <i>bob</i> eats. The important thing to recognize is that the first time we assign a value to <i>bob</i>'s energy, we assign him his own value and we no longer look at the prototype for it. So the first time <i>bob</i> eats, he gets his own definition for <em>energy</em> (set to 2).
+                Now we have an instance of <em>Human</em>. <em>bob</em> has the properties of the object we defined
+                when we created our <em>Human</em> class. But the important thing is that <em>bob</em> has these
+                properties through inheritance. When we reference <i>bob.eat</i>, <i>bob</i> doesn't really have
+                this property. JavaScript looks at <i>bob</i> and he doesn't have an <i>eat</i> method, so it looks
+                up the inheritance chain and finds it on the object we passed when we created the <em>Human</em> class.
+                This is true for <i>energy</i>, too. At first glance this looks potentially bad; we don't want all the
+                humans we create to gain energy every time that <i>bob</i> eats. The important thing to recognize is
+                that the first time we assign a value to <i>bob</i>'s energy, we assign him his own value and we no
+                longer look at the prototype for it. So the first time <i>bob</i> eats, he gets his own definition for
+                <em>energy</em> (set to 2).
             </p>
             <pre class="js">bob.eat(); //bob.energy == 2</pre>
             <p>
-                Note that <em>bob</em>'s name and age are unique to him; these are assigned to him when the class is initialized in the <i>initialize</i> method.
+                Note that <em>bob</em>'s name and age are unique to him; these are assigned to him when the class is
+                initialized in the <i>initialize</i> method.
             </p>
             <p>
-                This whole pattern may seem a little odd to you, but the value here is that we can define functionality for a pattern and create instances of that pattern every time we need it. Each instance maintains its own state. So if we create another instance each one is independent of the other, but inherits from the same base pattern:
+                This whole pattern may seem a little odd to you, but the value here is that we can define functionality
+                for a pattern and create instances of that pattern every time we need it. Each instance maintains its
+                own state. So if we create another instance each one is independent of the other, but inherits from
+                the same base pattern:
             </p>
 
 <pre class="js">var Alice = new Human();
@@ -833,10 +944,15 @@ $(document).ready(function() {
             <h3>Extending and Implementing Classes</h3>
 
             <p>
-                Let's revisit our jQuery <i>faq</i> plug-in. What would happen if we wanted to add more functionality to that plug-in. What if we wanted to make an ajax version that fetched the answers to the questions from the server? Let's imagine that the <i>faq</i> plug-in was authored by someone else and we want to add more to it without altering it in any way (we don't want to fork it).
+                Let's revisit our jQuery <i>faq</i> plug-in. What would happen if we wanted to add more functionality
+                to that plug-in. What if we wanted to make an ajax version that fetched the answers to the questions
+                from the server? Let's imagine that the <i>faq</i> plug-in was authored by someone else and we want to
+                add more to it without altering it in any way (we don't want to fork it).
             </p>
             <p>
-                Our only real choices are to either duplicate the <em>faq</em> plug-in's logic entirely (remember, it's a single function), essentially forking it, or we can invoke it and then add more logic to it. Given a choice, the latter seems to save us the most trouble. It would look something like this:
+                Our only real choices are to either duplicate the <em>faq</em> plug-in's logic entirely (remember,
+                it's a single function), essentially forking it, or we can invoke it and then add more logic to it.
+                Given a choice, the latter seems to save us the most trouble. It would look something like this:
             </p>
 <pre class="js">jQuery.fn.ajaxFaq = function(options) {
     var settings = jQuery.extend({ 
@@ -851,10 +967,18 @@ $(document).ready(function() {
     this.faq(); //call our original faq plug-in
 });</pre>
             <p>
-                This has some down sides. First of all, our <em>faq</em> class is going to repeat our selector for the definitions, which might be expensive; there's no way to store the retrieved definitions and pass it on for the second time they are needed. Secondly, we can't add our ajax logic into the middle of the <em>faq</em> plug-in's own logic for displaying the definition. The original plug-in called <em>slideToggle</em> which expands the definition using an effect. This is problematic because this effect is going to go off before our ajax finishes loading. There's no real solution here unless we just duplicate the entire <em>faq</em> plug-in.
+                This has some down sides. First of all, our <em>faq</em> class is going to repeat our selector for
+                the definitions, which might be expensive; there's no way to store the retrieved definitions and
+                pass it on for the second time they are needed. Secondly, we can't add our ajax logic into the middle
+                of the <em>faq</em> plug-in's own logic for displaying the definition. The original plug-in called
+                <em>slideToggle</em> which expands the definition using an effect. This is problematic because this
+                effect is going to go off before our ajax finishes loading. There's no real solution here unless we
+                just duplicate the entire <em>faq</em> plug-in.
             </p>
             <p>
-                Now let's consider our MooTools <em>Human</em> class. It has properties like <em>isAlive</em> and <em>energy</em> and it has a method called <em>eat</em>. What if we wanted to make a new version of <em>Human</em> that had additional properties? With MooTools, we extend the class:
+                Now let's consider our MooTools <em>Human</em> class. It has properties like <em>isAlive</em> and
+                <em>energy</em> and it has a method called <em>eat</em>. What if we wanted to make a new version of
+                <em>Human</em> that had additional properties? With MooTools, we extend the class:
             </p>
 <pre class="js">var Ninja = new Class({
     Extends: Human,
@@ -869,7 +993,10 @@ $(document).ready(function() {
     }
 });</pre>
             <p>
-                You can see that we've added a lot of functionality here into a subclass. This subclass has all these properties that are unique to <em>Ninjas</em>. <em>Ninjas</em> start off with an initial <em>energy</em> value of 100. <em>Ninjas</em> get a <em>side</em>. They also get an <em>attack</em> method that lets them kill other <em>Humans</em>, but it costs the <em>Ninja</em> energy.
+                You can see that we've added a lot of functionality here into a subclass. This subclass has all these
+                properties that are unique to <em>Ninjas</em>. <em>Ninjas</em> start off with an initial <em>energy</em>
+                value of 100. <em>Ninjas</em> get a <em>side</em>. They also get an <em>attack</em> method that lets
+                them kill other <em>Humans</em>, but it costs the <em>Ninja</em> energy.
             </p>
 
 <pre class="js">var bob = new Human('Bob', 25);
@@ -880,7 +1007,14 @@ blackNinja.attack(bob);
 //bob never had a chance</pre>
 
             <p>
-                Picking this apart a bit, there are some interesting things to consider here. Note that we have an <em>initialize</em> method in the <em>Ninja</em> class. This would appear to overwrite the <em>initialize</em> method in the <em>Human</em> class, but we can still access it by calling <em>this.parent</em>, passing along the arguments that the parent class's <em>initialize</em> expects. Further, we can control when our logic occurs; before or after the call to the parent. We can assign new values to properties (like the <em>energy</em> value) and we can define new functionality. Imagine if we could do this with our <em>faq</em> plug-in for jQuery. We could load our ajax and THEN slide open the value.
+                Picking this apart a bit, there are some interesting things to consider here. Note that we have an
+                <em>initialize</em> method in the <em>Ninja</em> class. This would appear to overwrite the
+                <em>initialize</em> method in the <em>Human</em> class, but we can still access it by calling
+                <em>this.parent</em>, passing along the arguments that the parent class's <em>initialize</em> expects.
+                Further, we can control when our logic occurs; before or after the call to the parent. We can assign
+                new values to properties (like the <em>energy</em> value) and we can define new functionality.
+                Imagine if we could do this with our <em>faq</em> plug-in for jQuery. We could load our ajax and THEN
+                slide open the value.
             </p>
             <p>
                 MooTools has another pattern called a Mixin. Unlike the parent to
@@ -900,7 +1034,9 @@ blackNinja.attack(bob);
 });</pre>
 
             <p>
-                Here we've broken the qualities that make a <em>Ninja</em> different from a <em>Human</em> and put them in a class of their own. This lets us reuse this code outside of <em>Ninja</em>. We could then imbue our <em>Ninja</em> class with the qualities of a warrior like so:
+                Here we've broken the qualities that make a <em>Ninja</em> different from a <em>Human</em> and put
+                them in a class of their own. This lets us reuse this code outside of <em>Ninja</em>. We could then
+                imbue our <em>Ninja</em> class with the qualities of a warrior like so:
             </p>
 
 <pre class="js">var Ninja = new Class({
@@ -923,11 +1059,19 @@ blackNinja.attack(bob);
 });</pre>
 
             <p>
-                Now we have a <em>Samurai</em> class and a <em>Ninja</em> class. But look at how little code both <em>Ninja</em> and <em>Samurai</em> took to define. Both of them are similar in that they are humans with warrior qualities, but they are different in that samurais are always, always good, while ninjas have shifting allegiances. By spending the time to write a <em>Human</em> class and a <em>Warrior</em> class, we're able to have three different classes with no repetition of code while maintaining a very granular level of control over when methods are called and how they relate to each other. Each instance we create has its own state and the code itself is very legible.
+                Now we have a <em>Samurai</em> class and a <em>Ninja</em> class. But look at how little code both
+                <em>Ninja</em> and <em>Samurai</em> took to define. Both of them are similar in that they are humans
+                with warrior qualities, but they are different in that samurais are always, always good, while ninjas
+                have shifting allegiances. By spending the time to write a <em>Human</em> class and a <em>Warrior</em>
+                class, we're able to have three different classes with no repetition of code while maintaining a very
+                granular level of control over when methods are called and how they relate to each other. Each instance
+                we create has its own state and the code itself is very legible.
             </p>
 
             <p>
-                Now that you have an overview of how classes work in MooTools, let's look at our <em>faq</em> class that we wrote in jQuery and write it as we would in MooTools and then extend it to add Ajax to it just as we did with jQuery.
+                Now that you have an overview of how classes work in MooTools, let's look at our <em>faq</em>
+                class that we wrote in jQuery and write it as we would in MooTools and then extend it to add Ajax
+                to it just as we did with jQuery.
             </p>
 <pre class="js">
 var FAQ = new Class({
@@ -971,7 +1115,10 @@ var FAQ = new Class({
 </pre>
 
             <p>
-                Woah. That's a lot of code. Even if we remove all the comments it's still two dozen lines long. I already illustrated above that we could build this plug-in with roughly the same amount of code as the jQuery version. So why is this one so much longer? Well, we've made it much more flexible. To use the class, we just call the constructor, like this:
+                Woah. That's a lot of code. Even if we remove all the comments it's still two dozen lines long.
+                I already illustrated above that we could build this plug-in with roughly the same amount of code
+                as the jQuery version. So why is this one so much longer? Well, we've made it much more flexible.
+                To use the class, we just call the constructor, like this:
             </p>
 
 <pre class="js">var myFAQ = new FAQ(myContainer);
@@ -980,7 +1127,9 @@ myFAQ.toggle(2); //toggle the 3rd element
 </pre>
 
             <p>
-                We can access methods and properties of the instance. But what about our ajax functionality? The problem with our ajax extension to the jQuery version was that we couldn't delay the opening of the definition until after it loaded. We don't have that problem with our MooTools version:
+                We can access methods and properties of the instance. But what about our ajax functionality? The
+                problem with our ajax extension to the jQuery version was that we couldn't delay the opening of
+                the definition until after it loaded. We don't have that problem with our MooTools version:
 
             </p>
 
@@ -1019,25 +1168,59 @@ myFAQ.toggle(2); //toggle the 3rd element
 </pre>
 
             <p>
-                Now we have a version of our <em>FAQ</em> class that allows us to get the definitions from the server. Note that we were able to integrate the new logic in a way that doesn't expand the definition until <em>after</em> the content comes back from the server (which we couldn't do with the jQuery version). Also note that we really only had to describe the new functionality (the ajax) and little else. This extensibility makes it possible for you to create families of plug-ins that offer different shades of functionality. It also means that you can use someone else's plug-in and alter just the bits that you to be want different if you need to (without forking it). This helps explain why, for any given design pattern - a date picker, a tab interface, etc, that you typically only find a few plug-ins for MooTools. Most of the plug-ins you get either solve your problem or, if not, you can just extend them to add the things you need.
+                Now we have a version of our <em>FAQ</em> class that allows us to get the definitions from the server.
+                Note that we were able to integrate the new logic in a way that doesn't expand the definition until
+                <em>after</em> the content comes back from the server (which we couldn't do with the jQuery version).
+                Also note that we really only had to describe the new functionality (the ajax) and little else.
+                This extensibility makes it possible for you to create families of plug-ins that offer different shades
+                of functionality. It also means that you can use someone else's plug-in and alter just the bits that
+                you to be want different if you need to (without forking it). This helps explain why, for any given
+                design pattern - a date picker, a tab interface, etc, that you typically only find a few plug-ins for
+                MooTools. Most of the plug-ins you get either solve your problem or, if not, you can just extend them
+                to add the things you need.
 
             </p>
 
             <p>
-                As I illustrated earlier, it's possible to write complex jQuery widgets with methods and state. Most of the code you write when doing this is vanilla JavaScript when you need to express logic that isn't related to the DOM. But jQuery's model doesn't offer a system for extending these instances into subclasses. Nor does it help you with mixins that can be reused easily. Finally, jQuery's plugins are always attached to DOM elements. If you wanted to write a class that, say, processed URLs, there's no stateful system for such a thing unless you write it yourself.
+                As I illustrated earlier, it's possible to write complex jQuery widgets with methods and state. Most of
+                the code you write when doing this is vanilla JavaScript when you need to express logic that isn't
+                related to the DOM. But jQuery's model doesn't offer a system for extending these instances into
+                subclasses. Nor does it help you with mixins that can be reused easily. Finally, jQuery's plugins are
+                always attached to DOM elements. If you wanted to write a class that, say, processed URLs, there's no
+                stateful system for such a thing unless you write it yourself.
             </p>
 
             <a name="conclusion"></a>
             <h2>Decision Time</h2>
 
             <p>
-                jQuery focuses on expressiveness, quick and easy coding, and the DOM while MooTools focuses on extension, inheritance, legibility, reuse, and maintainability. If you put those two things on opposite sides of a scale, the jQuery side translates into something with which it's easy to get started and see quick results but (in my experience) can turn into code that's harder to reuse and maintain (but really that's up to you; it's not jQuery's problem, per se), while the MooTools side takes longer to learn and requires you to write more code upfront before you see results, but afterwards is more reusable and more maintainable.
+                jQuery focuses on expressiveness, quick and easy coding, and the DOM while MooTools focuses on
+                extension, inheritance, legibility, reuse, and maintainability. If you put those two things on
+                opposite sides of a scale, the jQuery side translates into something with which it's easy to get
+                started and see quick results but (in my experience) can turn into code that's harder to reuse and
+                maintain (but really that's up to you; it's not jQuery's problem, per se), while the MooTools side
+                takes longer to learn and requires you to write more code upfront before you see results, but
+                afterwards is more reusable and more maintainable.
             </p>
             <p>
-                Further, the MooTools core does not contain every feature you can imagine and neither does the jQuery core. Both frameworks keep their cores rather lean, leaving it to you and others to write plug-ins and extensions. Their job is not to give you every feature you could want but to give you the tools so that you can implement anything you can imagine. This is the power of JavaScript, and of JavaScript frameworks in general, and both frameworks excel at it. MooTools takes a more holistic approach and gives you tools to write anything you can imagine beyond the scope of the DOM, but pays the price by having a steeper learning curve. MooTools' extensible and holistic approach gives you a superset of jQuery's features, but jQuery's focus on a slick DOM API doesn't preclude you from using the native inheritance methods of JavaScript or from using a class system like MooTools if you want it.
+                Further, the MooTools core does not contain every feature you can imagine and neither does the jQuery
+                core. Both frameworks keep their cores rather lean, leaving it to you and others to write plug-ins and
+                extensions. Their job is not to give you every feature you could want but to give you the tools so that
+                you can implement anything you can imagine. This is the power of JavaScript, and of JavaScript
+                frameworks in general, and both frameworks excel at it. MooTools takes a more holistic approach and
+                gives you tools to write anything you can imagine beyond the scope of the DOM, but pays the price by
+                having a steeper learning curve. MooTools' extensible and holistic approach gives you a superset of
+                jQuery's features, but jQuery's focus on a slick DOM API doesn't preclude you from using the native
+                inheritance methods of JavaScript or from using a class system like MooTools if you want it.
             </p>
             <p>
-                This is why I say that both frameworks are excellent choices. My effort here has been to highlight the differences in philosophies between the two codebases and highlight their advantages and disadvantages. I doubt I've been successful in keeping my preference for MooTools completely in check, but hopefully this has been helpful. Regardless of which framework you choose to work with, you now know a lot more about both, hopefully. If you have the luxury of time, I strongly recommend implementing a site with each. Then write your own review of them both and maybe your perspective will highlight some things I missed.
+                This is why I say that both frameworks are excellent choices. My effort here has been to highlight the
+                differences in philosophies between the two codebases and highlight their advantages and disadvantages.
+                I doubt I've been successful in keeping my preference for MooTools completely in check, but hopefully
+                this has been helpful. Regardless of which framework you choose to work with, you now know a lot more
+                about both, hopefully. If you have the luxury of time, I strongly recommend implementing a site with
+                each. Then write your own review of them both and maybe your perspective will highlight some things I
+                missed.
             </p>
             <p>A history of this document <a href="http://github.com/anutron/jquery-vs-mootools/tree/master">can be viewed on github</a>.</p>
             <p>
