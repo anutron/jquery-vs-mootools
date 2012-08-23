@@ -1,0 +1,1265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>
+            jQuery vs MooTools: Choosing Between Two Great JavaScript Frameworks
+        </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link rel="Shortcut Icon" href="favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection">
+        <link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print">
+        <!--[if IE]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+        <link rel="stylesheet" href="css/blueprint/src/typography.css" type="text/css" media="screen" title="no title" charset="utf-8">
+        <style>
+            body {
+              font-size: 100%;
+              color: #444;
+              background: #fff;
+              font-family: "Georgia", Arial, Helvetica, sans-serif;
+            }
+            h1, h2, h3, h4 {
+                color: #626262;
+            }
+            h1 {
+                text-align: center;
+                margin: 20px !important;
+                font-size: 90px;
+                padding: 0 !important;
+                padding:0 0 10px;
+            }
+            div.caption {
+                font-size: 14px;
+                text-align: right;
+                margin: auto;
+                width: 800px;
+                position: relative;
+                top: -25px;
+                background-color: none;
+            }
+            a, a.visited {
+                color: #004d9b;
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+            p.footnote {
+                font-size: 12px;
+                text-align:right;
+                margin-top: 0px;
+                position: relative;
+                top: -8px !important;
+                top: 0px;
+            }
+            p.about {
+                font-size: 12px;
+            }
+            tr td {
+                border-bottom: 1px solid #999;
+                vertical-align: top;
+            }
+            tr th {
+                background: #999;
+                color: #fff;
+            }
+            .dsq-item-cp {
+                display: none;
+            }
+            div.trans {
+                font-size: 10px;
+            }
+            ul#dsq-comments {
+                max-height:800px !important;
+                overflow:auto !important;
+                padding:0 10px 0 0 !important;
+            }
+        </style>
+        <script src="http://www.google.com/jsapi"></script>
+        <script>
+            google.load("mootools", "1.2.2");
+        </script>
+        <script src="js/Lighter/Ligher.uncompressed.js" type="text/javascript" charset="utf-8"></script>
+
+        <script>
+        window.addEvent('domready', function(){
+            var toc = $$('ul a');
+            $$('a:not(.stbutton)').each(function(a) {
+                if (toc.contains(a)) return;
+                 a.set('target', '_blank');
+            });
+            if (Browser.Engine.trident) return;
+            // Highlight all "pre" elements in a document.
+            $$('pre').light({
+                altLines: 'hover',
+                indent: 2,
+                mode: 'pre',
+                path: 'js/Lighter/'
+            });
+
+        });
+        </script>
+    </head>
+    <body>
+        <div class="container">
+
+            <h1 class="span-24 last">jQuery vs MooTools</h1>
+            <div class="caption">
+                May, 2009 - <a href="http://www.clientcide.com" target="_blank">Aaron Newton of Clientcide</a>
+                <div class="trans">
+                    Также доступно на
+                    <a href="/index.html">Английском</a>,
+                    <a href="/index_pt-br.html">Португальском (Бразилия)</a>, <a href="/index_cn.html">Китайском</a>,
+                    <a href="index_fa.html">Персидском</a>, <a href="/index_es-ar.html">Испанском</a>,
+                    <a href="/index_ja.html">Японском</a>, и <a href="/index_it.html">Итальянском</a>. |
+                    <a href="http://wiki.github.com/anutron/jquery-vs-mootools">Как сделать перевод</a>.
+                </div>
+            </div>
+            <p>
+                В наши дни большинство людей, начинающих использовать JavaScript, сталкиваются с непростой задачей выбора библиотеки
+                для дальнейшего использования, или, по крайней мере, какую из них изучать в первую очередь.
+                Если вы работаете в какой-либо компании, то выбор, вероятно, уже сделан за вас, и тогда этот вопрос отпадает. Тем не менее, если
+                вы привыкли к <a href="http://www.jquery.com">jQuery</a>, а компания заставляет использовать <a href="http://www.mootools.net">MooTools</a>,
+                эта статья все-таки может оказаться вам полезной.
+            </p>
+            <p>
+                <a href="http://twitter.com/joshink/statuses/1671986611">Каждый</a> <a href="http://twitter.com/jezusisstoer/statuses/1642244246">день</a>
+                <a href="http://twitter.com/digitalcampaign/statuses/1622094648">в</a> <a href="http://twitter.com/jesswma/statuses/1605733380">твиттере</a>
+                я вижу множество постов, которые сводятся к "MooTools или jQuery?". Эта статья поможет вам определиться с выбором.
+            </p>
+            <h3>Отказ от ответственности</h3>
+            <p>
+                Я &mdash; разработчик MooTools. Я работаю над этим фреймворком. Я веду блог про MooTools. Я написал
+                <a href="http://www.mootorial.com">основное онлайн руководство</a> и
+                <a href="http://www.amazon.com/gp/product/1430209836?ie=UTF8&tag=clientside-20&link_code=as3&camp=211189&creative=373489&creativeASIN=1430209836">книгу о MooTools</a>.
+                Очевидно, моя точка зрения несколько предвзята. Подчеркну также, что я не особо часто использую jQuery.
+                Если вы разработчик jQuery и увидели, что я исказил что-нибудь, пожалуйста, свяжитесь со
+                мной, чтобы помочь исправить это недоразумение. Моя задача здесь &mdash; помочь людям сделать выбор,
+                а не выставлять один фреймворк перед другим в более выгодном свете.
+            </p>
+
+            <h3>Цель данной статьи</h3>
+            <p>
+                Желание помочь вам выбрать между jQuery и MooTools заставляет меня рассказать вам, насколько
+                они отличаются друг от друга. Начну с того, что <b>они оба являются прекрасными фреймворками</b>. Сделать неправильный выбор здесь невозможно.
+                Разумеется, у каждого из них есть свои достоинства и недостатки, но, в целом, они оба &mdash; отличный выбор.
+                Есть также и другие фреймворки, которые стоят того, чтобы взглянуть на них более подробно. <a href="http://www.dojotoolkit.org/">Dojo</a>,
+                <a href="http://www.prototypejs.org/">Prototype</a>, <a href="http://developer.yahoo.com/yui/">YUI</a>,
+                <a href="http://extjs.com/">Ext</a> и прочие &mdash; тоже прекрасный выбор. Какой именно из них подойдет,
+                больше зависит от вашего стиля и от того, что именно вы хотите сделать. Цель данной статьи &mdash; сфокусироваться
+                на MooTools и jQuery, так как именно из них двоих все больше и больше людей пытаются выбирать. В конце концов,
+                я не пытаюсь никого убедить переключиться с одного фреймворка на другой. В них обоих есть что почерпнуть
+                и чему научиться. Более подробно о том, что побудило меня написать эту статью, вы можете прочитать
+                <a href="http://www.clientcide.com/3rd-party-libraries/jquery-vs-mootools-mootools-vs-jquery/">в моем посте на Clientcide</a>.
+            </p>
+
+            <h3>Содержание</h3>
+            <ul>
+                <li><a href="#mottos">Девизы говорят сами за себя</a></li>
+                <li><a href="#learning">Сложность изучения и сообщество</a></li>
+                <li><a href="#javascript">Для чего годится JavaScript</a></li>
+                    <ul style="margin-bottom: 0px">
+                        <li><a href="#dom">Больше, чем просто DOM</a></li>
+                        <li><a href="#inheritance">Наследование в JavaScript</a></li>
+                        <li><a href="#self">Ссылки на самого себя</a></li>
+                    </ul>
+                </li>
+                <li><a href="#jsfun">MooTools делает Javascript более крутым</a></li>
+                <li><a href="#domfun">jQuery делает DOM более крутым</a></li>
+                <li><a href="#cando">Все, что можете вы, я могу сделать лучше</a></li>
+                <li><a href="#yourway">Настройте MooTools, как это нужно вам</a></li>
+                <li><a href="#chaining">Chaining как паттерн проектирования</a></li>
+                <li><a href="#reuse">Повторное использование кода в jQuery</a></li>
+                <li><a href="#classes">Повторное использование кода в MooTools</a>
+                    <ul>
+                        <li><a href="#mooinheritance">MooTools и наследование</a></li>
+                        <li><a href="#extension">Расширение и реализация классов</a></li>
+                    </ul>
+                </li>
+                <li><a href="#conclusion">Пора принимать решение</a></li>
+                <li><a href="#discussion">Обсуждение</a></li>
+            </ul>
+
+            <h2>Сухие цифры</h2>
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Ядро jQuery</th>
+                    <th>Ядро MooTools</th>
+                </tr>
+                <tr>
+                    <td>Размер библиотеки</td>
+                    <td>55.9K</td>
+                    <td>64.3K</td>
+                </tr>
+                <tr>
+                    <th colspan="3">Особенности</th>
+                </tr>
+                <tr>
+                    <td>Лицензия</td>
+                    <td><a href="http://en.wikipedia.org/wiki/MIT_License" title="MIT License">MIT</a> &amp; <a href="http://en.wikipedia.org/wiki/GPL" title="GPL">GPL</a></td>
+                    <td><a href="http://en.wikipedia.org/wiki/MIT_License" title="MIT License">MIT</a></td>
+                </tr>
+                <tr>
+                    <td>Функции для работы с DOM</td>
+                    <td>есть</td>
+                    <td>есть</td>
+                </tr>
+                <tr>
+                    <td>Анимация</td>
+                    <td>есть</td>
+                    <td>есть</td>
+                </tr>
+                <tr>
+                    <td>Обработка событие</td>
+                    <td>есть</td>
+                    <td>есть</td>
+                </tr>
+                <tr>
+                    <td>CSS3 селекторы</td>
+                    <td>есть (подмножество)</td>
+                    <td>есть (подмножество)</td>
+                </tr>
+                <tr>
+                    <td>Ajax</td>
+                    <td>есть</td>
+                    <td>есть</td>
+                </tr>
+                <tr>
+                    <td>Нативные расширения (кроме Element)</td>
+                    <td>около 12 для Array, Object, и String</td>
+                    <td>70+ для Array, Object, String, Function, и Number</td>
+                </tr>
+                <tr>
+                    <td>Наследование</td>
+                    <td>Напрямую не поддерживается jQuery</td>
+                    <td>Предоставляется конструктором <em><a href="http://mootools.net/docs/core/Class/Class">Class</a></em></td>
+                </tr>
+                <tr>
+                    <th colspan="3">Прочие соображения</th>
+                </tr>
+                <tr>
+                    <td>Плагины</td>
+                    <td>Сотни неофициальных плагинов &mdash; <a href="http://plugins.jquery.com/">plugins.jquery.com</a></td>
+                    <td>Около 50 официальных плагинов тут &mdash; <a href="http://mootools.net/more">mootools.net/more</a>. Неофициальные плагины тут &mdash; <a href="http://mootools.net/plugins">mootools.net/plugins</a>.</td>
+                </tr>
+                <tr>
+                    <td>Официальная библиотека UI</td>
+                    <td>есть</td>
+                    <td>нет</td>
+                </tr>
+            </table>
+            <p class="footnote">
+                Информация основана на данных <a href="http://jquery.com">jquery.com</a>, <a href="http://mootools.net">mootools.net</a>, и <a href="http://en.wikipedia.org/wiki/Comparison_of_JavaScript_frameworks">wikipedia.com</a>.
+            </p>
+
+            <a name="mottos"></a>
+            <h2>Девизы говорят сами за себя</h2>
+            <p>
+                Если вы зайдете на сайт jQuery, вот что вы увидите вверху страницы:
+            </p>
+            <blockquote>
+                jQuery &mdash; быстрая и компактная JavaScript библиотека, которая упрощает работу с HTML документами,
+                обработкой событий, анимацией и Ajax для быстрой веб-разработки. jQuery cоздан, чтобы изменить
+                то, как вы обычно пишете JavaScript.
+            </blockquote>
+            <p>
+                ...а вот что написано на официальном сайте MooTools:
+            </p>
+            <blockquote>MooTools &mdash; это компактный, модульный, объектно-ориентированный JavaScript фреймворк, созданный для
+                JavaScript разработчиков среднего и продвинутого уровня. Он позволяет писать мощный, гибкий и кроссбраузерный
+                код с элегантным, понятным, логичным и хорошо документированным API.
+            </blockquote>
+            <p>
+                Я думаю, это действительно все неплохо суммирует. Если вы спросите меня (а поскольку вы это читаете,
+                я полагаю, что вы уже спросили), вопрос не в том, какой фреймворк лучше или хуже. А в том, что из вышеперечисленных вещей
+                вы хотели бы делать? Эти два фреймворка просто разработаны с разной целью. Разумеется, есть
+                некоторая функциональность, которая присутствует в них обоих, но, тем не менее, они не пытаются делать одно и то же.
+            </p>
+            <p>
+                Описание jQuery говорит о HTML, событиях, анимациях, Ajax и веб-разработке. MooTools говорит об
+                объектно-ориентированности и написании мощного и гибкого кода. jQuery стремится "изменить то, как вы обычно пишете JavaScript",
+                в то время как MooTools разработан для разработчиков среднего и продвинутого уровня.
+            </p>
+            <p>
+                Важно различать концепции <em>фреймворка</em> и <em>набора инструментов (toolkit)</em>. MooTools &mdash; это <em>фреймворк</em>, который
+                пытается сделать JavaScript таким, <em>каким он должен быть</em> (согласно авторам MooTools).
+                Его цель &mdash; реализовать API, который выглядел бы как JavaScript, но расширял бы все, не только DOM.
+                jQuery &mdash; это <em>toolkit</em>, который дает вам удобный набор методов, которые делают работу с DOM более приятной.
+                Просто так получилось, что DOM &mdash; это то, на чем концентрируется большинство людей, которые пишут JavaScript,
+                так что, в большинстве случаев jQuery &mdash; все, что вам нужно.
+            </p>
+            <p>
+                Большая часть кода, которую вы пишете, используя MooTools, все еще выглядит как JavaScript.
+                Если вам не интересен JavaScript как язык, то изучение MooTools, скорей всего, станет для вас неприятной рутиной.
+                А если вам интересен JavaScript сам по себе, и то, что делает его таким мощным и выразительным, то
+                лично я думаю, что MooTools подойдет вам больше.
+            </p>
+
+            <a name="learning"></a>
+            <h2>Сложность изучения и сообщество</h2>
+            <p>
+                Во-первых, jQuery, по большому счету, легче в освоении. Стиль его кода близок к разговорному и даже почти не
+                ощущается как программирование. Если вам нужно склепать что-нибудь по-быстрому, не изучая JavaScript, то
+                jQuery, вероятно, лучший выбор для вас. Это не значит, что MooTools не сможет вам помочь в таких вещах, но
+                я признаю, что MooTools может оказаться слегка сложнее в изучении, если вы новичок в JavaScript, а также
+                что ресурсов, готовых помочь в изучении jQuery, ощутимо больше, чем аналогичных для MooTools.
+            </p>
+            <p>
+                Если вы сравните сообщество jQuery (<a href="http://docs.jquery.com/Discussion">смотрите страницу "Обсуждение" на сайте jQuery</a>)
+                и сообщество MooTools (<a href="irc://irc.freenode.net/#mootools">irc</a>,
+                <a href="http://groups.google.com/group/mootools-users">mailing list</a>, и
+                <a href="http://mooforum.net/">unofficial forum</a>),
+                вы быстро обнаружите две вещи:
+                1) сообщество jQuery <i>гораздо</i> больше (я приписываю это большей частью тому, насколько легче его изучать, однако есть еще одна причина...),
+                2) оно более активно продвигает свою библиотеку.
+                Если вы измерите jQuery и MooTools с той точки зрения, сколько
+                человек их использует, сколько запросов о них делается в Гугле, сколько было продано книг и так далее,
+                вы увидите, что jQuery находится впереди с большим отрывом.
+            </p>
+            <p>
+                Чтобы рассказать о том, почему вам, возможно, стоит поглядеть в сторону MooTools, я сперва должен поговорить о том,
+                что вообще оба эти фреймворка делают. В конечном счете, какой фреймворк вы выберете, зависит от того, что вы хотели бы
+                получить, и как вам нравится программировать (а может быть, и <i>нравится ли</i> вам программировать вообще,
+                по крайней мере на JavaScript).
+            </p>
+
+            <a name="javascript"></a>
+            <h2>Для чего годится JavaScript</h2>
+            <p>
+                Важно понять, что именно вы хотите делать с помощью JavaScript. Давайте рассмотрим "чистый" JavaScript. Без фреймворков, просто старый добрый JS.
+                JavaScript предоставляет изначально нативные объекты вроде
+                <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/String">Strings</a>,
+                <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Number">Numbers</a>,
+                <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Function">Functions</a>,
+                <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Array">Arrays</a>,
+                <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Global_Objects/Date">Dates</a>,
+                <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/RegExp">Regular Expressions</a>
+                и так далее.
+                JavaScript также предоставляет вам способ наследования &mdash; довольно эзотерический способ,
+                называемый <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Inheritance">прототипным наследованием</a>
+                (о котором мы поговорим позже). Вот эти строительные блоки и концепция наследования &mdash; хлеб с маслом
+                любого языка программирования, и они не имеют совершенно никакого отношения к браузерам, вебу или CSS с HTML.
+                Вы можете написать на JavaScript все, что хотите. Крестики-нолики, шахматы, обработчик фотографий,
+                веб-сервер, что угодно. Просто так получилось, что 99% всего JavaScript запускается в браузерах, и поэтому
+                мы так о нем думаем, как о языке программирования для браузеров.
+            </p>
+            <p>
+                Понимание того, что браузеры и DOM &mdash; всего лишь то, для чего мы исторически больше всего используем
+                JavaScript, а на самом деле это очень надежный и выразительный язык программирования, поможет вам
+                понять различия между MooTools и jQuery.
+            </p>
+
+            <a name="dom"></a>
+            <h3>Больше, чем просто DOM</h3>
+            <p>
+                Если все ваши задачи, которые вы хотите решить с помощью JavaScript &mdash; это "взять эту штуку
+                со страницы и сделать с ней вот эти штуки", то jQuery, вероятно, для вас лучший выбор.
+                Ему прекрасно удается предоставлять очень выразительный способ описания поведения объектов на странице,
+                который иногда даже не похож на программирование. Вы по-прежнему можете использовать остальную часть
+                JavaScript для других целей, но если вы в основном сконцентрированы на DOM &mdash; изменении CSS свойств,
+                анимации объектов, получении данных через AJAX и тому подобном &mdash; большая часть того, что вы пишете,
+                будет покрыта jQuery, и эта часть не будет выглядеть как старый добрый JavaScript.
+                jQuery предоставляет несколько методов, не относящихся к DOM. Например, механизм для итерации
+                по массивам &mdash; <i><a href="http://docs.jquery.com/Utilities/jQuery.each">$.each(array, fn)</a></i> &mdash;
+                или, например, функцию для обрезания строк &mdash; <i><a href="http://docs.jquery.com/Utilities/jQuery.trim">$.trim(str)</a></i>.
+                Но этих методов там совсем немного, что и хорошо, поскольку в большей части кода вы просто
+                получаете всякие штуки из DOM, итерируете по ним и меняете каким-либо образом (добавляете html,
+                изменяете стили, добавляете обработчики события для click и mouseover и т.п.), и вам особо
+                ничего больше не нужно.
+            </p>
+            <p>
+                Но если вы подумаете о JavaScript в более широком смысле, вы увидете, что jQuery не фокусируется на
+                вещах помимо DOM. Это, кстати, одна из причин, почему его так легко изучать, но это также ограничивает
+                вас в предоставляемых библиотекой возможностях. Он даже просто не пытается быть чем-то большим,
+                чем отличной системой программирования <i>для DOM</i>. Он не обращает внимания ни на наследование,
+                ни на все нативные типы в языке JavaScript, <i>но ему этого и не нужно</i>. Если вам нужно возиться со
+                строками, датами, регулярными выражениями, массивами и функциями, <i>без проблем</i>. Просто это уже
+                не работа jQuery. К вашим услугам обычный JavaScript. jQuery делает вам конфетку из DOM, но все остальное
+                уже выходит за его рамки.
+            </p>
+            <p>
+                Вот в чем отличие MooTools. Вместо того чтобы фокусироваться только на DOM (хотя, как вам дальше будет
+                видно, он предлагает всю ту же функциональность, что и jQuery, просто в совершенно другой манере),
+                MooTools включает в свои рамки весь язык. Если jQuery делает вам конфетку из DOM, MooTools пытается
+                сделать конфетку из самого JavaScript, и это одна из причин, по которой его сложнее изучать.
+            </p>
+
+            <a name="inheritance"></a>
+            <h3>Наследование в JavaScript</h3>
+            <p>
+                Язык программирования JavaScript имеет несколько замечательных особенностей. Во-первых, это
+                <a href="http://en.wikipedia.org/wiki/Functional_programming">функциональный язык</a>, что означает,
+                что функции в нем являются объектами высшего порядка, которые могут передаваться повсюду в качестве
+                переменных, как и любые другие объекты, например, строки и числа. Его создавали, держа в уме эту
+                концепцию, и большинство его методов и подходов работают лучше всего, если вы пишете код в этом стиле.
+                Есть некоторые различия между:
+            </p>
+            <pre class="js">for (var i = 0; i &lt; myArray.length; i++) { /* делать всякие штуки */ }</pre>
+            <p>
+                  и
+            </p>
+            <pre class="js">myArray.forEach(function(item, index) { /* делать всякие штуки */ });</pre>
+            <p>
+                В JavaScript особенная <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Inheritance">модель наследования</a>,
+                которая не то что бы уникальна, но, по крайней мере, довольно редко встречается в языках программирования.
+                Вместо классов, которые нужно объявлять отдельно, чтобы из них создавать подклассы, здесь используется
+                <i><a href="http://en.wikipedia.org/wiki/Prototype-based_programming">прототипное наследование</a></i>.
+                Это означает, что объекты наследуются напрямую от других объектов. Если вы обращаетесь к свойству
+                какого-нибудь объекта, который наследуется от другого объекта, язык проверяет наличие данного свойства
+                у наследника, и если не находит, ищет такое свойство у родителя. Вот как этот метод работает, скажем,
+                на массивах. Когда вы печатаете:
+            </p>
+            <pre class="js">[1,2,3].forEach(function(item) { alert(item) }); // выводит сначала 1, потом 2, потом 3</pre>
+            <p>
+                метод "<a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference:Objects:Array:forEach">forEach</a>"
+                не является свойством массива, который вы объявили (<em>[1,2,3]</em>), это общее свойство прототипа
+                для всех массивов. Когда вы обращаетесь к этому методу, JavaScript ищет метод <em>forEach</em> в вашем массиве
+                и, не найдя, ищет его в прототипе всех массивов. Это означает, что метод <em>forEach</em> не хранится в памяти
+                для каждого отдельно взятого массива, а хранится в одном месте только для прототипа массивов. Это невероятно
+                эффективно и довольно мощно. (Замечание: в MooTools метод <em>forEach</em> доступен как <em>each</em>).
+            </p>
+
+            <a name="self"></a>
+            <h3>Ссылки на самого себя</h3>
+            <p>
+                В JavaScript есть ключевое слово "this". Сложно кратко сказать, что это вообще такое, но, по умолчанию,
+                "this" &mdash; это тот объект, которому принадлежит текущий метод. Это позволяет объектам ссылаться
+                на самих себя, а иначе они бы не имели такой возможности. Это становится важным, когда вы создаете
+                много дочерних объектов. Как иначе эти объекты могли бы сослаться на самих себя в своих же методах?
+                Когда настоящий метод расположен не в дочернем объекте, а в родителе, "this" позволяет
+                дочернему объекту обращаться к своему состоянию, а не к состоянию родителя.
+                (<a href="http://www.quirksmode.org/js/this.html">Здесь гораздо более подробно рассказано про "this"</a>,
+                и <a href="https://developer.mozilla.org/En/Core_JavaScript_1.5_Reference/Operators/Special_Operators/This_Operator">вот еще от Мозиллы</a>.)
+            </p>
+            <p>
+                Ключевое слово "this" позволяет объектам, наследующимся от других объектов, обращаться к самим себе,
+                но бывают случаи, когда нужно обращаться через "this" к чему-нибудь другому. Это называется
+                <a href="http://alternateidea.com/blog/articles/2007/7/18/javascript-scope-and-binding">binding</a> (привязывание),
+                когда вы определяете <i>другой</i> "this" для метода. Метод "each" для массивов позволяет вам
+                передать вторым параметром связанный объект. Вот пример того, где вам может понадобиться передавать другой
+                "this":
+            </p>
+<pre class="js">var ninja = {
+    weapons: ['катана', 'метательные звездочки', 'супер техника ударов ладонями, взрывающая сердца'],
+    log: function(message) {
+        console.log(message);
+    },
+    logInventory: function() {
+        this.weapons.each(function(weapon) {
+            // мы хотим, чтобы "this" ссылался на ниндзю
+            this.log('У этого ниндзи есть ' + weapon);
+        }, this); // так что мы передаем "this" (который ниндзя) в Array.each
+    }
+};
+ninja.logInventory(); 
+// У этого ниндзи есть катана
+// У этого ниндзи есть метательные звездочки
+// У этого ниндзи есть супер техника ударов ладонями, взрывающая сердца</pre>
+
+            <p>
+                В примере выше мы привязываем ниндзю (который "this" внутри метода <em>logInventory</em>) к методу,
+                который мы передаем массиву, так что мы можем обращаться к свойству log у ниндзи. Если бы мы этого
+                не сделали, "this" был бы объектом <em>window</em>.
+            </p>
+            <p>
+                Это только пара примеров силы и выразительности языка JavaScript &mdash; наследования, ссылок на самих себя
+                и связывания, а также эффективного использования свойств в прототипах. Плохие новости в том, что
+                чистый JavaScript не предоставляет удобных возможностей работать со всеми этими вещами, и <em>тогда</em> на
+                сцену выходит MooTools. Он превращает эти подходы в простые и приятные в использовании. В итоге
+                вы пишете более абстрактный код, и, по большому счету, это хорошо. Научиться использовать эти подходы
+                правильно требует усилий, но, в конечном счете, ваш код с большей вероятностью можно будет повторно
+                использовать и гораздо легче поддерживать. Поговорим об этих двух вещах более подробно.
+            </p>
+
+            <a name="jsfun"></a>
+            <h2>MooTools делает Javascript более крутым</h2>
+            <p>
+                Поскольку MooTools стремится превратить API JavaScript в более стабильный и логичный,
+                он меньше фокусируется на том, чтобы предоставить вам интерфейс, который "изменит то, как вы обычно пишете
+                JavaScript", а больше на том, чтобы сделать JavaScript в целом менее мучительным в использовании.
+                MooTools &mdash; это расширение языка JavaScript. Он пытается сделать из JavaScript то, чем он должен
+                быть. Значительная часть ядра библиотеки посвящена расширению Function, String, Array, Number,
+                Element и других прототипов. Также, очень важная часть &mdash; функция <em><a href="http://mootools.net/docs/core/Class/Class">Class</a></em>.
+            </p>
+            <p>
+                <em>Class</em> для многих людей выглядит как попытка воссоздать более классическое
+                наследование, как в Java или C++, но
+                <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Class-Based_vs._Prototype-Based_Languages">это не так</a>.
+                Основная задача <em>Class</em> &mdash; сделать модель прототипного наследования более простой
+                в использовании. Замечу, что этот подход есть не только в MooTools, другие фреймворки предлагают
+                похожую функциональность, но в jQuery этого нет. jQuery не предлагает ни системы наследования,
+                ни расширений для обычных объектов (Function, String и т.п.). Это не недостаток jQuery, так как его
+                авторы легко могли бы добавить такую функциональность, но они разрабатывали библиотеку совершенно
+                с другой целью. В то время как MooTools стремится сделать JavaScript более крутым, jQuery делает
+                DOM более крутым, и его разработчики решили ограничить масштаб проекта только этой задачей.
+            </p>
+
+            <a name="domfun"></a>
+            <h2>jQuery делает DOM более крутым</h2>
+            <p>
+                И поэтому jQuery более доступен. Он не заставляет вас учить JavaScript с головы до пят.
+                Он не кидает вас в дебри прототипного наследования, связываний, "this" и тому подобного.
+                Когда вы начинаете изучать jQuery с его <a href="http://docs.jquery.com/Tutorials:How_jQuery_Works">официального руководства</a>,
+                вот первый пример кода, который вы увидите:
+            </p>
+
+<pre class="js">window.onload = function() {
+    alert("welcome");
+}</pre>
+
+            <p>а вот третий: </p>
+
+<pre class="js">$(document).ready(function() {
+    $("a").click(function(event) {
+        alert("Thanks for visiting!");
+    });
+});</pre>
+
+            <p>
+                Если вы читали
+                <a href="http://www.amazon.com/gp/product/1430209836?ie=UTF8&tag=clientside-20&link_code=as3&camp=211189&creative=373489&creativeASIN=1430209836">the MooTools book</a>
+                или <a href="http://www.mootorial.com/wiki">MooTools tutorial</a> (и то, и другое написал я),
+                они начинаются совсем с других вещей.
+                Вы могли бы пропустить основы и начать читать об эффектах на странице и о DOM, но если вы хотите
+                изучить MooTools, придется начать с вещей типа <em>Class</em>, и я признаю:
+                если вы новичок в программировании, или просто хотите, чтобы на вашем сайте что-то быстро
+                заработало, а вам бы не пришлось изучать JavaScript, скорей всего, jQuery вам понравится гораздо больше.
+            </p>
+            <p>
+                С другой стороны, если вы хотите изучить сам JavaScript, MooTools &mdash; отличный способ это сделать.
+                Если вы привыкли программировать, особенно в функциональном и объектно-ориентированном стилях,
+                у MooTools есть много чего вам предложить.
+            </p>
+
+            <a name="cando"></a>
+            <h2>Все, что можете вы, я могу сделать лучше</h2>
+            <p>
+                Если вы взглянете на вещи, которые может делать jQuery, вы увидите, что
+                часто у них есть аналог в MooTools. Если вы взглянете на вещи, которые может делать MooTools,
+                часто не найдется способа повторить их с помощью jQuery, поскольку jQuery сфокусирован только на DOM.
+                MooTools обладает более широкой функциональностью нежели jQuery, но в этом нет ничего плохого.
+                Например, jQuery не предлагает никакой системы наследования, ну и хорошо. Вы можете использовать <em>Class</em>
+                из MooTools вместе с jQuery, если хотите (или написать свою). Есть даже
+                <a href="http://code.google.com/p/jquery-inheritance/updates/list">плагин для наследования в jQuery</a>
+                (Я его не использовал, но предполагаю, что он предоставляет весьма схожую функциональность).
+            </p>
+            <p>
+                Если мы посмотрим на пример из jQuery выше:
+            </p>
+
+<pre class="js">$(document).ready(function() {
+    $("a").click(function(event) {
+        alert("Thanks for visiting!");
+    });
+});</pre>
+
+            <p>
+                и захотим перевести это на MooTools, то получится:
+            </p>
+<pre class="js">window.addEvent('domready', function() {
+    $$('a').addEvent('click', function(event) {
+        alert('Thanks for visiting!');
+    });
+});</pre>
+            <p>
+                  Довольно похоже, нет?
+            </p>
+            <p>
+                  Вот более сложный пример из jQuery:
+            </p>
+
+<pre class="js">$(document).ready(function() {
+    $("#orderedlist li:last").hover(function() {
+        $(this).addClass("green");
+    },
+    function() {
+        $(this).removeClass("green");
+    });
+});</pre>
+
+            <p>
+                и из MooTools:
+            </p>
+
+<pre class="js">window.addEvent('domready',function() {
+    $$('#orderedlist li:last-child').addEvents({
+        mouseenter: function() {
+            this.addClass('green');
+        },
+        mouseleave: function() {
+            this.removeClass('green');
+        }
+    });
+});</pre>
+
+            <p>
+                И снова очень похоже. Я бы сказал, что версия MooTools более явная, но поэтому и писать приходится чуть больше.
+                Глядя на код для MooTools, понятно что мы добавляем два события &mdash; одно для mouseenter и одно для mouseleave,
+                в то время как версия для jQuery более краткая. Его метод <em><a href="http://docs.jquery.com/Events/hover">hover</a></em>
+                принимает две функции &mdash; первую для mouseenter и вторую для mouseleave.
+                Лично мне нравится, что код для MooTools более разборчивый, но это мое субъективное наблюдение.
+            </p>
+
+            <p>
+                Я бы сказал, иногда jQuery может быть слишком эзотерическим, на мой вкус. Например, мне не очевидно,
+                что делают методы из примера выше, если просто на них посмотреть, и поэтому этот код сложнее прочитать.
+                Хотя, это может быть несправедливо, так как я глубоко знаю MooTools, поэтому читать код MooTools для меня
+                легче. Но есть одна вещь, которую я очень ценю в MooTools &mdash; это то, что почти все методы и
+                названия классов обозначают именно то, как и называются. Методы почти всегда &mdash; глаголы, и практически
+                всегда по названию понятно, что они делают. Любой язык программирования требует время от времени пойти
+                и заглянуть в документацию, чтобы посмотреть синтаксис, и я не говорю, что в MooTools этого делать не надо,
+                я просто говорю, что нахожу API MooTools более понятным и последовательным.
+            </p>
+
+            <a name="yourway"></a>
+            <h2>Настройте MooTools, как это нужно вам</h2>
+            <p>
+                Но что если вам нравится синтаксис jQuery? Не проблема, я покажу, как просто можно изменить синтаксис
+                MooTools на любой вкус. Если бы, например, мы хотели создать метод hover, как в jQuery, мы могли бы
+                просто сделать так:
+            </p>
+
+<pre class="js">Element.implement({
+    hover : function(enter,leave){
+       return this.addEvents({ mouseenter : enter, mouseleave : leave });
+    }
+});
+
+// и теперь используем его точно так же, как в jQuery
+$$('#orderlist li:last').hover(function(){
+   this.addClass('green');
+},
+function(){
+   this.removeClass('green');
+});
+</pre>
+
+            <p>
+                В самом деле, для MooTools есть плагины, которые делают <a href="http://github.com/cheeaun/mooj/tree/master">именно это</a>.
+                То, что MooTools фокусируется на расширяемости, означает, что вы можете реализовать все, что захотите.
+                Это то, что jQuery не умеет. MooTools может маскироваться под jQuery, а jQuery под MooTools &mdash; нет.
+                Если вы захотите писать классы, или расширять существующие прототипы, или делать другие вещи, которые
+                умеет MooTools, вам придется писать это самим.
+            </p>
+
+            <a name="chaining"></a>
+            <h2>Chaining как паттерн проектирования</h2>
+            <p>
+                Давайте взглянем на кое-что еще. Вот немного jQuery (из официального руководства):
+            </p>
+
+<pre class="js">$(document).ready(function() {
+    $('#faq').find('dd').hide().end().find('dt').click(function() {
+        $(this).next().slideToggle();
+    });
+});</pre>
+
+            <p>
+                Это пример синтаксиса, который лично я не очень люблю. Глядя на кусок кода вверху, я с трудом смогу
+                сказать, что он делает. Особенно интересно, что делает <i>.end</i> и как <i>.find</i>, который идет
+                за ним, относится к тому, что делает <i>.end</i>? Поглядев в документацию jQuery, становится понятно,
+                что делает .end (он сбрасывает до значения самого первого селектора, в данном случае #faq).
+                Но для меня это выглядит очень странно. Когда я работаю с jQuery, я часто обнаруживаю, что не уверен,
+                что какой-либо метод собирается мне вернуть. Очевидно, это не беспокоит больше никого, так как
+                многие люди используют jQuery и вполне счастливы, так что припишу это опять своим личным предпочтениям.
+            </p>
+            <p>
+                Давайте посмотрим, как это выглядело бы в MooTools:
+            </p>
+
+<pre class="js">window.addEvent('domready', function() {
+    var faq = $('faq');
+    faq.getElements('dd').hide();
+    faq.getElements('dt').addEvent('click', function() {
+        this.getNext().slide('toggle');
+    });
+});
+</pre>
+
+            <p>
+                И снова, кода для MooTools слегка побольше, но он зато и более явный. Также заметьте, что
+                подход здесь заключается в хранении ссылки на #faq в переменной, тогда как jQuery
+                использует специальный метод <i>.end</i>, чтобы вернуться к нему. В MooTools тоже возможно
+                написать код в одну цепочку, например:
+            </p>
+<pre class="js">item.getElements('input[type=checkbox]')
+    .filter(function(box) {
+        return box.checked != checked;
+    })
+    .set('checked', checked)
+    .getParent()[(checked) ? 'addClass' : 'removeClass']('checked')
+    .fireEvent((checked) ? 'check' : 'uncheck');</pre>
+
+            <p>
+                Но, в самом деле, писать код вроде этого &mdash; куча логики в выражении domready &mdash; в любом
+                фреймворке, само по себе не очень хорошо. Гораздо лучше разбить вашу логику на куски, пригодные для
+                повторного использования.
+            </p>
+
+            <a name="reuse"></a>
+            <h2>Повторное использование кода в jQuery</h2>
+            <p>
+                Когда вы работаете над веб-проектом, писать код таким образом очень заманчиво. Просто добавить на страницу
+                немного кода, который выбирает элементы из DOM, и "обрабатывает их", скрывая одни, изменяя другие и
+                добавляя обработчики событий click и mouseover. Писать код таким образом очень эффективно и очень быстро.
+                Однако, проблема в написании всей логики в выражении domready в том, что у вас в итоге окажется
+                множество кода в разных местах, делающее одно и то же. Если взять код про FAQ из примера выше,
+                мы можем легко поместить такую же логику в другое место, на другую страницу, с любым списком
+                заголовков и определений. Надо ли нам повторять ту же самую логику каждый раз, когда мы сталкиваемся с
+                подобной задачей?
+            </p>
+            <p>
+                Простой способ написать реюзабельный код &mdash; это обернуть его в функцию и передать ей аргументы.
+                Вот как это может выглядеть на jQuery:
+            </p>
+
+<pre class="js">function faq(container, terms, definitions) {
+    $(container).find(terms).hide().end().find(definitions).click(function() {
+        $(this).next().slideToggle();
+    });
+};
+$(document).ready(function() {
+    faq('#faq', 'dd', 'dt');
+});</pre>
+
+            <p>
+                Это гораздо лучше по двум большим и важным причинам:
+            </p>
+            <ol>
+                <li>
+                    Если завтра мы захотим изменить то, как эти списки работают (например, добавить трекинг кликов, чтобы
+                    можно было потом их отслеживать в логах; или, например, получать куски кода через ajax), нам нужно
+                    будет изменить только главный метод <i>faq</i>, и везде, где он был использован, все будет работать
+                    нормально. Или если вдруг обновится версия jQuery, в которой были сделаны изменения, требующие
+                    изменить код, нам придется изменить один метод, а не десять в разных местах. Я называю это
+                    "стараться оставлять маленькие следы" (keeping a small footprint). Если стараться держать код,
+                    где приложение затрагивает более общий код, насколько маленьким, насколько возможно, становится
+                    гораздо проще исправлять ошибки, обновлять фреймворки, добавлять фичи или изменять функциональность.
+                </li>
+                <li>
+                    Вторая причина &mdash; меньше кода. Используя один и тот же метод несколько раз, мы не плодим
+                    дубликаты, а это важно при программировании чего угодно. Ну, и посетителям сайта приходится скачивать
+                    меньше кода.
+                </li>
+            </ol>
+            <p>
+                На самом деле, у jQuery есть немного более проработанная система для написания "виджетов" вроде этих,
+                пригодных для повторного использования. Вместо того, чтобы поощрять вас разбивать код на функции,
+                как в предыдущем примере (что и правда довольно грубо), он побуждает вас писать
+                <a href="http://docs.jquery.com/Plugins/Authoring">jQuery плагины</a>.
+                Вот как это примерно может выглядеть:
+
+<pre class="js">jQuery.fn.faq = function(options) {
+    var settings = jQuery.extend({
+        terms: 'dt',
+        definitions: 'dd'
+    }, options); 
+    // "this" - это текущий контекст,
+    // в данном случае - элементы, которые мы хотим превратить в разделы FAQ
+    $(this).find(settings.terms).hide().end().find(settings.definitions).click(function() {
+        $(this).next().slideToggle();
+    });
+    return this;
+};</pre>
+
+            </p>
+                а использовать это вы будете таким образом:
+            </p>
+    <pre class="js">$('#faq').faq();</pre>
+
+            <p>
+                Но, глядя на пример выше, видно, что нет большой разницы между объявлением нашей функции <i>faq</i>
+                таким образом и объявлением ее как обычной функции. Конечно, тогда она не мусорит в глобальном неймспейсе,
+                но мы могли бы и руками добавить ее в свой неймспейс, что ничуть не сложнее. Присоединив
+                ее к jQuery, мы получаем возможность добавлять ее в цепочки с другими методами. Другое преимущество
+                в том, что "this" внутри нашей функции тогда будет являться текущим контекстом всего, что будет
+                в цепочке к тому моменту. Поэтому, если создавать плагины таким образом, они выглядят совсем как часть
+                jQuery, но, вообще говоря, наш плагин по существу &mdash; обычная
+                функция, которая принимает текущий контекст, делает с ним разные штуки и затем возвращает, чтобы
+                следующая функция в цепочке могла им воспользоваться. Ничего особенно сложного в этом нет, поэтому
+                писать плагины для jQuery довольно легко, т.к. они всего лишь обычные функции.
+            </p>
+
+            <p>
+                Заметьте, что в jQuery можно писать более сложные плагины, с методами и хранением состояния.
+                Это позволяет сделать система плагинов jQuery UI, которая не использует тот механизм, который я
+                описал выше, в примере с faq. Вместо этого, вы привязываете свой объект к объекту jQuery
+                (например, <em>$.ui.tabs</em>) и можете потом использовать его в коде примерно как <em>$(selector).tabs()</em>,
+                чтобы можно было продолжать строить цепочку, как в примерах выше. Однако, поскольку это выражение не
+                возвращает ссылку на объект, который мы создали для наших табов внутри селектора, вам придется
+                снова выполнять поиск по селектору, чтобы вызывать его методы. И вместо того, чтобы просто вызвать
+                <em>myTabInstance.add(url, label, index)</em>, вам придется вызывать функции, передавая их имена
+                строками, например <em>$(selector).tabs('add', url, label, index);</em>. Таким образом, вы
+                выполняете поиск по селектору дважды, если, конечно, не сохранили результат в переменную, и не имеете
+                под рукой ссылку на функцию add, чтобы можно было использовать штуки вроде bind или delay. Но поскольку этот
+                пост про ядро jQuery и ядро MooTools, надо сказать, что данная функциональность предоставляется
+                jQuery UI и в ядро по умолчанию не входит.
+            </p>
+
+            <a name="classes"></a>
+            <h2>Повторное использование кода в MooTools</h2>
+            <p>
+                В MooTools, когда вы хотите создать реиспользуемый код, вы скорее будете использовать либо
+                <em><a href="http://mootools.net/docs/core/Class/Class">Class</a></em>, либо встроите метод
+                в один из нативных объектов, например, <em>String</em>.
+            </p>
+            <p>
+                Вместо того чтобы предлагать вам язык, совершенно отличный от JavaScript по стилю, MooTools
+                пытается балансировать между созданием своего особого синтаксиса и расширением существующих
+                методов JavaScript. Например, расширяет прототипы нативных объектов в самом языке и в DOM. Это
+                означает, что если вам, например, надо написать метод trim для обрезания строк, MooTools рекомендует
+                включить этот метод прямо в объект String (заметьте, что
+                <em><a href="http://mootools.net/docs/core/Native/String#String:trim">String.trim</a></em> в
+                MooTools уже есть, так что писать его не надо):
+            </p>
+
+<pre class="js">String.implement({
+    trim: function() {
+        return this.replace(/^\s+|\s+$/g, '');
+    }
+});</pre>
+
+            <p>
+                Это означает, что вы сможете написать просто <i>" no more spaces on the end! ".trim()</i> и
+                получить <i>"no more spaces on the end!"</i>. Некоторые скажут, что внедрение дополнительных
+                свойств в существующие прототипы неприемлемо. По этой причине, кстати, MooTools не может
+                нормально работать с  <a href="http://www.prototypejs.org/">Prototype.js</a>, так как оба эти
+                фреймворка манипулируют прототипами нативных объектов. Если, например, я объявлю
+                <i>String.prototype.foo()</i>, и другая библиотека на этой странице объявит такую же функцию, то
+                победит та, которая сделает это позднее. В некотором смысле это похоже на проблему с объявлением
+                переменных в глобальной области видимости. Но так уж работает JavaScript. Именно так
+                <a href="https://developer.mozilla.org/En/New_in_JavaScript_1.8">JavaScript 1.8</a> добавил
+                так много фич &mdash; просто поместил их в прототипы.
+            </p>
+            <p>
+                На самом деле, совмещать два фреймворка и заставлять пользователей скачивать их оба довольно
+                нехорошо. Единственный случай, когда вам может понадобиться два фреймворка одновременно &mdash;
+                когда вы хотите использовать плагины из них обоих. Однако, по мнению авторов MooTools (и меня
+                в том числе), если вы хотите использовать плагин, которого нет в вашем фреймворке, но есть в
+                другом, лучше потратить какое-то время на портирование его на ваш фреймворк, нежели помещать
+                их оба на страницу и заставлять пользователей скачивать лишний код.
+            </p>
+            <p>
+                Когда вы понимаете, как работает JavaScript и какие возможности дает расширение нативных объектов,
+                вам открывается совершенно новый уровень в программировании. Вы можете писать плагины, которые
+                изменяют прототипы Element, Date или Function. Некоторые могут сказать, что это замусоривает
+                глобальные объекты, но я возражу, что JavaScript и задумывался, чтобы использоваться именно так.
+                Это, можно сказать, особенность его дизайна. Код получается более кратким и менее связным,
+                если ее использовать. jQuery делает почти то же самое, но при этом ограничивает все расширения
+                прототипов объектом jQuery.
+            </p>
+            <p>
+                Несмотря на то, что вы можете легко объединять вызовы методов в цепочку, если это методы
+                объекта jQuery, для других объектов вам придется использовать обычные методы. Например, если
+                вы хотите обрезать кусок текста с помощью функции trim, а затем пробежаться по всем его строкам,
+                выполняя какой-то код, вам придется написать:
+            </p>
+
+            <pre class="js">$.each( $.trim( $('span.something').html() ).split("\n"), function(i, line){alert(line);});</pre>
+
+            <p>То же самое с помощью MooTools (так как он модифицирует прототипы):</p>
+
+            <pre class="js">$('span.something').get('html').trim().split("\n").each(function(line){alert(line);});</pre>
+
+            <p>
+                Этот пример позволяет понять, какие возможности дает изменение прототипов. DOM-элементы &mdash; не
+                единственное место, где может пригодиться объединение методов в цепочки. MooTools позволяет
+                делать это с методами любых объектов, включая вызов методов, воздействующих на несколько
+                объектов сразу.
+            </p>
+            <p>
+                В основе фреймворка MooTools лежит идея того, что если функциональности нет в ядре, вы всегда можете
+                ее расширить, и получить то, что хотели. Задача ядра &mdash; не предоставить все возможные фичи,
+                которые когда-либо могут вам понадобиться, а предоставить инструменты, чтобы вы могли создать эти
+                фичи сами. А для этого важно, чтобы можно было легко расширять существующие прототипы и использовать
+                преимущества прототипного наследования. Это все можно делать и на чистом JavaScript, но с помощью
+                MooTools это проще и приятней.
+            </p>
+
+
+            <a name="mooinheritance"></a>
+            <h3>MooTools и наследование</h3>
+            <p>
+                Несмотря на название, функция <em>Class</em> в MooTools не является классом и не создает никаких
+                классов. По виду и по способу использования она может напомнить обычные классы в более традиционных
+                языках программирования, но на самом деле <em>Class</em> целиком и полностью относится к объектам
+                и прототипному наследованию (к сожалению, для описания этих вещей слово "класс" подошло лучше других,
+                поэтому когда я буду говорить "классы", имейте в виду, что я говорю про функции, которые возвращают
+                объекты, которые, в свою очередь, я буду называть "экземпляры", и которые наследуются от прототипа).
+            </p>
+            <p>
+                Чтобы создать класс, надо передать объект в функцию <em>Class</em>, например, так:
+            </p>
+
+<pre class="js">var Human = new Class({
+    initialize: function(name, age) {
+        this.name = name;
+        this.age = age;
+    },
+    isAlive: true,
+    energy: 1,
+    eat: function() {
+        this.energy = this.energy + 1;
+    }
+});</pre>
+
+            <p>
+                Мы передаем в <em>Class</em> объект (со свойствами вроде "isAlive" и "eat", как у объекта выше),
+                и этот объект становится прототипомм для каждого экземпляра полученного класса. Чтобы создать
+                экземпляр, надо вызвать его вот так:
+            </p>
+<pre class="js">var bob = new Human("bob", 20); // Боба зовут Боб и ему 20 лет.</pre>
+            <p>
+                Теперь у нас есть экземпляр класса <em>Human</em>. У <i>bob</i> доступны все свойства объекта, который мы
+                указали при создании класса <em>Human</em>. Важно, что все эти свойства он получил при помощи
+                прототипного наследования, то есть, когда мы обращаемся к <i>bob.eat</i>, мы обращаемся на самом деле
+                к свойству его прототипа, так как сам <i>bob</i> этого свойства не имеет. JavaScript смотрит на объект
+                <i>bob</i>, не находит в нем свойства <i>eat</i>, поднимается выше по цепочке наследования и находит
+                его у объекта, который мы передали в функцию <i>Class</i>, когда создавали класс <em>Human</em>.
+                То же относится и к свойству <i>energy</i>. На первый взгляд выглядит плохо, так как мы не хотим,
+                чтобы все "человеки" получали энергию, каждый раз когда <i>bob</i> ест. Но важно понимать, что когда
+                мы первый раз назначаем значение свойству <i>bob.energy</i>, <i>bob</i> получает свое собственное
+                свойство, и нам больше не нужно будет лезть за ним в прототип. Так что, когда <i>bob</i> первый раз
+                поест, у него появится собственное свойство (равное 2), а прототип останется нетронутым.
+            </p>
+            <pre class="js">bob.eat(); //bob.energy == 2</pre>
+            <p>
+                Также обратите внимание, что name и age уже являются собственными свойствами <i>bob</i>, так как
+                они назначаются ему при инициализации (см. пример выше).
+            </p>
+            <p>
+                Этот подход может показаться слегка странным, но он довольно удобен, чтобы создать шаблон один раз,
+                а затем создавать экземпляры по этому шаблону, когда понадобится. При этом у каждого экземпляра будет
+                свое собственное состояние:
+            </p>
+
+<pre class="js">var Alice = new Human();
+//alice.energy == 1
+//bob.energy == 2</pre>
+
+            <p>
+                Но все становится еще интереснее, когда мы хотим расширить это поведение.
+            </p>
+
+            <a name="extension"></a>
+            <h3>Расширение и реализация классов</h3>
+            <p>
+                Давайте еще раз взглянем на наш плагин <i>faq</i> для jQuery. Что, если нам понадобится сделать
+                аяксовую версию, которая будет получать ответы на вопросы с сервера? Представим, что этот плагин
+                был написан кем-нибудь другим, и мы хотим модифицировать плагин, не внося изменений в исходную
+                версию (а форкать мы не хотим).
+            </p>
+            <p>
+                Единственные реальные способы это сделать &mdash; либо скопировать весь его код, фактически
+                форкнув его (напомню, это обычная функция), либо вызвать эту функцию и затем добавить
+                дополнительную логику, которую мы хотели. Если выбирать, то последнее кажется менее проблематичным.
+                Вот как это может выглядеть:
+            </p>
+<pre class="js">jQuery.fn.ajaxFaq = function(options) {
+    var settings = jQuery.extend({ 
+        // какие-нибудь опции, специфичные для ajax
+        url: '/getfaq.php'
+        definitions: 'dd'
+    }, options); 
+    // "this" в данном случае - элементы, которые мы хотим превратить в разделы faq
+    $(this).find(settings.definitions).click(function() {
+        $(this).load(.....); // логика для загрузки контента с сервера
+    });
+    this.faq(); // вызываем оригинальный плагин
+});</pre>
+            <p>
+                У такого подхода есть подводные камни. Во-первых, нам придется снова пробегать весь DOM в поисках
+                элементов по селектору, что может быть довольно затратно, а способа сохранить выбранные объекты
+                и использовать их во второй раз нет. Во-вторых, мы не сможем поместить нашу логику в середину
+                кода плагина. А реального решения, кроме копирования всего кода, нет.
+            </p>
+            <p>
+                Теперь давайте рассмотрим наш класс <em>Human</em> для MooTools. Что, если нам понадобится
+                создать новую версию "человеков" с дополнительными свойствами? Просто расширим класс:
+            </p>
+<pre class="js">var Ninja = new Class({
+    Extends: Human,
+    initialize: function(name, age, side) {
+        this.side = side;
+        this.parent(name, age);
+    },
+    energy: 100,
+    attack: function(target) {
+        this.energy = this.energy - 5;
+        target.isAlive = false;
+    }
+});</pre>
+            <p>
+                Как вы видите, мы добавили достаточно много функциональности с помощью подкласса. Теперь у этого
+                подкласса есть как свойства его родителя, так и его собственные. Например, <em>Ninja</em> имеет
+                начальное значение энергии, равное 100, также у него есть дополнительный параметр, <em>side</em>
+                и дополнительный метод <em>attack</em>, который позволяет убивать других человеков, но, правда,
+                стоит ниндзе энергии.
+            </p>
+
+<pre class="js">var bob = new Human('Bob', 25);
+var blackNinja = new Ninja('Nin Tendo', 'unknown', 'evil');
+//blackNinja.isAlive = true
+//blackNinja.name = 'Nin Tendo'
+blackNinja.attack(bob);
+// у Боба не было шансов</pre>
+
+            <p>
+                Есть некоторые интересные вещи, которые стоит рассмотреть подробнее. Обратите внимание на метод
+                <em>initialize</em> в классе <em>Ninja</em>. Этот метод, очевидно, перекрывает старый метод из
+                класса <em>Human</em>, но мы все равно имеем к нему доступ через вызов функции <em>this.parent</em>,
+                передавая ей аргументы, которые ожидает метод <em>initialize</em> у родителя. Тем самым мы можем
+                контролировать, когда выполнять наш дополнительный код &mdash; до родительского или после.
+                Представьте, если бы мы могли сделать подобное в нашем плагине для jQuery. Тогда бы мы смогли
+                сначала получить данные с сервера через ajax, а затем открыть раздел faq с красивым эффектом.
+            </p>
+            <p>
+                В MooTools существует также и другой подход, называемый Mixin. В отличие от создания классов
+                и их наследования, вы можете создавать классы, чтобы потом <em>смешивать</em> их с другими классами,
+                наделяя их тем самым нужными свойствами. Например:
+            </p>
+
+<pre class="js">var Warrior = new Class({
+    energy: 100,
+    kills: 0,
+    attack: function(target) {
+        target.isAlive = false;
+        this.energy = this.energy - 5;
+        this.kills++;
+    }
+});</pre>
+
+            <p>
+                То есть, мы выделили свойства, которые отличают ниндзь от обычных человеков, и поместили в отдельный
+                класс. Это позволит использовать данный код отдельно от класса <em>Ninja</em>. Можно объявить класс
+                <em>Ninja</em> другим способом, отдельно указав, что он обладает качествами воина:
+            </p>
+
+<pre class="js">var Ninja = new Class({
+    Extends: Human,
+    Implements: Warrior, // можно передать массив, если классов несколько
+    initialize: function(name, age, side) {
+        this.side = side;
+        this.parent(name, age);
+    }
+});</pre>
+
+            <p>
+                <em>Ninja</em> в этом случае будет работать совершенно так же, но теперь у нас есть класс
+                <em>Warrior</em>, и его можно использовать повторно:
+            </p>
+
+<pre class="js">var Samurai = new Class({
+  Extends: Human,
+  Implements: Warrior,
+  side: 'good'
+});</pre>
+
+            <p>
+                Теперь мы объявили классы <em>Samurai</em> и <em>Ninja</em>. Но посмотрите, как мало кода занимают
+                объявления этих классов. Оба они похожи в том, что являются человеками и обладают качествами воина,
+                но отличаются тем, что самураи всегда-всегда хорошие, а ниндзи могут быть и плохими. Потратив время
+                на создание классов <em>Human</em> и <em>Warrior</em>, мы теперь с легкостью получили три различных
+                класса без какого-либо дублирования кода между ними. Такой подход дает возможность более тонко
+                контролировать, когда какие методы будут вызываться и как они друг с другом соотносятся.
+                Каждый экземпляр созданных таким образом классов имеет свое собственное состояние, и код получился
+                весьма читаемым.
+            </p>
+            <p>
+                Сейчас, когда вы получили представление о том, как работают классы в MooTools, давайте посмотрим
+                на наш плагин <em>faq</em> для jQuery и перепишем его так, как бы мы сделали в MooTools, а потом
+                добавим Ajax, как мы пытались сделать в jQuery.
+            </p>
+<pre class="js">
+var FAQ = new Class({
+    // Options - это еще один MooTools класс
+    Implements: Options,
+    // опции по умолчанию
+    options: {
+        terms: 'dt',
+        definitions: 'dd'
+    },
+    initialize: function(container, options) {
+        // сохраняем ссылку на наш контейнер
+        this.container = $(container);
+        // setOptions - это метод, предоставляемый Options,
+        // он смешивает переданные в конструктор свойства с дефолтными
+        this.setOptions(options);
+        // сохраняем заголовки и тексты
+        this.terms = this.container.getElements(this.options.terms);
+        this.definitions = this.container.getElements(this.options.definitions);
+        // вызываем наш метод attach
+        // поскольку мы выделили это в отдельный метод,
+        // класс будет проще расширять
+        this.attach();
+    },
+    attach: function(){
+        // пробегаем по заголовкам faq
+        this.terms.each(function(term, index) {
+            // добавляем каждому обработчик события click
+            term.addEvent('click', function(){
+                // вызываем наш метод toggle
+                this.toggle(index);
+            }, this);
+        }, this);
+    },
+    toggle: function(index){
+        // показываем/скрываем текст раздела faq по его номеру
+        this.definitions[index].slide('toggle');
+    }
+});
+</pre>
+
+            <p>
+                Ого, это довольно много кода. Если даже удалить все комментарии, все равно получится больше 20 строк.
+                Я уже показывал выше, что мы можем написать такой плагин, уложившись примерно в такое же количество
+                строк, как и с jQuery. Так почему этот код такой большой? Потому, что мы писали его с заделом на
+                расширение. Итак, чтобы создать экземпляр faq, просто вызовем конструктор:
+            </p>
+
+<pre class="js">var myFAQ = new FAQ(myContainer);
+// и теперь мы можем вызывать его методы
+myFAQ.toggle(2); // показать/скрыть третий раздел
+</pre>
+
+            <p>
+                Мы имеем доступ к методам и свойствам экземпляра, теперь, что насчет ajax? В нашем jQuery плагине
+                была проблема, что мы не могли отложить разворачивание раздела, чтобы подождать, пока он подгрузится.
+                Здесь же нет такой проблемы:
+            </p>
+
+<pre class="js">FAQ.Ajax = new Class({
+    // этот класс наследует свойства класса FAQ
+    Extends: FAQ,
+    // и получает дополнительное свойство к уже имеющимся дефолтным,
+    // оно нужно для хранения url, по которому мы будем запрашивать наши разделы
+    options: {
+        url: null;
+    },
+    // мы будем кешировать результаты, чтобы не запрашивать данные на сервере
+    // каждый раз при открытии раздела
+    indexesLoaded: [],
+    toggle: function(index){
+        // если мы уже загрузили данные для этого раздела
+        if (this.indexesLoaded[index]) {
+            // то просто вызываем родительский метод
+            this.parent(index);
+        } else {
+            // иначе, лезем на сервер за данными
+            new Request.HTML({
+                update: this.definitions[index],
+                url: this.options.url + index,
+                // и когда они загружены, открываем раздел
+                onComplete: function(){
+                    this.indexesLoaded[index] = true;
+                    this.definitions[index].slide('toggle');
+                }.bind(this)
+            }).send();
+        }
+    }
+});
+</pre>
+
+            <p>
+                Таким образом, мы получили версию FAQ, которая умеет забирать данные с сервера. Обратите внимание,
+                что мы смогли интегрировать новую логику так, чтобы раздел не открывался, прежде чем придут данные
+                (что мы не могли сделать с jQuery). Также заметьте, что нам пришлось всего лишь описать функциональность
+                ajax без особых лишних телодвижений. Это позволяет создавать целые семейства плагинов, которые
+                отличаются друг от друга некоторыми свойствами и функциями. Это также значит, что мы можем взять
+                чужой плагин и изменить в нем лишь то, что нам нужно, не форкая его. Это, кстати, объясняет то, что
+                для MooTools существует меньше плагинов для различных распространенных штук вроде удобного выбора даты
+                или интерфейса со вкладками. Большинство плагинов либо решают вашу проблему сразу, либо требуют
+                незначительных изменений, чтобы полностью вам подходить.
+            </p>
+            <p>
+                Как я упоминал ранее, возможно писать сложные виджеты с методами и хранением состояния и на jQuery,
+                но большая часть кода, которую вам придется написать, будет чистым JavaScript, поскольку не имеет
+                отношения к DOM. А jQuery не предлагает способа расширять свои объекты с помощью подклассов и
+                не поможет вам создать классы для смешивания с другими, чтобы их можно было использовать еще.
+                В конечном счете, все плагины jQuery всегда привязаны к элементам DOM. Если вам захочется написать
+                класс, который, скажем, будет обрабатывать URL'ы, вам придется писать это самому, так как готовой
+                системы, позволяющей хранить состояние, нет.
+            </p>
+
+            <a name="conclusion"></a>
+            <h2>Пора принимать решение</h2>
+            <p>
+                jQuery сконцентрирован на выразительности, возможности быстро и просто написать код, и на DOM,
+                а MooTools &mdash; на расширяемости, наследовании, читаемости, возможности повторного использования
+                и поддерживаемости. jQuery &mdash; это то, с чего просто начать и быстро получить результаты, но
+                потом, по моему опыту, это может превратиться в код, который сложно использовать повторно и
+                поддерживать (но, на самом деле, это уж от вас зависит, и не проблема jQuery). MooTools &mdash;
+                то, что сложнее изучать и требует написания большего количества кода, прежде чем вы увидите
+                результаты, но в итоге получившийся код, вероятно, будет легче поддерживать и использовать повторно.
+            </p>
+            <p>
+                Дальше, ядро MooTools не содержит всевозможной кучи фич, равно как и ядро jQuery. Оба фреймворка
+                стараются держать свои ядра компактными, давая другим возможность написать плагины и расширения.
+                Их задача не предоставить вам все фичи, которые могут вам пригодиться, а дать инструменты,
+                чтобы вы могли сами создать что вам угодно. В этом сила JavaScript, а также JavaScript фреймворков,
+                и оба фреймворка в этом весьма преуспели. MooTools подходит к этому более глобально, позволяя
+                вам писать что угодно, не ограничиваясь лишь DOM, но платит за это более высокой сложностью изучения.
+                Возможности MooTools включают в себя все возможности jQuery, но jQuery просто концентрируется на
+                "гладком" API для работы с DOM, и вовсе не мешает вам использовать стандартные средства языка для
+                прототипного наследования или какую-либо другую систему вроде той, что в MooTools, если хотите.
+            </p>
+            <p>
+                Вот почему я говорю, что оба фреймворка &mdash; прекрасный выбор. Я попытался показать различия
+                в их философии, а также их преимущества и недостатки. Вряд ли мне удалось удержать свое явное
+                предпочтение MooTools под контролем, но надеюсь, что этот текст был вам полезен.
+                Независимо от того, какой фреймворк вы выберете, теперь вы знаете больше о них обоих.
+                Если у вас найдется драгоценное время, очень рекомендую сделать по сайту на каждом из них.
+                Затем напишите свой собственный обзор, который, возможно, осветит те вещи, которые я упустил.
+            </p>
+            <p>
+            <script type="text/javascript" src="http://w.sharethis.com/button/sharethis.js#publisher=c327065b-efa0-4e12-afbc-5717f5cf62f9&amp;type=website&amp;post_services=facebook%2Cdigg%2Cdelicious%2Ctwitter%2Creddit%2Cfriendfeed%2Cmyspace%2Cybuzz%2Cstumbleupon%2Ctechnorati%2Cmixx%2Cblogger%2Cwordpress%2Ctypepad%2Cgoogle_bmarks%2Cwindows_live%2Cfark%2Cbus_exchange%2Cpropeller%2Cnewsvine%2Clinkedin"></script>
+            </p>
+            <hr/>
+            <p class="about">
+                Обо мне: Я разработчик <a href="http://www.mootools.net">MooTools</a> и веду блог о JavaScript и
+                других вещах на моем сайте <a href="http://www.clientcide.com">Clientcide</a>. Также я написал
+                <a href="http://www.clientcide.com/js">множество плагинов для MooTools</a>. Я автор
+                <a href="http://www.amazon.com/gp/product/1430209836?ie=UTF8&tag=clientside-20&link_code=as3&camp=211189&creative=373489&creativeASIN=1430209836">MooTools Essentials</a>
+                и <a href="http://www.mootorial.com">MooTools online tutorial</a>.
+                Я работаю в компании <a href="http://www.cloudera.com">Cloudera</a>.
+                <a href="http://www.clientcide.com/shout-out">Со мной можно связаться здесь</a>.
+            </p>
+
+            <a name="discussion"></a>
+            <hr/>
+            <p class="about" style="color: #700"><strong>A note on comments here</strong>: These comments are moderated. No comments will show up until they are approved. Comments that are not productive (i.e. inflammatory, rude, etc) will not be approved. Similarly, "fan" comments won't be approved either - i.e. no "FrameworkX Rulez! It's better than FrameworkY for realz!" are not constructive comments.
+            </p>
+            <div id="disqus_thread"></div>
+            <script>
+                var disqus_url = "http://jqueryvsmootools.com/";
+            </script>
+            <script type="text/javascript" src="http://disqus.com/forums/jqueryvsmootools/embed.js"></script>
+        </div>
+        <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+        <script type="text/javascript">
+        try {
+        var pageTracker = _gat._getTracker("UA-539314-11");
+        pageTracker._trackPageview();
+        } catch(err) {}</script>
+
+        <script type="text/javascript">
+        //<![CDATA[
+        (function() {
+                var links = document.getElementsByTagName('a');
+                var query = '?';
+                for(var i = 0; i < links.length; i++) {
+                    if(links[i].href.indexOf('#disqus_thread') >= 0) {
+                        query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+                    }
+                }
+                document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/jqueryvsmootools/get_num_replies.js' + query + '"></' + 'script>');
+            })();
+        //]]>
+        </script>
+
+    </body>
+</html>
